@@ -1,5 +1,6 @@
 package com.finalproject.courseevaluation_studentattendance.Controller;
 
+import com.finalproject.courseevaluation_studentattendance.Model.Course;
 import com.finalproject.courseevaluation_studentattendance.Repositories.CourseRepository;
 import com.finalproject.courseevaluation_studentattendance.Services.AttendanceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,11 +34,14 @@ public class AdminController {
         return "adminpages/adminhome";
     }
 
-//
-//    @GetMapping("/detailsofacourse/{id}")
-//            public String displayCourse (@PathVariable("id")long id,
-//                                         Model model)
-//    {
-//
+
+    @GetMapping("/detailsofacourse/{id}")
+    public String displayCourse (@PathVariable("id")long id,
+                                         Model model) {
+        Course course = courseRepo.findOne(id);
+        model.addAttribute("course", course);
+
+        return "datailsofacourse";
+    }
 
 }
