@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+<Title>Register Student To Courses</Title>
+</head>
+<body>
+
+    <form action="#" th:action="@{/addstudent}" th:object="${newstudent}" method="post" >
+        <!--<input type="text" th:field="*{perosn.id}" />-->
+        <input type="hidden" th:field="*{id}" />
+        <p><h4>First Name</h4> <input type="text" th:field="*{firstName}"/></p>
+        <p> <h4> Last Name  </h4> <input type="text" th:field="*{lastName}"/></p>
+        <p> <h4> User Name  </h4> <input type="text" th:field="*{username}"/></p>
+        <p> <h4> Pass word  </h4> <input type="text" th:field="*{password}"/></p>
+        <p> <h4> Email  </h4> <input type="text" th:field="*{email}"/></p>
+        <input type="submit"  value="Save" class="btn btn-lg btn-default btn-block" />
+    </form>
+
+
+</body>
+</html>
