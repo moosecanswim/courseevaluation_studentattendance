@@ -6,9 +6,7 @@ import com.finalproject.courseevaluation_studentattendance.Services.AttendanceSe
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
@@ -34,7 +32,20 @@ public class AdminController {
         return "adminpages/adminhome";
     }
 
+    @GetMapping("/addcourse")
+    public String addCourse(Model model)
+    {
+        model.addAttribute("newcourse", new Course());
+        return "adminpages/addcourse";
+    }
 
+    @PostMapping("/addcourse")
+    public String postCourse(@ModelAttribute("newcourse")Course newcourse)
+    {
+        courseRepo.save(newcourse);
+
+         return"redirect:/admin/addcourse";
+    }
     @GetMapping("/detailsofacourse/{id}")
     public String displayCourse (@PathVariable("id")long id,
                                          Model model) {
@@ -43,5 +54,8 @@ public class AdminController {
 
         return "datailsofacourse";
     }
+
+
+
 
 }
