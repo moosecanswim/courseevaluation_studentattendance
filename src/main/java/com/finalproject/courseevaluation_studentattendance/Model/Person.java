@@ -131,13 +131,6 @@ public class Person {
         this.personRoles = personRoles;
     }
 
-    public Set<Course> getCourseinstructor() {
-        return courseInstructor;
-    }
-
-    public void setCourseinstructor(Set<Course> courseinstructor) {
-        this.courseInstructor = courseinstructor;
-    }
 
     public Set<Course> getCourseInstructor() {
         return courseInstructor;
