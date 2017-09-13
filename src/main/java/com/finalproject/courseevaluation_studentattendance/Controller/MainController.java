@@ -9,4 +9,12 @@ public class MainController {
     public String welcomePage(){
         return "welcomepage";
     }
+
+
+
+
+    @RequestMapping("/login")
+    public String login(){
+        return "login";
+    }
 }
