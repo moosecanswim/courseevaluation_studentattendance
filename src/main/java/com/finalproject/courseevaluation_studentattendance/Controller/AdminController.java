@@ -33,11 +33,11 @@ public class AdminController {
         return "adminpages/adminhome";
     }
 
+//
+//    @GetMapping("/detailsofacourse/{id}")
+//            public String displayCourse (@PathVariable("id")long id,
+//                                         Model model)
+//    {
+//
 
-    @GetMapping("/detailsofacourse/{id}")
-            public String displayCourse (@PathVariable("id")long id,
-                                         Model model)
-    {
-
-    }
 }
