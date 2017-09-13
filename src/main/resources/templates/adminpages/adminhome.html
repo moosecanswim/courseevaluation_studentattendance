@@ -32,17 +32,17 @@
                 <td><a th:text="${all.endDate}"></a></td>
                 <td><a th:text="${all.courseCompleteStatus}"></a></td>
                 <td>
-                    <a th:href="@{/admin/updateCourse/{id}(id=${all.id})}">Update</a>
+                    <a th:href="@{/admin/updatecourse/{id}(id=${all.id})}">Update</a>
                 </td>
                 <td>
-                    <a th:href="@{/admin/viewDetailsCourse/{id}(id=${all.id})}">View Details</a>
+                    <a th:href="@{/admin/detailsofacourse/{id}(id=${all.id})}">View Details</a>
                 </td>
 
                 <td>
-                    <a th:href="@{/admin/removeCourse/{id}(id=${all.id})}">Delete Course</a>
+                    <a th:href="@{/admin/removecourse/{id}(id=${all.id})}">Delete Course</a>
                 </td>
                 <td>
-                    <a th:href="@{/admin/viewCourseEvaluations/{id}(id=${all.id})}">View Evaluations</a>
+                    <a th:href="@{/admin/viewcourseevaluations/{id}(id=${all.id})}">View Evaluations</a>
                 </td>
 
             </tr>
