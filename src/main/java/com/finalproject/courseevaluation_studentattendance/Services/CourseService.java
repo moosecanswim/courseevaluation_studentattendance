@@ -1,5 +1,6 @@
 package com.finalproject.courseevaluation_studentattendance.Services;
 
+import com.finalproject.courseevaluation_studentattendance.Model.Course;
 import com.finalproject.courseevaluation_studentattendance.Repositories.AttendenceRepository;
 import com.finalproject.courseevaluation_studentattendance.Repositories.CourseRepository;
 import com.finalproject.courseevaluation_studentattendance.Repositories.EvaluationRepository;
@@ -19,4 +20,7 @@ public class CourseService {
     PersonService personRepo;
     @Autowired
     RoleRepository roleRepo;
+
+
+
 }

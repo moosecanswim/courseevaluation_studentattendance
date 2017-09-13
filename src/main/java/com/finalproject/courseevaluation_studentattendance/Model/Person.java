@@ -28,6 +28,7 @@ public class Person {
   @JoinTable(joinColumns = @JoinColumn(name="person_id"),
           inverseJoinColumns=@JoinColumn(name="role_id"))
   private Set<PersonRole>personRoles;
+    public Set<PersonRole> role;
 
   @ManyToMany
   private Set<Course>courseInstructor;
@@ -35,6 +36,7 @@ public class Person {
   @ManyToMany
   private Set<Course>courseStudent;
 
+    public Set<Course> course;
 
     public Person()
     { }
@@ -52,6 +54,19 @@ public class Person {
 //                ", course=" + course +
 //                '}';
 //    }
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", role=" + role +
+                ", course=" + course +
+                '}';
+    }
 
     public void addCourse(Course course)
     {
@@ -65,6 +80,19 @@ public class Person {
 //    public void deleteCourse(Course course)
 //    {
 //    }
+    public void removeCourse(Course course1)
+    {
+
+
+    }
+
+    public void deleteCourse(Course course)
+    {
+
+    }
+
+
+
 
     public long getId() {
         return id;
