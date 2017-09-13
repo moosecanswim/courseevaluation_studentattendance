@@ -19,7 +19,9 @@ public class Course {
 
     private Date endDate;
 
-    private boolean status;
+    private boolean courseCompleteStatus;
+
+
 
 
     public long getId() {
@@ -62,14 +64,14 @@ public class Course {
         this.endDate = endDate;
     }
 
-    public boolean isStatus() {
-        return status;
+
+    public boolean isCourseCompleteStatus() {
+        return courseCompleteStatus;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setCourseCompleteStatus(boolean courseCompleteStatus) {
+        this.courseCompleteStatus = courseCompleteStatus;
     }
-
 
 
 }
