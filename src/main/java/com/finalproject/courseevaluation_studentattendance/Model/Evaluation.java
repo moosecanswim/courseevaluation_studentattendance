@@ -10,7 +10,7 @@ public class Evaluation {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    //need to add relationship with course
+      //need to add relationship with course
 
     //excellent/above average/ average/ fair/ poor
     private String content;
@@ -26,6 +26,9 @@ public class Evaluation {
     private String suggestions;
     private String otherClass;
     private String findings;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Course courseEvaluation;
 
     public long getId() {
         return id;
@@ -121,5 +124,13 @@ public class Evaluation {
 
     public void setFindings(String findings) {
         this.findings = findings;
+    }
+
+    public Course getCourseEvaluation() {
+        return courseEvaluation;
+    }
+
+    public void setCourseEvaluation(Course courseEvaluation) {
+        this.courseEvaluation = courseEvaluation;
     }
 }

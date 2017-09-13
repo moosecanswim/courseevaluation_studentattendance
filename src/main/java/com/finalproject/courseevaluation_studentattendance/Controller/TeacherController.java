@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.websocket.server.PathParam;
+
 @Controller
 @RequestMapping("/teacher")
 public class TeacherController {
@@ -27,15 +30,15 @@ public class TeacherController {
         return "teacherpages/teacherhome";
     }
 
-   @GetMapping("/addstudent")
-    public String getCourse(Model model)
+   @GetMapping("/addstudentstocourse/{id}")
+    public String getCourse(@PathParam("id")Long id, Model model)
    {
        model.addAttribute("newstudent", new Person());
        return "addstudent";
    }
 
-   @PostMapping("/addstudent")
-    public String postCourse(@ModelAttribute("newstudent")Person person, Model model)
+   @PostMapping("/addstudent/{id}")
+    public String postCourse(@PathParam("id") Long id, Person person, Model model)
    {
 
        model.addAttribute("newstudent", person);
@@ -46,8 +49,8 @@ public class TeacherController {
    @RequestMapping("/displaystudents")
     public String displayStudents(@ModelAttribute("lstudents")Person person, Model model)
    {
-       personService.findAll();
-       return "displaystudents";
+        model.addAttribute("lstudents", personRepo.findAll());
+        return "displaystudents";
    }
 
 
