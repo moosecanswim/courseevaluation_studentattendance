@@ -10,8 +10,6 @@ public class Evaluation {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-      //need to add relationship with course
-
     //excellent/above average/ average/ fair/ poor
     private String content;
     private String quality;

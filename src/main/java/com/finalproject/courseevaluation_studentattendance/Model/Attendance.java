@@ -22,7 +22,6 @@ public class Attendance {
     public Attendance(){
         this.personAttendances=new HashSet<Person>();
         this.attendanceCourses=new HashSet<Course>();
-
     }
 
     public long getId() {
