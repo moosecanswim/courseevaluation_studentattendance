@@ -1,5 +1,6 @@
 package com.finalproject.courseevaluation_studentattendance.Services;
 
+import com.finalproject.courseevaluation_studentattendance.Model.Person;
 import com.finalproject.courseevaluation_studentattendance.Repositories.AttendenceRepository;
 import com.finalproject.courseevaluation_studentattendance.Repositories.CourseRepository;
 import com.finalproject.courseevaluation_studentattendance.Repositories.EvaluationRepository;
@@ -19,4 +20,12 @@ public class PersonService {
     PersonService personRepo;
     @Autowired
     RoleRepository roleRepo;
+
+    public Person findOneById(long id){
+        return personRepo.findOneById(id);
+    }
+    public void update(Person person){
+
+    }
+
 }
