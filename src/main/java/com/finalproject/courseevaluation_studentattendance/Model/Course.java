@@ -27,13 +27,19 @@ public class Course {
     @ManyToMany(mappedBy = "courseStudent")
     private Set<Person>student;
 
+    @ManyToMany
+    private Set<Attendance>courseAttendances;
+
     @OneToMany(mappedBy = "courseEvaluation")
     private Set<Evaluation>evaluations;
+
 
     public Course(){
         this.instructor=new HashSet<Person>();
         this.student=new HashSet<Person>();
+        this.courseAttendances=new HashSet<Attendance>();
         setEvaluations(new HashSet<Evaluation>());
+
 
     }
     public long getId() {
@@ -100,6 +106,14 @@ public class Course {
         this.evaluations = evaluations;
     }
 
+    public Set<Attendance> getCourseAttendances() {
+        return courseAttendances;
+    }
+
+    public void setCourseAttendances(Set<Attendance> courseAttendances) {
+        this.courseAttendances = courseAttendances;
+    }
+
     public void addInstructor(Person ins){
         instructor.add(ins);
     }
@@ -110,5 +124,8 @@ public class Course {
     public  void addEvaluation(Evaluation eva)
     {
         this.evaluations.add(eva);
+    }
+    public void addAttendance(Attendance att){
+        this.courseAttendances.add(att);
     }
 }

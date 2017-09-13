@@ -2,6 +2,7 @@ package com.finalproject.courseevaluation_studentattendance.Model;
 
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -35,9 +36,16 @@ public class Person {
   @ManyToMany
   private Set<Course>courseStudent;
 
+  @ManyToMany
+  private Set<Attendance>attendances;
 
     public Person()
-    { }
+    {
+        this.personRoles=new HashSet<PersonRole>();
+        this.courseInstructor=new HashSet<Course>();
+        this.courseStudent=new HashSet<Course>();
+        this.attendances=new HashSet<Attendance>();
+    }
 
 //    @Override
 //    public String toString() {
@@ -148,6 +156,14 @@ public class Person {
         this.courseStudent = courseStudent;
     }
 
+    public Set<Attendance> getAttendances() {
+        return attendances;
+    }
+
+    public void setAttendances(Set<Attendance> attendances) {
+        this.attendances = attendances;
+    }
+
     public void addRole(PersonRole p)
     {
         this.personRoles.add(p);
@@ -160,5 +176,9 @@ public class Person {
     public void addStudents(Course st)
     {
         this.courseStudent.add(st);
+    }
+    public void addAttendace(Attendance atn)
+    {
+        this.attendances.add(atn);
     }
 }
