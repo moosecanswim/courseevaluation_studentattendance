@@ -2,6 +2,8 @@ package com.finalproject.courseevaluation_studentattendance.Model;
 
 
 import javax.persistence.*;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -22,13 +24,13 @@ public class Person {
 
     private String password;
 
-    public String email;
+    private String email;
+    private Date startDate;
 
   @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(joinColumns = @JoinColumn(name="person_id"),
           inverseJoinColumns=@JoinColumn(name="role_id"))
   private Set<PersonRole>personRoles;
-    public Set<PersonRole> role;
 
   @ManyToMany
   private Set<Course>courseInstructor;
@@ -36,10 +38,17 @@ public class Person {
   @ManyToMany
   private Set<Course>courseStudent;
 
-    public Set<Course> course;
+  @ManyToMany
+  private Set<Attendance>attendances;
 
     public Person()
-    { }
+    {
+        this.personRoles=new HashSet<PersonRole>();
+        this.courseInstructor=new HashSet<Course>();
+        this.courseStudent=new HashSet<Course>();
+        this.attendances=new HashSet<Attendance>();
+        this.mNumber="M---";
+    }
 
 //    @Override
 //    public String toString() {
@@ -54,19 +63,6 @@ public class Person {
 //                ", course=" + course +
 //                '}';
 //    }
-    @Override
-    public String toString() {
-        return "Person{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", role=" + role +
-                ", course=" + course +
-                '}';
-    }
 
     public void addCourse(Course course)
     {
@@ -80,19 +76,6 @@ public class Person {
 //    public void deleteCourse(Course course)
 //    {
 //    }
-    public void removeCourse(Course course1)
-    {
-
-
-    }
-
-    public void deleteCourse(Course course)
-    {
-
-    }
-
-
-
 
     public long getId() {
         return id;
@@ -176,6 +159,14 @@ public class Person {
         this.courseStudent = courseStudent;
     }
 
+    public Set<Attendance> getAttendances() {
+        return attendances;
+    }
+
+    public void setAttendances(Set<Attendance> attendances) {
+        this.attendances = attendances;
+    }
+
     public void addRole(PersonRole p)
     {
         this.personRoles.add(p);
@@ -188,5 +179,17 @@ public class Person {
     public void addStudents(Course st)
     {
         this.courseStudent.add(st);
+    }
+    public void addAttendace(Attendance atn)
+    {
+        this.attendances.add(atn);
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 }

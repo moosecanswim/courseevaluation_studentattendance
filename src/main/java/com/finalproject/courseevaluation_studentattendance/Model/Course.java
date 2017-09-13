@@ -13,6 +13,8 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    private long crn;
+
     private String courseName;
 
     private Date startDate;
@@ -27,13 +29,19 @@ public class Course {
     @ManyToMany(mappedBy = "courseStudent")
     private Set<Person>student;
 
+    @ManyToMany
+    private Set<Attendance>courseAttendances;
+
     @OneToMany(mappedBy = "courseEvaluation")
     private Set<Evaluation>evaluations;
+
 
     public Course(){
         this.instructor=new HashSet<Person>();
         this.student=new HashSet<Person>();
+        this.courseAttendances=new HashSet<Attendance>();
         setEvaluations(new HashSet<Evaluation>());
+
 
     }
     public long getId() {
@@ -42,6 +50,14 @@ public class Course {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public long getCrn() {
+        return crn;
+    }
+
+    public void setCrn(long crn) {
+        this.crn = crn;
     }
 
     public String getCourseName() {
@@ -100,6 +116,14 @@ public class Course {
         this.evaluations = evaluations;
     }
 
+    public Set<Attendance> getCourseAttendances() {
+        return courseAttendances;
+    }
+
+    public void setCourseAttendances(Set<Attendance> courseAttendances) {
+        this.courseAttendances = courseAttendances;
+    }
+
     public void addInstructor(Person ins){
         instructor.add(ins);
     }
@@ -110,5 +134,8 @@ public class Course {
     public  void addEvaluation(Evaluation eva)
     {
         this.evaluations.add(eva);
+    }
+    public void addAttendance(Attendance att){
+        this.courseAttendances.add(att);
     }
 }
