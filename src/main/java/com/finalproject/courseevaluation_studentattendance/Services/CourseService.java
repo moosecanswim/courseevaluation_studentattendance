@@ -1,6 +1,7 @@
 package com.finalproject.courseevaluation_studentattendance.Services;
 
-import com.finalproject.courseevaluation_studentattendance.Repositories.AttendenceRepository;
+import com.finalproject.courseevaluation_studentattendance.Model.Course;
+import com.finalproject.courseevaluation_studentattendance.Repositories.AttendanceRepository;
 import com.finalproject.courseevaluation_studentattendance.Repositories.CourseRepository;
 import com.finalproject.courseevaluation_studentattendance.Repositories.EvaluationRepository;
 import com.finalproject.courseevaluation_studentattendance.Repositories.RoleRepository;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CourseService {
     @Autowired
-    AttendenceRepository attendenceRepo;
+    AttendanceRepository attendenceRepo;
     @Autowired
     CourseRepository courseRepo;
     @Autowired
@@ -19,4 +20,8 @@ public class CourseService {
     PersonService personRepo;
     @Autowired
     RoleRepository roleRepo;
+
+    public Iterable<Course> findAll(){
+        return courseRepo.findAll();
+    }
 }
