@@ -30,10 +30,10 @@ public class Person {
   private Set<PersonRole>personRoles;
 
   @ManyToMany
-  private Set<Course>courseinstructor;
+  private Set<Course>courseInstructor;
 
   @ManyToMany
-  private Set<Course>coursestudent;
+  private Set<Course>courseStudent;
 
 
     public Person()
@@ -132,19 +132,27 @@ public class Person {
     }
 
     public Set<Course> getCourseinstructor() {
-        return courseinstructor;
+        return courseInstructor;
     }
 
     public void setCourseinstructor(Set<Course> courseinstructor) {
-        this.courseinstructor = courseinstructor;
+        this.courseInstructor = courseinstructor;
     }
 
-    public Set<Course> getCoursestudent() {
-        return coursestudent;
+    public Set<Course> getCourseInstructor() {
+        return courseInstructor;
     }
 
-    public void setCoursestudent(Set<Course> coursestudent) {
-        this.coursestudent = coursestudent;
+    public void setCourseInstructor(Set<Course> courseInstructor) {
+        this.courseInstructor = courseInstructor;
+    }
+
+    public Set<Course> getCourseStudent() {
+        return courseStudent;
+    }
+
+    public void setCourseStudent(Set<Course> courseStudent) {
+        this.courseStudent = courseStudent;
     }
 
     public void addRole(PersonRole p)
@@ -153,11 +161,11 @@ public class Person {
     }
 
     public void addInstructor(Course in){
-        this.courseinstructor.add(in);
+        this.courseInstructor.add(in);
     }
 
     public void addStudents(Course st)
     {
-        this.coursestudent.add(st);
+        this.courseStudent.add(st);
     }
 }

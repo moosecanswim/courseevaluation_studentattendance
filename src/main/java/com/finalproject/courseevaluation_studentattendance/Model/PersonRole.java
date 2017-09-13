@@ -38,7 +38,15 @@ public class PersonRole {
             this.roleName = roleName;
         }
 
-        public void addPerson(Person usr){
+    public Set<Person> getPeople() {
+        return people;
+    }
+
+    public void setPeople(Set<Person> people) {
+        this.people = people;
+    }
+
+    public void addPerson(Person usr){
 
         people.add(usr);
         }

@@ -1,11 +1,9 @@
 package com.finalproject.courseevaluation_studentattendance.Model;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 public class Course {
@@ -21,6 +19,14 @@ public class Course {
     private Date endDate;
 
     private boolean status;
+
+    @ManyToMany(mappedBy = "courseInstructor")
+    private Set<Person>instructor;
+
+    @ManyToMany(mappedBy = "courseStudent")
+    private Set<Person>student;
+
+    @OneToMany
 
 
     public long getId() {
@@ -61,5 +67,28 @@ public class Course {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    public Set<Person> getInstructor() {
+        return instructor;
+    }
+
+    public void setInstructor(Set<Person> instructor) {
+        this.instructor = instructor;
+    }
+
+    public Set<Person> getStudent() {
+        return student;
+    }
+
+    public void setStudent(Set<Person> student) {
+        this.student = student;
+    }
+
+    public void addInstructor(Person ins){
+        instructor.add(ins);
+    }
+    public void  addStudent(Person std){
+        student.add(std);
     }
 }
