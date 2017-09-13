@@ -25,22 +25,19 @@ public class Course {
 
     @ManyToMany(mappedBy = "courseInstructor")
     private Set<Person> instructor;
-
-    @ManyToMany(mappedBy = "courseStudent")
-    private Set<Person>student;
-
     @ManyToMany
     private Set<Attendance>courseAttendances;
-
     @OneToMany(mappedBy = "courseEvaluation")
     private Set<Evaluation>evaluations;
+    @OneToMany(mappedBy = "courseStudent")
+    private Set<Person>student;
 
 
     public Course(){
         this.instructor=new HashSet<Person>();
-        this.student=new HashSet<Person>();
         this.courseAttendances=new HashSet<Attendance>();
         setEvaluations(new HashSet<Evaluation>());
+        setStudent(new HashSet<Person>());
 
 
     }
@@ -128,7 +125,7 @@ public class Course {
         instructor.add(ins);
     }
     public  void addStudent(Person stud){
-        student.add(stud);
+        this.student.add(stud);
     }
 
     public  void addEvaluation(Evaluation eva)
