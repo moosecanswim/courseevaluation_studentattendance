@@ -2,6 +2,7 @@ package com.finalproject.courseevaluation_studentattendance.Model;
 
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,7 +24,8 @@ public class Person {
 
     private String password;
 
-    public String email;
+    private String email;
+    private Date startDate;
 
   @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(joinColumns = @JoinColumn(name="person_id"),
@@ -45,6 +47,7 @@ public class Person {
         this.courseInstructor=new HashSet<Course>();
         this.courseStudent=new HashSet<Course>();
         this.attendances=new HashSet<Attendance>();
+        this.mNumber="M---";
     }
 
 //    @Override
@@ -180,5 +183,13 @@ public class Person {
     public void addAttendace(Attendance atn)
     {
         this.attendances.add(atn);
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 }
