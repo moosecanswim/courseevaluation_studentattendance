@@ -1,8 +1,8 @@
 package com.finalproject.courseevaluation_studentattendance.Controller;
 
-import com.finalproject.courseevaluation_studentattendance.Model.Course;
-import com.finalproject.courseevaluation_studentattendance.Model.Person;
+import com.finalproject.courseevaluation_studentattendance.Model.*;
 import com.finalproject.courseevaluation_studentattendance.Repositories.CourseRepository;
+import com.finalproject.courseevaluation_studentattendance.Repositories.EvaluationRepository;
 import com.finalproject.courseevaluation_studentattendance.Repositories.PersonRepository;
 import com.finalproject.courseevaluation_studentattendance.Services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,13 +37,14 @@ public class TeacherController {
     @Autowired
     CourseRepository courseRepository;
 
-
-
     @Autowired
     PersonRepository personRepo;
 
     @Autowired
     PersonService personService;
+
+    @Autowired
+    EvaluationRepository evaluationRepository;
 
     @RequestMapping("/home")
     public String teacherHome(){
@@ -99,6 +100,20 @@ public class TeacherController {
         return "displaystudents";
    }
 
+
+   @GetMapping("/evaluation/{id}")
+    public String getEvaluation(@PathParam("id")Long id, Model model)
+   {
+    model.addAttribute("neweval", new Evaluation());
+    return "evaluation";
+   }
+   @PostMapping("/evaluation/{id}")
+   public String postEvaluation(@PathParam("id")Long id,Evaluation evaluation, Model model)
+   {
+       model.addAttribute("neweval", evaluation);
+       evaluationRepository.save(evaluation);
+       return "evaluation";
+   }
 
 
 }
