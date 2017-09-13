@@ -3,6 +3,7 @@ package com.finalproject.courseevaluation_studentattendance.Model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -21,14 +22,16 @@ public class Course {
     private boolean status;
 
     @ManyToMany(mappedBy = "courseInstructor")
-    private Set<Person>instructor;
+    private Set<Person> instructor;
 
     @ManyToMany(mappedBy = "courseStudent")
     private Set<Person>student;
 
-    @OneToMany
 
-
+    public Course(){
+        this.instructor=new HashSet<Person>();
+        this.student=new HashSet<Person>();
+    }
     public long getId() {
         return id;
     }
@@ -88,7 +91,7 @@ public class Course {
     public void addInstructor(Person ins){
         instructor.add(ins);
     }
-    public void  addStudent(Person std){
-        student.add(std);
+    public  void addStudent(Person stud){
+        student.add(stud);
     }
 }
