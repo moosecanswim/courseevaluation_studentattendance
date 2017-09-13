@@ -16,6 +16,7 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    private String mnumber;
 
     private String firstName;
 
@@ -130,5 +131,13 @@ public class Person {
 
     public void setCourse(Set<Course> course) {
         this.course = course;
+    }
+
+    public String getMnumber() {
+        return mnumber;
+    }
+
+    public void setMnumber(String mnumber) {
+        this.mnumber = mnumber;
     }
 }
