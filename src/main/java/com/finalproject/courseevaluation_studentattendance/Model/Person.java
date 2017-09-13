@@ -8,8 +8,7 @@ import java.util.Set;
 
 @Entity
 public class Person {
-
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -29,23 +28,19 @@ public class Person {
 
   @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(joinColumns = @JoinColumn(name="person_id"),
-          inverseJoinColumns=@JoinColumn(name="role_id"))
+   inverseJoinColumns=@JoinColumn(name="role_id"))
   private Set<PersonRole>personRoles;
-
   @ManyToMany
   private Set<Course>courseInstructor;
-
-  @ManyToMany
-  private Set<Course>courseStudent;
-
   @ManyToMany
   private Set<Attendance>attendances;
+  @ManyToOne
+  private Course courseStudent;
 
     public Person()
     {
         this.personRoles=new HashSet<PersonRole>();
         this.courseInstructor=new HashSet<Course>();
-        this.courseStudent=new HashSet<Course>();
         this.attendances=new HashSet<Attendance>();
         this.mNumber="M---";
     }
@@ -151,13 +146,6 @@ public class Person {
         this.courseInstructor = courseInstructor;
     }
 
-    public Set<Course> getCourseStudent() {
-        return courseStudent;
-    }
-
-    public void setCourseStudent(Set<Course> courseStudent) {
-        this.courseStudent = courseStudent;
-    }
 
     public Set<Attendance> getAttendances() {
         return attendances;
@@ -176,10 +164,6 @@ public class Person {
         this.courseInstructor.add(in);
     }
 
-    public void addStudents(Course st)
-    {
-        this.courseStudent.add(st);
-    }
     public void addAttendace(Attendance atn)
     {
         this.attendances.add(atn);
