@@ -13,6 +13,8 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    private long crn;
+
     private String courseName;
 
     private Date startDate;
@@ -48,6 +50,14 @@ public class Course {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public long getCrn() {
+        return crn;
+    }
+
+    public void setCrn(long crn) {
+        this.crn = crn;
     }
 
     public String getCourseName() {

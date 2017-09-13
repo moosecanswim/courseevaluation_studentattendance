@@ -7,6 +7,52 @@
 <body>
     <h1>Admin Class</h1>
     <p>List of Courses</p>
-    <p>any notifications ("email" from the submit attendence")</p>
+
+    <table class="table table-striped">
+        <tr>
+            <td><b>ID</b></td>
+            <td><b>CRN</b></td>
+            <td><b>Course Name</b></td>
+            <td><b>Start Date</b></td>
+            <td><b>End Date</b></td>
+            <td><b>Course Complete Status</b></td>
+            <td><b>Update</b></td>
+            <td><b>View Details</b></td>
+            <td><b>Delete</p></b></td>
+            <td><b>View Evaluations</p></b></td>
+        </tr>
+
+        <!--iterate through all the existed courses-->
+        <th:block th:each="all:${allcourses}">
+            <tr>
+                <td><a th:text="${all.id}"></a></td>
+                <td><a th:text="${all.crn}"></a></td>
+                <td><a th:text="${all.courseName}"></a></td>
+                <td><a th:text="${all.startDate}"></a></td>
+                <td><a th:text="${all.endDate}"></a></td>
+                <td><a th:text="${all.courseCompleteStatus}"></a></td>
+                <td>
+                    <a th:href="@{/admin/updateCourse/{id}(id=${all.id})}">Update</a>
+                </td>
+                <td>
+                    <a th:href="@{/admin/viewDetailsCourse/{id}(id=${all.id})}">View Details</a>
+                </td>
+
+                <td>
+                    <a th:href="@{/admin/removeCourse/{id}(id=${all.id})}">Delete Course</a>
+                </td>
+                <td>
+                    <a th:href="@{/admin/viewCourseEvaluations/{id}(id=${all.id})}">View Evaluations</a>
+                </td>
+
+            </tr>
+        </th:block>
+    </table>
+
+
+
+    <p>any notifications ("email" from the submit attendance from the teacher)</p>
+
+
 </body>
 </html>
