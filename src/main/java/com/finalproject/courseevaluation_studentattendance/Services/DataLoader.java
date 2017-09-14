@@ -99,7 +99,7 @@ public class DataLoader implements CommandLineRunner{
 
         course = new Course(456,"Physics",startDate,endDate);
         courseRepo.save(course);
-        course.addInstructor(personRepo.findByUsername("teacher"));
+        course.setInstructor(personRepo.findByUsername("teacher"));
 
         course = new Course(789,"German",startDate,endDate);
         courseRepo.save(course);
