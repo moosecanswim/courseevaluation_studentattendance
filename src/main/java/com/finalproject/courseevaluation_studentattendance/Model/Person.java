@@ -30,7 +30,6 @@ public class Person {
   @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(joinColumns = @JoinColumn(name="person_id"),
    inverseJoinColumns=@JoinColumn(name="role_id"))
-
   private Set<PersonRole>personRoles;
 
   @OneToMany(mappedBy = "instructor")
