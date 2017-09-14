@@ -56,32 +56,24 @@ public class CourseService {
             existingCourse.setEndDate(aCourse.getEndDate());
             courseRepo.save(existingCourse);
             System.out.println("CourseService: updating Course " + aCourse.toString());
-
-            courseRepo.save(aCourse);
         }
-    }
 
-    //sets the course status to false
-    public void removeCourse(Course aCourse){
-        Course existingCourse = courseRepo.findOne(aCourse.getId());
 
-        if (existingCourse != null) {
-            throw new RuntimeException("CourseService: Course does not exist!  cannot set status to false(remove)");
-        }
-        else{
-            existingCourse.setStatus(false);
-            courseRepo.save(existingCourse);
-        }
-    }
-
-    //find course by crn
-    public Course findByCRN(String crn){
-        return courseRepo.findByCrn(crn);
-    }
-
-//    //remove a student from a course
-//    public void removeStudentFromCourse (Course aCourse, Person aStudent){
-//        aStudent.
+//    //sets the course status to false
+//    public void removeCourse(Course aCourse){
+//
+//        }
+//        Course existingCourse = courseRepo.findOne(aCourse.getId());
+//
+//        if (existingCourse != null) {
+//            throw new RuntimeException("CourseService: Course does not exist!  cannot set status to false(remove)");
+//        }
+//        else{
+//            existingCourse.setStatus(false);
+//            courseRepo.save(existingCourse);
+//        }
 //    }
+        }
+
 
 }
