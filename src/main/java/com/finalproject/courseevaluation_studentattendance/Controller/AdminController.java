@@ -83,7 +83,7 @@ public class AdminController {
         model.addAttribute("course", currentCourse);
 
         Person courseInstructor = currentCourse.getInstructor();
-        model.addAttribute("courseInstructors", courseInstructor);
+        model.addAttribute("courseInstructor", courseInstructor);
 
 
         Set<Person> courseStudents = currentCourse.getStudent();

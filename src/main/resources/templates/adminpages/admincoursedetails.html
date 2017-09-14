@@ -17,10 +17,10 @@
 
 
 
-    <p>Course Instructors: </p>
-    <th:block th:each="alli:${courseInstructors}">
-        <p th:text="'Instructor: ' + ${alli.firstName} + ' ' +${all.lastName} "/>
-    </th:block>
+
+
+    <p th:text="'Instructor: ' + ${courseInstructor.firstName} + ' ' +${courseInstructor.lastName} "/>
+
 
 
 
