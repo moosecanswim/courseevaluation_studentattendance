@@ -165,7 +165,7 @@ public class Person {
         this.courseInstructor.add(in);
     }
 
-    public void addAttendace(Attendance atn)
+    public void addAttendance(Attendance atn)
     {
         this.attendances.add(atn);
     }

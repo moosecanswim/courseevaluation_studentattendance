@@ -73,7 +73,7 @@ public class TeacherController {
     }
 
 
-    //will have a add student
+    //will have a add student, set date for a course
     @GetMapping("/detailsofacourse/{id}")
     public String detailsofcourse(@PathParam("id") Long courseId, Model model)
     {
@@ -82,19 +82,55 @@ public class TeacherController {
         Iterable<Person> studentsofACourse = currentCourse.getStudent();
 
         Iterable<Attendance> attendanceSheet = currentCourse.getCourseAttendances();
+
+        //add a new attendance and set date (for a course)
         Date now= new Date();
 
-        for (Attendance attend : attendanceSheet)
-        {
-            attend.setDate(now);
+        Attendance oneAttendancecourse = new Attendance();
+        Attendance oneAttendance = new Attendance();
+
+        oneAttendancecourse.setDate(now);
+        oneAttendance.setDate(now);
+
+        currentCourse.addAttendance(oneAttendancecourse);
+
+                for (Person student : studentsofACourse) {
+            student.addAttendance(oneAttendance);
         }
+
 
         model.addAttribute("course", currentCourse);
         model.addAttribute("studentsofACourse", studentsofACourse);
         model.addAttribute("AttendanceSheet", attendanceSheet);
+        model.addAttribute("now", now);
 
 
         return "detailsofacourse";
+    }
+
+
+    //add an attendance and set date for each student of a course
+    @GetMapping("/attendanceofacourse/{courseId}/{studentId}")
+    public String listattendanceofacourse(@PathParam("courseId") Long courseId, @PathParam("studentId") Long studentId, Model model)
+    {
+
+        Course currentCourse = courseRepository.findOne(courseId);
+        Iterable<Person> studentsofACourse = currentCourse.getStudent();
+
+        Attendance oneStudentAttendance = new Attendance();
+        Date now= new Date();
+
+        oneStudentAttendance.setDate(now);
+
+        Person student = personRepo.findOne(studentId);
+        student.addAttendance(oneStudentAttendance);
+
+
+        model.addAttribute("course", currentCourse);
+        model.addAttribute("studentsofACourse", studentsofACourse);
+        model.addAttribute("student", student);
+
+        return "attendanceofacourse";
     }
 
    @GetMapping("/addstudentstocourse/{id}")

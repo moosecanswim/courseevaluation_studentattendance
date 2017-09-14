@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:input="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
     <title>Details of a course info</title>
@@ -23,6 +23,7 @@
     <br/>
 
     <p>List of students who registered for the course: </p>
+    <p th:text="'Date today: ' + ${#dates.format(now, 'MMM dd, yyyy')}"></p>
 
     <!--should be a form allow input of students' attendance info-->
 
@@ -30,9 +31,10 @@
     <th:block th:each="student:${studentsofACourse}">
         <p th:text="'Student Name: ' + ${student.firstName} + ' ' +${student.lastName} "></p>
         <p th:text="'Student Email:' + ${student.email}"></p>
+
         <!--Todo: attendance for each student of a course-->
         <p>Attendance</p>
-        <p input:> </p>
+        <a href="/detailsofacourse/{courseId}/{studentId}">Mark Attendance</a>
 
 
 
