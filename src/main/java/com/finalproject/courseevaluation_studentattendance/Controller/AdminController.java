@@ -95,6 +95,27 @@ public class AdminController {
         model.addAttribute("course",thiscourse);
         return"courseevaluation";
     }
+    //this will allow the the admin to add an existing student to a course
+    @GetMapping("/addstudenttocourse/{id}")
+    public String addStudent(@PathVariable("id") long crsID, Model model)
+    {
+        model.addAttribute("course",courseRepo.findOne(crsID));
+        model.addAttribute("students",personRepo.findAllByPersonRoles("default"));
+
+        return "courseaddstudent";
+    }
+    @PostMapping("/addstudenttocourse/{crsid}")
+    public String studentSavedToCourse(@PathVariable("crsid") long id,
+                                       @RequestParam("crs") String crsID,
+                                       @ModelAttribute("aStudent") Person p,
+                                       Model model)
+
+    {
+        Course ncourse=courseRepo.findOne(id);
+        ncourse.addStudent(personRepo.findOne(new Long(crsID)));
+        courseRepo.save(ncourse);
+        return "redirect:/admin/detailsofacourse"+crsID;
+    }
 
     // ===   Remove Student from the Course
     @GetMapping("course/{courseid}/removestudentfromcourse/{studentid}")
