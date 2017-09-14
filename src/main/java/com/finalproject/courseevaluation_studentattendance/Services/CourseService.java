@@ -6,6 +6,8 @@ import com.finalproject.courseevaluation_studentattendance.Repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Set;
+
 @Service
 public class CourseService {
     @Autowired
@@ -56,24 +58,44 @@ public class CourseService {
             existingCourse.setEndDate(aCourse.getEndDate());
             courseRepo.save(existingCourse);
             System.out.println("CourseService: updating Course " + aCourse.toString());
+
+            courseRepo.save(aCourse);
         }
+    }
 
+    //sets the course status to false
+    public void removeCourse(Course aCourse){
+        Course existingCourse = courseRepo.findOne(aCourse.getId());
 
-//    //sets the course status to false
-//    public void removeCourse(Course aCourse){
-//
-//        }
-//        Course existingCourse = courseRepo.findOne(aCourse.getId());
-//
-//        if (existingCourse != null) {
-//            throw new RuntimeException("CourseService: Course does not exist!  cannot set status to false(remove)");
-//        }
-//        else{
-//            existingCourse.setStatus(false);
-//            courseRepo.save(existingCourse);
-//        }
-//    }
+        if (existingCourse != null) {
+            throw new RuntimeException("CourseService: Course does not exist!  cannot set status to false(remove)");
         }
+        else{
+            existingCourse.setStatus(false);
+            courseRepo.save(existingCourse);
+        }
+    }
 
+    //find course by crn
+    public Course findByCRN(String crn){
+        return courseRepo.findByCrn(crn);
+    }
+
+    //remove a student from a course
+    //take a temp set of students from the course and checks to see if the student is in it
+    //if the student is in that set it will remove the student from the temp sent courseStudents
+    //save the new set of student to the course
+    public void removeStudentFromCourse (Course aCourse, Person aStudent){
+        Set<Person> courseStudents = aCourse.getStudent();
+        if(courseStudents.contains(aStudent)){
+            System.out.println("CourseService/removeStudentFromCourse:remove students");
+            courseStudents.remove(aStudent);
+            aCourse.setStudent(courseStudents);
+            courseRepo.save(aCourse);
+        }
+        else{
+            System.out.println("CourseService/removeStudentFromCourse: student was not part of class to begin with");
+        }
+    }
 
 }
