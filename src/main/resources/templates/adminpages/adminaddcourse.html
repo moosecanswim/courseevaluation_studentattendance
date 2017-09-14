@@ -23,9 +23,10 @@
         <input type="date" th:field="*{startDate}"name="startDate" id="startDate" class="form-control input-lg" placeholder="startDate" tabindex="5">
     </div>
     <div th:if="${#fields.hasErrors('startDate')}"  th:errors="*{startDate}"
-         class="well alert alert-warning" role="alert"></div><div class="form-group">
-        <input type="text" th:field="*{endDate}"name="startDate" id="endDate" class="form-control input-lg" placeholder="endDate" tabindex="5">
-    </div>
+         class="well alert alert-warning" role="alert"></div>
+    <!--<div class="form-group">-->
+        <!--<input type="text" th:field="*{endDate}"name="endDate" id="endDate" class="form-control input-lg" placeholder="endDate" tabindex="5">-->
+    <!--</div>-->
     <!--<div th:if="${#fields.hasErrors('endDate')}"  th:errors="*{endDate}"-->
          <!--class="well alert alert-warning" role="alert"></div><div class="form-group">-->
         <!--<input type="text" th:field="*{status}"name="startDate" id="status" class="form-control input-lg" placeholder="status" tabindex="5">-->
