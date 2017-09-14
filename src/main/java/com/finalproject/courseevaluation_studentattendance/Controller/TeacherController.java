@@ -4,6 +4,7 @@ import com.finalproject.courseevaluation_studentattendance.Model.*;
 import com.finalproject.courseevaluation_studentattendance.Repositories.CourseRepository;
 import com.finalproject.courseevaluation_studentattendance.Repositories.EvaluationRepository;
 import com.finalproject.courseevaluation_studentattendance.Repositories.PersonRepository;
+import com.finalproject.courseevaluation_studentattendance.Services.CourseService;
 import com.finalproject.courseevaluation_studentattendance.Services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.finalproject.courseevaluation_studentattendance.Model.Course;
@@ -44,15 +45,18 @@ public class TeacherController {
     PersonService personService;
 
     @Autowired
+    CourseService courseService;
+
+    @Autowired
     EvaluationRepository evaluationRepository;
 
     @RequestMapping("/home")
     public String teacherHome(){
-        return "teacherpages/teacherhome";
+        return "teacherhome";
     }
 
 
-    //this route can be combine with the teacher home page later
+    //this route can be combine with the teacherhome page later
     @GetMapping("/listallcourses")
     public String listCourse(Principal p, Model model)
     {
@@ -60,7 +64,7 @@ public class TeacherController {
 
         Iterable<Course> allCoursesofAInstructor = instructor.getCourseInstructor();
 
-        model.addAttribute("allcoursesofaTeacher", allCoursesofAInstructor);
+        model.addAttribute("allcoursesofaInstructor", allCoursesofAInstructor);
 
         return "listallcourses";
     }
@@ -72,7 +76,10 @@ public class TeacherController {
     {
 
         Course currentCourse = courseRepository.findOne(courseId);
+        Iterable<Person> studentsofACourse = currentCourse.getStudent();
+
         model.addAttribute("course", currentCourse);
+        model.addAttribute("studentsofACourse", studentsofACourse);
 
         return "detailsofacourse";
     }

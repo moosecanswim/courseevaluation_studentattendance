@@ -2,23 +2,33 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Title</title>
+    <title>Details of a course info</title>
 </head>
 <body>
-<th:block th:each="item:${allcoursesofaTeacher}">
 
-    <h2 th:inline="text">Course information for [[${item.courseCode}]]</h2>
 
-    <p th:text="'Course ID: ' + ${item.Id}"/>
-    <p th:text="'Course Name: '+ ${item.courseName}" />
-    <p>Course Instructor: </p>
-    <th:block th:each="ins:${item.instructor}">
-        <p th:text="'Instructor: ' + ${ins.firstName} + ' ' +${ins.lastName} "/>
+    <h2 th:inline="text">Course information for [[${item.courseName}]]</h2>
+
+    <p th:text="'Course ID: ' + ${course.id}"/>
+    <p th:text="'Course Name: '+ ${course.courseName}" />
+    <p th:text="'Course CRN:' + ${item.crn}"/>
+    <p th:text="'Course StartDate:' + ${item.startDate}"/>
+    <p th:text="'Course EndDate:' + ${item.endDate}"/>
+    <p th:text="'Course Status:' + ${item.status}"/>
+    <br/>
+    <p>List of Course Instructors: </p>
+    <th:block th:each="ins:${course.instructor}">
+        <p th:text="'Instructor: ' + ${course.firstName} + ' ' +${course.lastName} "/>
     </th:block>
-    <!--<p th:text="'Students registed for the courses:' + "/>-->
-    <p><a th:href="@{/addstudentstocourse/{id}(id=${item.courseId})}">Register students for the course</a></p>
-    <p><a th:href="@{/detailsofacourse/{id}(id=${item.id})}">Show details</a></p>
-</th:block>
+    <br/>
+    <!--<p th:text="'Students registered for the courses:' + "/>-->
+    <p><a th:href="@{/addstudentstocourse/{id}(id=${item.id})}">Register students for the course</a></p>
+    <p><a th:href="@{/listallcourses}">Back to all course</a></p>
+    <p><a th:href="@{/evaluation/{id}(id=${item.id})}">See evaluations</a></p>
+    <p></p>
+
+
+
 
 </body>
 </html>

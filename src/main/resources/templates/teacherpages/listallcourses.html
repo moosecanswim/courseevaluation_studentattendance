@@ -6,18 +6,19 @@
 </head>
 <body>
 
-<th:block th:each="item:${allcoursesofaTeacher}">
+<th:block th:each="item:${allcoursesofaInstructor}">
 
-    <h2 th:inline="text">Course information for [[${item.courseCode}]]</h2>
+    <h2 th:inline="text">Course information for [[${item.courseName}]]</h2>
 
-    <p th:text="'Course ID: ' + ${item.Id}"/>
+    <p th:text="'Course ID: ' + ${item.id}"/>
+    <p th:text="'Course CRN:' + ${item.crn}"/>
     <p th:text="'Course Name: '+ ${item.courseName}" />
-    <p>Course Instructor: </p>
-    <th:block th:each="ins:${item.instructor}">
-        <p th:text="'Instructor: ' + ${ins.firstName} + ' ' +${ins.lastName} "/>
-    </th:block>
+    <!--<p>Course Instructor: </p>-->
+    <!--<th:block th:each="ins:${item.instructor}">-->
+        <!--<p th:text="'Instructor: ' + ${ins.firstName} + ' ' +${ins.lastName} "/>-->
+    <!--</th:block>-->
     <!--<p th:text="'Students registed for the courses:' + "/>-->
-    <p><a th:href="@{/addstudentstocourse/{id}(id=${item.courseId})}">Register students for the course</a></p>
+
     <p><a th:href="@{/detailsofacourse/{id}(id=${item.id})}">Show details</a></p>
 </th:block>
 
