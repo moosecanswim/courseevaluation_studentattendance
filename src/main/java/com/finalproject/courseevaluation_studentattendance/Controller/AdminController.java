@@ -7,6 +7,7 @@ import com.finalproject.courseevaluation_studentattendance.Repositories.CourseRe
 import com.finalproject.courseevaluation_studentattendance.Repositories.EvaluationRepository;
 import com.finalproject.courseevaluation_studentattendance.Repositories.PersonRepository;
 import com.finalproject.courseevaluation_studentattendance.Services.AttendanceService;
+import com.finalproject.courseevaluation_studentattendance.Services.CourseService;
 import com.finalproject.courseevaluation_studentattendance.Services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,8 +24,11 @@ public class AdminController {
     //@Autowired
     //AttendanceService attendenceService;
 
-//    @Autowired
-//    PersonService personService;
+    @Autowired
+    PersonService personService;
+
+    @Autowired
+    CourseService courseService;
 
     @Autowired
     PersonRepository personRepo;
@@ -34,6 +38,7 @@ public class AdminController {
 
     @Autowired
     EvaluationRepository evaluationRepo;
+
 
 
 
@@ -123,7 +128,10 @@ public class AdminController {
                                            @PathVariable("studentid")long studentid,
                                            Model model)
     {
-//        todo: call method here
+        Person student = personService.findById(studentid);
+        Course course = courseRepo.findOne(courseid);
+        courseService.removeStudentFromCourse(course, student);
+
         String courseIDString = Long.toString(courseid);
         return "rdirect:/admin/detailsofacourse/" + courseIDString;
     }

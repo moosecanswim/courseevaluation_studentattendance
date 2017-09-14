@@ -5,7 +5,9 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface CourseRepository extends CrudRepository<Course,Long> {
    Iterable<Course> findAllByCourseName(String courseName);
-    Course findByCrn(String crn);
+
+   Course findByCourseName(String coursenames);
 
 
+   Course findByCrn(String crn);
 }
