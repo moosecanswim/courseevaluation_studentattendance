@@ -107,7 +107,7 @@ public class TeacherController {
 
 
     @GetMapping("/markattendance/{courseId}")
-    public String listAttendanceofaCourse(@PathVariable("courseId") Long courseId, @RequestParam(value = "attendanceStatus", required = false) String[] attendanceStatus, Model model)
+    public String listAttendanceofaCourse(@PathVariable("courseId") Long courseId, Model model)
     {
 
 
@@ -115,23 +115,6 @@ public class TeacherController {
         Iterable<Person> studentsofACourse = currentCourse.getStudent();
 
         Date now= new Date();
-
-
-
-
-        int i=0;
-
-        for (Person student: studentsofACourse)
-        {
-
-            Attendance att = new Attendance();
-            att.setDate(now);
-            att.setStatus(attendanceStatus[i]);
-            i+=1;
-            att.setPersonAttendance(student);
-            attendanceRepository.save(att);
-
-        }
 
 
 
@@ -149,7 +132,31 @@ public class TeacherController {
         Course currentCourse = courseRepository.findOne(courseId);
         Iterable<Person> studentsofACourse = currentCourse.getStudent();
 
-        return "attendancefortheday";
+        int i=0;
+
+        Date now= new Date();
+
+        for (Person student: studentsofACourse)
+        {
+
+            Attendance att = new Attendance();
+            att.setDate(now);
+            att.setStatus(attendanceStatus[i]);
+            i+=1;
+            att.setPersonAttendance(student);
+            att.setAttendanceCourse(currentCourse);
+            attendanceRepository.save(att);
+
+        }
+
+
+
+        model.addAttribute("now", now);
+        model.addAttribute("course", currentCourse);
+        model.addAttribute("studentsofACourse", studentsofACourse);
+
+
+        return "attendanceforstudentsofacourse";
     }
 
 
