@@ -29,6 +29,8 @@ public class PersonService {
     public Person findById(long id){
         return personRepo.findOne(id);
     }
+
+
     public void update(Person person){
         Person existingPerson = personRepo.findOne(person.getId());
         if(existingPerson==null){
@@ -43,6 +45,27 @@ public class PersonService {
         System.out.println("PersonService/update: sucessfully updated person details");
         personRepo.save(existingPerson);
 
+    }
+
+    public Person create(Person aPerson) {
+        Person existingUser = personRepo.findByUsername(aPerson.getUsername());
+
+        if (existingUser != null) {
+            throw new RuntimeException("Record already exists!");
+        }
+        System.out.println("UserService: adding new user " + aPerson.toString());
+        aPerson.addRole(roleRepo.findByRoleName("Student"));
+        return personRepo.save(aPerson);
+    }
+    public void saveTeacher(Person aPerson){
+        aPerson.addRole(roleRepo.findByRoleName("TEACHER"));
+        aPerson.setActive(true);
+        personRepo.save(aPerson);
+    }
+    public void saveAdmin(Person aPerson){
+        aPerson.addRole(roleRepo.findByRoleName("ADMIN"));
+        aPerson.setActive(true);
+        personRepo.save(aPerson);
     }
 
 

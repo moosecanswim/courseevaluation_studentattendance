@@ -1,9 +1,6 @@
 package com.finalproject.courseevaluation_studentattendance.Services;
 
-import com.finalproject.courseevaluation_studentattendance.Repositories.AttendanceRepository;
-import com.finalproject.courseevaluation_studentattendance.Repositories.CourseRepository;
-import com.finalproject.courseevaluation_studentattendance.Repositories.EvaluationRepository;
-import com.finalproject.courseevaluation_studentattendance.Repositories.RoleRepository;
+import com.finalproject.courseevaluation_studentattendance.Repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +13,7 @@ public class RoleService {
     @Autowired
     EvaluationRepository evaluationRepo;
     @Autowired
-    PersonService personRepo;
+    PersonRepository personRepo;
     @Autowired
     RoleRepository roleRepo;
 }

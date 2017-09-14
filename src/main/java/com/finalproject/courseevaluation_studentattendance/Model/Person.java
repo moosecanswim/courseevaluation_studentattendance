@@ -25,6 +25,7 @@ public class Person {
 
     private String email;
     private Date startDate;
+    private Boolean active;//true if user is active false if user has been archived
 
   @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(joinColumns = @JoinColumn(name="person_id"),
@@ -175,5 +176,13 @@ public class Person {
 
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 }
