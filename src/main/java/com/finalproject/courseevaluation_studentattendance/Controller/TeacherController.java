@@ -152,6 +152,8 @@ public class TeacherController {
     public String postCourse(@PathParam("id") Long id, Person person, Model model)
    {
 
+       Course c =  courseRepository.findOne(id);
+       personService.addStudentToCourse(person,c);
        model.addAttribute("newstudent", person);
        personService.create(person);
       // personRepo.save(person);
@@ -179,6 +181,13 @@ public class TeacherController {
        evaluationRepository.save(evaluation);
        return "evaluation";
    }
+
+//
+//   @RequestMapping("searchcrn")
+//    public String searchForCRN(@ModelAttribute("crn") Evaluation eval, Model model, Course cse)
+//   {
+//
+//   }
 
 
 }

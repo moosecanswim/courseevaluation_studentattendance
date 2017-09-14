@@ -37,4 +37,15 @@ public class CourseService {
 
         return courseRepo.save(aCourse);
     }
+
+
+    public Course findCourseById()
+    {
+        long id = 0;
+        Course c =  courseRepo.findOne(id);
+
+        return c;
+
+
+    }
 }

@@ -6,6 +6,10 @@
 </head>
 <body>
 
+
+
+
+
 <h2> Section II: Rate the Course</h2>
 <form action="#" th:action="@{/evaluation}" th:object="${neweval}" method="post" >
     <!--<input type="text" th:field="*{perosn.id}" />-->
@@ -65,10 +69,10 @@
     <input type="radio" th:name="${'equipment[' + item + ']'}" value="Poor" />Poor
 
 
-    <p> <h4> 1. What did you like about the class?   </h4> <textarea th:inline="text">[[${likes}]]"></textarea>
-    <p> <h4> 2. What didn't you like about the class?   </h4><textarea th:inline="text">[[${dislikes}]]"> </p></textarea>
-    <p> <h4> 3. What improvements would you suggest?   </h4> <textarea th:inline="text">[[${suggestions}]]"> </p></textarea>
-    <p> <h4> 4. What other classes would you like to see offered?  </h4> <textarea th:inline="text">[[${otherClass}]]"></p></textarea>
+    <p> <h4> 1. What did you like about the class?   </h4> <textarea th:inline="text">[[${likes}]]></textarea>
+    <p> <h4> 2. What didn't you like about the class?   </h4><textarea th:inline="text">[[${dislikes}]]> </p></textarea>
+    <p> <h4> 3. What improvements would you suggest?   </h4> <textarea th:inline="text">[[${suggestions}]]> </p></textarea>
+    <p> <h4> 4. What other classes would you like to see offered?  </h4> <textarea th:inline="text">[[${otherClass}]]></p></textarea>
 
 
     <!--<p> <h4> Findings  </h4> <input type="text" th:field="*{findings}"/></p>-->
