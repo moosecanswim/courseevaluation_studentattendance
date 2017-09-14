@@ -55,6 +55,7 @@ public class AdminController {
         return "adminpages/addcourse";
     }
 
+    //End date for the course isn't going to be entered here but it will be set when the teacher says the course ended
     @PostMapping("/addcourse")
     public String postCourse(@ModelAttribute("newcourse")Course newcourse)
     {
