@@ -95,6 +95,9 @@ public class DataLoader implements CommandLineRunner{
         courseRepo.save(course);
         course.addStudent(personRepo.findByUsername("bobbob"));
         course.addStudent(personRepo.findByUsername("student"));
+        //course.setInstructor(personRepo.findByUsername("teacher"));
+        //or
+        //personRepo.findByUsername("teacher").addCourse(course);
         courseRepo.save(course);
 
         course = new Course(456,"Physics",startDate,endDate);
