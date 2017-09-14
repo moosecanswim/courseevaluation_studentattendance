@@ -94,13 +94,14 @@ public class AdminController {
 
     //need to taste viewing after the team is done with evaluation
     @GetMapping("viewcourseevaluations/{id}")
-    public String viewEvaluation(@PathVariable("id") long id ,Model model){
-        Course thiscourse=courseRepo.findOne(id);
-        Iterable<Evaluation>thiscourseevaluation=thiscourse.getEvaluations();
+    public String viewEvaluation(@PathVariable("id") long id, Model model){
+        Course thiscourse = courseRepo.findOne(id);
+        Iterable<Evaluation> thiscourseevaluation = thiscourse.getEvaluations();
         model.addAttribute("evaluation",thiscourseevaluation);
         model.addAttribute("course",thiscourse);
         return"admincourseevaluation";
     }
+
     //this will allow the the admin to add an existing student to a course
     @GetMapping("/addstudenttocourse/{id}")
     public String addStudent(@PathVariable("id") long crsID, Model model)
