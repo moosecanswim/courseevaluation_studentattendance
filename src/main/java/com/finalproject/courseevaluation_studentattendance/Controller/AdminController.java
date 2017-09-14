@@ -55,7 +55,7 @@ public class AdminController {
     public String addCourse(Model model)
     {
         model.addAttribute("newcourse", new Course());
-        return "adminpages/addcourse";
+        return "adminpages/adminaddcourse";
     }
 
     //End date for the course isn't going to be entered here but it will be set when the teacher says the course ended
@@ -71,7 +71,7 @@ public class AdminController {
     {
         model.addAttribute("newcourse",courseRepo.findOne(id));
 
-        return "adminpages/addcourse";
+        return "adminpages/adminaddcourse";
     }
 
     @GetMapping("/admincourcedatails/{id}")  //id - course id
@@ -98,7 +98,7 @@ public class AdminController {
         Iterable<Evaluation>thiscourseevaluation=thiscourse.getEvaluations();
         model.addAttribute("evaluation",thiscourseevaluation);
         model.addAttribute("course",thiscourse);
-        return"courseevaluation";
+        return"admincourseevaluation";
     }
     //this will allow the the admin to add an existing student to a course
     @GetMapping("/addstudenttocourse/{id}")
@@ -107,7 +107,7 @@ public class AdminController {
         model.addAttribute("course",courseRepo.findOne(crsID));
         model.addAttribute("students",personRepo.findAllByPersonRoles("default"));
 
-        return "courseaddstudent";
+        return "admincourseaddstudent";
     }
     @PostMapping("/addstudenttocourse/{crsid}")
     public String studentSavedToCourse(@PathVariable("crsid") long id,
