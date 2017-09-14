@@ -86,21 +86,15 @@ public class CourseService {
     //if the student is in that set it will remove the student from the temp sent courseStudents
     //save the new set of student to the course
     public void removeStudentFromCourse (Course aCourse, Person aStudent){
-        Course tempCourse = courseRepo.findOne(aCourse.getId());
-        if(tempCourse==null){
-            System.out.println("CourseService/removeStudentFromCourse:Course does not exist");
+        Set<Person> courseStudents = aCourse.getStudent();
+        if(courseStudents.contains(aStudent)){
+            System.out.println("CourseService/removeStudentFromCourse:remove students");
+            courseStudents.remove(aStudent);
+            aCourse.setStudent(courseStudents);
+            courseRepo.save(aCourse);
         }
-        else {
-
-            Set<Person> courseStudents = tempCourse.getStudent();
-            if (courseStudents.contains(aStudent)) {
-                System.out.println("CourseService/removeStudentFromCourse:remove students");
-                courseStudents.remove(aStudent);
-                tempCourse.setStudent(courseStudents);
-                courseRepo.save(tempCourse);
-            } else {
-                System.out.println("CourseService/removeStudentFromCourse: student was not part of class to begin with");
-            }
+        else{
+            System.out.println("CourseService/removeStudentFromCourse: student was not part of class to begin with");
         }
     }
 
