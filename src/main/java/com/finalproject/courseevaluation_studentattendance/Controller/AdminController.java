@@ -75,7 +75,7 @@ public class AdminController {
     }
 
     // ===   See the details of the Course
-    @GetMapping("/admincoursedatails/{id}")  //id - course id
+    @GetMapping("/admincoursedetails/{id}")  //id - course id
     public String displayCourse (@PathVariable("id")long id,
                                          Model model) {
 
