@@ -30,11 +30,14 @@ public class Person {
   @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(joinColumns = @JoinColumn(name="person_id"),
    inverseJoinColumns=@JoinColumn(name="role_id"))
+
   private Set<PersonRole>personRoles;
   @ManyToMany
   private Set<Course>courseInstructor;
-  @ManyToMany
+
+  @OneToMany(mappedBy = "attendances")
   private Set<Attendance>attendances;
+
   @ManyToOne
   private Course courseStudent;
 

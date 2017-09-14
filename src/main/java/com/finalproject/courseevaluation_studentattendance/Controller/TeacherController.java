@@ -81,7 +81,7 @@ public class TeacherController {
         Course currentCourse = courseRepository.findOne(courseId);
         Iterable<Person> studentsofACourse = currentCourse.getStudent();
 
-        Iterable<Attendance> attendanceSheet = currentCourse.getCourseAttendances();
+//        Iterable<Attendance> attendanceSheet = currentCourse.getCourseAttendances();
 
         //add a new attendance and set date (for a course)
         Date now= new Date();
@@ -101,7 +101,6 @@ public class TeacherController {
 
         model.addAttribute("course", currentCourse);
         model.addAttribute("studentsofACourse", studentsofACourse);
-        model.addAttribute("AttendanceSheet", attendanceSheet);
         model.addAttribute("now", now);
 
 
@@ -110,7 +109,7 @@ public class TeacherController {
 
 
     //add an attendance and set date for each student of a course
-    @GetMapping("/attendanceofacourse/{courseId}/{studentId}")
+    @GetMapping("/attendanceofastudent/{courseId}/{studentId}")
     public String listattendanceofacourse(@PathParam("courseId") Long courseId, @PathParam("studentId") Long studentId, Model model)
     {
 
@@ -137,7 +136,15 @@ public class TeacherController {
    @GetMapping("/addstudentstocourse/{id}")
     public String getCourse(@PathParam("id")Long id, Model model)
    {
-       model.addAttribute("newstudent", new Person());
+
+
+       Date now= new Date();
+
+       Person student = new Person();
+
+       student.setStartDate(now);
+
+       model.addAttribute("newstudent", student);
        return "addstudent";
    }
 

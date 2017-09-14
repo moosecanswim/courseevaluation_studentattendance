@@ -38,8 +38,6 @@ public class AdminController {
 
 
 
-
-
     @RequestMapping("/home")
     public String adminHome(Model model){
 
@@ -90,7 +88,15 @@ public class AdminController {
         return "adminpages/datailsofacourse";
     }
 
-
+    //need to taste viewing after the team is done with evaluation
+    @GetMapping("viewcourseevaluations/{id}")
+    public String viewEvaluation(@PathVariable("id") long id ,Model model){
+        Course thiscourse=courseRepo.findOne(id);
+        Iterable<Evaluation>thiscourseevaluation=thiscourse.getEvaluations();
+        model.addAttribute("evaluation",thiscourseevaluation);
+        model.addAttribute("course",thiscourse);
+        return"courseevaluation";
+    }
 
 
 }
