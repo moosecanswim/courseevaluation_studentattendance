@@ -74,7 +74,7 @@ public class AdminController {
         return "adminpages/adminaddcourse";
     }
 
-    @GetMapping("/admincourcedatails/{id}")  //id - course id
+    @GetMapping("/admincoursedatails/{id}")  //id - course id
     public String displayCourse (@PathVariable("id")long id,
                                          Model model) {
 
@@ -88,7 +88,7 @@ public class AdminController {
         Set<Person> courseStudents = currentCourse.getStudent();
         model.addAttribute("courseStudents", courseStudents);
 
-        return "adminpages/admincourcedatails";
+        return "adminpages/admincoursedatails";
     }
 
     //need to taste viewing after the team is done with evaluation
