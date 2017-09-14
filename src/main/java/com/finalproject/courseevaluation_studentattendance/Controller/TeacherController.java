@@ -168,6 +168,8 @@ public class TeacherController {
     public String postCourse(@PathVariable("id") Long id, Person person, Model model)
    {
 
+       Course c =  courseRepository.findOne(id);
+       personService.addStudentToCourse(person,c);
        model.addAttribute("newstudent", person);
        personService.create(person);
       // personRepo.save(person);
@@ -182,6 +184,13 @@ public class TeacherController {
    }
 
 
+
+//
+//   @RequestMapping("searchcrn")
+//    public String searchForCRN(@ModelAttribute("crn") Evaluation eval, Model model, Course cse)
+//   {
+//
+//   }
    @GetMapping("/evaluation/{id}")
     public String getEvaluation(@PathVariable("id")Long id, Model model)
    {

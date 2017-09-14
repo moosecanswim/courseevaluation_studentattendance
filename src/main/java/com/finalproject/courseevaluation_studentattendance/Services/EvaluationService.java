@@ -1,5 +1,7 @@
 package com.finalproject.courseevaluation_studentattendance.Services;
 
+import com.finalproject.courseevaluation_studentattendance.Model.Course;
+import com.finalproject.courseevaluation_studentattendance.Model.Evaluation;
 import com.finalproject.courseevaluation_studentattendance.Repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,4 +22,11 @@ public class EvaluationService {
     public EvaluationService(EvaluationRepository evalRepo){
         this.evaluationRepo=evalRepo;
     }
+
+
+  public void addEvalToCourse(Course cr, Evaluation eval)
+  {
+     eval.setCourseEvaluation(cr);
+     evaluationRepo.save(eval);
+  }
 }

@@ -1,6 +1,7 @@
 package com.finalproject.courseevaluation_studentattendance.Model;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name="Evaluation")
@@ -11,6 +12,9 @@ public class Evaluation {
     private long id;
 
     //excellent/above average/ average/ fair/ poor
+
+
+
     private String content;
     private String quality;
     private String experience;

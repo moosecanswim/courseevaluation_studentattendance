@@ -7,6 +7,7 @@ import com.finalproject.courseevaluation_studentattendance.Repositories.CourseRe
 import com.finalproject.courseevaluation_studentattendance.Repositories.EvaluationRepository;
 import com.finalproject.courseevaluation_studentattendance.Repositories.PersonRepository;
 import com.finalproject.courseevaluation_studentattendance.Services.AttendanceService;
+import com.finalproject.courseevaluation_studentattendance.Services.CourseService;
 import com.finalproject.courseevaluation_studentattendance.Services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,8 +24,11 @@ public class AdminController {
     //@Autowired
     //AttendanceService attendenceService;
 
-//    @Autowired
-//    PersonService personService;
+    @Autowired
+    PersonService personService;
+
+    @Autowired
+    CourseService courseService;
 
     @Autowired
     PersonRepository personRepo;
@@ -34,6 +38,7 @@ public class AdminController {
 
     @Autowired
     EvaluationRepository evaluationRepo;
+
 
 
 
@@ -50,7 +55,7 @@ public class AdminController {
     public String addCourse(Model model)
     {
         model.addAttribute("newcourse", new Course());
-        return "adminpages/addcourse";
+        return "adminpages/adminaddcourse";
     }
 
     //End date for the course isn't going to be entered here but it will be set when the teacher says the course ended
@@ -66,10 +71,10 @@ public class AdminController {
     {
         model.addAttribute("newcourse",courseRepo.findOne(id));
 
-        return "adminpages/addcourse";
+        return "adminpages/adminaddcourse";
     }
 
-    @GetMapping("/admincourcedatails/{id}")  //id - course id
+    @GetMapping("/admincoursedatails/{id}")  //id - course id
     public String displayCourse (@PathVariable("id")long id,
                                          Model model) {
 
@@ -83,7 +88,7 @@ public class AdminController {
         Set<Person> courseStudents = currentCourse.getStudent();
         model.addAttribute("courseStudents", courseStudents);
 
-        return "adminpages/admincourcedatails";
+        return "adminpages/admincoursedatails";
     }
 
     //need to taste viewing after the team is done with evaluation
@@ -93,7 +98,7 @@ public class AdminController {
         Iterable<Evaluation>thiscourseevaluation=thiscourse.getEvaluations();
         model.addAttribute("evaluation",thiscourseevaluation);
         model.addAttribute("course",thiscourse);
-        return"courseevaluation";
+        return"admincourseevaluation";
     }
     //this will allow the the admin to add an existing student to a course
     @GetMapping("/addstudenttocourse/{id}")
@@ -102,7 +107,7 @@ public class AdminController {
         model.addAttribute("course",courseRepo.findOne(crsID));
         model.addAttribute("students",personRepo.findAllByPersonRoles("default"));
 
-        return "courseaddstudent";
+        return "admincourseaddstudent";
     }
     @PostMapping("/addstudenttocourse/{crsid}")
     public String studentSavedToCourse(@PathVariable("crsid") long id,
@@ -114,7 +119,7 @@ public class AdminController {
         Course ncourse=courseRepo.findOne(id);
         ncourse.addStudent(personRepo.findOne(new Long(crsID)));
         courseRepo.save(ncourse);
-        return "redirect:/admin/detailsofacourse"+crsID;
+        return "redirect:/admin/admincoursedatails"+crsID;
     }
 
     // ===   Remove Student from the Course
@@ -123,9 +128,12 @@ public class AdminController {
                                            @PathVariable("studentid")long studentid,
                                            Model model)
     {
-//        todo: call method here
+        Person student = personService.findById(studentid);
+        Course course = courseRepo.findOne(courseid);
+        courseService.removeStudentFromCourse(course, student);
+
         String courseIDString = Long.toString(courseid);
-        return "rdirect:/admin/detailsofacourse/" + courseIDString;
+        return "rdirect:/admin/admincoursedatails/" + courseIDString;
     }
 
 

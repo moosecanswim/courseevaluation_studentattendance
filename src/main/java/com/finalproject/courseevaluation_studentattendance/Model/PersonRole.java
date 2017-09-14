@@ -22,6 +22,10 @@ public class PersonRole {
 
         this.people =new HashSet<Person>();
     }
+    public PersonRole(String aRoleName){
+        this.people=new HashSet<Person>();
+        this.roleName=aRoleName;
+    }
 
     public long getId() {
         return id;
