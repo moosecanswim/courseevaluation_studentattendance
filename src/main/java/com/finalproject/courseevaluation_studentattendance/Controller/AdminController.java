@@ -1,8 +1,13 @@
 package com.finalproject.courseevaluation_studentattendance.Controller;
 
 import com.finalproject.courseevaluation_studentattendance.Model.Course;
+import com.finalproject.courseevaluation_studentattendance.Model.Evaluation;
+import com.finalproject.courseevaluation_studentattendance.Model.Person;
 import com.finalproject.courseevaluation_studentattendance.Repositories.CourseRepository;
+import com.finalproject.courseevaluation_studentattendance.Repositories.EvaluationRepository;
+import com.finalproject.courseevaluation_studentattendance.Repositories.PersonRepository;
 import com.finalproject.courseevaluation_studentattendance.Services.AttendanceService;
+import com.finalproject.courseevaluation_studentattendance.Services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
-
+import java.util.Set;
 
 
 @Controller
@@ -20,8 +25,19 @@ public class AdminController {
     //@Autowired
     //AttendanceService attendenceService;
 
+//    @Autowired
+//    PersonService personService;
+
+    @Autowired
+    PersonRepository personRepo;
+
     @Autowired
     CourseRepository courseRepo;
+
+    @Autowired
+    EvaluationRepository evaluationRepo;
+
+
 
 
 
@@ -38,10 +54,20 @@ public class AdminController {
     @GetMapping("/detailsofacourse/{id}")
     public String displayCourse (@PathVariable("id")long id,
                                          Model model) {
-        Course course = courseRepo.findOne(id);
-        model.addAttribute("course", course);
 
-        return "datailsofacourse";
+        Course currentCourse = courseRepo.findOne(id);
+        model.addAttribute("course", currentCourse);
+
+        Set<Person> courseInstructors = currentCourse.getInstructor();
+        model.addAttribute("courseInstructors", courseInstructors);
+
+        Set<Evaluation> courseEvaluations = currentCourse.getEvaluations();
+        model.addAttribute("courseEvaluations", courseEvaluations);
+
+        Set<Person> courseStudents = currentCourse.getStudent();
+        model.addAttribute("courseStudents", courseStudents);
+
+        return "adminpages/datailsofacourse";
     }
 
 }

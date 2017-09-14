@@ -5,20 +5,53 @@
     <title>Title</title>
 </head>
 <body>
-<th:block th:each="item:${allcoursesofaTeacher}">
 
     <h2 th:inline="text">Course information for [[${item.courseCode}]]</h2>
 
-    <p th:text="'Course ID: ' + ${item.Id}"/>
-    <p th:text="'Course Name: '+ ${item.courseName}" />
-    <p>Course Instructor: </p>
-    <th:block th:each="ins:${item.instructor}">
-        <p th:text="'Instructor: ' + ${ins.firstName} + ' ' +${ins.lastName} "/>
+    <p th:text="'Course ID: ' + ${course.Id}"/>
+    <p th:text="'Course CRN: ' + ${course.Crn}"/>
+    <p th:text="'Course Name: '+ ${course.courseName}" />
+    <p th:text="'Start Date: '+ ${course.startDate}" />
+    <p th:text="'End Date: '+ ${course.endDate}" />
+    <p th:text="'Completion Status: '+ ${course.status}" />
+
+
+
+    <p>Course Instructors: </p>
+    <th:block th:each="all:${courseInstructors}">
+        <p th:text="'Instructor: ' + ${all.firstName} + ' ' +${all.lastName} "/>
     </th:block>
-    <!--<p th:text="'Students registed for the courses:' + "/>-->
-    <p><a th:href="@{/addstudentstocourse/{id}(id=${item.courseId})}">Register students for the course</a></p>
-    <p><a th:href="@{/detailsofacourse/{id}(id=${item.id})}">Show details</a></p>
-</th:block>
+
+
+
+    <!--ToDo-->
+    <!--link to the course evaluations-->
+
+
+
+    <!--ToDo: Need to complete it:-->
+    <p>List of All Students Registered for the Cource: </p>
+
+    <table class="table">
+
+        <td><strong>ID</strong></td>
+        <td><strong>First Name</strong></td>
+        <td><strong>Last Name</strong></td>
+        <td><strong>User Name</strong></td>
+        <td><strong>Password</strong></td>
+        <td><strong>Email Address</strong></td>
+
+        <tr th:each="i:${lstudents}">
+            <td th:text="${i.id}"></td>
+            <td th:text="${i.firstName}"></td>
+            <td th:text="${i.lastName}"></td>
+            <td th:text="${i.username}"></td>
+            <td th:text="${i.password}"></td>
+            <td th:text="${i.email}"></td>
+
+        </tr>
+    </table>
+
 
 </body>
 </html>
