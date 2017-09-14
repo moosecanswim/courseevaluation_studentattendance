@@ -21,7 +21,7 @@ public class Course {
 
     private Date endDate;
 
-    private boolean status;
+    private boolean status=true;
 
     @ManyToMany(mappedBy = "courseInstructor")
     private Set<Person> instructor;
@@ -38,7 +38,6 @@ public class Course {
         this.courseAttendances=new HashSet<Attendance>();
         setEvaluations(new HashSet<Evaluation>());
         setStudent(new HashSet<Person>());
-
 
     }
     public long getId() {
