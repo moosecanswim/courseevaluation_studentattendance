@@ -46,6 +46,14 @@ public class AdminController {
 
          return"redirect:/admin/addcourse";
     }
+    @GetMapping("/updatecourse/{id}")
+    public String editCourse(@PathVariable("id") long id, Model model)
+    {
+        model.addAttribute("newcourse",courseRepo.findOne(id));
+
+        return "adminpages/addcourse";
+    }
+
     @GetMapping("/detailsofacourse/{id}")
     public String displayCourse (@PathVariable("id")long id,
                                          Model model) {
