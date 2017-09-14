@@ -91,6 +91,7 @@ public class CourseService {
             System.out.println("CourseService/removeStudentFromCourse:remove students");
             courseStudents.remove(aStudent);
             aCourse.setStudent(courseStudents);
+            courseRepo.save(aCourse);
         }
         else{
             System.out.println("CourseService/removeStudentFromCourse: student was not part of class to begin with");
