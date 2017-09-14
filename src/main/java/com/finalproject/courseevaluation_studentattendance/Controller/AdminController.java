@@ -89,7 +89,7 @@ public class AdminController {
         Set<Person> courseStudents = currentCourse.getStudent();
         model.addAttribute("courseStudents", courseStudents);
 
-        return "adminpages/admincoursedatails";
+        return "adminpages/admincoursedetails";
     }
 
     //need to taste viewing after the team is done with evaluation
