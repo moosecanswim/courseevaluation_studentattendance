@@ -81,6 +81,11 @@ public class CourseService {
         return courseRepo.findByCrn(crn);
     }
 
+    public Course findByStartDate(String startDate)
+    {
+        return courseRepo.findByStartDate(startDate);
+    }
+
     //remove a student from a course
     //take a temp set of students from the course and checks to see if the student is in it
     //if the student is in that set it will remove the student from the temp sent courseStudents
