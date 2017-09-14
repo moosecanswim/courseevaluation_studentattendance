@@ -10,14 +10,16 @@ public class Attendance {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private long id;
+
+
     private Date date;
     private String status;
 
     @ManyToOne
-    private Person personAttendances;
+    private Person personAttendance;
 
     @ManyToOne
-    private Course attendanceCourses;
+    private Course attendanceCourse;
 
 
     public long getId() {
@@ -44,35 +46,20 @@ public class Attendance {
         this.status = status;
     }
 
-    public Person getPersonAttendances() {
-        return personAttendances;
+    public Person getPersonAttendance() {
+        return personAttendance;
     }
 
-    public void setPersonAttendances(Person personAttendances) {
-        this.personAttendances = personAttendances;
+    public void setPersonAttendance(Person personAttendances) {
+        this.personAttendance = personAttendances;
     }
 
-    public Course getAttendanceCourses() {
-        return attendanceCourses;
+    public Course getAttendanceCourse() {
+        return attendanceCourse;
     }
 
-    public void setAttendanceCourses(Course attendanceCourses) {
-        this.attendanceCourses = attendanceCourses;
+    public void setAttendanceCourse(Course attendanceCourses) {
+        this.attendanceCourse = attendanceCourses;
     }
 
-    //    public Set<Person> getPersonAttendances() {
-//        return personAttendances;
-//    }
-//
-//    public void setPersonAttendances(Set<Person> personAttendances) {
-//        this.personAttendances = personAttendances;
-//    }
-//
-//    public void addPerson(Person stud){
-//
-//        personAttendances.add(stud);
-//    }
-//    public void addCourse(Course crs){
-//        attendanceCourses.add(crs);
-//    }
 }

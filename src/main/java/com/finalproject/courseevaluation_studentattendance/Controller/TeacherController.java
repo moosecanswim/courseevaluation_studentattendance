@@ -1,9 +1,7 @@
 package com.finalproject.courseevaluation_studentattendance.Controller;
 
 import com.finalproject.courseevaluation_studentattendance.Model.*;
-import com.finalproject.courseevaluation_studentattendance.Repositories.CourseRepository;
-import com.finalproject.courseevaluation_studentattendance.Repositories.EvaluationRepository;
-import com.finalproject.courseevaluation_studentattendance.Repositories.PersonRepository;
+import com.finalproject.courseevaluation_studentattendance.Repositories.*;
 import com.finalproject.courseevaluation_studentattendance.Services.CourseService;
 import com.finalproject.courseevaluation_studentattendance.Services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +12,9 @@ import com.finalproject.courseevaluation_studentattendance.Services.PersonServic
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.websocket.server.PathParam;
 import java.security.Principal;
@@ -49,92 +44,132 @@ public class TeacherController {
     CourseService courseService;
 
     @Autowired
+    AttendanceRepository attendanceRepository;
+
+    @Autowired
     EvaluationRepository evaluationRepository;
 
     @RequestMapping("/home")
-    public String teacherHome(Principal p, Model model)
-    {
-        model.addAttribute("instructor", personRepository.findByUsername(p.getName()));
-        return "teacherhome";
-    }
+//    public String teacherHome(Principal p, Model model)
+//    {
+//        model.addAttribute("instructor", personRepository.findByUsername(p.getName()));
+//        return "teacherpages/teacherhome";
+//    }
 
+    //just for testing until security/login option is added
+    public String teacherHometest(Model model)
+    {
+        model.addAttribute("instructor", personRepository.findByUsername("teacher"));
+        return "teacherpages/teacherhome";
+    }
 
     //this route can be combine with the teacherhome page later
     @GetMapping("/listallcourses")
-    public String listCourse(Principal p, Model model)
+//    public String listCourse(Principal p, Model model)
+    public String listCourse(Model model)
     {
-        Person instructor = personRepository.findByUsername(p.getName());
+        Person instructor = personRepository.findByUsername("teacher");
 
         Iterable<Course> allCoursesofAInstructor = instructor.getCourseInstructor();
 
         model.addAttribute("allcoursesofaInstructor", allCoursesofAInstructor);
 
-        return "listallcourses";
+        return "teacherpages/listallcourses";
     }
 
 
-    //will have a add student, set date for a course
+    //list course info and all students/mark attendance
     @GetMapping("/detailsofacourse/{id}")
-    public String detailsofcourse(@PathParam("id") Long courseId, Model model)
+    public String detailsofcourse(@PathVariable("id") Long courseId, Model model)
     {
 
         Course currentCourse = courseRepository.findOne(courseId);
         Iterable<Person> studentsofACourse = currentCourse.getStudent();
 
-//        Iterable<Attendance> attendanceSheet = currentCourse.getCourseAttendances();
 
+        //move it to new route so it can stamp the time of the time actually submitted
         //add a new attendance and set date (for a course)
+//       Date now= new Date();
+
+//        Attendance oneAttendancecourse = new Attendance();
+//        Attendance oneAttendance = new Attendance();
+//
+//        oneAttendancecourse.setDate(now);
+//        oneAttendance.setDate(now);
+
+//        currentCourse.addAttendance(oneAttendancecourse);
+//
+//                for (Person student : studentsofACourse) {
+//            student.addAttendance(oneAttendance);
+//        }
+
+
+        model.addAttribute("course", currentCourse);
+        model.addAttribute("studentsofACourse", studentsofACourse);
+
+
+
+        return "teacherpages/detailsofacourse";
+    }
+
+
+    @GetMapping("/markattendance/{courseId}")
+    public String listAttendanceofaCourse(@PathVariable("courseId") Long courseId, Model model)
+    {
+
+
+        Course currentCourse = courseRepository.findOne(courseId);
+        Iterable<Person> studentsofACourse = currentCourse.getStudent();
+
         Date now= new Date();
 
-        Attendance oneAttendancecourse = new Attendance();
-        Attendance oneAttendance = new Attendance();
 
-        oneAttendancecourse.setDate(now);
-        oneAttendance.setDate(now);
 
-        currentCourse.addAttendance(oneAttendancecourse);
+        model.addAttribute("now", now);
+        model.addAttribute("course", currentCourse);
+        model.addAttribute("studentsofACourse", studentsofACourse);
 
-                for (Person student : studentsofACourse) {
-            student.addAttendance(oneAttendance);
+        return "teacherpages/attendanceofacourseform";
+    }
+
+    //display the attendance for a course of all students
+    @PostMapping("/markattendance/{courseId}")
+    public String postattendance(@PathVariable("courseId") Long courseId, @RequestParam(value = "attendanceStatus", required = false) String[] attendanceStatus, Model model)
+    {
+        Course currentCourse = courseRepository.findOne(courseId);
+        Iterable<Person> studentsofACourse = currentCourse.getStudent();
+
+        int i=0;
+
+        Date now= new Date();
+
+        for (Person student: studentsofACourse)
+        {
+
+            Attendance att = new Attendance();
+            att.setDate(now);
+            att.setStatus(attendanceStatus[i]);
+            i+=1;
+            att.setPersonAttendance(student);
+            att.setAttendanceCourse(currentCourse);
+            attendanceRepository.save(att);
+
         }
 
 
-        model.addAttribute("course", currentCourse);
-        model.addAttribute("studentsofACourse", studentsofACourse);
+
         model.addAttribute("now", now);
-
-
-        return "detailsofacourse";
-    }
-
-
-    //add an attendance and set date for each student of a course
-    @GetMapping("/attendanceofastudent/{courseId}/{studentId}")
-    public String listattendanceofacourse(@PathParam("courseId") Long courseId, @PathParam("studentId") Long studentId, Model model)
-    {
-
-       Course currentCourse = courseRepository.findOne(courseId);
-
-        Iterable<Person> studentsofACourse = currentCourse.getStudent();
-
-        Attendance oneStudentAttendance = new Attendance();
-        Date now= new Date();
-
-        oneStudentAttendance.setDate(now);
-        Person student = personService.findById(studentId);
-        //Person student = personRepo.findOne(studentId);
-        student.addAttendance(oneStudentAttendance);
-
-
         model.addAttribute("course", currentCourse);
         model.addAttribute("studentsofACourse", studentsofACourse);
-        model.addAttribute("student", student);
 
-        return "attendanceofacourse";
+
+        return "teacherpages/attendanceforstudentsofacourse";
     }
+
+
 
    @GetMapping("/addstudentstocourse/{id}")
-    public String getCourse(@PathParam("id")Long id, Model model)
+    public String getCourse(@PathVariable("id")Long id, Model model)
    {
 
 
@@ -144,12 +179,14 @@ public class TeacherController {
 
        student.setStartDate(now);
 
+       model.addAttribute("course", courseRepository.findOne(id));
+
        model.addAttribute("newstudent", student);
-       return "addstudent";
+       return "teacherpages/addstudent";
    }
 
    @PostMapping("/addstudent/{id}")
-    public String postCourse(@PathParam("id") Long id, Person person, Model model)
+    public String postCourse(@PathVariable("id") Long id, Person person, Model model)
    {
 
        Course c =  courseRepository.findOne(id);
@@ -157,14 +194,14 @@ public class TeacherController {
        model.addAttribute("newstudent", person);
        personService.create(person);
       // personRepo.save(person);
-       return "confirmstudent";
+       return "teacherpages/confirmstudent";
    }
 
    @RequestMapping("/displaystudents")
     public String displayStudents(@ModelAttribute("lstudents")Person person, Model model)
    {
         model.addAttribute("lstudents", personRepo.findAll());
-        return "displaystudents";
+        return "teacherpages/displaystudents";
    }
 
 
@@ -175,6 +212,19 @@ public class TeacherController {
 //   {
 //
 //   }
+   @GetMapping("/evaluation/{id}")
+    public String getEvaluation(@PathVariable("id")Long id, Model model)
+   {
+    model.addAttribute("neweval", new Evaluation());
+    return "teacherpages/evaluation";
+   }
+   @PostMapping("/evaluation/{id}")
+   public String postEvaluation(@PathVariable("id")Long id,Evaluation evaluation, Model model)
+   {
+       model.addAttribute("neweval", evaluation);
+       evaluationRepository.save(evaluation);
+       return "teacherpages/evaluation";
+   }
 
 
 }

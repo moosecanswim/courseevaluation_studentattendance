@@ -30,12 +30,12 @@ public class Person {
   @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(joinColumns = @JoinColumn(name="person_id"),
    inverseJoinColumns=@JoinColumn(name="role_id"))
-
   private Set<PersonRole>personRoles;
-  @ManyToMany
-  private Set<Course>courseInstructor;
 
-  @OneToMany(mappedBy = "personAttendances")
+  @OneToMany(mappedBy = "instructor")
+  private Set<Course> courseInstructor;
+
+  @OneToMany(mappedBy = "personAttendance")
   private Set<Attendance>attendances;
 
   @ManyToOne
@@ -55,8 +55,14 @@ public class Person {
         this.courseInstructor=new HashSet<Course>();
         this.attendances=new HashSet<Attendance>();
         this.mNumber="M---";
-    }
 
+        this.firstName=firstName;
+        this.lastName=lastName;
+        this.username=username;
+        this.password=password;
+        this.email=email;
+    }
+//
 //    @Override
 //    public String toString() {
 //        return "Person{" +
@@ -133,9 +139,7 @@ public class Person {
     }
 
 
-    public String getmNumber() {
-        return mNumber;
-    }
+
 
     public void setmNumber(String mNumber) {
         this.mNumber = mNumber;
@@ -195,5 +199,9 @@ public class Person {
 
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    public String getmNumber() {
+        return mNumber;
     }
 }

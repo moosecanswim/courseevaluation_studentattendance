@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+
+<p>List of All People in Montgomery College: </p>
+
+<table class="table">
+
+    <td><strong>ID</strong></td>
+    <td><strong>M Number</strong></td>
+    <td><strong>First Name</strong></td>
+    <td><strong>Last Name</strong></td>
+    <td><strong>User Name</strong></td>
+    <!--<td><strong>Password</strong></td>-->
+    <td><strong>Email Address</strong></td>
+    <td><strong>Start Date</strong></td>
+    <td><strong>Active</strong></td>
+
+    <!--iterate through all the students for this course-->
+    <tr th:each="all:${listOfAllPeople}">
+        <td th:text="${all.id}"></td>
+        <td th:text="${all.mNumber}"></td>
+        <td th:text="${all.firstName}"></td>
+        <td th:text="${all.lastName}"></td>
+        <td th:text="${all.username}"></td>
+        <!--<td th:text="${alls.password}"></td>-->
+        <td th:text="${all.email}"></td>
+        <td th:text="${all.startDate}"></td>
+        <td th:text="${all.active}"></td>
+
+    </tr>
+</table>
+
+<!--Link to view the list of all teachers-->
+<div><a href="/admin/viewallteachers">View All Teachers</a></div>
+<!--Link to view the list of all students-->
+<div><a href="/admin/viewallstudents">View All Students</a></div>
+<!--Link to the Admin Home page-->
+<div><a href="/admin/home">Admin Home</a></div>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+<p>Student Attendance: </p>
+<p th:text="'Date today: ' + ${#dates.format(now, 'MMM dd, yyyy')}"></p>
+<p th:text="'Course: ' + ${course.courseName}"></p>
+
+<br/>
+<br/>
+
+    <th:block th:each="student:${studentsofACourse}">
+        <p th:text="'Student Full Name: ' + ${student.firstName} + ' ' +${student.lastName} "></p>
+        <p th:text="'Student Email:' + ${student.email}"></p>
+
+        <th:block th:each="att:${student.attendances}">
+            <p th:text="'Attendance Id (just for checking): ' + ${att.id}"></p>
+            <p th:text="'Date: ' + ${att.date}"></p>
+            <p th:text="'Status' + ${att.status}"></p>
+
+        </th:block>
+
+    </th:block>
+
+
+</body>
+</html>

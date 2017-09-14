@@ -7,6 +7,7 @@
 <body>
     <h1>Admin Class</h1>
     <a href="/admin/addcourse">Add new Course</a>
+
     <p>List of Courses</p>
 
     <table class="table table-striped">
@@ -16,7 +17,7 @@
             <td><b>Course Name</b></td>
             <td><b>Start Date</b></td>
             <td><b>End Date</b></td>
-            <td><b>Course Complete Status</b></td>
+            <td><b>Available</b></td>
             <td><b>Update</b></td>
             <td><b>View Details</b></td>
             <td><b>Delete</p></b></td>
@@ -31,12 +32,12 @@
                 <td><a th:text="${all.courseName}"></a></td>
                 <td><a th:text="${all.startDate}"></a></td>
                 <td><a th:text="${all.endDate}"></a></td>
-                <td><a th:text="${all.courseCompleteStatus}"></a></td>
+                <td><a th:text="${all.status}"></a></td>
                 <td>
                     <a th:href="@{/admin/updatecourse/{id}(id=${all.id})}">Update</a>
                 </td>
                 <td>
-                    <a th:href="@{/admin/admincourcedatails/{id}(id=${all.id})}">View Details</a>
+                    <a th:href="@{/admin/admincoursedetails/{id}(id=${all.id})}">View Details</a>
                 </td>
 
                 <td>

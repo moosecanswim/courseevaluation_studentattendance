@@ -23,7 +23,7 @@
     <br/>
 
     <p>List of students who registered for the course: </p>
-    <p th:text="'Date today: ' + ${#dates.format(now, 'MMM dd, yyyy')}"></p>
+    <!--<p th:text="'Date today: ' + ${#dates.format(now, 'MMM dd, yyyy')}"></p>-->
 
     <!--should be a form allow input of students' attendance info-->
 
@@ -34,8 +34,7 @@
 
         <!--Todo: attendance for each student of a course-->
         <p>Attendance</p>
-        <a href="/detailsofacourse/{courseId}/{studentId}">Mark Attendance</a>
-
+        <a th:href="@{/markattendance/{courseId}(courseId=${course.id})}">Mark Attendance</a>
 
 
     </th:block>

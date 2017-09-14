@@ -23,10 +23,10 @@ public class Course {
 
     private boolean status;
 
-    @ManyToMany(mappedBy = "courseInstructor")
-    private Set<Person> instructor;
+    @ManyToOne
+    private Person instructor;
 
-    @OneToMany(mappedBy = "attendanceCourses")
+    @OneToMany(mappedBy = "attendanceCourse")
     private Set<Attendance>courseAttendances;
 
     @OneToMany(mappedBy = "courseEvaluation")
@@ -34,16 +34,27 @@ public class Course {
 
     @OneToMany(mappedBy = "courseStudent")
     private Set<Person>student;
-
+//
 
     public Course(){
         setStatus(true);
-        this.instructor=new HashSet<Person>();
         setEvaluations(new HashSet<Evaluation>());
         setCourseAttendances(new HashSet<Attendance>());
         setStudent(new HashSet<Person>());
 
     }
+
+    public Course(long crn, String aCourseName, Date aStartDate, Date anEndDate){
+        this.crn=crn;
+        this.courseName=aCourseName;
+        this.startDate=aStartDate;
+        this.endDate=anEndDate;
+        setStatus(true);
+        setEvaluations(new HashSet<Evaluation>());
+        setCourseAttendances(new HashSet<Attendance>());
+        setStudent(new HashSet<Person>());
+    }
+
     public long getId() {
         return id;
     }
@@ -92,11 +103,11 @@ public class Course {
         this.status = status;
     }
 
-    public Set<Person> getInstructor() {
+    public Person getInstructor() {
         return instructor;
     }
 
-    public void setInstructor(Set<Person> instructor) {
+    public void setInstructor(Person instructor) {
         this.instructor = instructor;
     }
 
@@ -124,9 +135,6 @@ public class Course {
         this.courseAttendances = courseAttendances;
     }
 
-    public void addInstructor(Person ins){
-        instructor.add(ins);
-    }
     public  void addStudent(Person stud){
         this.student.add(stud);
     }

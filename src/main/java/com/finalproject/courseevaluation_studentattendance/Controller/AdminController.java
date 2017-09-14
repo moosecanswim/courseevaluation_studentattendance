@@ -74,32 +74,35 @@ public class AdminController {
         return "adminpages/adminaddcourse";
     }
 
-    @GetMapping("/admincoursedatails/{id}")  //id - course id
+    // ===   See the details of the Course
+    @GetMapping("/admincoursedetails/{id}")  //id - course id
     public String displayCourse (@PathVariable("id")long id,
                                          Model model) {
 
         Course currentCourse = courseRepo.findOne(id);
         model.addAttribute("course", currentCourse);
 
-        Set<Person> courseInstructors = currentCourse.getInstructor();
-        model.addAttribute("courseInstructors", courseInstructors);
+
+        Person courseInstructor = currentCourse.getInstructor();
+        model.addAttribute("courseInstructor", courseInstructor);
 
 
         Set<Person> courseStudents = currentCourse.getStudent();
         model.addAttribute("courseStudents", courseStudents);
 
-        return "adminpages/admincoursedatails";
+        return "adminpages/admincoursedetails";
     }
 
     //need to taste viewing after the team is done with evaluation
     @GetMapping("viewcourseevaluations/{id}")
-    public String viewEvaluation(@PathVariable("id") long id ,Model model){
-        Course thiscourse=courseRepo.findOne(id);
-        Iterable<Evaluation>thiscourseevaluation=thiscourse.getEvaluations();
+    public String viewEvaluation(@PathVariable("id") long id, Model model){
+        Course thiscourse = courseRepo.findOne(id);
+        Iterable<Evaluation> thiscourseevaluation = thiscourse.getEvaluations();
         model.addAttribute("evaluation",thiscourseevaluation);
         model.addAttribute("course",thiscourse);
         return"admincourseevaluation";
     }
+
     //this will allow the the admin to add an existing student to a course
     @GetMapping("/addstudenttocourse/{id}")
     public String addStudent(@PathVariable("id") long crsID, Model model)
@@ -119,7 +122,7 @@ public class AdminController {
         Course ncourse=courseRepo.findOne(id);
         ncourse.addStudent(personRepo.findOne(new Long(crsID)));
         courseRepo.save(ncourse);
-        return "redirect:/admin/admincoursedatails"+crsID;
+        return "redirect:/admin/admincoursedatails/"+crsID;
     }
 
     // ===   Remove Student from the Course
@@ -136,5 +139,36 @@ public class AdminController {
         return "rdirect:/admin/admincoursedatails/" + courseIDString;
     }
 
+    // ===   See the List of All People
+    @GetMapping("/viewallpeople")
+    public String seeAllPeople(Model model)
+    {
+        Iterable<Person> listOfAllPeople = personRepo.findAll();
+
+        model.addAttribute("listOfAllPeople", listOfAllPeople);
+        return "adminpages/viewallpeople";
+    }
+
+
+    // ===   See the List of All Teachers
+    @GetMapping("/viewallteachers")
+    public String seeAllTeachers(Model model)
+    {
+        Iterable<Person> listOfAllTeachers = personRepo.findAllByPersonRoles("TEACHER");
+
+        model.addAttribute("listOfAllTeachers", listOfAllTeachers);
+        return "adminpages/viewallteachers";
+    }
+
+
+    // ===   See the List of All Students
+    @GetMapping("/viewallstudents")
+    public String seeAllStudents(Model model)
+    {
+        Iterable<Person> listOfAllStudents = personRepo.findAllByPersonRoles("DEFAULT");
+
+        model.addAttribute("listOfAllStudents", listOfAllStudents);
+        return "adminpages/viewallstudents";
+    }
 
 }
