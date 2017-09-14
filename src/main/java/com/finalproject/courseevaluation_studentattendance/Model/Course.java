@@ -44,6 +44,20 @@ public class Course {
         setStudent(new HashSet<Person>());
 
     }
+    //stuff
+
+    public Course(long crn, String aCourseName, Date aStartDate, Date anEndDate){
+        this.crn=crn;
+        this.courseName=aCourseName;
+        this.startDate=aStartDate;
+        this.endDate=anEndDate;
+        setStatus(true);
+        this.instructor=new HashSet<Person>();
+        setEvaluations(new HashSet<Evaluation>());
+        setCourseAttendances(new HashSet<Attendance>());
+        setStudent(new HashSet<Person>());
+    }
+
     public long getId() {
         return id;
     }
