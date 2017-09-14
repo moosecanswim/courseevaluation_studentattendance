@@ -44,6 +44,7 @@ public class Course {
         setStudent(new HashSet<Person>());
 
     }
+    //stuff
 
     public Course(long crn, String aCourseName, Date aStartDate, Date anEndDate){
         this.crn=crn;
