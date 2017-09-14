@@ -13,16 +13,12 @@ public class Attendance {
     private Date date;
     private String status;
 
-    @ManyToMany(mappedBy = "attendances")
-    private Set<Person>personAttendances;
+    @ManyToOne
+    private Person personAttendances;
 
-    @ManyToMany(mappedBy = "courseAttendances")
-    private Set<Course>attendanceCourses;
+    @ManyToOne
+    private Course attendanceCourses;
 
-    public Attendance(){
-        this.personAttendances=new HashSet<Person>();
-        this.attendanceCourses=new HashSet<Course>();
-    }
 
     public long getId() {
         return id;
@@ -48,19 +44,35 @@ public class Attendance {
         this.status = status;
     }
 
-    public Set<Person> getPersonAttendances() {
+    public Person getPersonAttendances() {
         return personAttendances;
     }
 
-    public void setPersonAttendances(Set<Person> personAttendances) {
+    public void setPersonAttendances(Person personAttendances) {
         this.personAttendances = personAttendances;
     }
 
-    public void addPerson(Person stud){
+    public Course getAttendanceCourses() {
+        return attendanceCourses;
+    }
 
-        personAttendances.add(stud);
+    public void setAttendanceCourses(Course attendanceCourses) {
+        this.attendanceCourses = attendanceCourses;
     }
-    public void addCourse(Course crs){
-        attendanceCourses.add(crs);
-    }
+
+    //    public Set<Person> getPersonAttendances() {
+//        return personAttendances;
+//    }
+//
+//    public void setPersonAttendances(Set<Person> personAttendances) {
+//        this.personAttendances = personAttendances;
+//    }
+//
+//    public void addPerson(Person stud){
+//
+//        personAttendances.add(stud);
+//    }
+//    public void addCourse(Course crs){
+//        attendanceCourses.add(crs);
+//    }
 }

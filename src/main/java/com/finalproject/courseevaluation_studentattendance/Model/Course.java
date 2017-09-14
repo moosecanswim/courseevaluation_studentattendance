@@ -26,7 +26,7 @@ public class Course {
     @ManyToMany(mappedBy = "courseInstructor")
     private Set<Person> instructor;
 
-    @ManyToMany
+    @OneToMany(mappedBy = "courseAttendances")
     private Set<Attendance>courseAttendances;
 
     @OneToMany(mappedBy = "courseEvaluation")
