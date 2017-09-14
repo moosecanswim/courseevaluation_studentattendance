@@ -10,6 +10,8 @@ public class Attendance {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private long id;
+
+
     private Date date;
     private String status;
 

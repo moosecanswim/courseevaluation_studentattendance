@@ -117,6 +117,8 @@ public class TeacherController {
         Date now= new Date();
 
 
+
+
         int i=0;
 
         for (Person student: studentsofACourse)
@@ -140,9 +142,12 @@ public class TeacherController {
         return "attendanceofacourseform";
     }
 
+    //display the attendance for a course of all students
     @PostMapping("/markattendance/{courseId}")
-    public String postattendance()
+    public String postattendance(@PathVariable("courseId") Long courseId, @RequestParam(value = "attendanceStatus", required = false) String[] attendanceStatus, Model model)
     {
+        Course currentCourse = courseRepository.findOne(courseId);
+        Iterable<Person> studentsofACourse = currentCourse.getStudent();
 
         return "attendancefortheday";
     }
@@ -159,6 +164,8 @@ public class TeacherController {
        Person student = new Person();
 
        student.setStartDate(now);
+
+       model.addAttribute("course", courseRepository.findOne(id));
 
        model.addAttribute("newstudent", student);
        return "addstudent";
