@@ -24,17 +24,24 @@
 
     <p>List of students who registered for the course: </p>
 
+    <!--should be a form allow input of students' attendance info-->
+
+
     <th:block th:each="student:${studentsofACourse}">
         <p th:text="'Student Name: ' + ${student.firstName} + ' ' +${student.lastName} "></p>
         <p th:text="'Student Email:' + ${student.email}"></p>
         <!--Todo: attendance for each student of a course-->
         <p>Attendance</p>
-
+        <p input:> </p>
 
 
 
     </th:block>
-    <!--<p th:text="'Students registered for the courses:' + "/>-->
+    <br/>
+    <br/>
+
+
+
     <p><a th:href="@{/addstudentstocourse/{id}(id=${course.id})}">Register students for the course</a></p>
     <p><a th:href="@{/listallcourses}">Back to all course</a></p>
     <p><a th:href="@{/evaluation/{id}(id=${course.id})}">See evaluations</a></p>

@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.websocket.server.PathParam;
 import java.security.Principal;
+import java.util.Date;
 
 
 import javax.websocket.server.PathParam;
@@ -80,10 +81,17 @@ public class TeacherController {
         Course currentCourse = courseRepository.findOne(courseId);
         Iterable<Person> studentsofACourse = currentCourse.getStudent();
 
-        Iterable<Attendance> AttendanceSheet = currentCourse.getCourseAttendances();
+        Iterable<Attendance> attendanceSheet = currentCourse.getCourseAttendances();
+        Date now= new Date();
+
+        for (Attendance attend : attendanceSheet)
+        {
+            attend.setDate(now);
+        }
+
         model.addAttribute("course", currentCourse);
         model.addAttribute("studentsofACourse", studentsofACourse);
-        model.addAttribute("AttendanceSheet", AttendanceSheet);
+        model.addAttribute("AttendanceSheet", attendanceSheet);
 
 
         return "detailsofacourse";
