@@ -82,6 +82,7 @@ public class AdminController {
         Course currentCourse = courseRepo.findOne(id);
         model.addAttribute("course", currentCourse);
 
+
         Person courseInstructor = currentCourse.getInstructor();
         model.addAttribute("courseInstructor", courseInstructor);
 
