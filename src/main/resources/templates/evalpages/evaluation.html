@@ -6,17 +6,13 @@
 </head>
 <body>
 
-
-
-
-
 <h2> Section II: Rate the Course</h2>
 <form action="#" th:action="@{/evaluation}" th:object="${neweval}" method="post" >
     <!--<input type="text" th:field="*{perosn.id}" />-->
     <input type="hidden" th:field="*{id}" />
     <p><h4>1. How would you rate the course content? </h4></p>
     <div>
-        <label th:text="${neweval}">example</label>
+
         <input type="radio" th:name="${'content[' + item + ']'}" value="Excellent" />Excellent
         <input type="radio" th:name="${'content[' + item + ']'}" value="Above Average" />Above Average
         <input type="radio" th:name="${'content[' + item + ']'}" value="Average" />Average
@@ -26,7 +22,7 @@
     <!--<input type="text" th:field="*{content}"/></p>-->
     <p> <h4>2.How would you rate the quality of instruction? </h4></p>
     <div>
-        <label th:text="${neweval}">example</label>
+
         <input type="radio" th:name="${'quality[' + item + ']'}" value="Excellent" />Excellent
         <input type="radio" th:name="${'quality[' + item + ']'}" value="Above Average" />Above Average
         <input type="radio" th:name="${'quality[' + item + ']'}" value="Average" />Average
@@ -35,7 +31,7 @@
     </div>
     <!--<input type="text" th:field="*{quality}"/></p>-->
     <p> <h4>3. How would you rate your overall training experience?</h4></p>
-        <label th:text="${neweval}">example</label>
+
         <input type="radio" th:name="${'experience[' + item + ']'}" value="Excellent" />Excellent
         <input type="radio" th:name="${'experience[' + item + ']'}" value="Above Average" />Above Average
         <input type="radio" th:name="${'experience[' + item + ']'}" value="Average" />Average
@@ -43,7 +39,7 @@
         <input type="radio" th:name="${'experience[' + item + ']'}" value="Poor" />Poor
    <!--</h4> <input type="text" th:field="*{experience}"/></p>-->
     <p> <h4>4. How would you rate the textbook or handouts?  </h4></p>
-    <label th:text="${neweval}">example</label>
+
     <input type="radio" th:name="${'materials[' + item + ']'}" value="Excellent" />Excellent
     <input type="radio" th:name="${'materials[' + item + ']'}" value="Above Average" />Above Average
     <input type="radio" th:name="${'materials[' + item + ']'}" value="Average" />Average
@@ -51,7 +47,7 @@
     <input type="radio" th:name="${'materials[' + item + ']'}" value="Poor" />Poor
     <!--<input type="text" th:field="*{materials}"/></p>-->
     <p> <h4>5. How would you rate the classroom environment and seating?   </h4></p>
-    <label th:text="${neweval}">example</label>
+
     <input type="radio" th:name="${'environment[' + item + ']'}" value="Excellent" />Excellent
     <input type="radio" th:name="${'environment[' + item + ']'}" value="Above Average" />Above Average
     <input type="radio" th:name="${'environment[' + item + ']'}" value="Average" />Average
@@ -61,7 +57,7 @@
     <!--<input type="text" th:field="*{environment}"/></p>-->
     <!--<p><h4>Equipment</h4> <input type="text" th:field="*{equipment}"/></p>-->
     <p> <h4>6. How would you rate the classroom computer equipment?    </h4>
-    <label th:text="${neweval}">example</label>
+
     <input type="radio" th:name="${'equipment[' + item + ']'}" value="Excellent" />Excellent
     <input type="radio" th:name="${'equipment[' + item + ']'}" value="Above Average" />Above Average
     <input type="radio" th:name="${'equipment[' + item + ']'}" value="Average" />Average
@@ -78,7 +74,7 @@
     <!--<p> <h4> Findings  </h4> <input type="text" th:field="*{findings}"/></p>-->
 
     <p> <h4>1. How did you find out about the class?    </h4></p>
-    <label th:text="${neweval}">example</label>
+
     <input type="radio" th:name="${'findings[' + item + ']'}" value="Excellent" />Internet / Website
     <input type="radio" th:name="${'findings[' + item + ']'}" value="Above Average" />Brochure - ITI schedule of classes
     <input type="radio" th:name="${'findings[' + item + ']'}" value="Average" />Word of Mouth

@@ -168,19 +168,6 @@ public class TeacherController {
    }
 
 
-   @GetMapping("/evaluation/{id}")
-    public String getEvaluation(@PathParam("id")Long id, Model model)
-   {
-    model.addAttribute("neweval", new Evaluation());
-    return "evaluation";
-   }
-   @PostMapping("/evaluation/{id}")
-   public String postEvaluation(@PathParam("id")Long id,Evaluation evaluation, Model model)
-   {
-       model.addAttribute("neweval", evaluation);
-       evaluationRepository.save(evaluation);
-       return "evaluation";
-   }
 
 //
 //   @RequestMapping("searchcrn")
