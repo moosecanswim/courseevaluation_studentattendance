@@ -119,7 +119,7 @@ public class AdminController {
         Course ncourse=courseRepo.findOne(id);
         ncourse.addStudent(personRepo.findOne(new Long(crsID)));
         courseRepo.save(ncourse);
-        return "redirect:/admin/admincoursedatails"+crsID;
+        return "redirect:/admin/admincoursedatails/"+crsID;
     }
 
     // ===   Remove Student from the Course
@@ -134,6 +134,27 @@ public class AdminController {
 
         String courseIDString = Long.toString(courseid);
         return "rdirect:/admin/admincoursedatails/" + courseIDString;
+    }
+
+    // ===   See the List of All People
+    @GetMapping("/viewallpeople")
+    public String seeAllPeople(Model model)
+    {
+        Iterable<Person> listOfAllPeople = personRepo.findAll();
+
+        model.addAttribute("listOfAllPeople", listOfAllPeople);
+        return "adminpages/viewallpeople";
+    }
+
+
+    // ===   See the List of All Teachers
+    @GetMapping("/viewallteachers")
+    public String seeAllTeachers(Model model)
+    {
+        Iterable<Person> listOfAllTeachers = personRepo.findAll();
+
+        model.addAttribute("listOfAllPeople", listOfAllTeachers);
+        return "adminpages/viewallteachers";
     }
 
 
