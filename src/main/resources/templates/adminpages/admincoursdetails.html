@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+
+    <h2 th:inline="text">Course information for [[${course.courseCode}]]</h2>
+
+    <p th:text="'Course ID: ' + ${course.Id}"/>
+    <p th:text="'Course CRN: ' + ${course.Crn}"/>
+    <p th:text="'Course Name: '+ ${course.courseName}" />
+    <p th:text="'Start Date: '+ ${course.startDate}" />
+    <p th:text="'End Date: '+ ${course.endDate}" />
+    <p th:text="'Completion Status: '+ ${course.status}" />
+
+
+
+    <p>Course Instructors: </p>
+    <th:block th:each="alli:${courseInstructors}">
+        <p th:text="'Instructor: ' + ${alli.firstName} + ' ' +${all.lastName} "/>
+    </th:block>
+
+
+
+    <!--ToDo-->
+    <p>See the course evaluations: </p>
+    <!--link to the course evaluations for this course-->
+
+
+
+
+    <!--Admin does not see the student's password-->
+    <p>List of All Students Registered for the Cource: </p>
+
+    <table class="table">
+
+        <td><strong>ID</strong></td>
+        <td><strong>M Number</strong></td>
+        <td><strong>First Name</strong></td>
+        <td><strong>Last Name</strong></td>
+        <td><strong>User Name</strong></td>
+        <!--<td><strong>Password</strong></td>-->
+        <td><strong>Email Address</strong></td>
+        <td><strong>Start Date</strong></td>
+        <td><strong>Active</strong></td>
+        <td><strong>Remove from Course</strong></td>
+
+        <!--iterate through all the students for this course-->
+        <tr th:each="alls:${courseStudents}">
+            <td th:text="${alls.id}"></td>
+            <td th:text="${alls.mNumber}"></td>
+            <td th:text="${alls.firstName}"></td>
+            <td th:text="${alls.lastName}"></td>
+            <td th:text="${alls.username}"></td>
+            <!--<td th:text="${alls.password}"></td>-->
+            <td th:text="${alls.email}"></td>
+            <td th:text="${alls.startDate}"></td>
+            <td th:text="${alls.active}"></td>
+            <td>
+                <a th:href="@{/admin/course/{courseid}/removestudentfromcourse/{studentid}(studentid=${alls.id},courseid=${course.Id})}">Remove</a>
+            </td>
+
+        </tr>
+    </table>
+
+
+</body>
+</html>
