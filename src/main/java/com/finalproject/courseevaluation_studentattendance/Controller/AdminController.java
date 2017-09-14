@@ -69,7 +69,7 @@ public class AdminController {
         return "adminpages/addcourse";
     }
 
-    @GetMapping("/detailsofacourse/{id}")
+    @GetMapping("/admincourcedatails/{id}")  //id - course id
     public String displayCourse (@PathVariable("id")long id,
                                          Model model) {
 
@@ -79,13 +79,11 @@ public class AdminController {
         Set<Person> courseInstructors = currentCourse.getInstructor();
         model.addAttribute("courseInstructors", courseInstructors);
 
-        Set<Evaluation> courseEvaluations = currentCourse.getEvaluations();
-        model.addAttribute("courseEvaluations", courseEvaluations);
 
         Set<Person> courseStudents = currentCourse.getStudent();
         model.addAttribute("courseStudents", courseStudents);
 
-        return "adminpages/datailsofacourse";
+        return "adminpages/admincourcedatails";
     }
 
     //need to taste viewing after the team is done with evaluation
@@ -96,6 +94,38 @@ public class AdminController {
         model.addAttribute("evaluation",thiscourseevaluation);
         model.addAttribute("course",thiscourse);
         return"courseevaluation";
+    }
+    //this will allow the the admin to add an existing student to a course
+    @GetMapping("/addstudenttocourse/{id}")
+    public String addStudent(@PathVariable("id") long crsID, Model model)
+    {
+        model.addAttribute("course",courseRepo.findOne(crsID));
+        model.addAttribute("students",personRepo.findAllByPersonRoles("default"));
+
+        return "courseaddstudent";
+    }
+    @PostMapping("/addstudenttocourse/{crsid}")
+    public String studentSavedToCourse(@PathVariable("crsid") long id,
+                                       @RequestParam("crs") String crsID,
+                                       @ModelAttribute("aStudent") Person p,
+                                       Model model)
+
+    {
+        Course ncourse=courseRepo.findOne(id);
+        ncourse.addStudent(personRepo.findOne(new Long(crsID)));
+        courseRepo.save(ncourse);
+        return "redirect:/admin/detailsofacourse"+crsID;
+    }
+
+    // ===   Remove Student from the Course
+    @GetMapping("course/{courseid}/removestudentfromcourse/{studentid}")
+    public String removeStudentFromCourse (@PathVariable("courseid")long courseid,
+                                           @PathVariable("studentid")long studentid,
+                                           Model model)
+    {
+//        todo: call method here
+        String courseIDString = Long.toString(courseid);
+        return "rdirect:/admin/detailsofacourse/" + courseIDString;
     }
 
 
