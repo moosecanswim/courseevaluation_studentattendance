@@ -1,6 +1,7 @@
 package com.finalproject.courseevaluation_studentattendance.Services;
 
 import com.finalproject.courseevaluation_studentattendance.Model.Course;
+import com.finalproject.courseevaluation_studentattendance.Model.Person;
 import com.finalproject.courseevaluation_studentattendance.Repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,26 +27,61 @@ public class CourseService {
         return courseRepo.findAll();
     }
 
+    //ensures that course does not exist in the db then adds it
+    public void  addCourse(Course aCourse) {
+        Course existingCourse = courseRepo.findOne(aCourse.getId());
 
-    public Course  addCourse(Course aCourse) {
-        Course existingCourse = courseRepo.findByCourseName(aCourse.getCourseName());
-        courseRepo.findByCourseName(aCourse.getCourseName());
         if (existingCourse != null) {
-            throw new RuntimeException("Course already exists!");
+            System.out.println("CourseService: adding new Course " + aCourse.toString());
+            courseRepo.save(aCourse);
+        }else {
+            throw new RuntimeException("CourseService: Course already existed");
         }
-        System.out.println("Course Service: adding new Course " + aCourse.toString());
-
-        return courseRepo.save(aCourse);
     }
 
+    //checks to see if the course is in the database
+    //creates a copy of it (from the database-origional data)
+    //updates the copy with the input from the input Course
+    //pushes that copy with the updated info to the repository to replace/update the origional
+    public void updateCourse(Course aCourse){
+        Course existingCourse = courseRepo.findOne(aCourse.getId());
 
-    public Course findCourseById()
-    {
-        long id = 0;
-        Course c =  courseRepo.findOne(id);
+        if (existingCourse != null) {
+            throw new RuntimeException("CourseService: Course does not exist!  cannot update");
+        }else {
+            //do not change status, instructor, courseAttendances, evaluations, or studen
+            existingCourse.setCrn(aCourse.getCrn());
+            existingCourse.setCourseName(aCourse.getCourseName());
+            existingCourse.setStartDate(aCourse.getStartDate());
+            existingCourse.setEndDate(aCourse.getEndDate());
+            courseRepo.save(existingCourse);
+            System.out.println("CourseService: updating Course " + aCourse.toString());
 
-        return c;
-
-
+            courseRepo.save(aCourse);
+        }
     }
+
+    //sets the course status to false
+    public void removeCourse(Course aCourse){
+        Course existingCourse = courseRepo.findOne(aCourse.getId());
+
+        if (existingCourse != null) {
+            throw new RuntimeException("CourseService: Course does not exist!  cannot set status to false(remove)");
+        }
+        else{
+            existingCourse.setStatus(false);
+            courseRepo.save(existingCourse);
+        }
+    }
+
+    //find course by crn
+    public Course findByCRN(String crn){
+        return courseRepo.findByCrn(crn);
+    }
+
+//    //remove a student from a course
+//    public void removeStudentFromCourse (Course aCourse, Person aStudent){
+//        aStudent.
+//    }
+
 }
