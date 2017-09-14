@@ -53,7 +53,7 @@ public class TeacherController {
     public String teacherHome(Principal p, Model model)
     {
         model.addAttribute("instructor", personRepository.findByUsername(p.getName()));
-        return "teacherhome";
+        return "teacherpages/teacherhome";
     }
 
 
@@ -67,7 +67,7 @@ public class TeacherController {
 
         model.addAttribute("allcoursesofaInstructor", allCoursesofAInstructor);
 
-        return "listallcourses";
+        return "teacherpages/listallcourses";
     }
 
 
@@ -102,7 +102,7 @@ public class TeacherController {
 
 
 
-        return "detailsofacourse";
+        return "teacherpages/detailsofacourse";
     }
 
 
@@ -122,7 +122,7 @@ public class TeacherController {
         model.addAttribute("course", currentCourse);
         model.addAttribute("studentsofACourse", studentsofACourse);
 
-        return "attendanceofacourseform";
+        return "teacherpages/attendanceofacourseform";
     }
 
     //display the attendance for a course of all students
@@ -156,7 +156,7 @@ public class TeacherController {
         model.addAttribute("studentsofACourse", studentsofACourse);
 
 
-        return "attendanceforstudentsofacourse";
+        return "teacherpages/attendanceforstudentsofacourse";
     }
 
 
@@ -175,7 +175,7 @@ public class TeacherController {
        model.addAttribute("course", courseRepository.findOne(id));
 
        model.addAttribute("newstudent", student);
-       return "addstudent";
+       return "teacherpages/addstudent";
    }
 
    @PostMapping("/addstudent/{id}")
@@ -187,14 +187,14 @@ public class TeacherController {
        model.addAttribute("newstudent", person);
        personService.create(person);
       // personRepo.save(person);
-       return "confirmstudent";
+       return "teacherpages/confirmstudent";
    }
 
    @RequestMapping("/displaystudents")
     public String displayStudents(@ModelAttribute("lstudents")Person person, Model model)
    {
         model.addAttribute("lstudents", personRepo.findAll());
-        return "displaystudents";
+        return "teacherpages/displaystudents";
    }
 
 
@@ -209,14 +209,14 @@ public class TeacherController {
     public String getEvaluation(@PathVariable("id")Long id, Model model)
    {
     model.addAttribute("neweval", new Evaluation());
-    return "evaluation";
+    return "teacherpages/evaluation";
    }
    @PostMapping("/evaluation/{id}")
    public String postEvaluation(@PathVariable("id")Long id,Evaluation evaluation, Model model)
    {
        model.addAttribute("neweval", evaluation);
        evaluationRepository.save(evaluation);
-       return "evaluation";
+       return "teacherpages/evaluation";
    }
 
 
