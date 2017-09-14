@@ -55,6 +55,12 @@ public class Person {
         this.courseInstructor=new HashSet<Course>();
         this.attendances=new HashSet<Attendance>();
         this.mNumber="M---";
+
+        this.firstName=firstName;
+        this.lastName=lastName;
+        this.username=username;
+        this.password=password;
+        this.email=email;
     }
 
 //    @Override
