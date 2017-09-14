@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+
+<p>Student Attendance: </p>
+<p th:text="'Date today: ' + ${#dates.format(now, 'MMM dd, yyyy')}"></p>
+
+<!--should be a form allow input of students' attendance info-->
+
+
+<th:block th:each="student:${studentsofACourse}">
+    <p th:text="'Student Name: ' + ${student.firstName} + ' ' +${student.lastName} "></p>
+    <p th:text="'Student Email:' + ${student.email}"></p>
+
+    <p><select name="attendanceStatus">
+        <!--<th:block th:each="director:${alldirector}">-->
+        <option th:value="No mark">Default</option>
+        <option th:value="P">Present</option>
+        <option th:value="A">Absent</option>
+        <option th:value="L">Late</option>
+        <!--<option value="-1">Not a department head</option>-->
+
+        <!--</th:block>-->
+    </select></p>
+
+</th:block>
+
+<p><input type="submit" class="btn btn-default navbar-btn" value="Mark Attendance" />
+    <input type="reset" class="btn btn-default navbar-btn" value="Reset" /></p>
+
+
+</body>
+</html>
