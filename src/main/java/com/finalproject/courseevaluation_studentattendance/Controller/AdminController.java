@@ -74,6 +74,7 @@ public class AdminController {
         return "adminpages/adminaddcourse";
     }
 
+    // ===   See the details of the Course
     @GetMapping("/admincoursedatails/{id}")  //id - course id
     public String displayCourse (@PathVariable("id")long id,
                                          Model model) {
@@ -151,11 +152,21 @@ public class AdminController {
     @GetMapping("/viewallteachers")
     public String seeAllTeachers(Model model)
     {
-        Iterable<Person> listOfAllTeachers = personRepo.findAll();
+        Iterable<Person> listOfAllTeachers = personRepo.findAllByPersonRoles("TEACHER");
 
-        model.addAttribute("listOfAllPeople", listOfAllTeachers);
+        model.addAttribute("listOfAllTeachers", listOfAllTeachers);
         return "adminpages/viewallteachers";
     }
 
+
+    // ===   See the List of All Students
+    @GetMapping("/viewallstudents")
+    public String seeAllStudents(Model model)
+    {
+        Iterable<Person> listOfAllStudents = personRepo.findAllByPersonRoles("DEFAULT");
+
+        model.addAttribute("listOfAllStudents", listOfAllStudents);
+        return "adminpages/viewallstudents";
+    }
 
 }
