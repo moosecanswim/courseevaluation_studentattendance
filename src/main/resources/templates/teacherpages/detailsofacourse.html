@@ -7,25 +7,38 @@
 <body>
 
 
-    <h2 th:inline="text">Course information for [[${item.courseName}]]</h2>
+    <h2 th:inline="text">Course information for [[${course.courseName}]]</h2>
 
     <p th:text="'Course ID: ' + ${course.id}"/>
     <p th:text="'Course Name: '+ ${course.courseName}" />
-    <p th:text="'Course CRN:' + ${item.crn}"/>
-    <p th:text="'Course StartDate:' + ${item.startDate}"/>
-    <p th:text="'Course EndDate:' + ${item.endDate}"/>
-    <p th:text="'Course Status:' + ${item.status}"/>
+    <p th:text="'Course CRN:' + ${course.crn}"/>
+    <p th:text="'Course StartDate:' + ${course.startDate}"/>
+    <p th:text="'Course EndDate:' + ${course.endDate}"/>
+    <p th:text="'Course Status:' + ${course.status}"/>
     <br/>
     <p>List of Course Instructors: </p>
     <th:block th:each="ins:${course.instructor}">
-        <p th:text="'Instructor: ' + ${course.firstName} + ' ' +${course.lastName} "/>
+        <p th:text="'Instructor: ' + ${ins.firstName} + ' ' +${ins.lastName} "/>
     </th:block>
     <br/>
+
+    <p>List of students who registered for the course: </p>
+
+    <th:block th:each="student:${studentsofACourse}">
+        <p th:text="'Student Name: ' + ${student.firstName} + ' ' +${student.lastName} "></p>
+        <p th:text="'Student Email:' + ${student.email}"></p>
+        <!--Todo: attendance for each student of a course-->
+        <p>Attendance</p>
+
+
+
+
+    </th:block>
     <!--<p th:text="'Students registered for the courses:' + "/>-->
     <p><a th:href="@{/addstudentstocourse/{id}(id=${item.id})}">Register students for the course</a></p>
     <p><a th:href="@{/listallcourses}">Back to all course</a></p>
     <p><a th:href="@{/evaluation/{id}(id=${item.id})}">See evaluations</a></p>
-    <p></p>
+
 
 
 
