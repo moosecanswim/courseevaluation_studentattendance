@@ -32,8 +32,9 @@ public class Person {
    inverseJoinColumns=@JoinColumn(name="role_id"))
 
   private Set<PersonRole>personRoles;
-  @ManyToMany
-  private Set<Course>courseInstructor;
+
+  @OneToMany(mappedBy = "instructor")
+  private Set<Course> courseInstructor;
 
   @OneToMany(mappedBy = "personAttendance")
   private Set<Attendance>attendances;

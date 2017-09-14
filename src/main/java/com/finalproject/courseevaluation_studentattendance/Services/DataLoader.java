@@ -38,6 +38,7 @@ public class DataLoader implements CommandLineRunner{
         PersonRole adminRole = roleRepo.findByRoleName("ADMIN");
 
 
+
         ////////////////Create people with the roles/////////////////
 
         //make a person ([String] first name,[String] last name,[String] username,[String] password,[String] email)
@@ -46,21 +47,26 @@ public class DataLoader implements CommandLineRunner{
         aPerson.addRole(defaultRole);
         personRepo.save(aPerson);
 
+
+        //load teacher
         aPerson= new Person("matt", "mcmatterson","mattmatt", "password","matt@email.com" );
         personRepo.save(aPerson);
         aPerson.addRole(teacherRole);
         personRepo.save(aPerson);
 
+        //load teacher
         aPerson= new Person("tom", "O'tom","tomtom", "password","tom@email.com" );
         personRepo.save(aPerson);
         aPerson.addRole(teacherRole);
         personRepo.save(aPerson);
 
+        //load teacher
         aPerson= new Person("teacher", "Mr.teacher","teacher", "password","teacher@email.com" );
         personRepo.save(aPerson);
         aPerson.addRole(teacherRole);
         personRepo.save(aPerson);
 
+        //
         aPerson= new Person("admin", "Mr.Admin","admin", "password","admin@email.com" );
         personRepo.save(aPerson);
         aPerson.addRole(teacherRole);
@@ -100,6 +106,9 @@ public class DataLoader implements CommandLineRunner{
 
         course = new Course(101,"Java",startDate,endDate);
         courseRepo.save(course);
+
+        //add course to teacher
+
 
 
 
