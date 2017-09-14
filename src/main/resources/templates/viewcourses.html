@@ -19,11 +19,13 @@
         <tr th:each="course:${courseList}">
             <td th:text="*{course.id}"></td>
             <td th:text="*{course.crn}"></td>
-            <td th:text="*{course.name}"></td>
+            <td th:text="*{course.courseName}"></td>
             <td th:text="*{course.startDate}"></td>
             <td th:text="*{course.endDate}"></td>
-            <td th:text="*{course.courseCompleteStatus}"></td>
-            <td th:href="@{/teacher/coursePage/{id} (id=*{course.id})}">Register for class</td>
+            <td th:text="*{course.status}"></td>
+            <td>
+                <a th:href="@{/teacher/detailsofacourse/{id} (id=*{course.id})}">Register for class</a>
+            </td>
         </tr>
     </table>
     <h3><a href="/">Go Home</a></h3>
