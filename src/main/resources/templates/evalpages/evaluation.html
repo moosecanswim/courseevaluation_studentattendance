@@ -6,10 +6,42 @@
 </head>
 <body>
 
-<h2> Section II: Rate the Course</h2>
-<form action="#" th:action="@{/evaluation}" th:object="${neweval}" method="post" >
-    <!--<input type="text" th:field="*{perosn.id}" />-->
+<div><form action = "#" th:action="@{/evaluation}" th:object="${crn}" method="post">
+
+
+    <p>Enter CRN Number: <input type="text" th:field="*{crn}" /></p>
+
+
+    <p><input type="submit" value="Search CRN" /> <input type="reset" value="Reset" /> </p>
+
+</form>
+</div>
+
+<div>
+    <form action = "#" th:action="@{/evaluation}" th:object="${byDate}" method="post">
+
+
+    <p>Enter STart Date : <input type="text" th:field="*{byDate}" /></p>
+
+
+    <p><input type="submit" value="Search CRN" /> <input type="reset" value="Reset" /> </p>
+    </form>
+
+</div>
+<div>
+<form action="#" th:action="@{/evaluation/{id}" th:object="${neweval}" method="post" >
     <input type="hidden" th:field="*{id}" />
+
+
+<p><h4>1. Please enter the Course Registration Number CRN#</h4> <input type="text" th:field="*{crn}"/></p>
+<p> <h4> 2. Please enter the Course Name  </h4> <input type="text" th:field="*{courseName}"/></p>
+<p> <h4> 3. Please enter the Start Date (mm/dd/yyyy)  </h4> <input type="text" th:field="*{email}"/></p>
+    <p> <h4> 4. Please enter the Instructor's Name (First and Last Name) </h4> <input type="text" th:field="*{email}"/></p>
+
+<h2> Section II: Rate the Course</h2>
+
+    <!--<input type="text" th:field="*{perosn.id}" />-->
+
     <p><h4>1. How would you rate the course content? </h4></p>
     <div>
 
@@ -70,7 +102,6 @@
     <p> <h4> 3. What improvements would you suggest?   </h4> <textarea th:inline="text">[[${suggestions}]]> </p></textarea>
     <p> <h4> 4. What other classes would you like to see offered?  </h4> <textarea th:inline="text">[[${otherClass}]]></p></textarea>
 
-
     <!--<p> <h4> Findings  </h4> <input type="text" th:field="*{findings}"/></p>-->
 
     <p> <h4>1. How did you find out about the class?    </h4></p>
@@ -85,5 +116,6 @@
 
     <input type="submit"  value="Save" class="btn btn-lg btn-default btn-block" />
 </form>
+</div>
 </body>
 </html>

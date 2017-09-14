@@ -7,6 +7,6 @@ public interface CourseRepository extends CrudRepository<Course,Long> {
    Iterable<Course> findAllByCourseName(String courseName);
 
    Course findByCourseName(String coursenames);
-   Course findByCrn(String crn);
+   Course findByCrn(long crn);
    Course findByStartDate(String startDate);
 }
