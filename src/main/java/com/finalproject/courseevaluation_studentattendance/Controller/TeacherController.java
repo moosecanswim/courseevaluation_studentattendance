@@ -114,15 +114,16 @@ public class TeacherController {
     public String listattendanceofacourse(@PathParam("courseId") Long courseId, @PathParam("studentId") Long studentId, Model model)
     {
 
-        Course currentCourse = courseRepository.findOne(courseId);
+       Course currentCourse = courseRepository.findOne(courseId);
+
         Iterable<Person> studentsofACourse = currentCourse.getStudent();
 
         Attendance oneStudentAttendance = new Attendance();
         Date now= new Date();
 
         oneStudentAttendance.setDate(now);
-
-        Person student = personRepo.findOne(studentId);
+        Person student = personService.findById(studentId);
+        //Person student = personRepo.findOne(studentId);
         student.addAttendance(oneStudentAttendance);
 
 
@@ -145,7 +146,8 @@ public class TeacherController {
    {
 
        model.addAttribute("newstudent", person);
-       personRepo.save(person);
+       personService.create(person);
+      // personRepo.save(person);
        return "confirmstudent";
    }
 

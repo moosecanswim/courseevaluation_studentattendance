@@ -25,4 +25,16 @@ public class CourseService {
     public Iterable<Course> findAll(){
         return courseRepo.findAll();
     }
+
+
+    public Course  addCourse(Course aCourse) {
+        Course existingCourse = courseRepo.findByCourseName(aCourse.getCourseName());
+        courseRepo.findByCourseName(aCourse.getCourseName());
+        if (existingCourse != null) {
+            throw new RuntimeException("Course already exists!");
+        }
+        System.out.println("Course Service: adding new Course " + aCourse.toString());
+
+        return courseRepo.save(aCourse);
+    }
 }
