@@ -11,6 +11,8 @@
         <p><h4>First Name</h4> <input type="text" th:field="*{firstName}"/></p>
         <p> <h4> Last Name  </h4> <input type="text" th:field="*{lastName}"/></p>
         <p> <h4> Email  </h4> <input type="text" th:field="*{email}"/></p>
+        <!--<p th:text="'Sign up time: ' + *{startDate)}">-->
+        <p th:text="'Sign up date: ' + ${#dates.format(*{startDate), 'MMM dd, yyyy')}">
         <input type="submit"  value="Save" class="btn btn-lg btn-default btn-block" />
     </form>
 

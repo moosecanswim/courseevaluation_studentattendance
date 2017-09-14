@@ -136,7 +136,15 @@ public class TeacherController {
    @GetMapping("/addstudentstocourse/{id}")
     public String getCourse(@PathParam("id")Long id, Model model)
    {
-       model.addAttribute("newstudent", new Person());
+
+
+       Date now= new Date();
+
+       Person student = new Person();
+
+       student.setStartDate(now);
+
+       model.addAttribute("newstudent", student);
        return "addstudent";
    }
 
