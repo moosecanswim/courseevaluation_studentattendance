@@ -119,7 +119,7 @@ public class AdminController {
         Course ncourse=courseRepo.findOne(id);
         ncourse.addStudent(personRepo.findOne(new Long(crsID)));
         courseRepo.save(ncourse);
-        return "redirect:/admin/detailsofacourse"+crsID;
+        return "redirect:/admin/admincoursedatails"+crsID;
     }
 
     // ===   Remove Student from the Course
@@ -133,7 +133,7 @@ public class AdminController {
         courseService.removeStudentFromCourse(course, student);
 
         String courseIDString = Long.toString(courseid);
-        return "rdirect:/admin/detailsofacourse/" + courseIDString;
+        return "rdirect:/admin/admincoursedatails/" + courseIDString;
     }
 
 
