@@ -1,6 +1,7 @@
 package com.finalproject.courseevaluation_studentattendance.Services;
 
 import com.finalproject.courseevaluation_studentattendance.Model.Course;
+import com.finalproject.courseevaluation_studentattendance.Model.Person;
 import com.finalproject.courseevaluation_studentattendance.Repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -72,5 +73,15 @@ public class CourseService {
             courseRepo.save(existingCourse);
         }
     }
+
+    //find course by crn
+    public Course findByCRN(String crn){
+        return courseRepo.findByCrn(crn);
+    }
+
+//    //remove a student from a course
+//    public void removeStudentFromCourse (Course aCourse, Person aStudent){
+//        aStudent.
+//    }
 
 }

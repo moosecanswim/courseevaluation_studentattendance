@@ -8,12 +8,12 @@ import java.util.Set;
 @Entity
 public class PersonRole {
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
-        private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
 
-        //@NotEmpty
-        private String roleName;
+    //@NotEmpty
+    private String roleName;
 
     @ManyToMany(mappedBy = "personRoles", fetch = FetchType.LAZY)
     private Set<Person> people;
@@ -23,21 +23,21 @@ public class PersonRole {
         this.people =new HashSet<Person>();
     }
 
-        public long getId() {
-            return id;
-        }
+    public long getId() {
+        return id;
+    }
 
-        public void setId(long id) {
-            this.id = id;
-        }
+    public void setId(long id) {
+        this.id = id;
+    }
 
-        public String getRoleName() {
-            return roleName;
-        }
+    public String getRoleName() {
+        return roleName;
+    }
 
-        public void setRoleName(String roleName) {
-            this.roleName = roleName;
-        }
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
 
     public Set<Person> getPeople() {
         return people;
@@ -50,7 +50,7 @@ public class PersonRole {
     public void addPerson(Person usr){
 
         people.add(usr);
-        }
+    }
 
 //    public Set<Person> getPersons() {
 //        return persons;
@@ -66,7 +66,7 @@ public class PersonRole {
 //        this.persons = new HashSet<>();
 //    }
 
-        //add person
+    //add person
 //    public void addPersontoRole(Person p)
 //    {
 //        this.persons.add(p);
@@ -79,6 +79,6 @@ public class PersonRole {
 //    }
 
 
-    }
+}
 
 
