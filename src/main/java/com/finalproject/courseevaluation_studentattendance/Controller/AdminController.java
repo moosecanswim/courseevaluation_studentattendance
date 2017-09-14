@@ -82,8 +82,8 @@ public class AdminController {
         Course currentCourse = courseRepo.findOne(id);
         model.addAttribute("course", currentCourse);
 
-        Set<Person> courseInstructors = currentCourse.getInstructor();
-        model.addAttribute("courseInstructors", courseInstructors);
+        Person courseInstructor = currentCourse.getInstructor();
+        model.addAttribute("courseInstructors", courseInstructor);
 
 
         Set<Person> courseStudents = currentCourse.getStudent();

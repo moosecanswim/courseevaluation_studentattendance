@@ -140,9 +140,7 @@ public class Person {
     }
 
 
-    public String getmNumber() {
-        return mNumber;
-    }
+
 
     public void setmNumber(String mNumber) {
         this.mNumber = mNumber;
@@ -202,5 +200,9 @@ public class Person {
 
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    public String getmNumber() {
+        return mNumber;
     }
 }
