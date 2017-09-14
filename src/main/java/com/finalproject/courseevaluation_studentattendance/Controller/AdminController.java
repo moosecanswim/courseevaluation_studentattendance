@@ -74,7 +74,7 @@ public class AdminController {
         return "adminpages/adminaddcourse";
     }
 
-    @GetMapping("/admincourcedatails/{id}")  //id - course id
+    @GetMapping("/admincoursedatails/{id}")  //id - course id
     public String displayCourse (@PathVariable("id")long id,
                                          Model model) {
 
@@ -88,7 +88,7 @@ public class AdminController {
         Set<Person> courseStudents = currentCourse.getStudent();
         model.addAttribute("courseStudents", courseStudents);
 
-        return "adminpages/admincourcedatails";
+        return "adminpages/admincoursedatails";
     }
 
     //need to taste viewing after the team is done with evaluation
@@ -119,7 +119,7 @@ public class AdminController {
         Course ncourse=courseRepo.findOne(id);
         ncourse.addStudent(personRepo.findOne(new Long(crsID)));
         courseRepo.save(ncourse);
-        return "redirect:/admin/detailsofacourse"+crsID;
+        return "redirect:/admin/admincoursedatails"+crsID;
     }
 
     // ===   Remove Student from the Course
@@ -133,7 +133,7 @@ public class AdminController {
         courseService.removeStudentFromCourse(course, student);
 
         String courseIDString = Long.toString(courseid);
-        return "rdirect:/admin/detailsofacourse/" + courseIDString;
+        return "rdirect:/admin/admincoursedatails/" + courseIDString;
     }
 
 

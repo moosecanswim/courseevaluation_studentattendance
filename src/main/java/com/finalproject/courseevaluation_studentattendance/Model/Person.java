@@ -43,6 +43,14 @@ public class Person {
 
     public Person()
     {
+        this.active=true;
+        this.personRoles=new HashSet<PersonRole>();
+        this.courseInstructor=new HashSet<Course>();
+        this.attendances=new HashSet<Attendance>();
+        this.mNumber="M---";
+    }
+    public Person(String firstName, String lastName, String username, String password, String email){
+        this.active=true;
         this.personRoles=new HashSet<PersonRole>();
         this.courseInstructor=new HashSet<Course>();
         this.attendances=new HashSet<Attendance>();
