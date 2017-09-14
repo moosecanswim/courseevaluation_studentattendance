@@ -34,7 +34,7 @@ public class Course {
 
     @OneToMany(mappedBy = "courseStudent")
     private Set<Person>student;
-
+//
 
     public Course(){
         setStatus(true);
