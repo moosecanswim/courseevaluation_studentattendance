@@ -26,7 +26,7 @@ public class Course {
     @ManyToMany(mappedBy = "courseInstructor")
     private Set<Person> instructor;
 
-    @OneToMany(mappedBy = "courseAttendances")
+    @OneToMany(mappedBy = "attendanceCourses")
     private Set<Attendance>courseAttendances;
 
     @OneToMany(mappedBy = "courseEvaluation")
@@ -39,8 +39,8 @@ public class Course {
     public Course(){
         setStatus(true);
         this.instructor=new HashSet<Person>();
-        this.courseAttendances=new HashSet<Attendance>();
         setEvaluations(new HashSet<Evaluation>());
+        setCourseAttendances(new HashSet<Attendance>());
         setStudent(new HashSet<Person>());
 
     }
