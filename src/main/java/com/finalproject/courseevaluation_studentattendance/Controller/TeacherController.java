@@ -51,7 +51,9 @@ public class TeacherController {
     EvaluationRepository evaluationRepository;
 
     @RequestMapping("/home")
-    public String teacherHome(){
+    public String teacherHome(Principal p, Model model)
+    {
+        model.addAttribute("instructor", personRepository.findByUsername(p.getName()));
         return "teacherhome";
     }
 
@@ -78,8 +80,11 @@ public class TeacherController {
         Course currentCourse = courseRepository.findOne(courseId);
         Iterable<Person> studentsofACourse = currentCourse.getStudent();
 
+        Iterable<Attendance> AttendanceSheet = currentCourse.getCourseAttendances();
         model.addAttribute("course", currentCourse);
         model.addAttribute("studentsofACourse", studentsofACourse);
+        model.addAttribute("AttendanceSheet", AttendanceSheet);
+
 
         return "detailsofacourse";
     }

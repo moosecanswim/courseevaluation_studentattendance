@@ -25,10 +25,13 @@ public class Course {
 
     @ManyToMany(mappedBy = "courseInstructor")
     private Set<Person> instructor;
+
     @ManyToMany
     private Set<Attendance>courseAttendances;
+
     @OneToMany(mappedBy = "courseEvaluation")
     private Set<Evaluation>evaluations;
+
     @OneToMany(mappedBy = "courseStudent")
     private Set<Person>student;
 

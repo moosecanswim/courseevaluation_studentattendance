@@ -6,7 +6,15 @@
 </head>
 <body>
     <h1>Teacher Home Page</h1>
-    <p>See My Info</p>
-    <p>See My Courses</p>
+
+    <p>My profile</p>
+
+    <p th:text="'Instructor Id: ' + ${instructor.id}"></p>
+    <p th:text="'Instructor MNumber: ' + ${instructor.mNumber}"></p>
+    <p th:text="'Instructor Name: ' + ${instructor.firstName} + ' ' +${instructor.lastName} "></p>
+    <p th:text="'Instructor email: ' + ${instructor.email}"></p>
+
+    <p>My Courses links</p>
+    <p><a href="/listallcourses">All my courses</a></p>
 </body>
 </html>

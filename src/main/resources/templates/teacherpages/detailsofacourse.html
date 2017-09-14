@@ -35,9 +35,9 @@
 
     </th:block>
     <!--<p th:text="'Students registered for the courses:' + "/>-->
-    <p><a th:href="@{/addstudentstocourse/{id}(id=${item.id})}">Register students for the course</a></p>
+    <p><a th:href="@{/addstudentstocourse/{id}(id=${course.id})}">Register students for the course</a></p>
     <p><a th:href="@{/listallcourses}">Back to all course</a></p>
-    <p><a th:href="@{/evaluation/{id}(id=${item.id})}">See evaluations</a></p>
+    <p><a th:href="@{/evaluation/{id}(id=${course.id})}">See evaluations</a></p>
 
 
 
