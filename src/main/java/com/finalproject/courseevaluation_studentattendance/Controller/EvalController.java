@@ -60,8 +60,8 @@ public class EvalController {
     @PostMapping("/searchcourse")
     public String searchCoursePost(@RequestParam("crnfield")long crn, Model model)
     {
-        model.addAttribute("searcheval", courseRepository.findByCrn(crn));
-        return "searchresult";
+        model.addAttribute("coursefound", courseRepository.findByCrn(crn));
+        return "evalpages/searchresult";
     }
 
     @GetMapping("/evaluation/{id}")
@@ -87,7 +87,7 @@ public class EvalController {
 
         String testcrn = null;
 
-//        courseService.findByCRN(testcrn);
+//      courseService.findByCRN(testcrn);
         model.addAttribute("neweval", evaluation);
         evaluationRepository.save(evaluation);
         return "evaluation";
