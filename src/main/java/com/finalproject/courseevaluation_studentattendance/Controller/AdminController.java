@@ -3,9 +3,11 @@ package com.finalproject.courseevaluation_studentattendance.Controller;
 import com.finalproject.courseevaluation_studentattendance.Model.Course;
 import com.finalproject.courseevaluation_studentattendance.Model.Evaluation;
 import com.finalproject.courseevaluation_studentattendance.Model.Person;
+import com.finalproject.courseevaluation_studentattendance.Model.PersonRole;
 import com.finalproject.courseevaluation_studentattendance.Repositories.CourseRepository;
 import com.finalproject.courseevaluation_studentattendance.Repositories.EvaluationRepository;
 import com.finalproject.courseevaluation_studentattendance.Repositories.PersonRepository;
+import com.finalproject.courseevaluation_studentattendance.Repositories.RoleRepository;
 import com.finalproject.courseevaluation_studentattendance.Services.AttendanceService;
 import com.finalproject.courseevaluation_studentattendance.Services.CourseService;
 import com.finalproject.courseevaluation_studentattendance.Services.PersonService;
@@ -38,6 +40,8 @@ public class AdminController {
 
     @Autowired
     EvaluationRepository evaluationRepo;
+    @Autowired
+    RoleRepository roleRepository;
 
 
 
@@ -107,10 +111,15 @@ public class AdminController {
     @GetMapping("/addstudenttocourse/{id}")
     public String addStudent(@PathVariable("id") long crsID, Model model)
     {
-        model.addAttribute("course",courseRepo.findOne(crsID));
-        model.addAttribute("students",personRepo.findAllByPersonRoles("default"));
 
-        return "admincourseaddstudent";
+      PersonRole nrole=roleRepository.findByRoleName("DEFAULT");
+       Iterable<Person>students=nrole.getPeople();
+
+        model.addAttribute("students",students);
+        model.addAttribute("course",courseRepo.findOne(crsID));
+
+
+        return "adminpages/admincourseaddstudent";
     }
     @PostMapping("/addstudenttocourse/{crsid}")
     public String studentSavedToCourse(@PathVariable("crsid") long id,
@@ -122,7 +131,34 @@ public class AdminController {
         Course ncourse=courseRepo.findOne(id);
         ncourse.addStudent(personRepo.findOne(new Long(crsID)));
         courseRepo.save(ncourse);
-        return "redirect:/admin/admincoursedatails/"+crsID;
+        return "redirect:/admin/admincoursedetails/"+crsID;
+    }
+
+    //this will allow the the admin to add teachers to a course
+    @GetMapping("/addinstructortocourse/{id}")
+    public String addTeacher(@PathVariable("id") long crsID, Model model)
+    {
+
+        PersonRole nrole=roleRepository.findByRoleName("TEACHER");
+        Iterable<Person>teachers=nrole.getPeople();
+
+        model.addAttribute("instructors",teachers);
+        model.addAttribute("course",courseRepo.findOne(crsID));
+
+
+        return "adminpages/admincourseaddinstructor";
+    }
+    @PostMapping("/addinstructortocourse/{crsid}")
+    public String teacherSavedtoCourse(@PathVariable("crsid") long id,
+                                       @RequestParam("crs") String crsID,
+                                       @ModelAttribute("aInstructor") Person p,
+                                       Model model)
+
+    {
+        Course ncourse=courseRepo.findOne(id);
+        ncourse.setInstructor(personRepo.findOne(new Long(crsID)));
+        courseRepo.save(ncourse);
+        return "redirect:/admin/admincoursedetails/"+crsID;
     }
 
 
