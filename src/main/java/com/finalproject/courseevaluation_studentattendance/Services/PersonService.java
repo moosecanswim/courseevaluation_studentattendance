@@ -77,13 +77,13 @@ public class PersonService {
     }
 
 
-    public void addStudentToCourse(Person per, Course course)
-    {
-
-       per.addCourse(course);
-       personRepo.save(per);
-
-    }
+//    public void addStudentToCourse(Person per, Course course)
+//    {
+//
+//       per.addCourse(course);
+//       personRepo.save(per);
+//
+//    }
 
 
 
