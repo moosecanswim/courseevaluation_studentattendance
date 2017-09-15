@@ -60,6 +60,7 @@ public class AdminController {
         model.addAttribute("newcourse", new Course());
         return "adminpages/adminaddcourse";
     }
+    //
 //
     //End date for the course isn't going to be entered here but it will be set when the teacher says the course ended
     @PostMapping("/addcourse")
