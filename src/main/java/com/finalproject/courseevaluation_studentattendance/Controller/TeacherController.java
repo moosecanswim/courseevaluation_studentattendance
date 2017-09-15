@@ -4,6 +4,10 @@ import com.finalproject.courseevaluation_studentattendance.Model.*;
 import com.finalproject.courseevaluation_studentattendance.Repositories.*;
 import com.finalproject.courseevaluation_studentattendance.Services.CourseService;
 import com.finalproject.courseevaluation_studentattendance.Services.PersonService;
+import com.google.common.collect.Lists;
+import it.ozimov.springboot.mail.model.Email;
+import it.ozimov.springboot.mail.model.defaultimpl.DefaultEmail;
+import it.ozimov.springboot.mail.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.finalproject.courseevaluation_studentattendance.Model.Course;
 import com.finalproject.courseevaluation_studentattendance.Model.Person;
@@ -13,7 +17,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.mail.internet.InternetAddress;
 import javax.websocket.server.PathParam;
+import java.io.UnsupportedEncodingException;
 import java.security.Principal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -263,5 +269,33 @@ public class TeacherController {
        evaluationRepository.save(evaluation);
        return "teacherpages/evaluation";
    }
+
+//the method to send email
+    //it sends email need to make the body
+
+    @Autowired
+    public EmailService emailService;
+    public void sendEmailWithoutTemplating() throws UnsupportedEncodingException {
+        final Email email= DefaultEmail.builder()
+                .from(new InternetAddress("mahifentaye@gmail.com", "Marco Tullio Cicero ne"))
+                .to(Lists.newArrayList(new InternetAddress("mymahder@gmail.com","admin")))
+                .subject("Testing Email")
+                .body("We need the attendance in the Email body.")
+                .encoding("UTF-8").build();
+//		modelObject.put("recipent", recipent);
+        System.out.println("test it");
+        emailService.send(email);
+    }
+    @GetMapping("/courseend")
+    public String emailAtCourseEnd(Model model) throws UnsupportedEncodingException {
+        Date now= new Date();
+
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+
+        String nowdate= df.format(now);
+        //we need to set the course end date with the current date when they click here
+        sendEmailWithoutTemplating();
+        return"redirect:/teacher/displaystudents/";
+    }
 
 }
