@@ -52,15 +52,13 @@ public class EvalController {
 
     @GetMapping("/searchcourse")
     public String searchCourse()
-    @RequestMapping("/eval/searchcourse")
-    public String searchCourse(Model model)
     {
 
-        return "searchcourse";
+        return "evalpages/searchcourse";
     }
 
     @PostMapping("/searchcourse")
-    public String searchCoursePost(@RequestParam("crnfield")long crn, Model model,Course course )
+    public String searchCoursePost(@RequestParam("crnfield")long crn, Model model)
     {
         model.addAttribute("searcheval", courseRepository.findByCrn(crn));
         return "searchresult";
