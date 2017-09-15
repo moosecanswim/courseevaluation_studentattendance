@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" >
+<head>
+
+    <title>Title</title>
+</head>
+<body>
+<form  th:action="@{/eval/searchcourse/}"  method="post">
+
+    <p>Enter CRN Number: <input type="number" name="crnfield" /></p>
+
+    <p><input type="submit" value="Search CRN" /> <input type="reset" value="Reset" /> </p>
+
+</form>
+</body>
+</html>

@@ -52,21 +52,17 @@ public class EvalController {
      return "";
     }
 
-    @RequestMapping("/eval/searchcourse")
-    public String searchCourse(@RequestParam("crnfield") long crn, Model model)
+    @GetMapping("/searchcourse")
+    public String searchCourse()
     {
-        model.addAttribute("crnfield", crn);
 
         return "searchcourse";
     }
 
-    @PostMapping("/eval/searchcourse")
+    @PostMapping("/searchcourse")
     public String searchCoursePost(@RequestParam("crnfield")long crn, Model model,Course course )
     {
-
         model.addAttribute("searcheval", courseRepository.findByCrn(crn));
-
-
         return "searchresult";
     }
 
@@ -91,23 +87,23 @@ public class EvalController {
 
 
      //search by crn
-   @GetMapping("searchcrn")
-    public String getSearchCRN(@RequestParam("crn") long crn , Model model)
-   {
-
-       model.addAttribute("crn", new Course());
-       model.addAttribute("crn",courseService.findByCRN(crn));
-       return "searchcrn";
-   }
-
-
-   @PostMapping("searchcrn")
-   public String postSearchCRN(@RequestParam("crn")long crn, Model model, Evaluation eval, Course cr)
-   {
-      evaluationService.addEvalToCourse(cr, eval);
-     // evaluationService.SaveEntry(eval);
-       return "searchresult";
-   }
+//   @GetMapping("searchcrn")
+//    public String getSearchCRN(@RequestParam("crn") long crn , Model model)
+//   {
+//
+//       model.addAttribute("crn", new Course());
+//       model.addAttribute("crn",courseService.findByCRN(crn));
+//       return "searchcrn";
+//   }
+//
+//
+//   @PostMapping("searchcrn")
+//   public String postSearchCRN(@RequestParam("crn")long crn, Model model, Evaluation eval, Course cr)
+//   {
+//      evaluationService.addEvalToCourse(cr, eval);
+//     // evaluationService.SaveEntry(eval);
+//       return "searchresult";
+//   }
 
 
    // search by date
