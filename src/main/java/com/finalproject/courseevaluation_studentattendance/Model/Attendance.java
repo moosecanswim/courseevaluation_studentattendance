@@ -11,8 +11,8 @@ public class Attendance {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private long id;
 
-
-    private Date date;
+//    private Date date;
+    private String date;
     private String status;
 
     @ManyToOne
@@ -30,11 +30,11 @@ public class Attendance {
         this.id = id;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

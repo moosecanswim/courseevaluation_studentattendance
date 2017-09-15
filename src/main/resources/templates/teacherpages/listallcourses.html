@@ -6,6 +6,10 @@
 </head>
 <body>
 
+
+<div  th:if="${!allcoursesofaInstructor.isEmpty()}">
+
+
 <th:block th:each="item:${allcoursesofaInstructor}">
 
     <h2 th:inline="text">Course information for [[${item.courseName}]]</h2>
@@ -21,6 +25,11 @@
 
     <p><a th:href="@{/teacher/detailsofacourse/{id}(id=${item.id})}">Show details</a></p>
 </th:block>
+</div>
+
+<div  th:if="${allcoursesofaInstructor.isEmpty()}">
+    <p>No information available</p>
+</div>
 
 
 </body>
