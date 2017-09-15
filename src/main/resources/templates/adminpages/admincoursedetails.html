@@ -15,13 +15,10 @@
     <p th:text="'End Date: '+ ${course.endDate}" />
     <p th:text="'Completion Status: '+ ${course.status}" />
 
-
+    <!--If the Instructor is not assigned to the course yet, this div will display Instructor: null null:-->
     <div th:text="'Instructor: ' + ${courseInstructor?.firstName} + ' ' +${courseInstructor?.lastName}"></div>
 
-    <span th:if="${courseInstructor != null && courseInstructor.firstName != null}" th:text="${courseInstructor.firstName}">Static summary</span>
 
-
-    <div><p th:if="${courseInstructor != null && courseInstructor.firstName != null && courseInstructor.lastName != null}" th:text="'Instructor: ' + ${courseInstructor.firstName} + ' ' +${courseInstructor.lastName} "/></div>
 
 
 
@@ -30,35 +27,36 @@
     <p>List of All Students Registered for the Cource: </p>
 
     <table class="table">
-
-        <td><strong>ID</strong></td>
-        <td><strong>M Number</strong></td>
-        <td><strong>First Name</strong></td>
-        <td><strong>Last Name</strong></td>
-        <td><strong>User Name</strong></td>
-        <!--<td><strong>Password</strong></td>-->
-        <td><strong>Email Address</strong></td>
-        <td><strong>Start Date</strong></td>
-        <td><strong>Active</strong></td>
-        <td><strong>Remove from Course</strong></td>
-
-        <!--iterate through all the students for this course-->
-        <tr th:each="alls:${courseStudents}">
-            <td th:text="${alls.id}"></td>
-            <td th:text="${alls.mNumber}"></td>
-            <td th:text="${alls.firstName}"></td>
-            <td th:text="${alls.lastName}"></td>
-            <td th:text="${alls.username}"></td>
-            <!--<td th:text="${alls.password}"></td>-->
-            <td th:text="${alls.email}"></td>
-            <td th:text="${alls.startDate}"></td>
-            <td th:text="${alls.active}"></td>
-            <td>
-                <!--Remove Student from current class:-->
-                <a th:href="@{/admin/course/{courseid}/removestudentfromcourse/{studentid}(studentid=${alls.id},courseid=${course.id})}">Remove</a>
-            </td>
-
+        <tr>
+            <td><strong>ID</strong></td>
+            <td><strong>M Number</strong></td>
+            <td><strong>First Name</strong></td>
+            <td><strong>Last Name</strong></td>
+            <td><strong>User Name</strong></td>
+            <!--<td><strong>Password</strong></td>-->
+            <td><strong>Email Address</strong></td>
+            <td><strong>Start Date</strong></td>
+            <td><strong>Active</strong></td>
+            <td><strong>Remove from Course</strong></td>
         </tr>
+        <!--iterate through all the students for this course-->
+        <th:block th:each="alls:${courseStudents}">
+            <tr>
+                <td th:text="${alls.id}"></td>
+                <td th:text="${alls.mNumber}"></td>
+                <td th:text="${alls.firstName}"></td>
+                <td th:text="${alls.lastName}"></td>
+                <td th:text="${alls.username}"></td>
+                <!--<td th:text="${alls.password}"></td>-->
+                <td th:text="${alls.email}"></td>
+                <td th:text="${alls.startDate}"></td>
+                <td th:text="${alls.active}"></td>
+                <td>
+                    <!--Remove Student from current class:-->
+                    <a th:href="@{/admin/course/{courseid}/removestudentfromcourse/{studentid}(studentid=${alls.id},courseid=${course.id})}">Remove</a>
+                </td>
+            </tr>
+        </th:block>
     </table>
 
 
