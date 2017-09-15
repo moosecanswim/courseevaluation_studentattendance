@@ -1,42 +1,68 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
     <title>Title</title>
 </head>
+<!--<body>-->
+
+<!--<div><form action = "#" th:action="@{/evaluation}" th:object="${crn}" method="post">-->
+
+
+    <!--<p>Enter CRN Number: <input type="text" th:field="*{crn}" /></p>-->
+
+
+    <!--<p><input type="submit" value="Search CRN" /> <input type="reset" value="Reset" /> </p>-->
+
+<!--</form>-->
+<!--</div>-->
+
+<!--<div>-->
+    <!--<form action = "#" th:action="@{/evaluation}" th:object="${byDate}" method="post">-->
+
+
+    <!--<p>Enter STart Date : <input type="text" th:field="*{byDate}" /></p>-->
+
+
+    <!--<p><input type="submit" value="Search CRN" /> <input type="reset" value="Reset" /> </p>-->
+    <!--</form>-->
+
+<!--</div>-->
+<!--<div>-->
+    <!--<form action = "#" th:action="@{/searchresult}" th:object="${crn}" method="post">-->
+    <!--<table>-->
+        <!--<tr>-->
+            <!--<th>CRN</th>-->
+            <!--<th>Course Name</th>-->
+            <!--<th>Start Date</th>-->
+            <!--<th>End Date</th>-->
+
+
+        <!--</tr>-->
+
+        <!--<tr th:each="item : ${crn}">-->
+            <!--<td th:text="${item.crn}"></td>-->
+            <!--<td th:text="${item.courseName}"></td>-->
+            <!--<td th:text="${item.startDate}"></td>-->
+            <!--<td th:text="${item.endDate}"></td>-->
+
+
+
+        <!--</tr>-->
+
+    <!--</table>-->
+    <!--</form>-->
+
+<!--</div>-->
 <body>
-
-<div><form action = "#" th:action="@{/evaluation}" th:object="${crn}" method="post">
-
-
-    <p>Enter CRN Number: <input type="text" th:field="*{crn}" /></p>
+<form action="#" th:action="@{/evaluation}" th:object="${neweval}" method="post" >
+    <!--<input type="hidden" th:field="*{id}" />-->
 
 
-    <p><input type="submit" value="Search CRN" /> <input type="reset" value="Reset" /> </p>
-
-</form>
-</div>
-
-<div>
-    <form action = "#" th:action="@{/evaluation}" th:object="${byDate}" method="post">
-
-
-    <p>Enter STart Date : <input type="text" th:field="*{byDate}" /></p>
-
-
-    <p><input type="submit" value="Search CRN" /> <input type="reset" value="Reset" /> </p>
-    </form>
-
-</div>
-<div>
-<form action="#" th:action="@{/evaluation/{id}" th:object="${neweval}" method="post" >
-    <input type="hidden" th:field="*{id}" />
-
-
-<p><h4>1. Please enter the Course Registration Number CRN#</h4> <input type="text" th:field="*{crn}"/></p>
-<p> <h4> 2. Please enter the Course Name  </h4> <input type="text" th:field="*{courseName}"/></p>
-<p> <h4> 3. Please enter the Start Date (mm/dd/yyyy)  </h4> <input type="text" th:field="*{email}"/></p>
-    <p> <h4> 4. Please enter the Instructor's Name (First and Last Name) </h4> <input type="text" th:field="*{email}"/></p>
+<!--<p><h4>1. Please enter the Course Registration Number CRN#</h4> <input type="text" th:field="*{crn}"/></p>-->
+<!--<p> <h4> 2. Please enter the Course Name  </h4> <input type="text" th:field="*{courseName}"/></p>-->
+<!--<p> <h4> 3. Please enter the Start Date (mm/dd/yyyy)  </h4> <input type="text" th:field="*{email}"/></p>-->
+    <!--<p> <h4> 4. Please enter the Instructor's Name (First and Last Name) </h4> <input type="text" th:field="*{email}"/></p>-->
 
 <h2> Section II: Rate the Course</h2>
 
@@ -116,6 +142,6 @@
 
     <input type="submit"  value="Save" class="btn btn-lg btn-default btn-block" />
 </form>
-</div>
+
 </body>
 </html>

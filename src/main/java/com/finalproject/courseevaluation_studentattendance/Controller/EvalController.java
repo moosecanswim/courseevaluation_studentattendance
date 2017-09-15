@@ -33,11 +33,27 @@ public class EvalController {
         return "/evalpages/evalhome";
     }
 
+//
+//    @GetMapping("/evaluation")
+//    public String getEvaluation(Model model)
+//    {
+//        model.addAttribute("neweval", new Evaluation());
+//        return "/evalpages/evaluation";
+//    }
+//
+//    @PostMapping("/evalpages/evaluation")
+//    public String postEValuation(Evaluation evaluation)
+//    {
+//        evaluationRepository.save(evaluation);
+//     return "";
+//    }
+
+
     @GetMapping("/evaluation/{id}")
     public String getEvaluation(@PathParam("id")Long id, Model model)
     {
         model.addAttribute("neweval", new Evaluation());
-        return "evaluation";
+        return "/evalpages/evaluation";
     }
     @RequestMapping("/evaluation/{id}")
     public String postEvaluation(@PathParam("id")Long id,Evaluation evaluation, Model model)
@@ -48,7 +64,7 @@ public class EvalController {
 //        courseService.findByCRN(testcrn);
         model.addAttribute("neweval", evaluation);
         evaluationRepository.save(evaluation);
-        return "evaluation";
+        return "/evalpages/evaluation";
     }
 
 
@@ -67,7 +83,7 @@ public class EvalController {
    public String postSearchCRN(@RequestParam("crn")long crn, Model model, Evaluation eval, Course cr)
    {
       evaluationService.addEvalToCourse(cr, eval);
-      evaluationService.SaveEntry(eval);
+     // evaluationService.SaveEntry(eval);
        return "searchresult";
    }
 
