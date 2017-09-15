@@ -255,7 +255,6 @@ public class AdminController {
     //admin edit the information of all people
     //this just takes back to the  registration form
     //which we need to change, updating person is going to be a little different after that
-
     @GetMapping("/updateperson/{id}")
     public String editPerson(@PathVariable("id") long id, Model model){
         model.addAttribute("person", personRepo.findOne(id));

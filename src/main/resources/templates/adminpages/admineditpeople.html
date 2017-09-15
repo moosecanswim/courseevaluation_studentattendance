@@ -8,10 +8,10 @@
 <form action="#" th:action="@{/addperson}" th:object="${person}" method="post" >
     <!--<input type="text" th:field="*{perosn.id}" />-->
     <input type="hidden" th:field="*{id}" />
+    <p> <h4>M Number</h4> <input type="text" th:field="*{mNumber}"/></p>
     <p><h4>First Name</h4> <input type="text" th:field="*{firstName}"/></p>
     <p> <h4> Last Name  </h4> <input type="text" th:field="*{lastName}"/></p>
     <p> <h4> Email  </h4> <input type="text" th:field="*{email}"/></p>
-
     <!--<p th:text="'Sign up time: ' + *{startDate)}">-->
 
     <!--th:text="${#dates.format(link.date, 'MMM dd, yyyy')}"-->
