@@ -181,17 +181,22 @@ public class AdminController {
 //    ToDo need to check how it works:
 //    // ===   Remove Student from the Course
 //    @RequestMapping("course/{courseid}/removestudentfromcourse/{studentid}")
-//    public String removeStudentFromCourse (@PathVariable("courseid")long courseid,
-//                                           @PathVariable("studentid")long studentid,
-//                                           Model model)
-//    {
-//        Person student = personService.findById(studentid);
-//        Course course = courseRepo.findOne(courseid);
-//        courseService.removeStudentFromCourse(course, student);
-//
-//        String courseIDString = Long.toString(courseid);
-//        return "rdirect:/admin/admincoursedatails/" + courseIDString;
-//    }
+    @RequestMapping("/removestudentfromcourse/{courseid}/{studentid}")
+    public String removeStudentFromCourse (@PathVariable("courseid")long courseid,
+                                           @PathVariable("studentid")long studentid,
+                                           Model model)
+    {
+        Person student = personService.findById(studentid);
+
+        System.out.println(student.getFirstName());
+
+        Course course = courseRepo.findOne(courseid);
+        System.out.println(course.getCourseName());
+        courseService.removeStudentFromCourse(course, student);
+
+        String courseIDString = Long.toString(courseid);
+        return "rdirect:/admin/admincoursedatails/" + courseIDString;
+    }
 
 
 
