@@ -121,7 +121,7 @@ public class AdminController {
 
         return "adminpages/admincourseaddstudent";
     }
-    @PostMapping("/savestudenttocourse/{crsid}")
+    @PostMapping("/addstudenttocourse/{crsid}")
     public String studentSavedToCourse(@PathVariable("crsid") long id,
                                        @RequestParam("crs") String crsID,
                                        @ModelAttribute("aStudent") Person p,
@@ -131,7 +131,7 @@ public class AdminController {
         Course ncourse=courseRepo.findOne(id);
         ncourse.addStudent(personRepo.findOne(new Long(crsID)));
         courseRepo.save(ncourse);
-        return "redirect:/admincoursedetails"+crsID;
+        return "redirect:/admin/admincoursedetails/"+crsID;
     }
 
     //this will allow the the admin to add teachers to a course
@@ -158,7 +158,7 @@ public class AdminController {
         Course ncourse=courseRepo.findOne(id);
         ncourse.setInstructor(personRepo.findOne(new Long(crsID)));
         courseRepo.save(ncourse);
-        return "redirect:/admincoursedetails"+crsID;
+        return "redirect:/admin/admincoursedetails/"+crsID;
     }
 
     // ===   Remove Student from the Course

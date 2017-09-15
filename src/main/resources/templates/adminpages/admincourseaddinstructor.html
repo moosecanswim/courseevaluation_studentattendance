@@ -7,7 +7,7 @@
 
 <header>
     <div>
-        <form th:action="@{admin/addinstructortocourse/{crsid}(crsid=${course.id})}" th:object="${aInstructor}" method="post">
+        <form action="#" th:action="@{/admin/addinstructortocourse/{crsid}(crsid=${course.id})}" th:object="${aInstructor}" method="post">
             <input type="hidden" th:value="${course.id}">
             <h2> <label th:inline="text">Adding a Instructor for [[${course.courseName}]]</label></h2>
             <select name="crs">
