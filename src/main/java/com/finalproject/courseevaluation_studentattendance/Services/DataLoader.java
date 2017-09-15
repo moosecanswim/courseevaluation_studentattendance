@@ -91,22 +91,34 @@ public class DataLoader implements CommandLineRunner{
         cal2.set(2013, Calendar.MAY, 12); //Year, month and day of month
         Date endDate = cal2.getTime();
 
+
+        //add math
         Course course = new Course(123,"Math",startDate,endDate);
         courseRepo.save(course);
-        course.addStudent(personRepo.findByUsername("bobbob"));
-        course.addStudent(personRepo.findByUsername("student"));
+//        course.addStudent(personRepo.findByUsername("bobbob"));
+//        course.addStudent(personRepo.findByUsername("student"));
         course.setInstructor(personRepo.findByUsername("teacher"));
         courseRepo.save(course);
 
+
+        //add physics
         course = new Course(456,"Physics",startDate,endDate);
         courseRepo.save(course);
         course.setInstructor(personRepo.findByUsername("teacher"));
+        personRepo.findByUsername("bobbob").setCourseStudent(course);
 
+
+        //add german
         course = new Course(789,"German",startDate,endDate);
         courseRepo.save(course);
         course.setInstructor(personRepo.findByUsername("teacher"));
         courseRepo.save(course);
+        Person tempPerson = personRepo.findByUsername("bobbob");
+        tempPerson.setCourseStudent(course);
+        personRepo.save(tempPerson);
 
+
+        //add java
         course = new Course(101,"Java",startDate,endDate);
         courseRepo.save(course);
 
