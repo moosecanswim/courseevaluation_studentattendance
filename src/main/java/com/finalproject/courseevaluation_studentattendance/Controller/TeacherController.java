@@ -123,6 +123,8 @@ public class TeacherController {
 
         Date now= new Date();
 
+
+
         model.addAttribute("now", now);
         model.addAttribute("course", currentCourse);
         model.addAttribute("studentsofACourse", studentsofACourse);
@@ -187,6 +189,7 @@ public class TeacherController {
 
 
         }
+
 
         model.addAttribute("now", now);
         model.addAttribute("course", currentCourse);

@@ -38,38 +38,60 @@ public class EvalController {
 
 //
     @GetMapping("/evaluationentry")
-    public String getEvaluation(Model model)
-    {
-        model.addAttribute("neweval", new Evaluation());
-        return "/evalpages/evaluationentry";
+    public String getEvaluation(Model model) {
+
+
+        Evaluation evalforaCourse = new Evaluation();
+
+
+        model.addAttribute("neweval", evalforaCourse);
+
+        return "evalpages/evaluation";
     }
 
-    @PostMapping("/evaluationentry")
-    public String postEValuation(@ModelAttribute("newval") Evaluation evaluation)
+
+    @GetMapping("/searchcourse")
+    public String searchCourse()
     {
+
+        return "evalpages/searchcourse";
+    }
+
+    @PostMapping("/searchcourse")
+    public String searchCoursePost(@RequestParam("crnfield")long crn, Model model)
+    {
+        model.addAttribute("coursefound", courseRepository.findByCrn(crn));
+        return "evalpages/searchresult";
+    }
+
+    @GetMapping("/evaluation/{id}")
+    public String getEvaluation(@PathParam("id")Long id, Model model)
+    {
+
+        Course course = courseRepository.findOne(id);
+
+        Evaluation evalforaCourse = new Evaluation();
+
+        evalforaCourse.setCourseEvaluation(course);
+
+        model.addAttribute("course", course);
+
+        model.addAttribute("neweval", evalforaCourse);
+
+        return "evalpages/evaluation";
+    }
+
+    @RequestMapping("/evaluation/{id}")
+    public String postEvaluation(@PathParam("id")Long id,Evaluation evaluation, Model model)
+    {
+
+        String testcrn = null;
+
+//      courseService.findByCRN(testcrn);
+        model.addAttribute("neweval", evaluation);
         evaluationRepository.save(evaluation);
-
-     return "";
+        return "evaluation";
     }
-
-    @RequestMapping("/eval/searchcourse")
-    public String searchCourse(@RequestParam("crnfield") long crn, Model model)
-    {
-        model.addAttribute("crnfield", crn);
-
-        return "searchcourse";
-    }
-
-    @PostMapping("/eval/searchcourse")
-    public String searchCoursePost(@RequestParam("crnfield")long crn, Model model,Course course )
-    {
-
-        model.addAttribute("searcheval", courseRepository.findByCrn(crn));
-
-
-        return "searchresult";
-    }
-
 
 //    @GetMapping("/evaluation/{id}")
 //    public String getEvaluation(@PathParam("id")Long id, Model model)
@@ -91,23 +113,23 @@ public class EvalController {
 
 
      //search by crn
-   @GetMapping("searchcrn")
-    public String getSearchCRN(@RequestParam("crn") long crn , Model model)
-   {
-
-       model.addAttribute("crn", new Course());
-       model.addAttribute("crn",courseService.findByCRN(crn));
-       return "searchcrn";
-   }
-
-
-   @PostMapping("searchcrn")
-   public String postSearchCRN(@RequestParam("crn")long crn, Model model, Evaluation eval, Course cr)
-   {
-      evaluationService.addEvalToCourse(cr, eval);
-     // evaluationService.SaveEntry(eval);
-       return "searchresult";
-   }
+//   @GetMapping("searchcrn")
+//    public String getSearchCRN(@RequestParam("crn") long crn , Model model)
+//   {
+//
+//       model.addAttribute("crn", new Course());
+//       model.addAttribute("crn",courseService.findByCRN(crn));
+//       return "searchcrn";
+//   }
+//
+//
+//   @PostMapping("searchcrn")
+//   public String postSearchCRN(@RequestParam("crn")long crn, Model model, Evaluation eval, Course cr)
+//   {
+//      evaluationService.addEvalToCourse(cr, eval);
+//     // evaluationService.SaveEntry(eval);
+//       return "searchresult";
+//   }
 
 
    // search by date

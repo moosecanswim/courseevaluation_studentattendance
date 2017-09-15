@@ -42,39 +42,39 @@ public class DataLoader implements CommandLineRunner{
         ////////////////Create people with the roles/////////////////
 
         //make a person ([String] first name,[String] last name,[String] username,[String] password,[String] email)
-        Person aPerson= new Person("bob", "mcbobberson","bobbob", "password","bob@email.com" );
+        Person aPerson= new Person("bob", "mcbobberson","bobbob", "password","bob@email.com","M006" );
         personRepo.save(aPerson);
         aPerson.addRole(defaultRole);
         personRepo.save(aPerson);
 
 
         //load teacher
-        aPerson= new Person("matt", "mcmatterson","mattmatt", "password","matt@email.com" );
+        aPerson= new Person("matt", "mcmatterson","mattmatt", "password","matt@email.com","M001" );
         personRepo.save(aPerson);
         aPerson.addRole(teacherRole);
         personRepo.save(aPerson);
 
         //load teacher
-        aPerson= new Person("tom", "O'tom","tomtom", "password","tom@email.com" );
+        aPerson= new Person("tom", "O'tom","tomtom", "password","tom@email.com","M002" );
         personRepo.save(aPerson);
         aPerson.addRole(teacherRole);
         personRepo.save(aPerson);
 
         //load teacher
-        aPerson= new Person("teacher", "Mr.teacher","teacher", "password","teacher@email.com" );
+        aPerson= new Person("teacher", "Mr.teacher","teacher", "password","teacher@email.com","M003" );
         personRepo.save(aPerson);
         aPerson.addRole(teacherRole);
         personRepo.save(aPerson);
 
         //
-        aPerson= new Person("admin", "Mr.Admin","admin", "password","admin@email.com" );
+        aPerson= new Person("admin", "Mr.Admin","admin", "password","admin@email.com","M004" );
         personRepo.save(aPerson);
         aPerson.addRole(teacherRole);
         aPerson.addRole(adminRole);
         personRepo.save(aPerson);
 
         //empty username to see if default will work
-        aPerson= new Person("student", "name","", "password","noname@email.com" );
+        aPerson= new Person("student", "name","", "password","noname@email.com","M005" );
         personRepo.save(aPerson);
         aPerson.addRole(teacherRole);
         aPerson.addRole(adminRole);
@@ -88,7 +88,7 @@ public class DataLoader implements CommandLineRunner{
         cal1.set(2013, Calendar.JANUARY, 9); //Year, month and day of month
         Date startDate = cal1.getTime();
         Calendar cal2 = Calendar.getInstance();
-        cal2.set(2013, Calendar.JANUARY, 9); //Year, month and day of month
+        cal2.set(2013, Calendar.MAY, 12); //Year, month and day of month
         Date endDate = cal2.getTime();
 
         Course course = new Course(123,"Math",startDate,endDate);

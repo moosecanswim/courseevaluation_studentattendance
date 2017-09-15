@@ -56,33 +56,6 @@ public class PersonRole {
         people.add(usr);
     }
 
-//    public Set<Person> getPersons() {
-//        return persons;
-//    }
-//
-//    public void setPersons(Set<Person> persons) {
-//        this.persons = persons;
-//    }
-//
-//    //Constructor for Role Class
-//    public Role()
-//    {
-//        this.persons = new HashSet<>();
-//    }
-
-    //add person
-//    public void addPersontoRole(Person p)
-//    {
-//        this.persons.add(p);
-//    }
-//
-//    //remove person
-//    public void removePersonfromRole(Person p)
-//    {
-//        this.persons.remove(p);
-//    }
-
-
 }
 
 
