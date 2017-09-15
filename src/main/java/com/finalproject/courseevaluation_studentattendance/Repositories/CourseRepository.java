@@ -9,4 +9,5 @@ public interface CourseRepository extends CrudRepository<Course,Long> {
    Course findByCourseName(String coursenames);
    Course findByCrn(long crn);
    Course findByStartDate(String startDate);
+   Course findAllByCrn(long crn);
 }

@@ -14,16 +14,14 @@
 
 
     </tr>
-
-    <tr th:each="item : ${crn}">
-        <td th:text="${item.crn}"></td>
-        <td th:text="${item.courseName}"></td>
-        <td th:text="${item.startDate}"></td>
-        <td th:text="${item.endDate}"></td>
-
-
+        <td th:text="${itemz.crn}"></td>
+        <td th:text="${itemz.courseName}"></td>
+        <td th:text="${itemz.startDate}"></td>
+        <td th:text="${itemz.endDate}"></td>
 
     </tr>
+
+    <a href="evaluationentry.html">Evaluate this course</a>
 
 </table>
 </body>

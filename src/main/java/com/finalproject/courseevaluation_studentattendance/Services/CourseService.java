@@ -77,7 +77,9 @@ public class CourseService {
     }
 
     //find course by crn
-    public Course findByCRN(long crn){
+    public Course findByCRN(long crn)
+    {
+
         return courseRepo.findByCrn(crn);
     }
 

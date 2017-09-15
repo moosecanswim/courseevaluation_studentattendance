@@ -5,15 +5,16 @@
     <title>Title</title>
 </head>
 <body>
-<form action="#" th:action="@{/evaluation}" th:object="${neweval}" method="post" >
+<form action="#" th:action="@{/eval/evaluationentry/{id}(id=${course.id})" th:object="${neweval}" method="post" >
+    <input type="hidden" th:field="*{id}">
 <p><h4>1. How would you rate the course content? </h4></p>
 <div>
 
-    <input type="radio" th:name="${'content[' + item + ']'}" value="Excellent" />Excellent
-    <input type="radio" th:name="${'content[' + item + ']'}" value="Above Average" />Above Average
-    <input type="radio" th:name="${'content[' + item + ']'}" value="Average" />Average
-    <input type="radio" th:name="${'content[' + item + ']'}" value="Fair" />Fair
-    <input type="radio" th:name="${'content[' + item + ']'}" value="Poor" />Poor
+    <label><input type="radio" name="select5" id="select5" value="1" />Excellent</label>
+    <label><input type="radio" name="select5" id="select5" value="2" />Above Average</label>
+    <label><input type="radio" name="select5" id="select5" value="3" />Average</label>
+    <label><input type="radio" name="select5" id="select5" value="4" />Fair</label>
+    <label><input type="radio" name="select5" id="select5" value="5" />Poor</label>
 </div>
 <input type="text" th:field="*{content}"/></p>
 <p> <h4>2.How would you rate the quality of instruction? </h4></p>
