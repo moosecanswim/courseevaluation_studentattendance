@@ -108,6 +108,10 @@ public class AdminController {
     }
 
     //this will allow the the admin to add an existing student to a course
+    // the relationship between student and to courses is many to one so
+    //it is not going to let them assign existing students to different courses
+    // but if we change the relationship to allow that we can add them to a different
+    // courses using this method
     @GetMapping("/addstudenttocourse/{id}")
     public String addStudent(@PathVariable("id") long crsID, Model model)
     {
@@ -134,7 +138,9 @@ public class AdminController {
         return "redirect:/admin/admincoursedetails/"+crsID;
     }
 
-    //this will allow the the admin to add teachers to a course
+    //this will allow the the admin to assign teachers to a course
+    //since a course can only have one teacher every time the teachers chooses
+    //different instructor it will reset it which is what we need
     @GetMapping("/addinstructortocourse/{id}")
     public String addTeacher(@PathVariable("id") long crsID, Model model)
     {
