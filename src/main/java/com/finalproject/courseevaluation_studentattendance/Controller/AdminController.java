@@ -85,6 +85,21 @@ public class AdminController {
         courseRepo.save(newcourse);
         return"redirect:/admin/home";
     }
+    //admin can register a student to a course here
+    @GetMapping("/registerstudentforcourse/{id}")
+    public String registerStudents(@PathVariable("id") long id, Model model)
+    {
+        model.addAttribute("newstudent", new Person());
+        return "adminregisterstudent";
+
+    }
+    @PostMapping("/registerstudent")
+    public String saveStudent(@ModelAttribute("newstudent") Person newstudent)
+    {
+
+        personService.create(newstudent);
+        return "redirect:/admin/viewallstudents";
+    }
     @GetMapping("/updatecourse/{id}")
     public String editCourse(@PathVariable("id") long id, Model model)
     {
