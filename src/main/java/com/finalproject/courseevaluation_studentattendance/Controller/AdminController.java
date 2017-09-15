@@ -134,6 +134,32 @@ public class AdminController {
         return "redirect:/admincoursedetails"+crsID;
     }
 
+    //this will allow the the admin to add teachers to a course
+    @GetMapping("/addinstructortocourse/{id}")
+    public String addTeacher(@PathVariable("id") long crsID, Model model)
+    {
+
+        PersonRole nrole=roleRepository.findByRoleName("TEACHER");
+        Iterable<Person>teachers=nrole.getPeople();
+
+        model.addAttribute("instructors",teachers);
+        model.addAttribute("course",courseRepo.findOne(crsID));
+
+
+        return "adminpages/admincourseaddinstructor";
+    }
+    @PostMapping("/addinstructortocourse/{crsid}")
+    public String teacherSavedtoCourse(@PathVariable("crsid") long id,
+                                       @RequestParam("crs") String crsID,
+                                       @ModelAttribute("aInstructor") Person p,
+                                       Model model)
+
+    {
+        Course ncourse=courseRepo.findOne(id);
+        ncourse.setInstructor(personRepo.findOne(new Long(crsID)));
+        courseRepo.save(ncourse);
+        return "redirect:/admincoursedetails"+crsID;
+    }
 
     // ===   Remove Student from the Course
     @GetMapping("course/{courseid}/removestudentfromcourse/{studentid}")

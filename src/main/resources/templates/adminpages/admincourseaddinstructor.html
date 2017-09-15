@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+</head>
+
+<body id="page-top">
+
+<header>
+    <div>
+        <form th:action="@{admin/addinstructortocourse/{crsid}(crsid=${course.id})}" th:object="${aInstructor}" method="post">
+            <input type="hidden" th:value="${course.id}">
+            <h2> <label th:inline="text">Adding a Instructor for [[${course.courseName}]]</label></h2>
+            <select name="crs">
+                <option th:each="aInstructor:${instructors}" th:value="${aInstructor.id}" th:text="${aInstructor.firstName}+' '+${aInstructor.lastName}"></option>
+            </select><br/>
+            <p><input type="submit" value="Add a Instructor!"></p>
+        </form>
+    </div>
+</header>
+<!-- Bootstrap core JavaScript -->
+
+</div>
+
+</body>
+
+</html>
