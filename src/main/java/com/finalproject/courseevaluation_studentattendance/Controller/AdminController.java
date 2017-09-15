@@ -50,7 +50,6 @@ public class AdminController {
     @RequestMapping("/home")
     public String adminHome(Model model){
 
-
         model.addAttribute("allcourses", courseRepo.findAll());
         return "adminpages/adminhome";
     }
@@ -67,8 +66,7 @@ public class AdminController {
     public String postCourse(@ModelAttribute("newcourse")Course newcourse)
     {
         courseRepo.save(newcourse);
-
-         return"redirect:/admin/home";
+        return"redirect:/admin/home";
     }
     @GetMapping("/updatecourse/{id}")
     public String editCourse(@PathVariable("id") long id, Model model)
@@ -86,10 +84,8 @@ public class AdminController {
         Course currentCourse = courseRepo.findOne(id);
         model.addAttribute("course", currentCourse);
 
-
         Person courseInstructor = currentCourse.getInstructor();
         model.addAttribute("courseInstructor", courseInstructor);
-
 
         Set<Person> courseStudents = currentCourse.getStudent();
         model.addAttribute("courseStudents", courseStudents);
