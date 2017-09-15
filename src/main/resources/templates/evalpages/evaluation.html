@@ -7,7 +7,7 @@
 <body>
 
 <h2> Section II: Rate the Course</h2>
-<form action="#" th:action="@{/evaluation}" th:object="${neweval}" method="post" >
+<form th:action="@{/eval/evaluation/{id}(id=${course.id})}" th:object="${neweval}" method="post" >
     <!--<input type="text" th:field="*{perosn.id}" />-->
     <input type="hidden" th:field="*{id}" />
     <p><h4>1. How would you rate the course content? </h4></p>

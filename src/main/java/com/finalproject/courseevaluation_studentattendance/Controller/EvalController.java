@@ -1,5 +1,6 @@
 package com.finalproject.courseevaluation_studentattendance.Controller;
 
+import com.finalproject.courseevaluation_studentattendance.Model.Course;
 import com.finalproject.courseevaluation_studentattendance.Model.Evaluation;
 import com.finalproject.courseevaluation_studentattendance.Repositories.CourseRepository;
 import com.finalproject.courseevaluation_studentattendance.Repositories.EvaluationRepository;
@@ -20,6 +21,9 @@ public class EvalController {
     EvaluationRepository evaluationRepository;
 
     @Autowired
+    CourseRepository courseRepository;
+
+    @Autowired
     CourseService courseService;
 
 
@@ -32,9 +36,20 @@ public class EvalController {
     @GetMapping("/evaluation/{id}")
     public String getEvaluation(@PathParam("id")Long id, Model model)
     {
-        model.addAttribute("neweval", new Evaluation());
-        return "evaluation";
+
+        Course course = courseRepository.findOne(id);
+
+        Evaluation evalforaCourse = new Evaluation();
+
+        evalforaCourse.setCourseEvaluation(course);
+
+        model.addAttribute("course", course);
+
+        model.addAttribute("neweval", evalforaCourse);
+
+        return "evalpages/evaluation";
     }
+
     @RequestMapping("/evaluation/{id}")
     public String postEvaluation(@PathParam("id")Long id,Evaluation evaluation, Model model)
     {

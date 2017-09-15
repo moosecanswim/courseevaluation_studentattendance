@@ -157,7 +157,6 @@ public class TeacherController {
         }
 
 
-
         model.addAttribute("now", now);
         model.addAttribute("course", currentCourse);
         model.addAttribute("studentsofACourse", studentsofACourse);
