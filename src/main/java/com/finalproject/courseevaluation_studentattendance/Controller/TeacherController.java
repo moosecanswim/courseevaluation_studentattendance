@@ -151,7 +151,7 @@ public class TeacherController {
         for (Person student: studentsofACourse)
         {
 
-            // TODO: make the comment method work to prevent Att status being set twice for the same student for the same day
+            // TODO: make the following comment-out method work to prevent Att status being set twice for the same student for the same day
             // The following method is for preventing the attendance being set twice on the same day for the same student
             //if this same's attendance has been set, only update the attendance status, rather than create a new attendance
 

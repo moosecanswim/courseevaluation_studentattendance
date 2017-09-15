@@ -11,7 +11,7 @@ public class Attendance {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private long id;
 
-
+//    private Date date;
     private String date;
     private String status;
 

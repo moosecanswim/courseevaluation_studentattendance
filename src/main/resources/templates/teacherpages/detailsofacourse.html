@@ -16,13 +16,15 @@
     <p th:text="'Course EndDate:' + ${course.endDate}"/>
     <p th:text="'Course Status:' + ${course.status}"/>
     <br/>
-    <p>List of Course Instructors: </p>
+
+    <h2>List of Course Instructors: </h2>
     <th:block th:each="ins:${course.instructor}">
         <p th:text="'Instructor: ' + ${ins.firstName} + ' ' +${ins.lastName} "/>
     </th:block>
     <br/>
 
-    <p>List of students who registered for the course: </p>
+    <h2>List of students who registered for the course: </h2>
+    <p><a th:href="@{/teacher/markattendance/{courseId}(courseId=${course.id})}">Mark Attendance</a></p>
     <!--<p th:text="'Date today: ' + ${#dates.format(now, 'MMM dd, yyyy')}"></p>-->
 
     <!--should be a form allow input of students' attendance info-->
@@ -30,16 +32,9 @@
     <th:block th:each="student:${studentsofACourse}">
         <p th:text="'Student Name: ' + ${student.firstName} + ' ' +${student.lastName} "></p>
         <p th:text="'Student Email:' + ${student.email}"></p>
-
-        <!--Todo: attendance for each student of a course-->
-        <p>Attendance</p>
-        <a th:href="@{/teacher/markattendance/{courseId}(courseId=${course.id})}">Mark Attendance</a>
-
-
     </th:block>
     <br/>
     <br/>
-
 
 
     <p><a th:href="@{/teacher/addstudentstocourse/{id}(id=${course.id})}">Register students for the course</a></p>
