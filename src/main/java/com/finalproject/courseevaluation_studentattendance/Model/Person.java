@@ -51,12 +51,12 @@ public class Person {
         this.attendances=new HashSet<Attendance>();
         this.mNumber="M---";
     }
-    public Person(String firstName, String lastName, String username, String password, String email){
+    public Person(String firstName, String lastName, String username, String password, String email,String inMnumber){
         this.active=true;
         this.personRoles=new HashSet<PersonRole>();
         this.courseInstructor=new HashSet<Course>();
         this.attendances=new HashSet<Attendance>();
-        this.mNumber="M---";
+        this.mNumber=inMnumber;
 
         this.firstName=firstName;
         this.lastName=lastName;
