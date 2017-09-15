@@ -68,7 +68,7 @@ public class AdminController {
     {
         courseRepo.save(newcourse);
 
-         return"redirect:/admin/addcourse";
+         return"redirect:/admin/home";
     }
     @GetMapping("/updatecourse/{id}")
     public String editCourse(@PathVariable("id") long id, Model model)
