@@ -5,15 +5,17 @@
     <title>Title</title>
 </head>
 <body>
-<h1>Evaluation for [[${course.courseName}]]</h1>
+
+<h1 th:text="'Evaluation for ' + ${course.courseName}+ ':'"></h1>
+
 <div class="panel-body">
-<div th:each="course:${course}">
+<th:block th:each="course:${course}">
     <p th:text="${course.crn}" />
     <p th:text="${course.courseName}" />
     <p th:text="${course.startDate}" />
     <p th:text="${course.endDate}" />
     <p th:text="${course.status}" />
-</div>
+</th:block>
 
     <div th:each="item:${evaluation}">
         <p th:text="${item.content}" />
@@ -30,5 +32,10 @@
     </div>
 </div>
 </div>
+
+
+<!--Link to the Admin Home page-->
+<div><a href="/admin/home">Admin Home</a></div>
+
 </body>
 </html>

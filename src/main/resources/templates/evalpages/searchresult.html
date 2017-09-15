@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th>CRN</th>
+        <th>Course Name</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+
+
+    </tr>
+
+    <tr th:each="item : ${crn}">
+        <td th:text="${item.crn}"></td>
+        <td th:text="${item.courseName}"></td>
+        <td th:text="${item.startDate}"></td>
+        <td th:text="${item.endDate}"></td>
+
+
+
+    </tr>
+
+</table>
+</body>
+</html>

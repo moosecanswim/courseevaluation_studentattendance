@@ -6,11 +6,16 @@
 </head>
 <body>
 <p>Student Attendance: </p>
+<!--<p th:text="'Date today: ' + ${#dates.format(now, 'MMM dd, yyyy')}"></p>-->
+
 <p th:text="'Date today: ' + ${#dates.format(now, 'MMM dd, yyyy')}"></p>
+
 <p th:text="'Course: ' + ${course.courseName}"></p>
 
 <br/>
 <br/>
+
+<div  th:if="${!studentsofACourse.isEmpty()}">
 
     <th:block th:each="student:${studentsofACourse}">
         <p th:text="'Student Full Name: ' + ${student.firstName} + ' ' +${student.lastName} "></p>
@@ -19,11 +24,19 @@
         <th:block th:each="att:${student.attendances}">
             <p th:text="'Attendance Id (just for checking): ' + ${att.id}"></p>
             <p th:text="'Date: ' + ${att.date}"></p>
-            <p th:text="'Status' + ${att.status}"></p>
+            <p th:text="'Attendance Status: ' + ${att.status}"></p>
 
         </th:block>
 
     </th:block>
+
+<br/>
+<br/>
+</div>
+
+<div  th:if="${studentsofACourse.isEmpty()}">
+    <p>No information available!</p>
+</div>
 
 
 </body>

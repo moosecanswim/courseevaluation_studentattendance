@@ -67,7 +67,7 @@ public class CourseService {
     public void removeCourse(Course aCourse){
         Course existingCourse = courseRepo.findOne(aCourse.getId());
 
-        if (existingCourse != null) {
+        if (existingCourse == null) {
             throw new RuntimeException("CourseService: Course does not exist!  cannot set status to false(remove)");
         }
         else{
@@ -77,7 +77,7 @@ public class CourseService {
     }
 
     //find course by crn
-    public Course findByCRN(String crn){
+    public Course findByCRN(long crn){
         return courseRepo.findByCrn(crn);
     }
 

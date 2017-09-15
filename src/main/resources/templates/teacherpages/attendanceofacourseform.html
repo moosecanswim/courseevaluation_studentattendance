@@ -11,28 +11,59 @@
 
 <!--should be a form allow input of students' attendance info-->
 
-<form th:action="@{/markattendance/{courseId}(id=${course.id})}" method="post">
-<th:block th:each="student:${studentsofACourse}">
-    <p th:text="'Student Name: ' + ${student.firstName} + ' ' +${student.lastName} "></p>
-    <p th:text="'Student Email:' + ${student.email}"></p>
 
-    <p><select name="attendanceStatus">
+<div  th:if="${!studentsofACourse.isEmpty()}">
+
+<form th:action="@{/teacher/markattendance/{courseId}(courseId=${course.id})}" method="post">
+    <table>
+        <thead>
+        <tr>
+            StudentFullName
+        </tr>
+        <tr>
+            StudentEmail
+        </tr>
+        <tr>
+            Attendance
+        </tr>
+        </thead>
+
+
+
+        <tbody>
+<th:block th:each="student:${studentsofACourse}">
+
+
+    <tr>
+    <td th:text="${student.firstName} + ' ' +${student.lastName} "></td>
+    <td th:text="${student.email}"></td>
+
+    <td><select name="attendanceStatus">
         <!--<th:block th:each="director:${alldirector}">-->
-        <option th:value="Not marked">Default</option>
-        <option th:value="P">Present</option>
-        <option th:value="A">Absent</option>
-        <option th:value="L">Late</option>
+        <option value="NotMarked">  </option>
+        <option value="Present">Present</option>
+        <option value="Absent">Absent</option>
+        <option value="Late">Late</option>
         <!--<option value="-1">Not a department head</option>-->
 
         <!--</th:block>-->
     </select>
-    </p>
+    </td>
+    </tr>
+
 
 </th:block>
+        </tbody>
+    </table>
 
 <p><input type="submit" class="btn btn-default navbar-btn" value="Mark Attendance" />
     <input type="reset" class="btn btn-default navbar-btn" value="Reset" /></p>
 </form>
+</div>
+
+<div  th:if="${studentsofACourse.isEmpty()}">
+    <p>No Student information available!</p>
+</div>
 
 </body>
 </html>

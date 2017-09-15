@@ -8,17 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.finalproject.courseevaluation_studentattendance.Model.Course;
 import com.finalproject.courseevaluation_studentattendance.Model.Person;
 import com.finalproject.courseevaluation_studentattendance.Repositories.PersonRepository;
-import com.finalproject.courseevaluation_studentattendance.Services.PersonService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.websocket.server.PathParam;
 import java.security.Principal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.SimpleFormatter;
 
 
 import javax.websocket.server.PathParam;
@@ -133,8 +133,11 @@ public class TeacherController {
     }
 
     //display the attendance for a course of all students
+
+
+
     @PostMapping("/markattendance/{courseId}")
-    public String postattendance(@PathVariable("courseId") Long courseId, @RequestParam(value = "attendanceStatus", required = false) String[] attendanceStatus, Model model)
+    public String postattendance(@PathVariable("courseId") Long courseId, @RequestParam(value = "attendanceStatus") String[] attendanceStatus, Model model)
     {
         Course currentCourse = courseRepository.findOne(courseId);
         Iterable<Person> studentsofACourse = currentCourse.getStudent();
@@ -143,16 +146,47 @@ public class TeacherController {
 
         Date now= new Date();
 
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+
+        String nowdate= df.format(now);
+
         for (Person student: studentsofACourse)
         {
 
-            Attendance att = new Attendance();
-            att.setDate(now);
-            att.setStatus(attendanceStatus[i]);
-            i+=1;
-            att.setPersonAttendance(student);
-            att.setAttendanceCourse(currentCourse);
-            attendanceRepository.save(att);
+            // TODO: update student attendance status (for the same day same course)
+            // make the following comment-out method work to prevent Att status being set twice for the same student for the same day
+            //if this same's attendance status has been set, only update the attendance status, rather than create a new attendance
+
+//            try {
+//
+//            for (Attendance att : student.getAttendances())
+//            {
+//
+//                if (att.getDate()== nowdate && att.getAttendanceCourse()==currentCourse)
+//                {
+////                       !!!maybe an update method here would work
+//                    att.setStatus(attendanceStatus[i]);
+//                    //attendanceRepository.save(att);
+//                    i+=1;
+//                    return "teacherpages/displyattforstudentsofacourse";
+//                }
+//
+//            } } catch (Exception e) {
+//                System.out.println("this is the first time marking attendance for the student today");
+//
+//            }
+
+             Attendance att = new Attendance();
+
+//            df.format(now) returns a string
+                att.setDate(nowdate);
+//            att.setDate(now);
+                att.setStatus(attendanceStatus[i]);
+                i += 1;
+                att.setPersonAttendance(student);
+                att.setAttendanceCourse(currentCourse);
+                attendanceRepository.save(att);
+
 
         }
 
@@ -162,15 +196,13 @@ public class TeacherController {
         model.addAttribute("studentsofACourse", studentsofACourse);
 
 
-        return "teacherpages/attendanceforstudentsofacourse";
+        return "teacherpages/displyattforstudentsofacourse";
     }
 
 
-
    @GetMapping("/addstudentstocourse/{id}")
-    public String getCourse(@PathVariable("id")Long id, Model model)
+   public String getCourse(@PathVariable("id")Long id, Model model)
    {
-
 
        Date now= new Date();
 
@@ -178,32 +210,39 @@ public class TeacherController {
 
        student.setStartDate(now);
 
+       System.out.println(student.getStartDate());
+
        model.addAttribute("course", courseRepository.findOne(id));
 
        model.addAttribute("newstudent", student);
+
        return "teacherpages/addstudent";
    }
 
+
    @PostMapping("/addstudent/{id}")
-    public String postCourse(@PathVariable("id") Long id, Person person, Model model)
+    public String postCourse(@PathVariable("id") Long id, @ModelAttribute("newstudent") Person student, Model model)
    {
 
        Course c =  courseRepository.findOne(id);
-       personService.addStudentToCourse(person,c);
-       model.addAttribute("newstudent", person);
-       personService.create(person);
-      // personRepo.save(person);
+       student.setCourseStudent(c);
+       personRepository.save(student);
+//       personService.addStudentToCourse(student,c);
+       model.addAttribute("newstudent", student);
+//       personService.create(student);
+//      // personRepo.save(person);
        return "teacherpages/confirmstudent";
    }
 
+
+
+   //why we need this method? T
    @RequestMapping("/displaystudents")
     public String displayStudents(@ModelAttribute("lstudents")Person person, Model model)
    {
         model.addAttribute("lstudents", personRepo.findAll());
         return "teacherpages/displaystudents";
    }
-
-
 
 //
 //   @RequestMapping("searchcrn")
@@ -214,7 +253,7 @@ public class TeacherController {
    @GetMapping("/evaluation/{id}")
     public String getEvaluation(@PathVariable("id")Long id, Model model)
    {
-    model.addAttribute("neweval", new Evaluation());
+       model.addAttribute("neweval", new Evaluation());
     return "teacherpages/evaluation";
    }
    @PostMapping("/evaluation/{id}")
@@ -224,6 +263,5 @@ public class TeacherController {
        evaluationRepository.save(evaluation);
        return "teacherpages/evaluation";
    }
-
 
 }

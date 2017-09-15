@@ -24,8 +24,9 @@
             <td><b>View Evaluations</p></b></td>
         </tr>
 
+
         <!--iterate through all the existed courses-->
-        <th:block th:each="all:${allcourses}">
+                <th:block th:each="all:${allcourses}">
             <tr>
                 <td><a th:text="${all.id}"></a></td>
                 <td><a th:text="${all.crn}"></a></td>
@@ -41,12 +42,11 @@
                 </td>
 
                 <td>
-                    <a th:href="@{/admin/removecourse/{id}(id=${all.id})}">Delete Course</a>
+                    <a th:href="@{/admin/removecourse/{id}(id=${all.id})}">Remove Course</a>
                 </td>
                 <td>
                     <a th:href="@{/admin/viewcourseevaluations/{id}(id=${all.id})}">View Evaluations</a>
                 </td>
-
             </tr>
         </th:block>
     </table>

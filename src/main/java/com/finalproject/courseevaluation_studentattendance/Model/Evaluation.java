@@ -13,8 +13,6 @@ public class Evaluation {
 
     //excellent/above average/ average/ fair/ poor
 
-
-
     private String content;
     private String quality;
     private String experience;

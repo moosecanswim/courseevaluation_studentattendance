@@ -5,12 +5,9 @@
 
 <body id="page-top">
 
-<header class="masthead">
-    <div class="header-content">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12 col-sm-8 col-md-12 col-sm-offset-2 col-md-offset-3">
-                    <form th:action="@{admin/addstudenttocourse/{crsid}(crsid=${course.id})}" th:object="${aStudent}" method="post">
+<header>
+                <div>
+                    <form action="#" th:action="@{/admin/addstudenttocourse/{crsid}(crsid=${course.id})}" th:object="${aStudent}" method="post">
                         <input type="hidden" th:value="${course.id}">
                         <h2> <label th:inline="text">Adding a student for [[${course.courseName}]]</label></h2>
                         <select name="crs">
@@ -19,10 +16,6 @@
                         <p><input type="submit" value="Add a Student!"></p>
                     </form>
                 </div>
-            </div>
-        </div>
-    </div>
-
 </header>
 <!-- Bootstrap core JavaScript -->
 

@@ -41,6 +41,8 @@ public class Person {
   @ManyToOne
   private Course courseStudent;
 
+
+
     public Person()
     {
         this.active=true;
@@ -77,11 +79,11 @@ public class Person {
 //                '}';
 //    }
 
-    public void addCourse(Course course)
-    {
-
-
-    }
+//    public void addCourse(Course course)
+//    {
+//
+//
+//    }
 
 //    public void removeCourse(Course course1)
 //    {
@@ -203,5 +205,14 @@ public class Person {
 
     public String getmNumber() {
         return mNumber;
+    }
+
+
+    public Course getCourseStudent() {
+        return courseStudent;
+    }
+
+    public void setCourseStudent(Course courseStudent) {
+        this.courseStudent = courseStudent;
     }
 }
