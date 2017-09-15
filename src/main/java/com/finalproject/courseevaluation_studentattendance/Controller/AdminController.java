@@ -270,12 +270,32 @@ public class AdminController {
     //admin edit the information of all people
     //this just takes back to the  registration form
     //which we need to change, updating person is going to be a little different after that
-
     @GetMapping("/updateperson/{id}")
     public String editPerson(@PathVariable("id") long id, Model model){
         model.addAttribute("person", personRepo.findOne(id));
 
         return "adminpages/admineditpeople";
     }
+
+
+
+    // admin create new person
+    @GetMapping("/addperson")
+    public String addPerson(Model model)
+    {
+        model.addAttribute("person", new Person());
+        return "adminpages/adminaddperson";
+    }
+
+    // Validate entered information and if it is valid display the result
+    // Person must have first name, last name, and email address
+    @PostMapping("/addperson")
+    public String postPerson(@ModelAttribute("person") Person person)
+    {
+        personRepo.save(person);
+        return"redirect:/admin/home";
+    }
+
+
 
 }
