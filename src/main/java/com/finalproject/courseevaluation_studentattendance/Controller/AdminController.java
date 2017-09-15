@@ -262,4 +262,25 @@ public class AdminController {
         return "adminpages/admineditpeople";
     }
 
+
+
+    // admin create new person
+    @GetMapping("/addperson")
+    public String addPerson(Model model)
+    {
+        model.addAttribute("person", new Person());
+        return "adminpages/adminaddperson";
+    }
+
+    // Validate entered information and if it is valid display the result
+    // Person must have first name, last name, and email address
+    @PostMapping("/addperson")
+    public String postPerson(@ModelAttribute("person") Person person)
+    {
+        personRepo.save(person);
+        return"redirect:/admin/home";
+    }
+
+
+
 }
