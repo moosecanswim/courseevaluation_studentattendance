@@ -11,17 +11,17 @@
 
 <!--should be a form allow input of students' attendance info-->
 
-<form th:action="@{/markattendance/{courseId}(id=${course.id})}" method="post">
+<form th:action="@{/teacher/markattendance/{courseId}(courseId=${course.id})}" method="post">
 <th:block th:each="student:${studentsofACourse}">
     <p th:text="'Student Name: ' + ${student.firstName} + ' ' +${student.lastName} "></p>
     <p th:text="'Student Email:' + ${student.email}"></p>
 
     <p><select name="attendanceStatus">
         <!--<th:block th:each="director:${alldirector}">-->
-        <option th:value="Not marked">Default</option>
-        <option th:value="P">Present</option>
-        <option th:value="A">Absent</option>
-        <option th:value="L">Late</option>
+        <option value="NotMarked">Default</option>
+        <option value="P">Present</option>
+        <option value="A">Absent</option>
+        <option value="L">Late</option>
         <!--<option value="-1">Not a department head</option>-->
 
         <!--</th:block>-->

@@ -123,8 +123,6 @@ public class TeacherController {
 
         Date now= new Date();
 
-
-
         model.addAttribute("now", now);
         model.addAttribute("course", currentCourse);
         model.addAttribute("studentsofACourse", studentsofACourse);
@@ -133,6 +131,9 @@ public class TeacherController {
     }
 
     //display the attendance for a course of all students
+
+
+
     @PostMapping("/markattendance/{courseId}")
     public String postattendance(@PathVariable("courseId") Long courseId, @RequestParam(value = "attendanceStatus", required = false) String[] attendanceStatus, Model model)
     {
@@ -155,8 +156,6 @@ public class TeacherController {
             attendanceRepository.save(att);
 
         }
-
-
 
         model.addAttribute("now", now);
         model.addAttribute("course", currentCourse);
@@ -192,7 +191,7 @@ public class TeacherController {
    {
 
        Course c =  courseRepository.findOne(id);
-       student.addCourse(c);
+       student.setCourseStudent(c);
        personRepository.save(student);
 //       personService.addStudentToCourse(student,c);
        model.addAttribute("newstudent", student);
@@ -201,14 +200,15 @@ public class TeacherController {
        return "teacherpages/confirmstudent";
    }
 
+
+
+   //why we need this method?T
    @RequestMapping("/displaystudents")
     public String displayStudents(@ModelAttribute("lstudents")Person person, Model model)
    {
         model.addAttribute("lstudents", personRepo.findAll());
         return "teacherpages/displaystudents";
    }
-
-
 
 //
 //   @RequestMapping("searchcrn")
@@ -229,6 +229,5 @@ public class TeacherController {
        evaluationRepository.save(evaluation);
        return "teacherpages/evaluation";
    }
-
 
 }

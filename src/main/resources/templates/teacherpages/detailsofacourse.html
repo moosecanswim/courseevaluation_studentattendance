@@ -27,14 +27,13 @@
 
     <!--should be a form allow input of students' attendance info-->
 
-
     <th:block th:each="student:${studentsofACourse}">
         <p th:text="'Student Name: ' + ${student.firstName} + ' ' +${student.lastName} "></p>
         <p th:text="'Student Email:' + ${student.email}"></p>
 
         <!--Todo: attendance for each student of a course-->
         <p>Attendance</p>
-        <a th:href="@{/markattendance/{courseId}(courseId=${course.id})}">Mark Attendance</a>
+        <a th:href="@{/teacher/markattendance/{courseId}(courseId=${course.id})}">Mark Attendance</a>
 
 
     </th:block>
