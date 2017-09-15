@@ -151,21 +151,20 @@ public class TeacherController {
         for (Person student: studentsofACourse)
         {
 
-            // TODO: make the following comment-out method work to prevent Att status being set twice for the same student for the same day
-            // The following method is for preventing the attendance being set twice on the same day for the same student
-            //if this same's attendance has been set, only update the attendance status, rather than create a new attendance
+            // TODO: update student attendance status (for the same day same course)
+            // make the following comment-out method work to prevent Att status being set twice for the same student for the same day
+            //if this same's attendance status has been set, only update the attendance status, rather than create a new attendance
 
 //            try {
 //
 //            for (Attendance att : student.getAttendances())
 //            {
 //
-//                if (att.getDate()== nowdate)
+//                if (att.getDate()== nowdate&& att.getAttendanceCourse()==currentCourse)
 //                {
-                      // maybe an update method here would work
+////                       maybe an update method here would work
 //                    att.setStatus(attendanceStatus[i]);
-//                    att.setAttendanceCourse(currentCourse);
-//                    attendanceRepository.save(att);
+//                    //attendanceRepository.save(att);
 //                    i+=1;
 //                    return "teacherpages/displyattforstudentsofacourse";
 //                }
