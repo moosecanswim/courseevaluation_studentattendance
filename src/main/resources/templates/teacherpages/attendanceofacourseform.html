@@ -11,6 +11,9 @@
 
 <!--should be a form allow input of students' attendance info-->
 
+
+<div  th:if="${!studentsofACourse.isEmpty()}">
+
 <form th:action="@{/teacher/markattendance/{courseId}(courseId=${course.id})}" method="post">
     <table>
         <thead>
@@ -56,6 +59,11 @@
 <p><input type="submit" class="btn btn-default navbar-btn" value="Mark Attendance" />
     <input type="reset" class="btn btn-default navbar-btn" value="Reset" /></p>
 </form>
+</div>
+
+<div  th:if="${studentsofACourse.isEmpty()}">
+    <p>No Student information available!</p>
+</div>
 
 </body>
 </html>

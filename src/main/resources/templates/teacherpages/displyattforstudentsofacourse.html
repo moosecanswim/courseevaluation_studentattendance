@@ -15,6 +15,8 @@
 <br/>
 <br/>
 
+<div  th:if="${!studentsofACourse.isEmpty()}">
+
     <th:block th:each="student:${studentsofACourse}">
         <p th:text="'Student Full Name: ' + ${student.firstName} + ' ' +${student.lastName} "></p>
         <p th:text="'Student Email:' + ${student.email}"></p>
@@ -30,6 +32,11 @@
 
 <br/>
 <br/>
+</div>
+
+<div  th:if="${studentsofACourse.isEmpty()}">
+    <p>No information available!</p>
+</div>
 
 
 </body>

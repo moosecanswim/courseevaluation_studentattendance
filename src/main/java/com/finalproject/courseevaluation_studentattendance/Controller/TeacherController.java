@@ -160,9 +160,9 @@ public class TeacherController {
 //            for (Attendance att : student.getAttendances())
 //            {
 //
-//                if (att.getDate()== nowdate&& att.getAttendanceCourse()==currentCourse)
+//                if (att.getDate()== nowdate && att.getAttendanceCourse()==currentCourse)
 //                {
-////                       maybe an update method here would work
+////                       !!!maybe an update method here would work
 //                    att.setStatus(attendanceStatus[i]);
 //                    //attendanceRepository.save(att);
 //                    i+=1;
@@ -173,7 +173,6 @@ public class TeacherController {
 //                System.out.println("this is the first time marking attendance for the student today");
 //
 //            }
-
 
              Attendance att = new Attendance();
 
@@ -251,8 +250,6 @@ public class TeacherController {
    @GetMapping("/evaluation/{id}")
     public String getEvaluation(@PathVariable("id")Long id, Model model)
    {
-
-
        model.addAttribute("neweval", new Evaluation());
     return "teacherpages/evaluation";
    }

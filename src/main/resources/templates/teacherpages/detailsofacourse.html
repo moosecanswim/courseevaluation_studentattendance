@@ -24,6 +24,9 @@
     <br/>
 
     <h2>List of students who registered for the course: </h2>
+
+    <div  th:if="${!studentsofACourse.isEmpty()}">
+
     <p><a th:href="@{/teacher/markattendance/{courseId}(courseId=${course.id})}">Mark Attendance</a></p>
     <!--<p th:text="'Date today: ' + ${#dates.format(now, 'MMM dd, yyyy')}"></p>-->
 
@@ -33,6 +36,14 @@
         <p th:text="'Student Name: ' + ${student.firstName} + ' ' +${student.lastName} "></p>
         <p th:text="'Student Email:' + ${student.email}"></p>
     </th:block>
+    <br/>
+    <br/>
+    </div>
+
+    <div  th:if="${studentsofACourse.isEmpty()}">
+        <p>No information available!</p>
+    </div>
+
     <br/>
     <br/>
 
