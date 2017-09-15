@@ -21,9 +21,6 @@ public class EvalController {
     EvaluationRepository evaluationRepository;
 
     @Autowired
-    CourseRepository courseRepository;
-
-    @Autowired
     CourseService courseService;
 
     @Autowired
@@ -53,12 +50,9 @@ public class EvalController {
     }
 
 
-
-
     @RequestMapping("/eval/searchcourse")
-    public String searchCourse(@RequestParam("crnfield") long crn, Model model)
+    public String searchCourse(Model model)
     {
-        model.addAttribute("crnfield", crn);
 
         return "searchcourse";
     }
@@ -96,7 +90,7 @@ public class EvalController {
 
         String testcrn = null;
 
-        courseService.findByCRN(testcrn);
+//        courseService.findByCRN(testcrn);
         model.addAttribute("neweval", evaluation);
         evaluationRepository.save(evaluation);
         return "evaluation";
