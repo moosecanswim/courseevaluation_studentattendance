@@ -16,10 +16,12 @@
     <p th:text="'Completion Status: '+ ${course.status}" />
 
 
+    <div th:text="'Instructor: ' + ${courseInstructor?.firstName} + ' ' +${courseInstructor?.lastName}"></div>
+
+    <span th:if="${courseInstructor != null && courseInstructor.firstName != null}" th:text="${courseInstructor.firstName}">Static summary</span>
 
 
-
-    <p th:text="'Instructor: ' + ${courseInstructor.firstName} + ' ' +${courseInstructor.lastName} "/>
+    <div><p th:if="${courseInstructor != null && courseInstructor.firstName != null && courseInstructor.lastName != null}" th:text="'Instructor: ' + ${courseInstructor.firstName} + ' ' +${courseInstructor.lastName} "/></div>
 
 
 
