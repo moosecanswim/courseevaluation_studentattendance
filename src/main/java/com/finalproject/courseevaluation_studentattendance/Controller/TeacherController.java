@@ -172,28 +172,32 @@ public class TeacherController {
     public String getCourse(@PathVariable("id")Long id, Model model)
    {
 
-
        Date now= new Date();
 
        Person student = new Person();
 
        student.setStartDate(now);
 
+       System.out.println(student.getStartDate());
+
        model.addAttribute("course", courseRepository.findOne(id));
 
        model.addAttribute("newstudent", student);
+
        return "teacherpages/addstudent";
    }
 
    @PostMapping("/addstudent/{id}")
-    public String postCourse(@PathVariable("id") Long id, Person person, Model model)
+    public String postCourse(@PathVariable("id") Long id, @ModelAttribute("newstudent") Person student, Model model)
    {
 
        Course c =  courseRepository.findOne(id);
-       personService.addStudentToCourse(person,c);
-       model.addAttribute("newstudent", person);
-       personService.create(person);
-      // personRepo.save(person);
+       student.addCourse(c);
+       personRepository.save(student);
+//       personService.addStudentToCourse(student,c);
+       model.addAttribute("newstudent", student);
+//       personService.create(student);
+//      // personRepo.save(person);
        return "teacherpages/confirmstudent";
    }
 
