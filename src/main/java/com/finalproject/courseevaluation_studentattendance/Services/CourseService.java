@@ -91,14 +91,33 @@ public class CourseService {
     //remove a student from a course
     //take a temp set of students from the course and checks to see if the student is in it
     //if the student is in that set it will remove the student from the temp sent courseStudents
+    //also we need to set the Course courseStudent for this Person as null
     //save the new set of student to the course
     public void removeStudentFromCourse (Course aCourse, Person aStudent){
+
         Set<Person> courseStudents = aCourse.getStudent();
+
+        // Print all students (irst names) in the course before the removing of student:
+        for(Person s: courseStudents){
+            System.out.println("Students" +
+                    " that are currently enrolled in the course: "
+                    + s.getFirstName());
+        }
         if(courseStudents.contains(aStudent)){
+
             System.out.println("CourseService/removeStudentFromCourse:remove students");
+
+            aStudent.setCourseStudent(null);
             courseStudents.remove(aStudent);
             aCourse.setStudent(courseStudents);
             courseRepo.save(aCourse);
+
+            // Print all students in the course after removing one:
+            for(Person s: courseStudents){
+                System.out.println("Students" +
+                        " that are in the course after removing one student: "
+                        + s.getFirstName());
+            }
         }
         else{
             System.out.println("CourseService/removeStudentFromCourse: student was not part of class to begin with");

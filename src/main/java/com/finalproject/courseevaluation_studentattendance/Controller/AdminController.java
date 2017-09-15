@@ -55,10 +55,26 @@ public class AdminController {
     }
 
     @GetMapping("/addcourse")
-    public String addCourse(Model model)
+    public String addCourse(Course newcourse, Model model)
     {
-        model.addAttribute("newcourse", new Course());
-        return "adminpages/adminaddcourse";
+        model.addAttribute("newcourse",newcourse);
+
+       Iterable<Course>courses=courseRepo.findAllById(newcourse.getId());
+       for(Course c:courses)
+       {
+           System.out.println(c.getId());
+       }
+
+        long test=courses.spliterator().getExactSizeIfKnown();
+        System.out.println(test);
+       if(test==0)
+       {
+           return "adminpages/adminaddcourse";
+
+       }
+
+    return "adminpages/admineditcourse";
+
     }
     //
 //
@@ -74,7 +90,7 @@ public class AdminController {
     {
         model.addAttribute("newcourse",courseRepo.findOne(id));
 
-        return "adminpages/adminaddcourse";
+        return "adminpages/admineditcourse";
     }
 
     // ===   See the details of the Course
@@ -161,7 +177,7 @@ public class AdminController {
         Course ncourse=courseRepo.findOne(id);
         ncourse.setInstructor(personRepo.findOne(new Long(crsID)));
         courseRepo.save(ncourse);
-        return "redirect:/admin/admincoursedetails/"+crsID;
+        return "redirect:/admin/admincoursedetails/"+id;
     }
 
 
@@ -206,12 +222,10 @@ public class AdminController {
 
     // ===   See the List of All People
     @GetMapping("/viewallpeople")
-    public String seeAllPeople(Model model)
+    public String listallPeople(Person person, Model model)
     {
-        Iterable<Person> listOfAllPeople = personRepo.findAll();
-
-        model.addAttribute("listOfAllPeople", listOfAllPeople);
-        return "adminpages/viewallpeople";
+        model.addAttribute("person",personRepo.findAll());
+        return"adminpages/adminviewallpeople";
     }
 
 
@@ -219,10 +233,11 @@ public class AdminController {
     @GetMapping("/viewallteachers")
     public String seeAllTeachers(Model model)
     {
-        Iterable<Person> listOfAllTeachers = personRepo.findAllByPersonRoles("TEACHER");
+        PersonRole nrole=roleRepository.findByRoleName("TEACHER");
+        Iterable<Person>teachers=nrole.getPeople();
 
-        model.addAttribute("listOfAllTeachers", listOfAllTeachers);
-        return "adminpages/viewallteachers";
+        model.addAttribute("listOfAllTeachers", teachers);
+        return "adminpages/adminviewallteachers";
     }
 
 
@@ -230,10 +245,22 @@ public class AdminController {
     @GetMapping("/viewallstudents")
     public String seeAllStudents(Model model)
     {
-        Iterable<Person> listOfAllStudents = personRepo.findAllByPersonRoles("DEFAULT");
+        PersonRole nrole=roleRepository.findByRoleName("DEFAULT");
+        Iterable<Person>students=nrole.getPeople();
 
-        model.addAttribute("listOfAllStudents", listOfAllStudents);
-        return "adminpages/viewallstudents";
+        model.addAttribute("listOfAllStudents", students);
+        return "adminpages/adminviewallstudents";
+    }
+
+    //admin edit the information of all people
+    //this just takes back to the  registration form
+    //which we need to change, updating person is going to be a little different after that
+
+    @GetMapping("/updateperson/{id}")
+    public String editPerson(@PathVariable("id") long id, Model model){
+        model.addAttribute("person", personRepo.findOne(id));
+
+        return "adminpages/admineditpeople";
     }
 
 }

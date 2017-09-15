@@ -19,9 +19,10 @@
     <td><strong>Email Address</strong></td>
     <td><strong>Start Date</strong></td>
     <td><strong>Active</strong></td>
+    <td><strong>Actions</strong></td>
 
     <!--iterate through all the students for this course-->
-    <tr th:each="all:${listOfAllPeople}">
+    <tr th:each="all:${person}">
         <td th:text="${all.id}"></td>
         <td th:text="${all.mNumber}"></td>
         <td th:text="${all.firstName}"></td>
@@ -31,7 +32,10 @@
         <td th:text="${all.email}"></td>
         <td th:text="${all.startDate}"></td>
         <td th:text="${all.active}"></td>
+        <td>
+        <a th:href="@{/admin/updateperson/{id}(id=${all.id})}">Update</a>
 
+        </td>
     </tr>
 </table>
 
