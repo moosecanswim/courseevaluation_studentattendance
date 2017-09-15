@@ -26,6 +26,9 @@ public class EvalController {
     @Autowired
     EvaluationService evaluationService;
 
+    @Autowired
+    CourseRepository courseRepository;
+
 
 
     @RequestMapping("/home")
@@ -34,38 +37,57 @@ public class EvalController {
     }
 
 //
-//    @GetMapping("/evaluation")
-//    public String getEvaluation(Model model)
+    @GetMapping("/evaluationentry")
+    public String getEvaluation(Model model)
+    {
+        model.addAttribute("neweval", new Evaluation());
+        return "/evalpages/evaluationentry";
+    }
+
+    @PostMapping("/evaluationentry")
+    public String postEValuation(@ModelAttribute("newval") Evaluation evaluation)
+    {
+        evaluationRepository.save(evaluation);
+
+     return "";
+    }
+
+    @RequestMapping("/eval/searchcourse")
+    public String searchCourse(@RequestParam("crnfield") long crn, Model model)
+    {
+        model.addAttribute("crnfield", crn);
+
+        return "searchcourse";
+    }
+
+    @PostMapping("/eval/searchcourse")
+    public String searchCoursePost(@RequestParam("crnfield")long crn, Model model,Course course )
+    {
+
+        model.addAttribute("searcheval", courseRepository.findByCrn(crn));
+
+
+        return "searchresult";
+    }
+
+
+//    @GetMapping("/evaluation/{id}")
+//    public String getEvaluation(@PathParam("id")Long id, Model model)
 //    {
 //        model.addAttribute("neweval", new Evaluation());
 //        return "/evalpages/evaluation";
 //    }
-//
-//    @PostMapping("/evalpages/evaluation")
-//    public String postEValuation(Evaluation evaluation)
+//    @RequestMapping("/evaluation/{id}")
+//    public String postEvaluation(@PathParam("id")Long id,Evaluation evaluation, Model model)
 //    {
-//        evaluationRepository.save(evaluation);
-//     return "";
-//    }
-
-
-    @GetMapping("/evaluation/{id}")
-    public String getEvaluation(@PathParam("id")Long id, Model model)
-    {
-        model.addAttribute("neweval", new Evaluation());
-        return "/evalpages/evaluation";
-    }
-    @RequestMapping("/evaluation/{id}")
-    public String postEvaluation(@PathParam("id")Long id,Evaluation evaluation, Model model)
-    {
-
-//        String testcrn = null;
 //
-//        courseService.findByCRN(testcrn);
-        model.addAttribute("neweval", evaluation);
-        evaluationRepository.save(evaluation);
-        return "/evalpages/evaluation";
-    }
+////        String testcrn = null;
+////
+////        courseService.findByCRN(testcrn);
+//        model.addAttribute("neweval", evaluation);
+//        evaluationRepository.save(evaluation);
+//        return "/evalpages/evaluation";
+//    }
 
 
      //search by crn

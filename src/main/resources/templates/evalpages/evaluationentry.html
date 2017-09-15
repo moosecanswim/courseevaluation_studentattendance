@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="#" th:action="@{/evaluation}" th:object="${neweval}" method="post" >
+<p><h4>1. How would you rate the course content? </h4></p>
+<div>
+
+    <input type="radio" th:name="${'content[' + item + ']'}" value="Excellent" />Excellent
+    <input type="radio" th:name="${'content[' + item + ']'}" value="Above Average" />Above Average
+    <input type="radio" th:name="${'content[' + item + ']'}" value="Average" />Average
+    <input type="radio" th:name="${'content[' + item + ']'}" value="Fair" />Fair
+    <input type="radio" th:name="${'content[' + item + ']'}" value="Poor" />Poor
+</div>
+<input type="text" th:field="*{content}"/></p>
+<p> <h4>2.How would you rate the quality of instruction? </h4></p>
+<div>
+
+    <input type="radio" th:name="${'quality[' + item + ']'}" value="Excellent" />Excellent
+    <input type="radio" th:name="${'quality[' + item + ']'}" value="Above Average" />Above Average
+    <input type="radio" th:name="${'quality[' + item + ']'}" value="Average" />Average
+    <input type="radio" th:name="${'quality[' + item + ']'}" value="Fair" />Fair
+    <input type="radio" th:name="${'quality[' + item + ']'}" value="Poor" />Poor
+</div>
+<input type="text" th:field="*{quality}"/></p>
+<p> <h4>3. How would you rate your overall training experience?</h4></p>
+
+<input type="radio" th:name="${'experience[' + item + ']'}" value="Excellent" />Excellent
+<input type="radio" th:name="${'experience[' + item + ']'}" value="Above Average" />Above Average
+<input type="radio" th:name="${'experience[' + item + ']'}" value="Average" />Average
+<input type="radio" th:name="${'experience[' + item + ']'}" value="Fair" />Fair
+<input type="radio" th:name="${'experience[' + item + ']'}" value="Poor" />Poor
+<!--</h4> <input type="text" th:field="*{experience}"/></p>-->
+<p> <h4>4. How would you rate the textbook or handouts?  </h4></p>
+
+<input type="radio" th:name="${'materials[' + item + ']'}" value="Excellent" />Excellent
+<input type="radio" th:name="${'materials[' + item + ']'}" value="Above Average" />Above Average
+<input type="radio" th:name="${'materials[' + item + ']'}" value="Average" />Average
+<input type="radio" th:name="${'materials[' + item + ']'}" value="Fair" />Fair
+<input type="radio" th:name="${'materials[' + item + ']'}" value="Poor" />Poor
+<!--<input type="text" th:field="*{materials}"/></p>-->
+<p> <h4>5. How would you rate the classroom environment and seating?   </h4></p>
+
+<input type="radio" th:name="${'environment[' + item + ']'}" value="Excellent" />Excellent
+<input type="radio" th:name="${'environment[' + item + ']'}" value="Above Average" />Above Average
+<input type="radio" th:name="${'environment[' + item + ']'}" value="Average" />Average
+<input type="radio" th:name="${'environment[' + item + ']'}" value="Fair" />Fair
+<input type="radio" th:name="${'environment[' + item + ']'}" value="Poor" />Poor
+
+<!--<input type="text" th:field="*{environment}"/></p>-->
+<!--<p><h4>Equipment</h4> <input type="text" th:field="*{equipment}"/></p>-->
+<p> <h4>6. How would you rate the classroom computer equipment?    </h4>
+
+<input type="radio" th:name="${'equipment[' + item + ']'}" value="Excellent" />Excellent
+<input type="radio" th:name="${'equipment[' + item + ']'}" value="Above Average" />Above Average
+<input type="radio" th:name="${'equipment[' + item + ']'}" value="Average" />Average
+<input type="radio" th:name="${'equipment[' + item + ']'}" value="Fair" />Fair
+<input type="radio" th:name="${'equipment[' + item + ']'}" value="Poor" />Poor
+
+
+<p> <h4> 1. What did you like about the class?   </h4> <textarea th:inline="text">[[${likes}]]></textarea>
+<p> <h4> 2. What didn't you like about the class?   </h4><textarea th:inline="text">[[${dislikes}]]> </p></textarea>
+<p> <h4> 3. What improvements would you suggest?   </h4> <textarea th:inline="text">[[${suggestions}]]> </p></textarea>
+<p> <h4> 4. What other classes would you like to see offered?  </h4> <textarea th:inline="text">[[${otherClass}]]></p></textarea>
+
+<!--<p> <h4> Findings  </h4> <input type="text" th:field="*{findings}"/></p>-->
+
+<p> <h4>1. How did you find out about the class?    </h4></p>
+
+<input type="radio" th:name="${'findings[' + item + ']'}" value="Excellent" />Internet / Website
+<input type="radio" th:name="${'findings[' + item + ']'}" value="Above Average" />Brochure - ITI schedule of classes
+<input type="radio" th:name="${'findings[' + item + ']'}" value="Average" />Word of Mouth
+<input type="text" th:field="*{findings}"/>Other
+
+<p><h4>2. If you have further questions, please feel free to contact us at 240-567-5510</h4></p>
+
+
+<input type="submit"  value="Save" class="btn btn-lg btn-default btn-block" />
+
+</form>
+</body>
+</html>
