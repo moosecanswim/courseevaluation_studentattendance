@@ -67,7 +67,7 @@ public class CourseService {
     public void removeCourse(Course aCourse){
         Course existingCourse = courseRepo.findOne(aCourse.getId());
 
-        if (existingCourse != null) {
+        if (existingCourse == null) {
             throw new RuntimeException("CourseService: Course does not exist!  cannot set status to false(remove)");
         }
         else{

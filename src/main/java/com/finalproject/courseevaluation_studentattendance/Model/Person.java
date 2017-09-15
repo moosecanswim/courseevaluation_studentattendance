@@ -204,4 +204,13 @@ public class Person {
     public String getmNumber() {
         return mNumber;
     }
+
+
+    public Course getCourseStudent() {
+        return courseStudent;
+    }
+
+    public void setCourseStudent(Course courseStudent) {
+        this.courseStudent = courseStudent;
+    }
 }

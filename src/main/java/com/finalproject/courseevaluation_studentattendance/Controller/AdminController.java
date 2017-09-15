@@ -100,7 +100,7 @@ public class AdminController {
         Iterable<Evaluation> thiscourseevaluation = thiscourse.getEvaluations();
         model.addAttribute("evaluation",thiscourseevaluation);
         model.addAttribute("course",thiscourse);
-        return"admincourseevaluation";
+        return"/adminpages/admincourseevaluation";
     }
 
     //this will allow the the admin to add an existing student to a course
@@ -125,19 +125,40 @@ public class AdminController {
         return "redirect:/admin/admincoursedatails/"+crsID;
     }
 
-    // ===   Remove Student from the Course
-    @GetMapping("course/{courseid}/removestudentfromcourse/{studentid}")
-    public String removeStudentFromCourse (@PathVariable("courseid")long courseid,
-                                           @PathVariable("studentid")long studentid,
-                                           Model model)
-    {
-        Person student = personService.findById(studentid);
-        Course course = courseRepo.findOne(courseid);
-        courseService.removeStudentFromCourse(course, student);
 
-        String courseIDString = Long.toString(courseid);
-        return "rdirect:/admin/admincoursedatails/" + courseIDString;
+
+    // ===   Remove Course from the list of courses
+    @RequestMapping("removecourse/{id}") //Course id
+    public String removeCourse (@PathVariable("id")long id, Model model){
+
+        Course course = courseRepo.findOne(id);
+        System.out.println("course id to remove " + course.getId());
+//        long courseToGoTo = course.getId();
+
+        courseService.removeCourse(course);
+
+        return "redirect:/admin/home"; //" + courseToGoTo;
     }
+
+//    ToDo need to check how it works:
+//    // ===   Remove Student from the Course
+//    @RequestMapping("course/{courseid}/removestudentfromcourse/{studentid}")
+//    public String removeStudentFromCourse (@PathVariable("courseid")long courseid,
+//                                           @PathVariable("studentid")long studentid,
+//                                           Model model)
+//    {
+//        Person student = personService.findById(studentid);
+//        Course course = courseRepo.findOne(courseid);
+//        courseService.removeStudentFromCourse(course, student);
+//
+//        String courseIDString = Long.toString(courseid);
+//        return "rdirect:/admin/admincoursedatails/" + courseIDString;
+//    }
+
+
+
+
+
 
     // ===   See the List of All People
     @GetMapping("/viewallpeople")
