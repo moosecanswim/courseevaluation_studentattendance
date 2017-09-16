@@ -89,16 +89,21 @@ public class AdminController {
     @GetMapping("/registerstudentforcourse/{id}")
     public String registerStudents(@PathVariable("id") long id, Model model)
     {
-        model.addAttribute("newstudent", new Person());
-        return "adminregisterstudent";
+
+        Person student=new Person();
+        Course ncourse=courseRepo.findOne(id);
+        student.setCourseStudent(ncourse);
+        model.addAttribute("newstudent", student);
+        return "adminpages/adminregisterstudent";
 
     }
+
     @PostMapping("/registerstudent")
     public String saveStudent(@ModelAttribute("newstudent") Person newstudent)
     {
 
         personService.create(newstudent);
-        return "redirect:/admin/viewallstudents";
+        return "redirect:/admin/home/";
     }
     @GetMapping("/updatecourse/{id}")
     public String editCourse(@PathVariable("id") long id, Model model)
@@ -280,21 +285,21 @@ public class AdminController {
 
 
     // admin create new person
-    @GetMapping("/addperson")
-    public String addPerson(Model model)
-    {
-        model.addAttribute("person", new Person());
-        return "adminpages/adminaddperson";
-    }
-
-    // Validate entered information and if it is valid display the result
-    // Person must have first name, last name, and email address
-    @PostMapping("/addperson")
-    public String postPerson(@ModelAttribute("person") Person person)
-    {
-        personRepo.save(person);
-        return"redirect:/admin/home";
-    }
+//    @GetMapping("/addperson")
+//    public String addPerson(Model model)
+//    {
+//        model.addAttribute("person", new Person());
+//        return "adminpages/adminaddperson";
+//    }
+//
+//    // Validate entered information and if it is valid display the result
+//    // Person must have first name, last name, and email address
+//    @PostMapping("/addperson")
+//    public String postPerson(@ModelAttribute("person") Person person)
+//    {
+//        personRepo.save(person);
+//        return"redirect:/admin/home";
+//    }
 
 
 

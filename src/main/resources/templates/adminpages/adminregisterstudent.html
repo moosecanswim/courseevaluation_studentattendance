@@ -1,10 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+<form action="#" th:action="@{/admin/registerstudent}" th:object="${newstudent}" method="post" >
+    <input type="text" th:field="*{courseStudent.id}" />
+    <input type="hidden" th:field="*{id}" />
+    <p> <h4>M Number</h4> <input type="text" th:field="*{mNumber}"/></p>
+    <p><h4>First Name</h4> <input type="text" th:field="*{firstName}"/></p>
+    <p> <h4> Last Name  </h4> <input type="text" th:field="*{lastName}"/></p>
+    <p> <h4> Email  </h4> <input type="text" th:field="*{email}"/></p>
+    <p> <h4> Start Date  </h4> <input type="text" th:field="*{startDate}"/></p>
 
+    <!--th:text="${#dates.format(link.date, 'MMM dd, yyyy')}"-->
+    <!--<p th:text="'Sign up date: ' + ${#dates.format(newstudent.startDate, 'MMM dd, yyyy')}" />-->
+    <p><input type="submit"  value="Submit" class="btn btn-lg btn-default btn-block" /></p>
+
+</form>
 </body>
 </html>
