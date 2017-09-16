@@ -50,7 +50,13 @@ public class AdminController {
     @RequestMapping("/home")
     public String adminHome(Model model){
 
-        model.addAttribute("allcourses", courseRepo.findAll());
+        //Display all courses in the system regardless of status:
+        //model.addAttribute("allcourses", courseRepo.findAll());
+
+        //Display all courses in the system with status = true:
+        model.addAttribute("allcourses", courseRepo.findAllByStatus(true));
+
+
         return "adminpages/adminhome";
     }
 
@@ -84,6 +90,26 @@ public class AdminController {
     {
         courseRepo.save(newcourse);
         return"redirect:/admin/home";
+    }
+    //admin can register a student to a course here
+    @GetMapping("/registerstudentforcourse/{id}")
+    public String registerStudents(@PathVariable("id") long id, Model model)
+    {
+
+        Person student=new Person();
+        Course ncourse=courseRepo.findOne(id);
+        student.setCourseStudent(ncourse);
+        model.addAttribute("newstudent", student);
+        return "adminpages/adminregisterstudent";
+
+    }
+
+    @PostMapping("/registerstudent")
+    public String saveStudent(@ModelAttribute("newstudent") Person newstudent)
+    {
+
+        personService.create(newstudent);
+        return "redirect:/admin/home/";
     }
     @GetMapping("/updatecourse/{id}")
     public String editCourse(@PathVariable("id") long id, Model model)
@@ -255,12 +281,32 @@ public class AdminController {
     //admin edit the information of all people
     //this just takes back to the  registration form
     //which we need to change, updating person is going to be a little different after that
-
     @GetMapping("/updateperson/{id}")
     public String editPerson(@PathVariable("id") long id, Model model){
         model.addAttribute("person", personRepo.findOne(id));
 
         return "adminpages/admineditpeople";
     }
+
+
+
+    // admin create new person
+//    @GetMapping("/addperson")
+//    public String addPerson(Model model)
+//    {
+//        model.addAttribute("person", new Person());
+//        return "adminpages/adminaddperson";
+//    }
+//
+//    // Validate entered information and if it is valid display the result
+//    // Person must have first name, last name, and email address
+//    @PostMapping("/addperson")
+//    public String postPerson(@ModelAttribute("person") Person person)
+//    {
+//        personRepo.save(person);
+//        return"redirect:/admin/home";
+//    }
+
+
 
 }
