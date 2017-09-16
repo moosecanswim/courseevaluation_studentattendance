@@ -16,14 +16,15 @@
     </tr>
 
     <tr>
-        <td th:text="${coursefound.crn}"></td>
-        <td th:text="${coursefound.courseName}"></td>
-        <td th:text="${coursefound.startDate}"></td>
-        <td th:text="${coursefound.endDate}"></td>
+        <td th:text="${searcheval.crn}"></td>
+        <td th:text="${searcheval.courseName}"></td>
+        <td th:text="${searcheval.startDate}"></td>
+        <td th:text="${searcheval.endDate}"></td>
 
 
 
     </tr>
+    <a th:href="@{/eval/evaluationentry/{id}(id=${searcheval.id})}">Evaluate this course</a>
 
 </table>
 </body>

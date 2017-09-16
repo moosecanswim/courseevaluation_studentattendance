@@ -7,6 +7,8 @@ import com.finalproject.courseevaluation_studentattendance.Repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+
 @Service
 public class EvaluationService {
     @Autowired
@@ -24,21 +26,30 @@ public class EvaluationService {
         this.evaluationRepo=evalRepo;
     }
 
-// method adds crn of the course to the evaluation repository
+//// method adds crn of the course to the evaluation repository
   public void addEvalToCourse(Course cr, Evaluation eval)
   {
-     cr.getCrn();
-     eval.setCourseEvaluation(cr);
+      eval.setCourseEvaluation(cr);
+     //eval.setId(cr.getId());
+
      evaluationRepo.save(eval);
   }
+//
+//  // method adds start date of the course to the evaluation repository
+//    public void addStartDateToEval(Course cr, Evaluation eval)
+//    {
+//        cr.getStartDate();
+//        eval.setCourseEvaluation(cr);
+//        evaluationRepo.save(eval);
+//    }
+//
+//    public void saveEvalToCourse(Evaluation ev, Course cr)
+//    {
+//        //cr.getId();
+//        ev.setCourseEvaluation(courseRepo.findOne(cr.getId()));
+//        evaluationRepo.save(ev);
+//    }
 
-  // method adds start date of the course to the evaluation repository
-    public void addStartDateToEval(Course cr, Evaluation eval)
-    {
-        cr.getStartDate();
-        eval.setCourseEvaluation(cr);
-        evaluationRepo.save(eval);
-    }
 
     public Evaluation SaveEntry(Evaluation aValuation)
     {

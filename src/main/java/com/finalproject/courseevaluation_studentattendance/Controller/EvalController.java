@@ -37,16 +37,29 @@ public class EvalController {
     }
 
 //
-    @GetMapping("/evaluationentry")
-    public String getEvaluation(Model model) {
+    @GetMapping("/evaluationentry/{id}")
+    public String getEvaluation(@PathVariable("id") long id,  Model model, Course cr) {
+
+        Evaluation ev =  new Evaluation();
+        ev.setCourseEvaluation(courseRepository.findOne(id));
+
+        System.out.println(id);
+        model.addAttribute("neweval", ev);
+
+        return "evalpages/evaluationentry";
 
 
-        Evaluation evalforaCourse = new Evaluation();
+    }
 
+    @PostMapping("/evaluationentry")
+    public String entrypost(@ModelAttribute("neweval") Evaluation eval, Model model, Course cr)
+    {
 
-        model.addAttribute("neweval", evalforaCourse);
+        Evaluation evs =  new Evaluation();
 
-        return "evalpages/evaluation";
+        evaluationService.addEvalToCourse(cr,eval);
+
+        return "evalpages/confirmeval";
     }
 
 
@@ -54,44 +67,42 @@ public class EvalController {
     public String searchCourse()
     {
 
-        return "searchcourse";
+        return "evalpages/searchcourse";
     }
 
     @PostMapping("/searchcourse")
     public String searchCoursePost(@RequestParam("crnfield")long crn, Model model,Course course )
     {
         model.addAttribute("searcheval", courseRepository.findByCrn(crn));
-        return "searchresult";
+        return "evalpages/searchresult";
     }
 
-    @GetMapping("/evaluation/{id}")
-    public String getEvaluation(@PathParam("id")Long id, Model model)
-    {
-
-        Course course = courseRepository.findOne(id);
-
-        Evaluation evalforaCourse = new Evaluation();
-
-        evalforaCourse.setCourseEvaluation(course);
-
-        model.addAttribute("course", course);
-
-        model.addAttribute("neweval", evalforaCourse);
-
-        return "evalpages/evaluation";
-    }
-
-    @RequestMapping("/evaluation/{id}")
-    public String postEvaluation(@PathParam("id")Long id,Evaluation evaluation, Model model)
-    {
-
-        String testcrn = null;
-
-//        courseService.findByCRN(testcrn);
-        model.addAttribute("neweval", evaluation);
-        evaluationRepository.save(evaluation);
-        return "evaluation";
-    }
+//    @GetMapping("/evaluation/{id}")
+//    public String getEvaluation(@PathParam("id")Long id, Model model)
+//    {
+//
+//        Course course = courseRepository.findOne(id);
+//
+//        Evaluation evalforaCourse = new Evaluation();
+//
+//        evalforaCourse.setCourseEvaluation(course);
+//
+//      //  model.addAttribute("course", course);
+//
+//        model.addAttribute("neweval", evalforaCourse);
+//
+//        return "evalpages/evaluation";
+//    }
+//
+//    @RequestMapping("/evaluation/{id}")
+//    public String postEvaluation(@PathVariable("id") long id,Evaluation evaluation, Model model)
+//    {
+//
+//
+//        model.addAttribute("neweval", evaluation);
+//        evaluationRepository.save(evaluation);
+//        return "evaluation";
+//    }
 
 //    @GetMapping("/evaluation/{id}")
 //    public String getEvaluation(@PathParam("id")Long id, Model model)
@@ -146,10 +157,11 @@ public class EvalController {
     @PostMapping("/serachbydate")
     public String postSearchByDate(@RequestParam("bydate") Date startDate, Evaluation evaluation, Model model,Course course)
     {
-
-
         return "searchresult";
     }
+
+
+    // add course crn to evaluation
 
 
 

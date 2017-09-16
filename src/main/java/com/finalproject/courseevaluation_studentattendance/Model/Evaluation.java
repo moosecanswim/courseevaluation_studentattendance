@@ -27,7 +27,7 @@ public class Evaluation {
     private String otherClass;
     private String findings;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Course courseEvaluation;
 
     public long getId() {
