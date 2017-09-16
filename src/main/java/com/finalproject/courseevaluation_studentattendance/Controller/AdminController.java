@@ -50,7 +50,13 @@ public class AdminController {
     @RequestMapping("/home")
     public String adminHome(Model model){
 
-        model.addAttribute("allcourses", courseRepo.findAll());
+        //Display all courses in the system regardless of status:
+        //model.addAttribute("allcourses", courseRepo.findAll());
+
+        //Display all courses in the system with status = true:
+        model.addAttribute("allcourses", courseRepo.findAllByStatus(true));
+
+
         return "adminpages/adminhome";
     }
 
