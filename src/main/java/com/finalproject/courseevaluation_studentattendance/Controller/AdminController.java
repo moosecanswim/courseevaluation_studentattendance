@@ -245,7 +245,7 @@ public class AdminController {
         courseService.removeStudentFromCourse(course, student);
 
         String courseIDString = Long.toString(courseid);
-        return "rdirect:/admin/admincoursedatails/" + courseIDString;
+        return "redirect:/admin/admincoursedetails/" + courseIDString;
     }
 
 
