@@ -5,7 +5,7 @@
     <title>Admin Home</title>
 </head>
 <body>
-<h1>List of All Classes for this Teacher</h1>
+<h1>List of All Courses for this Teacher</h1>
 
 
 <div th:text="'Instructor Name: ' + ${teacher?.firstName} + ' ' +${teacher?.lastName}"></div>
@@ -25,7 +25,7 @@
     </tr>
 
 
-    <!--iterate through all the existed courses-->
+    <!--iterate through all the courses for this Teacher-->
     <th:block th:each="course:${listAllCoursesForThisTeacher}">
         <tr>
             <td><a th:text="${course.id}"></a></td>
@@ -49,12 +49,10 @@
 <!--Create a new person-->
 <!--<div><a href="/admin/addperson">Create New Person</a></div>-->
 
-<!--Link to view the list of all people-->
-<div><a href="/admin/viewallpeople">View All People</a></div>
 <!--Link to view the list of all teachers-->
-<div><a href="/admin/viewallteachers">View All Teachers</a></div>
-<!--Link to view the list of all students-->
-<div><a href="/admin/viewallstudents">View All Students</a></div>
+<div><a href="/admin/viewallteachers">Back to All Teachers</a></div>
+<!--Link to the Admin Home page-->
+<div><a href="/admin/home">Admin Home</a></div>
 
 
 

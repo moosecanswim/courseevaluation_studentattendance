@@ -330,6 +330,7 @@ public class TeacherController {
                 .to(Lists.newArrayList(new InternetAddress("mymahder@gmail.com","admin")))
                 .subject("Testing Email")
                 .body("We need the attendance in the Email body.")
+                .attachment(getCsvForecastAttachment("Attendance"))
                 .encoding("UTF-8").build();
 //		modelObject.put("recipent", recipent);
         System.out.println("test it");
@@ -337,8 +338,10 @@ public class TeacherController {
     }
 
     private EmailAttachment getCsvForecastAttachment(String filename) {
+
         final String testData =
-                "years from now,death probability\n1,0.9\n2,0.95\n3,1.0";
+                "RecordNUm,StudentName,Mnum,Date" +
+                        "\n1,0.9\n2,0.95\n3,1.0";
         final DefaultEmailAttachment attachment = DefaultEmailAttachment.builder()
                 .attachmentName(filename + ".csv")
                 .attachmentData(testData.getBytes(Charset.forName("UTF-8")))

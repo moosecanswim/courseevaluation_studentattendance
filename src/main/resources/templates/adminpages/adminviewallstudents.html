@@ -20,7 +20,7 @@
     <td><strong>Start Date</strong></td>
     <td><strong>Active</strong></td>
 
-    <!--iterate through all the students for this course-->
+    <!--iterate through all the students-->
     <tr th:each="all:${listOfAllStudents}">
         <td th:text="${all.id}"></td>
         <td th:text="${all.mNumber}"></td>

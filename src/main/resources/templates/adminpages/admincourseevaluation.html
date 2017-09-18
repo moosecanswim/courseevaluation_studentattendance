@@ -8,30 +8,80 @@
 
 <h1 th:text="'Evaluation for ' + ${course.courseName}+ ':'"></h1>
 
-<div class="panel-body">
-<th:block th:each="course:${course}">
-    <p th:text="${course.crn}" />
-    <p th:text="${course.courseName}" />
-    <p th:text="${course.startDate}" />
-    <p th:text="${course.endDate}" />
-    <p th:text="${course.status}" />
-</th:block>
+<h2>Course Details Summary:</h2>
+<p th:text="'Course ID: ' + ${course.id}"/>
+<p th:text="'Course CRN: ' + ${course.crn}"/>
+<p th:text="'Course Name: '+ ${course.courseName}" />
+<p th:text="'Start Date: '+ ${course.startDate}" />
+<p th:text="'End Date: '+ ${course.endDate}" />
+<p th:text="'Completion Status: '+ ${course.status}" />
+<!--If the Instructor is not assigned to the course yet, this div will display Instructor: null null:-->
+<div th:text="'Instructor: ' + ${courseInstructor?.firstName} + ' ' +${courseInstructor?.lastName}"></div>
 
-    <div th:each="item:${evaluation}">
-        <p th:text="${item.content}" />
-        <p th:text="${item.quality}" />
-        <p th:text="${item.experience}" />
-        <p th:text="${item.materials}" />
-        <p th:text="${item.environment}" />
-        <p th:text="${item.equipment}" />
-        <p th:text="${item.likes}" />
-        <p th:text="${item.dislikes}" />
-        <p th:text="${item.suggestions}" />
-        <p th:text="${item.otherClass}" />
-        <p th:text="${item.findings}" />
-    </div>
-</div>
-</div>
+<h2>Course Evaluations Summary:</h2>
+
+<table class="table table-striped" border="1">
+    <tr>
+        <td><b>Eval ID</b></td>
+        <td><b>Content</b></td>
+        <td><b>Quality</b></td>
+        <td><b>Experience</b></td>
+        <td><b>Materials</b></td>
+        <td><b>Environment</b></td>
+        <td><b>Equipment</b></td>
+        <td><b>Likes</b></td>
+        <td><b>Dislikes</b></td>
+        <td><b>Suggestions</b></td>
+        <td><b>Other Class</b></td>
+        <td><b>Findings</b></td>
+    </tr>
+
+    <!--iterate through all the evaluations for this course-->
+    <th:block th:each="eval:${evaluation}">
+        <tr>
+            <td><a th:text="${eval.id}"></a></td>
+            <td><a th:text="${eval.content}"></a></td>
+            <td><a th:text="${eval.quality}"></a></td>
+            <td><a th:text="${eval.experience}"></a></td>
+            <td><a th:text="${eval.materials}"></a></td>
+            <td><a th:text="${eval.environment}"></a></td>
+            <td><a th:text="${eval.equipment}"></a></td>
+            <td><a th:text="${eval.likes}"></a></td>
+            <td><a th:text="${eval.dislikes}"></a></td>
+            <td><a th:text="${eval.suggestions}"></a></td>
+            <td><a th:text="${eval.otherClass}"></a></td>
+            <td><a th:text="${eval.findings}"></a></td>
+        </tr>
+    </th:block>
+</table>
+
+
+
+
+<!--<div class="panel-body">-->
+<!--<th:block th:each="course:${course}">-->
+    <!--<p th:text="${course.crn}" />-->
+    <!--<p th:text="${course.courseName}" />-->
+    <!--<p th:text="${course.startDate}" />-->
+    <!--<p th:text="${course.endDate}" />-->
+    <!--<p th:text="${course.status}" />-->
+<!--</th:block>-->
+
+    <!--<div th:each="item:${evaluation}">-->
+        <!--<p th:text="${item.content}" />-->
+        <!--<p th:text="${item.quality}" />-->
+        <!--<p th:text="${item.experience}" />-->
+        <!--<p th:text="${item.materials}" />-->
+        <!--<p th:text="${item.environment}" />-->
+        <!--<p th:text="${item.equipment}" />-->
+        <!--<p th:text="${item.likes}" />-->
+        <!--<p th:text="${item.dislikes}" />-->
+        <!--<p th:text="${item.suggestions}" />-->
+        <!--<p th:text="${item.otherClass}" />-->
+        <!--<p th:text="${item.findings}" />-->
+    <!--</div>-->
+<!--</div>-->
+<!--</div>-->
 
 
 <!--Link to the Admin Home page-->
