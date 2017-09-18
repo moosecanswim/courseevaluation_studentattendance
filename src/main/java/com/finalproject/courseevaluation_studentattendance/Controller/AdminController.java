@@ -19,6 +19,9 @@ import org.springframework.web.bind.annotation.*;
 import com.finalproject.courseevaluation_studentattendance.Model.Communication;
 
 import javax.validation.Valid;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Set;
 
 
@@ -294,42 +297,119 @@ public class AdminController {
 
 
 
-    //COMMUNICATIONS
+    //COMMUNICATIONS methods
 
     @RequestMapping("/communicationhome")
     public String communicationHome(Model model){
-        model.addAttribute("communicationListAvalible",communicationService.showAllAvalible());
-        model.addAttribute("communicationListUnavalible",communicationService.showAllUnavalible());
+        model.addAttribute("communicationListAvalible",communicationService.showByStatus(true));
+        model.addAttribute("communicationListUnavalible",communicationService.showByStatus(false));
         return "/adminpages/admincommunicationhome";
     }
 
     @GetMapping("/addcommunication")
     public String newCommunication(Model model){
+        Date now= new Date();
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+        String nowDate= df.format(now);
+
+        model.addAttribute("now", now);
         model.addAttribute("aCommunication",new Communication());
         model.addAttribute("courseList",courseService.findAll());
         return "/adminpages/adminaddcommunication";
     }
-    @PostMapping("/processcommunication")
-    public String processCommunication(@Valid Communication aCom, BindingResult result){
+    @PostMapping("/processcommunication/{type}")
+    public String processCommunication(@Valid Communication aCom,@PathVariable("type") String type, BindingResult result){
         if(result.hasErrors()){
             System.out.println("Communication invalid- did not add");
             return "/adminpages/adminaddcommunication";
         }else{
-            aCom.setCourseInterested(courseService.findByCRN(Long.valueOf(aCom.getCourseInterestedCRN())));
-            communicationService.create(aCom);
+            Date now= new Date();
+            DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+            String nowDate= df.format(now);
+
+            switch (type){
+                case "add":
+                    //create a new communication
+                    aCom.setCreatedOn(nowDate);
+                    communicationService.create(aCom);
+                    break;
+                case "update":
+                    //update communication
+                    communicationService.update(aCom);
+                    break;
+            }
+
             return "redirect:/admin/communicationhome";
         }
     }
 
     @GetMapping("/updatecommunication/{id}")
     public String updateCommunication(@PathVariable("id") long communicationId,Model model){
+        Date now= new Date();
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+        String nowDate= df.format(now);
+
+        model.addAttribute("now", now);
         model.addAttribute("aCommunication",communicationService.findOne(communicationId));
-        return "/adminpages/adminaddcommunication";
+        model.addAttribute("courseList",courseService.findAll());
+        return "/adminpages/adminupdatecommunication";
     }
     @GetMapping("/togglecommunication/{id}")
     public String toggleCommunication(@PathVariable("id") long communicationId){
         communicationService.toggleCommunicationStatus(communicationService.findOne(communicationId));
         return "redirect:/admin/communicationhome";
+    }
+
+    @GetMapping("/searchcommunication")
+    public String searchCommunication(@RequestParam("searchBy") String searchBy,@RequestParam("searchThing") String searchThing,Model model){
+
+        switch (searchBy){
+            case "all":
+                //show all
+                model.addAttribute("communicationListAvalible",communicationService.showByStatus(true));
+                model.addAttribute("communicationListUnavalible",communicationService.showByStatus(false));
+                break;
+            case "courseCrn":
+                //search by course crn (check to make sure search thing is an long input
+                System.out.println("Search course crn");
+                try{
+                    Long crn=Long.valueOf(searchThing);
+                    model.addAttribute("communicationListAvalible",communicationService.findByCrnAndStatus(crn,true));
+                    model.addAttribute("communicationListUnvalible",communicationService.findByCrnAndStatus(crn,true));
+
+                }catch(Exception e){
+                    System.out.println("adminController- searchCommunication: search input not a long");
+                    return "redirect:/admin/communicationhome";
+                }
+                     break;
+            case "courseName":
+                //search by course name (partial course names ok)
+                System.out.println("Search course name");
+                model.addAttribute("communicationListAvalible",communicationService.findByCourseNameAndStatus(searchThing,true));
+                model.addAttribute("communicationListUnvalible",communicationService.findByCourseNameAndStatus(searchThing,false));
+                break;
+            case "phoneNumber":
+                //search by phone number
+                System.out.println("Search phoneNumber");
+                model.addAttribute("communicationListAvalible",communicationService.findByPhoneNumberAndStatus(searchThing,true));
+                model.addAttribute("communicationListUnvalible",communicationService.findByPhoneNumberAndStatus(searchThing,false));
+                break;
+            case "mNumber":
+                //search by mNumber
+                System.out.println("Search mNumber");
+                model.addAttribute("communicationListAvalible",communicationService.findByMNumberAndStatus(searchThing,true));
+                model.addAttribute("communicationListUnvalible",communicationService.findByMNumberAndStatus(searchThing,false));
+                break;
+            case "email":
+                //search by email
+                System.out.println("Search email");
+                model.addAttribute("communicationListAvalible",communicationService.findByEmailAndStatus(searchThing,true));
+                model.addAttribute("communicationListUnvalible",communicationService.findByEmailAndStatus(searchThing,false));
+                break;
+        }
+
+        //returns to admin home if there is an error
+        return "/adminpages/admincommunicationhome";
     }
 
 

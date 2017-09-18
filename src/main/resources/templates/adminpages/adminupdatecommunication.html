@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>New Communication</title>
+    <title>UpdateCommunication</title>
 </head>
 <body>
 <div class="container">
-    <h1>Communication Form</h1>
+    <h1>Update Communication Form</h1>
     <p th:text="'Date today: ' + ${#dates.format(now, 'MMM dd, yyyy')}"></p>
 
-    <form th:action="@{/admin/processcommunication/add}"
+    <form th:action="@{/admin/processcommunication/update}"
           th:object="${aCommunication}"
           method="POST">
         <fieldset>

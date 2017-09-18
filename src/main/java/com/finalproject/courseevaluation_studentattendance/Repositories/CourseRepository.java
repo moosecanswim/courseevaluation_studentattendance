@@ -9,9 +9,14 @@ public interface CourseRepository extends CrudRepository<Course,Long> {
 
    //Search the courses by status (complete/false or active/true)
    Iterable<Course> findAllByStatus(boolean status);
+   Iterable<Course> findByCrnAndStatus(long crn, Boolean status);
+   Iterable<Course> findByStatusAndCourseNameContains(Boolean status, String courseName);
+
 
    Course findByCourseName(String coursenames);
    Course findByCrn(long crn);
+
+
    Course findByStartDate(String startDate);
 
 

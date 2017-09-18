@@ -20,7 +20,7 @@ public class Communication {
     private String courseInterestedCRN;
     private String callDetails;
     private Boolean callStatus;
-    //private Date createdOn;
+    private String createdOn;
 
     public Communication(){
         setCallStatus(true);
@@ -100,5 +100,13 @@ public class Communication {
     public void setCourseInterestedCRN(String courseInterestedCRN) {
         this.courseInterestedCRN = courseInterestedCRN;
         //set the course interested here?
+    }
+
+    public String getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(String createdOn) {
+        this.createdOn = createdOn;
     }
 }

@@ -9,12 +9,15 @@ import org.springframework.stereotype.Service;
 public class CommunicationService {
     @Autowired
     CommunicationRepository communicationRepository;
+    @Autowired
+    CourseService courseService;
 
     public void create(Communication aComm){
         Communication existCom = communicationRepository.findOne(aComm.getId());
         if (existCom==null) {
 
             System.out.println("CommunicationService: Adding communication to repository");
+            aComm.setCourseInterested(courseService.findByCRN(Long.valueOf(aComm.getCourseInterestedCRN())));
             communicationRepository.save(aComm);
         }
         else{
@@ -22,28 +25,23 @@ public class CommunicationService {
         }
     }
 
-    public void update(Communication aCom){
-        Communication existCom = communicationRepository.findOne(aCom.getId());
+    public void update(Communication aComm){
+        Communication existCom = communicationRepository.findOne(aComm.getId());
         if (existCom==null){
             System.out.println("CommunicationService: the communication you wanted to enter is already in the repository");
         }
         else{
-            existCom.setId(aCom.getId());
-            existCom.setmNumber(aCom.getmNumber());
-            existCom.setPhoneNumber(aCom.getPhoneNumber());
-            existCom.setEmail(aCom.getEmail());
-            existCom.setCourseInterested(aCom.getCourseInterested());
-            existCom.setCallDetails(aCom.getCallDetails());
+            existCom.setId(aComm.getId());
+            existCom.setmNumber(aComm.getmNumber());
+            existCom.setPhoneNumber(aComm.getPhoneNumber());
+            existCom.setEmail(aComm.getEmail());
+            //existCom.setCourseInterested(courseService.findByCRN(Long.valueOf(aComm.getCourseInterestedCRN())));
+            existCom.setCallDetails(aComm.getCallDetails());
             System.out.println("Adding " + existCom.toString());
             communicationRepository.save(existCom);
         }
     }
-    public Communication findOne(long communicationId){
-        return communicationRepository.findOne(communicationId);
-    }
-    public Iterable<Communication> showAll(){
-        return communicationRepository.findAll();
-    }
+
     public Iterable<Communication> showAllAvalible(){
         return communicationRepository.findAllByCallStatus(true);
     }
@@ -52,8 +50,8 @@ public class CommunicationService {
     }
 
     //toggle call status
-    public void toggleCommunicationStatus(Communication aCom){
-        Communication existCom = communicationRepository.findOne(aCom.getId());
+    public void toggleCommunicationStatus(Communication aComm){
+        Communication existCom = communicationRepository.findOne(aComm.getId());
         if(existCom ==null){
             System.out.println("CommunicationService: Cannot toggle status of communication (no id cannot find)");
         }
@@ -67,6 +65,28 @@ public class CommunicationService {
 
         }
         communicationRepository.save(existCom);
+    }
+    //////////////FIND THINGS///////////
+    public Communication findOne(long communicationId){
+        return communicationRepository.findOne(communicationId);
+    }
+    public Iterable<Communication> showByStatus(Boolean status){
+        return communicationRepository.findAllByCallStatus(status);
+    }
+    public Iterable<Communication> findByMNumberAndStatus(String mNumber, Boolean status){
+        return communicationRepository.findByMNumberAndCallStatus(mNumber,status);
+    }
+    public Iterable<Communication> findByEmailAndStatus(String email, Boolean status){
+        return communicationRepository.findByEmailAndCallStatus(email,status);
+    }
+    public Iterable<Communication> findByPhoneNumberAndStatus(String phoneNumber, Boolean status){
+        return communicationRepository.findByPhoneNumberContainsAndCallStatus(phoneNumber,status);
+    }
+    public Iterable<Communication> findByCrnAndStatus(Long crn, Boolean status){
+        return communicationRepository.findByCourseInterestedCRNContainsAndCallStatus(crn,status);
+    }
+    public Iterable<Communication> findByCourseNameAndStatus(String courseName, Boolean status){
+        return communicationRepository.findByCourseInterestedContainsAndCallStatus(courseName,status);
     }
 
 

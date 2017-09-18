@@ -13,24 +13,28 @@
     <table border="1">
         <tr>
             <th><strong>Id</strong></th>
-            <th><strong>Contact M#</strong></th>
+            <th><strong>Date Entered</strong></th>
+            <th><strong>M#</strong></th>
             <th><strong>Contact Phone#</strong></th>
             <th><strong>Contact Email</strong></th>
             <th><strong>Course Inquired</strong></th>
             <th><strong>Call Details</strong></th>
-            <th><strong>Call Status</strong></th>
+            <!--<th><strong>Call Status</strong></th>-->
             <th><strong>Actions</strong></th>
         </tr>
         <tr th:each="comm : ${communicationListAvalible}">
             <td th:text="*{comm.id}"></td>
+            <th th:text="*{comm.createdOn}"></th>
             <td th:text="*{comm.mNumber}"></td>
             <td th:text="*{comm.phoneNumber}"></td>
             <td th:text="*{comm.email}"></td>
             <td th:text="*{comm.courseInterested}"></td>
             <td th:text="*{comm.callDetails}"></td>
-            <td th:text="*{comm.callStatus}"></td>
+            <!--<td th:text="*{comm.callStatus}"></td>-->
             <td>
-                Update-Delete-mark addressed?
+                <a th:href="@{/admin/updatecommunication/{id} (id=*{comm.id})}">Update</a>
+                -
+                <a th:href="@{/admin/togglecommunication/{id} (id=*{comm.id})}">Mark Open</a>
             </td>
 
         </tr>
@@ -40,29 +44,50 @@
     <table border="1">
         <tr>
             <th><strong>Id</strong></th>
-            <th><strong>Contact M#</strong></th>
+            <th><strong>Date Entered</strong></th>
+            <th><strong>M#</strong></th>
             <th><strong>Contact Phone#</strong></th>
             <th><strong>Contact Email</strong></th>
             <th><strong>Course Inquired</strong></th>
             <th><strong>Call Details</strong></th>
-            <th><strong>Call Status</strong></th>
+            <!--<th><strong>Call Status</strong></th>-->
             <th><strong>Actions</strong></th>
         </tr>
         <tr th:each="comm : ${communicationListUnavalible}">
             <td th:text="*{comm.id}"></td>
+            <th th:text="*{comm.createdOn}"></th>
             <td th:text="*{comm.mNumber}"></td>
             <td th:text="*{comm.phoneNumber}"></td>
             <td th:text="*{comm.email}"></td>
             <td th:text="*{comm.courseInterested}"></td>
             <td th:text="*{comm.callDetails}"></td>
-            <td th:text="*{comm.callStatus}"></td>
+            <!--<td th:text="*{comm.callStatus}"></td>-->
             <td>
-                Update-Delete-mark addressed?
+                <a th:href="@{/admin/togglecommunication/{id} (id=*{comm.id})}">Mark Closed</a>
             </td>
 
         </tr>
     </table>
-<a href="/admin/Admin">Admin Dash</a>
+
+
+    <h4>Chose an option to search by:</h4>
+    <form action="/admin/searchcommunication">
+        <select name="searchBy">
+            <option value="all">All</option>
+            <option value="courseCrn">Course CRN</option>
+            <option value="courseName">Course Name</option>
+            <option value="phoneNumber">Phone Number</option>
+            <option value="mNumber">M #</option>
+            <option value="email">Email</option>
+        </select>
+        <p>
+            <input name="searchThing" type="text" placeholder="Input Search"/>
+            <input type="submit" value="Go"/>
+        </p>
+
+    </form>
+
+<a href="/admin/home">Admin Dash</a>
 
 </body>
 </html>

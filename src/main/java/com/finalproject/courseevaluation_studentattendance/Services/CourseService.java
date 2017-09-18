@@ -82,11 +82,24 @@ public class CourseService {
 
         return courseRepo.findByCrn(crn);
     }
+    public Iterable<Course> findByCRNAndStatus(long crn,Boolean status){
+        return courseRepo.findByCrnAndStatus(crn,status);
+    }
+    public Iterable<Course> findByCourseNameAndStatus(String name,Boolean status){
+        return courseRepo.findByStatusAndCourseNameContains(status, name);
+    }
 
+
+
+
+    //find by start date
     public Course findByStartDate(String startDate)
     {
         return courseRepo.findByStartDate(startDate);
     }
+
+
+
 
     //remove a student from a course
     //take a temp set of students from the course and checks to see if the student is in it

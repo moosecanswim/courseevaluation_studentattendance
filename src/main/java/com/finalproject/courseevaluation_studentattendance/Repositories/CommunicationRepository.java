@@ -28,4 +28,16 @@ public interface CommunicationRepository extends CrudRepository<Communication,Lo
     Long countByPhoneNumber(String phoneNumber);
     Set<Communication> findByPhoneNumberAndCallStatus(String phoneNumber, Boolean callStatus);
     Long countByPhoneNumberAndCallStatus(String phoneNumber, Boolean callStatus);
+    Set<Communication> findByPhoneNumberContainsAndCallStatus(String phoneNumber, Boolean callStatus);
+    Long countByPhoneNumberContainsAndCallStatus(String phoneNumber, Boolean callStatus);
+
+
+    //course Crn
+    Set<Communication> findByCourseInterestedCRNContainsAndCallStatus(long crn,Boolean status);
+    Long countByCourseInterestedCRNContainsAndCallStatus(long crn,Boolean status);
+
+    //course name
+    Set<Communication> findByCourseInterestedContainsAndCallStatus(String courseName,Boolean status);
+    Long countByCourseInterestedContainsAndCallStatus(String courseName,Boolean status);
+
 }
