@@ -1,7 +1,10 @@
 package com.finalproject.courseevaluation_studentattendance.Model;
 
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,7 +21,7 @@ public class Course {
     private String courseName;
 
     private Date startDate;
-
+    @DateTimeFormat(pattern = "MM/dd/yyyy")
     private Date endDate;
 
     private boolean status;

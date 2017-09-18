@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<a href="/teacher/courseend">Course has Ended</a>
+<a th:href="@{/teacher/courseend/{id}(id=${course.id})}">Course has Ended</a>
     <h2 th:inline="text">Course information for [[${course.courseName}]]</h2>
 
     <p th:text="'Course ID: ' + ${course.id}"/>
