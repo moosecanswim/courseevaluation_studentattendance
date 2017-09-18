@@ -17,7 +17,7 @@
     <p th:text="'Course Status:' + ${course.status}"/>
     <br/>
 
-    <h2 th:text="inline">Course Instructor: [[${ins.firstName}]]+[[${ins.lastName}]]</h2>
+    <h2 th:inline="text">Course Instructor: [[${ins.firstName}]], [[${ins.lastName}]]</h2>
     <br/>
 
     <h2>List of students who registered for the course: </h2>
@@ -30,6 +30,7 @@
         <!--should be a form allow input of students' attendance info-->
 
         <th:block th:each="student:${studentsofACourse}">
+            <p th:text="'Student M number:' + ${student.mNumber}"></p>
             <p th:text="'Student Name: ' + ${student.firstName} + ' ' +${student.lastName} "></p>
             <p th:text="'Student Email:' + ${student.email}"></p>
         </th:block>
@@ -39,7 +40,6 @@
 
     <div  th:if="${studentsofACourse.isEmpty()}">
         <p>No students Are taking the class!</p>
-        <h5><a th:href="@{/teacher/addstudentstocourse/{id}(id=${course.id})}">Register students for the course</a></h5>
     </div>
 
     <br/>

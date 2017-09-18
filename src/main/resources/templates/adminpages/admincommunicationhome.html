@@ -15,6 +15,7 @@
             <th><strong>Id</strong></th>
             <th><strong>Date Entered</strong></th>
             <th><strong>M#</strong></th>
+            <th><strong>Contact Name</strong></th>
             <th><strong>Contact Phone#</strong></th>
             <th><strong>Contact Email</strong></th>
             <th><strong>Course Inquired</strong></th>
@@ -26,6 +27,7 @@
             <td th:text="*{comm.id}"></td>
             <th th:text="*{comm.createdOn}"></th>
             <td th:text="*{comm.mNumber}"></td>
+            <td th:text="*{comm.name}"></td>
             <td th:text="*{comm.phoneNumber}"></td>
             <td th:text="*{comm.email}"></td>
             <td th:text="*{comm.courseInterested}"></td>
@@ -34,7 +36,7 @@
             <td>
                 <a th:href="@{/admin/updatecommunication/{id} (id=*{comm.id})}">Update</a>
                 -
-                <a th:href="@{/admin/togglecommunication/{id} (id=*{comm.id})}">Mark Open</a>
+                <a th:href="@{/admin/togglecommunication/{id} (id=*{comm.id})}">Mark Closed</a>
             </td>
 
         </tr>
@@ -46,6 +48,7 @@
             <th><strong>Id</strong></th>
             <th><strong>Date Entered</strong></th>
             <th><strong>M#</strong></th>
+            <th><strong>Contact Name</strong></th>
             <th><strong>Contact Phone#</strong></th>
             <th><strong>Contact Email</strong></th>
             <th><strong>Course Inquired</strong></th>
@@ -57,13 +60,14 @@
             <td th:text="*{comm.id}"></td>
             <th th:text="*{comm.createdOn}"></th>
             <td th:text="*{comm.mNumber}"></td>
+            <td th:text="*{comm.name}"></td>
             <td th:text="*{comm.phoneNumber}"></td>
             <td th:text="*{comm.email}"></td>
             <td th:text="*{comm.courseInterested}"></td>
             <td th:text="*{comm.callDetails}"></td>
             <!--<td th:text="*{comm.callStatus}"></td>-->
             <td>
-                <a th:href="@{/admin/togglecommunication/{id} (id=*{comm.id})}">Mark Closed</a>
+                <a th:href="@{/admin/togglecommunication/{id} (id=*{comm.id})}">Mark Open</a>
             </td>
 
         </tr>
@@ -74,6 +78,7 @@
     <form action="/admin/searchcommunication">
         <select name="searchBy">
             <option value="all">All</option>
+            <option value="name">Contact Name</option>
             <option value="courseCrn">Course CRN</option>
             <option value="courseName">Course Name</option>
             <option value="phoneNumber">Phone Number</option>

@@ -96,6 +96,7 @@ public class TeacherController {
 
         Course currentCourse = courseRepository.findOne(courseId);
         Iterable<Person> studentsofACourse = currentCourse.getStudent();
+        model.addAttribute("ins", currentCourse.getInstructor());
 
 
         //move it to new route so it can stamp the time of the time actually submitted
@@ -220,7 +221,7 @@ public class TeacherController {
                 unvalidatedstudent.add(student);
             }
 
-            if(student.getmNumber()!=null)
+            if(!student.getmNumber().isEmpty())
             {
                 System.out.println("not null====" + student.getmNumber().toString());
                 validatedstudent.add(student);
