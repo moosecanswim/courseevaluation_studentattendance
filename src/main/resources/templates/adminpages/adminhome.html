@@ -1,20 +1,35 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
-    <meta charset="UTF-8"/>
+
     <title>Admin Home</title>
+
+    <!-- Header -->
+    <div th:replace="base :: header"></div>
+    <!-- /.Header -->
+
 </head>
 <body>
+
+<!--Navigation Admin-->
+<nav th:replace="base :: nav2Admin"></nav>
+<!--/.Navigation Admin-->
+
+
+
+
     <h1>Admin Class</h1>
+
+
     <p>
         <a href="/admin/addcourse">Add new Course</a>
          -
         <a href="/admin/communicationhome">Communication Home</a>
     </p>
-
     <a href="/admin/addcommunication">Quick Call Link (create a new call/email)</a>
 
-    <p>List of Courses</p>
+
+<p>List of Courses</p>
 
     <table class="table table-striped" border="1">
         <tr>
@@ -65,6 +80,14 @@
     <!--Link to view the list of all students-->
     <div><a href="/admin/viewallstudents">View All Students</a></div>
 
+
+
+
+
+
+<!-- Footer -->
+<div th:replace="base :: footer"></div>
+<!-- /.Footer -->
 
 
 </body>

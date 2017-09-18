@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+</head>
+<body>
+
+<title>Montgomery College Database</title>
+
+
+<!-- Header -->
+<div th:fragment="header">
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/additional.css">
+
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
+</div>
+<!-- /.Header -->
+
+
+
+
+<!-- Navigation Admin -->
+<div th:fragment="nav2Admin">
+    <nav class="navbar navbar-inverse fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Courses DB</a>
+            </div>
+            <ul class="nav navbar-nav">
+
+                <!--<li class="active"><a href="/">Welcome</a></li>-->
+                <!--<li class="active"><a href="/admin/home">Admin Home</a></li>-->
+
+                <li><a href="/">Welcome</a></li>
+                <li><a href="/admin/home">Admin Home</a></li>
+
+
+                <!--Communication dropdown-->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle"
+                       data-toggle="dropdown"
+                       role="button" aria-haspopup="true"
+                       aria-expanded="false">Communication<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+
+                        <li><a href="/admin/communicationhome">Communication Home</a></li>
+                        <li><a href="/admin/addcommunication">Create a New Call/Email</a></li>
+                        <!--<li><a href="/admin/searchcommunication">Search Communication</a></li>-->
+                    </ul>
+                </li>
+
+
+                <!--Lists All dropdown-->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle"
+                          data-toggle="dropdown"
+                       role="button" aria-haspopup="true"
+                       aria-expanded="false">List All<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/admin/viewallpeople">All People</a></li>
+                        <li><a href="/admin/viewallteachers">All Teachers</a></li>
+                        <li><a href="/admin/viewallstudents">All Students</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="/admin/addcommunication">Quick Call</a></li>
+
+                <li><a href="/admin/addcourse">Add Course</a></li>
+
+            </ul>
+
+            <ul class="nav navbar-nav">
+                <li style="float: right"><a href="/logout">Logout</a></li>
+            </ul>
+
+        </div>
+    </nav>
+</div>
+<!-- /.Navigation Admin -->
+
+
+<!-- Footer -->
+<div th:fragment="footer">
+    <div class="container">
+        <footer align="left">
+            <h5>&copy; Developed by Kyle, Mahder, Grace, Anna, and Tarig 2017</h5>
+
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+            <!-- Latest compiled JavaScript -->
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        </footer>
+    </div>
+</div>
+<!-- /.Footer -->
+
+</body>
+</html>
