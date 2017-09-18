@@ -1,9 +1,15 @@
 package com.finalproject.courseevaluation_studentattendance.Services;
 
 import com.finalproject.courseevaluation_studentattendance.Model.Communication;
+import com.finalproject.courseevaluation_studentattendance.Model.Course;
 import com.finalproject.courseevaluation_studentattendance.Repositories.CommunicationRepository;
+import com.google.common.collect.Iterables;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 @Service
 public class CommunicationService {
@@ -73,21 +79,88 @@ public class CommunicationService {
     public Iterable<Communication> showByStatus(Boolean status){
         return communicationRepository.findAllByCallStatus(status);
     }
+    //mNumber
     public Iterable<Communication> findByMNumberAndStatus(String mNumber, Boolean status){
-        return communicationRepository.findByMNumberAndCallStatus(mNumber,status);
+        String first=mNumber.substring(0);
+        if(!first.equalsIgnoreCase("m")){
+        }
+        else{
+            mNumber="M"+mNumber;
+        }
+        if(status==true){
+            return communicationRepository.findByMNumberLikeAndCallStatusTrue("%"+mNumber+"%");
+        }
+        else{
+            return communicationRepository.findByMNumberLikeAndCallStatusFalse("%"+mNumber+"%");
+        }
+
+
     }
+    //email
     public Iterable<Communication> findByEmailAndStatus(String email, Boolean status){
-        return communicationRepository.findByEmailAndCallStatus(email,status);
+        if(status==true){
+            return communicationRepository.findByEmailLikeAndCallStatusTrue("%"+email+"%");
+        }
+        else{
+            return communicationRepository.findByEmailLikeAndCallStatusFalse("%"+email+"%");
+        }
     }
+    //phone number
     public Iterable<Communication> findByPhoneNumberAndStatus(String phoneNumber, Boolean status){
-        return communicationRepository.findByPhoneNumberContainsAndCallStatus(phoneNumber,status);
-    }
-    public Iterable<Communication> findByCrnAndStatus(Long crn, Boolean status){
-        return communicationRepository.findByCourseInterestedCRNContainsAndCallStatus(crn,status);
-    }
-    public Iterable<Communication> findByCourseNameAndStatus(String courseName, Boolean status){
-        return communicationRepository.findByCourseInterestedContainsAndCallStatus(courseName,status);
+        if(status==true){
+            return communicationRepository.findByPhoneNumberLikeAndCallStatusTrue("%"+phoneNumber+"%");
+        }
+        else{
+            return communicationRepository.findByPhoneNumberLikeAndCallStatusFalse("%"+phoneNumber+"%");
+        }
     }
 
+    //by crn
+    public Iterable<Communication> findByCrnAndStatus(String crn, Boolean status){
+        if(status==true){
+            return communicationRepository.findByCourseInterestedCRNLikeAndCallStatusTrue(crn);
+        }
+        else{
+            return communicationRepository.findByCourseInterestedCRNLikeAndCallStatusFalse(crn);
+        }
 
+    }
+//    //find by course name
+//    public Iterable<Communication> findByCourseNameAndStatus(String courseName,Boolean status){
+//        ArrayList<String> theCRNs = new ArrayList<String>();
+//
+//        Iterable<Course> coursesAll = courseService.findByCourseName("%"+courseName+"%");
+//        if(coursesAll.equals(null)){
+//            System.out.println("CommService-findByCourseNameAndStatus: no courses with that name");
+//        }else {
+//
+//            for(Course course:coursesAll){
+//                //do nothing
+//                theCRNs.add(String.valueOf(course.getCrn()));
+//            }
+//        }
+//            if(status==true){
+//            for(String l:theCRNs){
+//                Iterable<Communication> lList = findByCrnAndStatus(l,true);
+//                }
+//                return communicationRepository.findByCourseInterestedLikeAndCallStatusTrue(courseName);
+//            }
+//            else{
+//                return communicationRepository.findByCourseInterestedLikeAndCallStatusFalse(courseName);
+//            }
+//
+//
+//    }
+
+    //contact name
+    public Iterable<Communication> findByNameAndAvalible(String name){
+        long count = communicationRepository.countByNameLikeIgnoreCaseAndCallStatusTrue(name);
+        System.out.println("commService: there are " + count + " occurances of " +name +" true");
+        return communicationRepository.findByNameLikeIgnoreCaseAndCallStatusTrue(name);
+    }
+    public Iterable<Communication> findByNameAndUnavalible(String name) {
+        long count = communicationRepository.countByNameLikeIgnoreCaseAndCallStatusFalse(name);
+        System.out.println("commService: there are " + count + " occurances of " +name +"false");
+        return communicationRepository.findByNameLikeIgnoreCaseAndCallStatusFalse(name);
+    }
 }

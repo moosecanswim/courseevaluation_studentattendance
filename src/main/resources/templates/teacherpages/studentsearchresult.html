@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+
+<h4>Search result (Matching students)</h4>
+
+<div  th:if="${searchstudent.isEmpty()}">
+    No matching results found
+</div>
+
+<div  th:if="${!searchstudent.isEmpty()}">
+    <table>
+
+        <thead>
+        <tr>
+
+            <td><strong>ID</strong></td>
+            <td><strong>M-Number</strong></td>
+            <td><strong>First Name</strong></td>
+            <td><strong>Last Name</strong></td>
+            <td><strong>Email Address</strong></td>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="student:${searchstudent}">
+            <td th:text="${student.id}"></td>
+            <td th:text="${student.mNumber}"></td>
+            <td th:text="${student.firstName}"></td>
+            <td th:text="${student.lastName}"></td>
+            <td th:text="${student.email}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+
+</div>
+
+
+</body>
+</html>

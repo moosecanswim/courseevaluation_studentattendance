@@ -10,6 +10,7 @@ public class Communication {
     private long id;
     //link to student (one to one)
     private String mNumber;
+    private String name;
     private String phoneNumber;
     private String email;
 
@@ -59,16 +60,6 @@ public class Communication {
         this.callDetails = callDetails;
     }
 
-    @Override
-    public String toString() {
-        return "Communication{" +
-                "id=" + id +
-                ", mNumber='" + mNumber + '\'' +
-                ", courseInterested=" + courseInterested +
-                ", callDetails='" + callDetails + '\'' +
-                '}';
-    }
-
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -108,5 +99,29 @@ public class Communication {
 
     public void setCreatedOn(String createdOn) {
         this.createdOn = createdOn;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Communication{" +
+                "id=" + id +
+                ", mNumber='" + mNumber + '\'' +
+                ", name='" + name + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", email='" + email + '\'' +
+                ", courseInterested=" + courseInterested +
+                ", courseInterestedCRN='" + courseInterestedCRN + '\'' +
+                ", callDetails='" + callDetails + '\'' +
+                ", callStatus=" + callStatus +
+                ", createdOn='" + createdOn + '\'' +
+                '}';
     }
 }

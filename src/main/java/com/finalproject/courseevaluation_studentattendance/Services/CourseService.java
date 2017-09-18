@@ -87,6 +87,9 @@ public class CourseService {
     public Iterable<Course> findByCRNAndStatus(long crn,Boolean status){
         return courseRepo.findByCrnAndStatus(crn,status);
     }
+    public Iterable<Course> findByCourseName(String name){
+        return courseRepo.findAllByCourseNameLike(name);
+    }
     public Iterable<Course> findByCourseNameAndStatus(String name,Boolean status){
         return courseRepo.findByStatusAndCourseNameContains(status, name);
     }

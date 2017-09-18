@@ -1,20 +1,32 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
+<head lang="en">
+
     <title>Communication Home</title>
+
+    <!-- Header -->
+    <div th:replace="base :: header"></div>
+    <!-- /.Header -->
+
 </head>
 <body>
+
+<!--Navigation Admin-->
+<nav th:replace="base :: nav2Admin"></nav>
+<!--/.Navigation Admin-->
+
     <h1>Communication Home</h1>
 
     <h3>Open Communications</h3>
 
     <a href="/admin/addcommunication">Create a call/email</a>
-    <table border="1">
+
+    <table class="table table-striped" border="1">
         <tr>
             <th><strong>Id</strong></th>
             <th><strong>Date Entered</strong></th>
             <th><strong>M#</strong></th>
+            <th><strong>Contact Name</strong></th>
             <th><strong>Contact Phone#</strong></th>
             <th><strong>Contact Email</strong></th>
             <th><strong>Course Inquired</strong></th>
@@ -26,6 +38,7 @@
             <td th:text="*{comm.id}"></td>
             <th th:text="*{comm.createdOn}"></th>
             <td th:text="*{comm.mNumber}"></td>
+            <td th:text="*{comm.name}"></td>
             <td th:text="*{comm.phoneNumber}"></td>
             <td th:text="*{comm.email}"></td>
             <td th:text="*{comm.courseInterested}"></td>
@@ -34,18 +47,19 @@
             <td>
                 <a th:href="@{/admin/updatecommunication/{id} (id=*{comm.id})}">Update</a>
                 -
-                <a th:href="@{/admin/togglecommunication/{id} (id=*{comm.id})}">Mark Open</a>
+                <a th:href="@{/admin/togglecommunication/{id} (id=*{comm.id})}">Mark Closed</a>
             </td>
 
         </tr>
     </table>
 
     <h3>Closed Communications (already taken care)</h3>
-    <table border="1">
+    <table class="table table-striped" border="1">
         <tr>
             <th><strong>Id</strong></th>
             <th><strong>Date Entered</strong></th>
             <th><strong>M#</strong></th>
+            <th><strong>Contact Name</strong></th>
             <th><strong>Contact Phone#</strong></th>
             <th><strong>Contact Email</strong></th>
             <th><strong>Course Inquired</strong></th>
@@ -57,13 +71,14 @@
             <td th:text="*{comm.id}"></td>
             <th th:text="*{comm.createdOn}"></th>
             <td th:text="*{comm.mNumber}"></td>
+            <td th:text="*{comm.name}"></td>
             <td th:text="*{comm.phoneNumber}"></td>
             <td th:text="*{comm.email}"></td>
             <td th:text="*{comm.courseInterested}"></td>
             <td th:text="*{comm.callDetails}"></td>
             <!--<td th:text="*{comm.callStatus}"></td>-->
             <td>
-                <a th:href="@{/admin/togglecommunication/{id} (id=*{comm.id})}">Mark Closed</a>
+                <a th:href="@{/admin/togglecommunication/{id} (id=*{comm.id})}">Mark Open</a>
             </td>
 
         </tr>
@@ -74,8 +89,9 @@
     <form action="/admin/searchcommunication">
         <select name="searchBy">
             <option value="all">All</option>
+            <option value="name">Contact Name</option>
             <option value="courseCrn">Course CRN</option>
-            <option value="courseName">Course Name</option>
+            <!--<option value="courseName">Course Name</option>-->
             <option value="phoneNumber">Phone Number</option>
             <option value="mNumber">M #</option>
             <option value="email">Email</option>
@@ -88,6 +104,10 @@
     </form>
 
 <a href="/admin/home">Admin Dash</a>
+
+<!-- Footer -->
+<div th:replace="base :: footer"></div>
+<!-- /.Footer -->
 
 </body>
 </html>

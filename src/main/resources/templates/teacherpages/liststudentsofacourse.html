@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+
+
+<table class="table">
+
+
+    <h4>Student with validated IDs</h4>
+    <td><strong>ID</strong></td>
+    <td><strong>M-Number</strong></td>
+    <td><strong>First Name</strong></td>
+    <td><strong>Last Name</strong></td>
+    <td><strong>Email Address</strong></td>
+
+    <tr th:each="student:${validatedstudent}">
+        <td th:text="${student.id}"></td>
+        <td th:text="${student.mNumber}"></td>
+        <td th:text="${student.firstName}"></td>
+        <td th:text="${student.lastName}"></td>
+        <td th:text="${student.email}"></td>
+
+        <!--<td>-->
+            <!--<a th:href="@{/detail/{id}(id=${i.id})}">Details</a>-->
+
+        <!--</td>-->
+
+    </tr>
+</table>
+
+
+
+<table class="table">
+
+
+    <h4>Student with unvalidated IDs</h4>
+    <td><strong>ID</strong></td>
+    <td><strong>M-Number</strong></td>
+    <td><strong>First Name</strong></td>
+    <td><strong>Last Name</strong></td>
+    <td><strong>Email Address</strong></td>
+
+    <tr th:each="student:${unvalidatedstudent}">
+        <td th:text="${student.id}"></td>
+        <td th:text="${student.mNumber}"></td>
+        <td th:text="${student.firstName}"></td>
+        <td th:text="${student.lastName}"></td>
+        <td th:text="${student.email}"></td>
+
+        <td>
+            <a th:href="@{/teacher/delete/{courseId}/{studentId}(courseId=${course.id} ,studentId=${student.id})}">delete</a>
+
+        </td>
+        <td>
+            <a th:href="@{/teacher/update/{courseId}/{studentId}(courseId=${course.id} ,studentId=${student.id})}">Update</a>
+        </td>
+
+    </tr>
+</table>
+
+
+    <br/>
+    <br/>
+    <br/>
+
+
+    <h4>Chose an option to search student:</h4>
+    <form th:action="@{/teacher/searchstudent/{courseId}(courseId=${course.id})}">
+        <select name="searchBy">
+            <option value="all">Search by Complete info</option>
+            <option value="first">First Name only</option>
+            <option value="last">Last Name only</option>
+            <option value="email">Email only</option>
+            <option value="fandl">First Name and Last Name</option>
+        </select>
+        <p>
+            <input name="fname" type="text" required placeholder="FirstName"/>
+            <input name="lname" type="text" required placeholder="LastName"/>
+            <input name="email" type="text" required placeholder="Email"/>
+            <input type="submit" value="Search"/>
+        </p>
+
+    </form>
+
+    <!--<h4>Search result (Matching students)</h4>-->
+
+    <!--<div  th:if="${searchstudent.isEmpty()}">-->
+        <!--No matching results found-->
+    <!--</div>-->
+
+    <!--<div  th:if="${!searchstudent.isEmpty()}">-->
+        <!--<table>-->
+
+        <!--<thead>-->
+        <!--<tr>-->
+
+        <!--<td><strong>ID</strong></td>-->
+        <!--<td><strong>M-Number</strong></td>-->
+        <!--<td><strong>First Name</strong></td>-->
+        <!--<td><strong>Last Name</strong></td>-->
+        <!--<td><strong>Email Address</strong></td>-->
+        <!--</tr>-->
+        <!--</thead>-->
+
+        <!--<tbody>-->
+        <!--<tr th:each="student:${searchstudent}">-->
+            <!--<td th:text="${student.id}"></td>-->
+            <!--<td th:text="${student.mNumber}"></td>-->
+            <!--<td th:text="${student.firstName}"></td>-->
+            <!--<td th:text="${student.lastName}"></td>-->
+            <!--<td th:text="${student.email}"></td>-->
+        <!--</tr>-->
+        <!--</tbody>-->
+        <!--</table>-->
+
+
+    <!--</div>-->
+
+
+</body>
+</html>

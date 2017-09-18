@@ -1,5 +1,6 @@
 package com.finalproject.courseevaluation_studentattendance.Controller;
 
+import com.fasterxml.jackson.databind.util.ArrayIterator;
 import com.finalproject.courseevaluation_studentattendance.Model.*;
 import com.finalproject.courseevaluation_studentattendance.Repositories.*;
 import com.finalproject.courseevaluation_studentattendance.Services.CourseService;
@@ -7,12 +8,15 @@ import com.finalproject.courseevaluation_studentattendance.Services.EvaluationSe
 import com.finalproject.courseevaluation_studentattendance.Services.PersonService;
 import com.google.common.collect.Lists;
 import it.ozimov.springboot.mail.model.Email;
+import it.ozimov.springboot.mail.model.EmailAttachment;
 import it.ozimov.springboot.mail.model.defaultimpl.DefaultEmail;
+import it.ozimov.springboot.mail.model.defaultimpl.DefaultEmailAttachment;
 import it.ozimov.springboot.mail.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.finalproject.courseevaluation_studentattendance.Model.Course;
 import com.finalproject.courseevaluation_studentattendance.Model.Person;
 import com.finalproject.courseevaluation_studentattendance.Repositories.PersonRepository;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,9 +25,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import javax.mail.internet.InternetAddress;
 import javax.websocket.server.PathParam;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.security.Principal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.SimpleFormatter;
 
@@ -96,6 +102,7 @@ public class TeacherController {
 
         Course currentCourse = courseRepository.findOne(courseId);
         Iterable<Person> studentsofACourse = currentCourse.getStudent();
+        model.addAttribute("ins", currentCourse.getInstructor());
 
 
 
@@ -119,23 +126,17 @@ public class TeacherController {
         model.addAttribute("course", currentCourse);
         model.addAttribute("studentsofACourse", studentsofACourse);
 
-
-
         return "teacherpages/detailsofacourse";
     }
-
 
     @GetMapping("/markattendance/{courseId}")
     public String listAttendanceofaCourse(@PathVariable("courseId") Long courseId, Model model)
     {
 
-
         Course currentCourse = courseRepository.findOne(courseId);
         Iterable<Person> studentsofACourse = currentCourse.getStudent();
 
         Date now= new Date();
-
-
 
         model.addAttribute("now", now);
         model.addAttribute("course", currentCourse);
@@ -205,6 +206,144 @@ public class TeacherController {
         return "teacherpages/displyattforstudentsofacourse";
     }
 
+    //for delete or update M number for the student
+    @GetMapping("/listallstudents/{courseId}")
+    public String updateMnumber(@ModelAttribute ()@PathVariable("courseId") Long courseId, Model model) {
+
+
+        Course currentCourse = courseRepository.findOne(courseId);
+        Iterable<Person> studentsofACourse = currentCourse.getStudent();
+        ArrayList<Person> unvalidatedstudent= new ArrayList<>();
+        ArrayList<Person> validatedstudent= new ArrayList<>();
+
+        //for student that M number is null put them in a unvalidated list
+        for (Person student:studentsofACourse)
+        {
+            if(student.getmNumber().isEmpty())
+            {
+                unvalidatedstudent.add(student);
+            }
+
+            if(!student.getmNumber().isEmpty())
+            {
+                System.out.println("not null====" + student.getmNumber().toString());
+                validatedstudent.add(student);
+            }
+
+        }
+
+        //add an empty search student results
+//        ArrayList<Person> searchStudent= new ArrayList<>();
+//
+//        model.addAttribute("searchstudent", searchStudent);
+
+        model.addAttribute("course", currentCourse);
+        model.addAttribute("unvalidatedstudent", unvalidatedstudent);
+        model.addAttribute("validatedstudent", validatedstudent);
+
+        return "teacherpages/liststudentsofacourse";
+
+    }
+
+
+    @GetMapping("/update/{courseId}/{studentId}")
+    public String updateMnumber(@PathVariable("courseId") Long courseId, @PathVariable("studentId") Long studentId, Model model) {
+
+        Course currentCourse = courseRepository.findOne(courseId);
+        Person currentStudent= personRepository.findOne(studentId);
+        model.addAttribute("student", currentStudent);
+        model.addAttribute("course", currentCourse);
+
+        return "teacherpages/updateMform";
+    }
+
+
+    @PostMapping("/update/{courseId}/{studentId}")
+    public String updateMnumberordeletestudent(@PathVariable("courseId") Long courseId, @PathVariable("studentId") Long studentId, @RequestParam(value="newMId") String newMId, Model model) {
+
+        Course currentCourse = courseRepository.findOne(courseId);
+        Person currentStudent= personRepository.findOne(studentId);
+        currentStudent.setmNumber(newMId);
+        personRepository.save(currentStudent);
+        model.addAttribute("course", currentCourse);
+
+        return "redirect:/teacher/listallstudents/{courseId}";
+    }
+
+
+
+    @RequestMapping("/delete/{courseId}/{studentId}")
+    public String deletestudentwithnoMnumber(@PathVariable("courseId") Long courseId,@PathVariable("studentId") Long studentId, Model model) {
+
+        Course currentCourse = courseRepository.findOne(courseId);
+        Person currentStudent= personRepository.findOne(studentId);
+        currentCourse.removeStudent(currentStudent);
+        personRepository.delete(currentStudent);
+
+        model.addAttribute("course", currentCourse);
+
+        return "redirect:/teacher/listallstudents/{courseId}";
+    }
+
+
+
+    @RequestMapping("/searchstudent/{courseId}")
+    public String findstudents(@PathVariable("courseId") Long courseId, @RequestParam("searchBy") String searchBy, @RequestParam(value ="fname", required=false) String fname,
+                    @RequestParam(value ="lname", required=false) String lname, @RequestParam(value ="email", required=false) String email,
+                    Model model)
+    {
+
+        //have to add course to model in order to show course info and all stduents of that course!
+        Course currentCourse = courseRepository.findOne(courseId);
+        model.addAttribute("course", currentCourse);
+
+        if (searchBy=="all")
+        {
+            model.addAttribute("searchstudent", personRepository.findByFirstNameLikeAndLastNameLikeAndEmailLike(fname,lname,email) );
+            System.out.println("added to model !!");
+            return "teacherpages/studentsearchresult";
+//            return "redirect:/teacher/listallstudents/{courseId}";
+        }
+
+        if (searchBy=="first")
+        {
+            model.addAttribute("searchstudent", personRepository.findByFirstNameLike(fname) );
+//            return "redirect:/teacher/listallstudents/{courseId}";
+            return "teacherpages/studentsearchresult";
+        }
+
+
+        if (searchBy=="last")
+        {
+            model.addAttribute("searchstudent", personRepository.findByLastNameLike(fname) );
+//            return "redirect:/teacher/listallstudents/{courseId}";
+            return "teacherpages/studentsearchresult";
+        }
+
+        if (searchBy=="email")
+        {
+            model.addAttribute("searchstudent", personRepository.findByEmailLike(email) );
+//            return "redirect:/teacher/listallstudents/{courseId}";
+            return "teacherpages/studentsearchresult";
+        }
+
+
+
+        if (searchBy=="fandl")
+        {
+            model.addAttribute("searchstudent", personRepository.findByFirstNameLikeAndLastNameLike(fname, lname) );
+//            return "redirect:/teacher/listallstudents/{courseId}";
+            return "teacherpages/studentsearchresult";
+        }
+
+
+        else {
+
+            model.addAttribute("message", "Erro with the search, try again!");
+//            return "redirect:/teacher/listallstudents/{courseId}";
+            return "teacherpages/studentsearchresult";
+        }
+    }
 
    @GetMapping("/addstudentstocourse/{id}")
    public String getCourse(@PathVariable("id")Long id, Model model)
@@ -234,13 +373,12 @@ public class TeacherController {
        student.setCourseStudent(c);
        personRepository.save(student);
 //       personService.addStudentToCourse(student,c);
+       model.addAttribute("course", c);
        model.addAttribute("newstudent", student);
 //       personService.create(student);
 //      // personRepo.save(person);
        return "teacherpages/confirmstudent";
    }
-
-
 
    //why we need this method? T
    @RequestMapping("/displaystudents")
@@ -266,7 +404,7 @@ public class TeacherController {
 //    }
 
 
-//the method to send email
+    //the method to send email
     //it sends email need to make the body
 
     @Autowired
@@ -277,11 +415,25 @@ public class TeacherController {
                 .to(Lists.newArrayList(new InternetAddress("mymahder@gmail.com","admin")))
                 .subject("Testing Email")
                 .body("We need the attendance in the Email body.")
+                .attachment(getCsvForecastAttachment("Attendance"))
                 .encoding("UTF-8").build();
 //		modelObject.put("recipent", recipent);
         System.out.println("test it");
         emailService.send(email);
     }
+
+    private EmailAttachment getCsvForecastAttachment(String filename) {
+
+        final String testData =
+                "RecordNUm,StudentName,Mnum,Date" +
+                        "\n1,0.9\n2,0.95\n3,1.0";
+        final DefaultEmailAttachment attachment = DefaultEmailAttachment.builder()
+                .attachmentName(filename + ".csv")
+                .attachmentData(testData.getBytes(Charset.forName("UTF-8")))
+                .mediaType(MediaType.TEXT_PLAIN).build();
+        return attachment;
+    }
+
     @GetMapping("/courseend")
     public String emailAtCourseEnd(Model model) throws UnsupportedEncodingException {
         Date now= new Date();

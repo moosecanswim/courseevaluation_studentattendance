@@ -1,10 +1,22 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
+<head lang="en">
+
     <title>New Communication</title>
+
+    <!-- Header -->
+    <div th:replace="base :: header"></div>
+    <!-- /.Header -->
+
 </head>
 <body>
+
+<!--Navigation Admin-->
+<nav th:replace="base :: nav2Admin"></nav>
+<!--/.Navigation Admin-->
+
+
+
 <div class="container">
     <h1>Communication Form</h1>
     <p th:text="'Date today: ' + ${#dates.format(now, 'MMM dd, yyyy')}"></p>
@@ -13,12 +25,14 @@
           th:object="${aCommunication}"
           method="POST">
         <fieldset>
+            <legend>Communication Form</legend>
             <!--//hidden id-->
             <input type="hidden" th:field="*{id}">
             <!--//mNumber input-->
-            M#: <input th:field="*{mNumber}">
-            Phone #: <input th:field="*{phoneNumber}">
-            Email: <input th:field="*{email}">
+            M#: <input th:field="*{mNumber}" placeholder="M-Number">
+            Name: <input th:field="*{name}" placeholder="Contact Name">
+            Phone #: <input th:field="*{phoneNumber}" placeholder="Phone Number ex(xxxyyzzzz)">
+            Email: <input th:field="*{email}" placeholder="Email">
             Course:
             <select th:field="*{courseInterestedCRN}">
                 <option value="">--select a course--</option>
@@ -33,5 +47,13 @@
         </fieldset>
     </form>
 </div>
+
+
+
+
+<!-- Footer -->
+<div th:replace="base :: footer"></div>
+<!-- /.Footer -->
+
 </body>
 </html>
