@@ -13,13 +13,12 @@ public interface CourseRepository extends CrudRepository<Course,Long> {
    Iterable<Course> findByStatusAndCourseNameContains(Boolean status, String courseName);
 
 
+
    Course findByCourseName(String coursenames);
    Course findByCrn(long crn);
 
 
    Course findByStartDate(String startDate);
-
-
 
    Course findAllByCrn(long crn);
    Long findById(long id);

@@ -3,6 +3,7 @@ package com.finalproject.courseevaluation_studentattendance.Controller;
 import com.finalproject.courseevaluation_studentattendance.Model.*;
 import com.finalproject.courseevaluation_studentattendance.Repositories.*;
 import com.finalproject.courseevaluation_studentattendance.Services.CourseService;
+import com.finalproject.courseevaluation_studentattendance.Services.EvaluationService;
 import com.finalproject.courseevaluation_studentattendance.Services.PersonService;
 import com.google.common.collect.Lists;
 import it.ozimov.springboot.mail.model.Email;
@@ -55,6 +56,9 @@ public class TeacherController {
     @Autowired
     EvaluationRepository evaluationRepository;
 
+    @Autowired
+    EvaluationService evaluationService;
+
     @RequestMapping("/home")
 //    public String teacherHome(Principal p, Model model)
 //    {
@@ -84,6 +88,7 @@ public class TeacherController {
     }
 
 
+
     //list course info and all students/mark attendance
     @GetMapping("/detailsofacourse/{id}")
     public String detailsofcourse(@PathVariable("id") Long courseId, Model model)
@@ -91,6 +96,7 @@ public class TeacherController {
 
         Course currentCourse = courseRepository.findOne(courseId);
         Iterable<Person> studentsofACourse = currentCourse.getStudent();
+
 
 
         //move it to new route so it can stamp the time of the time actually submitted
@@ -250,19 +256,15 @@ public class TeacherController {
 //   {
 //
 //   }
-   @GetMapping("/evaluation/{id}")
-    public String getEvaluation(@PathVariable("id")Long id, Model model)
-   {
-       model.addAttribute("neweval", new Evaluation());
-    return "teacherpages/evaluation";
-   }
-   @PostMapping("/evaluation/{id}")
-   public String postEvaluation(@PathVariable("id")Long id,Evaluation evaluation, Model model)
-   {
-       model.addAttribute("neweval", evaluation);
-       evaluationRepository.save(evaluation);
-       return "teacherpages/evaluation";
-   }
+//    @GetMapping("/evaluationspercourse/{id}")
+//    public  String matchEvaluationPerCourse(@PathVariable("id") long id, Model model, Course cr)
+//    {
+//
+//    model.addAttribute("matchevtocr", evaluationService.matchCourseToEvals(cr));
+//    return "teacher/evaluationspercourse";
+//
+//    }
+
 
 //the method to send email
     //it sends email need to make the body
