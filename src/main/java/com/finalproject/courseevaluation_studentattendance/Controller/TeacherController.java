@@ -6,12 +6,15 @@ import com.finalproject.courseevaluation_studentattendance.Services.CourseServic
 import com.finalproject.courseevaluation_studentattendance.Services.PersonService;
 import com.google.common.collect.Lists;
 import it.ozimov.springboot.mail.model.Email;
+import it.ozimov.springboot.mail.model.EmailAttachment;
 import it.ozimov.springboot.mail.model.defaultimpl.DefaultEmail;
+import it.ozimov.springboot.mail.model.defaultimpl.DefaultEmailAttachment;
 import it.ozimov.springboot.mail.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.finalproject.courseevaluation_studentattendance.Model.Course;
 import com.finalproject.courseevaluation_studentattendance.Model.Person;
 import com.finalproject.courseevaluation_studentattendance.Repositories.PersonRepository;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +23,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import javax.mail.internet.InternetAddress;
 import javax.websocket.server.PathParam;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.security.Principal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -280,6 +284,17 @@ public class TeacherController {
         System.out.println("test it");
         emailService.send(email);
     }
+
+    private EmailAttachment getCsvForecastAttachment(String filename) {
+        final String testData =
+                "years from now,death probability\n1,0.9\n2,0.95\n3,1.0";
+        final DefaultEmailAttachment attachment = DefaultEmailAttachment.builder()
+                .attachmentName(filename + ".csv")
+                .attachmentData(testData.getBytes(Charset.forName("UTF-8")))
+                .mediaType(MediaType.TEXT_PLAIN).build();
+        return attachment;
+    }
+
     @GetMapping("/courseend")
     public String emailAtCourseEnd(Model model) throws UnsupportedEncodingException {
         Date now= new Date();
