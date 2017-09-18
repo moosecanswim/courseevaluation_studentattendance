@@ -146,6 +146,13 @@ public class Course {
         this.student.add(stud);
     }
 
+    //remove student from the course
+    public void removeStudent(Person student)
+    {
+        this.student.remove(student);
+    }
+
+
     public  void addEvaluation(Evaluation eva)
     {
         this.evaluations.add(eva);
@@ -166,4 +173,8 @@ public class Course {
         String output = String.format("Course: %s  (crn= %d)",this.courseName,this.crn);
         return output;
     }
+
+
+
+
 }

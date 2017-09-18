@@ -1,8 +1,10 @@
 package com.finalproject.courseevaluation_studentattendance.Controller;
 
+import com.fasterxml.jackson.databind.util.ArrayIterator;
 import com.finalproject.courseevaluation_studentattendance.Model.*;
 import com.finalproject.courseevaluation_studentattendance.Repositories.*;
 import com.finalproject.courseevaluation_studentattendance.Services.CourseService;
+import com.finalproject.courseevaluation_studentattendance.Services.EvaluationService;
 import com.finalproject.courseevaluation_studentattendance.Services.PersonService;
 import com.google.common.collect.Lists;
 import it.ozimov.springboot.mail.model.Email;
@@ -62,6 +64,9 @@ public class TeacherController {
     @Autowired
     EvaluationRepository evaluationRepository;
 
+    @Autowired
+    EvaluationService evaluationService;
+
     @RequestMapping("/home")
 //    public String teacherHome(Principal p, Model model)
 //    {
@@ -91,6 +96,7 @@ public class TeacherController {
     }
 
 
+
     //list course info and all students/mark attendance
     @GetMapping("/detailsofacourse/{id}")
     public String detailsofcourse(@PathVariable("id") Long courseId, Model model)
@@ -99,6 +105,7 @@ public class TeacherController {
         Course currentCourse = courseRepository.findOne(courseId);
         Iterable<Person> studentsofACourse = currentCourse.getStudent();
         model.addAttribute("ins", currentCourse.getInstructor());
+
 
 
         //move it to new route so it can stamp the time of the time actually submitted
@@ -124,18 +131,14 @@ public class TeacherController {
         return "teacherpages/detailsofacourse";
     }
 
-
     @GetMapping("/markattendance/{courseId}")
     public String listAttendanceofaCourse(@PathVariable("courseId") Long courseId, Model model)
     {
-
 
         Course currentCourse = courseRepository.findOne(courseId);
         Iterable<Person> studentsofACourse = currentCourse.getStudent();
 
         Date now= new Date();
-
-
 
         model.addAttribute("now", now);
         model.addAttribute("course", currentCourse);
@@ -207,7 +210,7 @@ public class TeacherController {
 
     //for delete or update M number for the student
     @GetMapping("/listallstudents/{courseId}")
-    public String updateMnumber(@PathVariable("courseId") Long courseId, Model model) {
+    public String updateMnumber(@ModelAttribute ()@PathVariable("courseId") Long courseId, Model model) {
 
 
         Course currentCourse = courseRepository.findOne(courseId);
@@ -231,26 +234,118 @@ public class TeacherController {
 
         }
 
+        //add an empty search student results
+//        ArrayList<Person> searchStudent= new ArrayList<>();
+//
+//        model.addAttribute("searchstudent", searchStudent);
+
+        model.addAttribute("course", currentCourse);
         model.addAttribute("unvalidatedstudent", unvalidatedstudent);
         model.addAttribute("validatedstudent", validatedstudent);
 
-        return "teacherpages/updatemnum";
-
-
+        return "teacherpages/liststudentsofacourse";
 
     }
 
-    @PostMapping("/mforallstudents/{courseId}")
-    public String updateMnumberordeletestudent(@PathVariable("courseId") Long courseId, Model model) {
+
+    @GetMapping("/update/{courseId}/{studentId}")
+    public String updateMnumber(@PathVariable("courseId") Long courseId, @PathVariable("studentId") Long studentId, Model model) {
 
         Course currentCourse = courseRepository.findOne(courseId);
-        Iterable<Person> studentsofACourse = currentCourse.getStudent();
-        model.addAttribute("allstudent", studentsofACourse);
+        Person currentStudent= personRepository.findOne(studentId);
+        model.addAttribute("student", currentStudent);
+        model.addAttribute("course", currentCourse);
 
-        return "redirect:/teacherpages/listallstudents/{courseId}";
-
+        return "teacherpages/updateMform";
     }
 
+
+    @PostMapping("/update/{courseId}/{studentId}")
+    public String updateMnumberordeletestudent(@PathVariable("courseId") Long courseId, @PathVariable("studentId") Long studentId, @RequestParam(value="newMId") String newMId, Model model) {
+
+        Course currentCourse = courseRepository.findOne(courseId);
+        Person currentStudent= personRepository.findOne(studentId);
+        currentStudent.setmNumber(newMId);
+        personRepository.save(currentStudent);
+        model.addAttribute("course", currentCourse);
+
+        return "redirect:/teacher/listallstudents/{courseId}";
+    }
+
+
+
+    @RequestMapping("/delete/{courseId}/{studentId}")
+    public String deletestudentwithnoMnumber(@PathVariable("courseId") Long courseId,@PathVariable("studentId") Long studentId, Model model) {
+
+        Course currentCourse = courseRepository.findOne(courseId);
+        Person currentStudent= personRepository.findOne(studentId);
+        currentCourse.removeStudent(currentStudent);
+        personRepository.delete(currentStudent);
+
+        model.addAttribute("course", currentCourse);
+
+        return "redirect:/teacher/listallstudents/{courseId}";
+    }
+
+
+
+    @RequestMapping("/searchstudent/{courseId}")
+    public String findstudents(@PathVariable("courseId") Long courseId, @RequestParam("searchBy") String searchBy, @RequestParam(value ="fname", required=false) String fname,
+                    @RequestParam(value ="lname", required=false) String lname, @RequestParam(value ="email", required=false) String email,
+                    Model model)
+    {
+
+        //have to add course to model in order to show course info and all stduents of that course!
+        Course currentCourse = courseRepository.findOne(courseId);
+        model.addAttribute("course", currentCourse);
+
+        if (searchBy=="all")
+        {
+            model.addAttribute("searchstudent", personRepository.findByFirstNameLikeAndLastNameLikeAndEmailLike(fname,lname,email) );
+            System.out.println("added to model !!");
+            return "teacherpages/studentsearchresult";
+//            return "redirect:/teacher/listallstudents/{courseId}";
+        }
+
+        if (searchBy=="first")
+        {
+            model.addAttribute("searchstudent", personRepository.findByFirstNameLike(fname) );
+//            return "redirect:/teacher/listallstudents/{courseId}";
+            return "teacherpages/studentsearchresult";
+        }
+
+
+        if (searchBy=="last")
+        {
+            model.addAttribute("searchstudent", personRepository.findByLastNameLike(fname) );
+//            return "redirect:/teacher/listallstudents/{courseId}";
+            return "teacherpages/studentsearchresult";
+        }
+
+        if (searchBy=="email")
+        {
+            model.addAttribute("searchstudent", personRepository.findByEmailLike(email) );
+//            return "redirect:/teacher/listallstudents/{courseId}";
+            return "teacherpages/studentsearchresult";
+        }
+
+
+
+        if (searchBy=="fandl")
+        {
+            model.addAttribute("searchstudent", personRepository.findByFirstNameLikeAndLastNameLike(fname, lname) );
+//            return "redirect:/teacher/listallstudents/{courseId}";
+            return "teacherpages/studentsearchresult";
+        }
+
+
+        else {
+
+            model.addAttribute("message", "Erro with the search, try again!");
+//            return "redirect:/teacher/listallstudents/{courseId}";
+            return "teacherpages/studentsearchresult";
+        }
+    }
 
    @GetMapping("/addstudentstocourse/{id}")
    public String getCourse(@PathVariable("id")Long id, Model model)
@@ -301,19 +396,15 @@ public class TeacherController {
 //   {
 //
 //   }
-   @GetMapping("/evaluation/{id}")
-    public String getEvaluation(@PathVariable("id")Long id, Model model)
-   {
-       model.addAttribute("neweval", new Evaluation());
-    return "teacherpages/evaluation";
-   }
-   @PostMapping("/evaluation/{id}")
-   public String postEvaluation(@PathVariable("id")Long id,Evaluation evaluation, Model model)
-   {
-       model.addAttribute("neweval", evaluation);
-       evaluationRepository.save(evaluation);
-       return "teacherpages/evaluation";
-   }
+//    @GetMapping("/evaluationspercourse/{id}")
+//    public  String matchEvaluationPerCourse(@PathVariable("id") long id, Model model, Course cr)
+//    {
+//
+//    model.addAttribute("matchevtocr", evaluationService.matchCourseToEvals(cr));
+//    return "teacher/evaluationspercourse";
+//
+//    }
+
 
     //the method to send email
     //it sends email need to make the body

@@ -1,11 +1,13 @@
 package com.finalproject.courseevaluation_studentattendance.Services;
 
 import com.finalproject.courseevaluation_studentattendance.Model.Course;
+import com.finalproject.courseevaluation_studentattendance.Model.Evaluation;
 import com.finalproject.courseevaluation_studentattendance.Model.Person;
 import com.finalproject.courseevaluation_studentattendance.Repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -85,9 +87,13 @@ public class CourseService {
     public Iterable<Course> findByCRNAndStatus(long crn,Boolean status){
         return courseRepo.findByCrnAndStatus(crn,status);
     }
+    public Iterable<Course> findByCourseName(String name){
+        return courseRepo.findAllByCourseNameLike(name);
+    }
     public Iterable<Course> findByCourseNameAndStatus(String name,Boolean status){
         return courseRepo.findByStatusAndCourseNameContains(status, name);
     }
+
 
 
 

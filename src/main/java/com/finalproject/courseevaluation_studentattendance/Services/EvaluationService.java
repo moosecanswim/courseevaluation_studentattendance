@@ -4,6 +4,7 @@ import com.finalproject.courseevaluation_studentattendance.Model.Course;
 import com.finalproject.courseevaluation_studentattendance.Model.Evaluation;
 import com.finalproject.courseevaluation_studentattendance.Model.Person;
 import com.finalproject.courseevaluation_studentattendance.Repositories.*;
+import com.sun.org.apache.bcel.internal.generic.NEW;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,29 +28,54 @@ public class EvaluationService {
     }
 
 //// method adds crn of the course to the evaluation repository
-  public void addEvalToCourse(Course cr, Evaluation eval)
+  public void addEvalToCourse(Evaluation eval, Course cr)
   {
-      eval.setCourseEvaluation(cr);
+    Course eCourse = courseRepo.findOne(cr.getId());
+    if(eCourse==null){
+        System.out.println("Course Does not exist in the database so you may not add an evaluation to it");
+    }
+    else{
+        eCourse.addEvaluation(eval);
+        eval.setCourseEvaluation(eCourse);
+    }
+    //
      //eval.setId(cr.getId());
 
-     evaluationRepo.save(eval);
-  }
-//
-//  // method adds start date of the course to the evaluation repository
-//    public void addStartDateToEval(Course cr, Evaluation eval)
-//    {
-//        cr.getStartDate();
-//        eval.setCourseEvaluation(cr);
-//        evaluationRepo.save(eval);
-//    }
-//
-//    public void saveEvalToCourse(Evaluation ev, Course cr)
-//    {
-//        //cr.getId();
-//        ev.setCourseEvaluation(courseRepo.findOne(cr.getId()));
-//        evaluationRepo.save(ev);
-//    }
+      //System.out.println(cr.getId());
+     // System.out.println(eval.getId());
 
+
+      //
+
+
+//      cr.addEvaluation(eval);
+//
+//        eval.setCourseEvaluation(cr);
+
+
+
+
+    //  eval.setId(crs.getId());
+
+     //
+     // eval.setId(cr.getId());
+
+
+
+    evaluationRepo.save(eval);
+
+    System.out.println(cr.getId());
+
+    System.out.println(eval.getId());
+  }
+
+  public Iterable<Evaluation> matchCourseToEvals(Course cr)
+  {
+      Course course = courseRepo.findOne(cr.getId());
+      course.getEvaluations();
+      return evaluationRepo.findEvaluationsByCourseEvaluation_Id(course.getId());
+
+  }
 
     public Evaluation SaveEntry(Evaluation aValuation)
     {

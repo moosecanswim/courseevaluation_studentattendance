@@ -1,14 +1,25 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Title</title>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title>All Students</title>
+
+    <!-- Header -->
+    <div th:replace="base :: header"></div>
+    <!-- /.Header -->
+
 </head>
 <body>
 
-<p>List of All Students in Montgomery College: </p>
+<!--Navigation Admin-->
+<nav th:replace="base :: nav2Admin"></nav>
+<!--/.Navigation Admin-->
 
-<table class="table" border="1">
+
+
+<h1>List of All Students in Montgomery College: </h1>
+
+<table class="table table-striped" border="1">
 
     <td><strong>ID</strong></td>
     <td><strong>M Number</strong></td>
@@ -20,7 +31,7 @@
     <td><strong>Start Date</strong></td>
     <td><strong>Active</strong></td>
 
-    <!--iterate through all the students for this course-->
+    <!--iterate through all the students-->
     <tr th:each="all:${listOfAllStudents}">
         <td th:text="${all.id}"></td>
         <td th:text="${all.mNumber}"></td>
@@ -39,6 +50,12 @@
 <div>
     <a href="/admin/home">Admin Home</a>
 </div>
+
+
+
+<!-- Footer -->
+<div th:replace="base :: footer"></div>
+<!-- /.Footer -->
 
 </body>
 </html>

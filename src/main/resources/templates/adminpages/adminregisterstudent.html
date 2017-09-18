@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title>Register Student</title>
+
+    <!-- Header -->
+    <div th:replace="base :: header"></div>
+    <!-- /.Header -->
+
 </head>
 <body>
+
+<!--Navigation Admin-->
+<nav th:replace="base :: nav2Admin"></nav>
+<!--/.Navigation Admin-->
+
 <form action="#" th:action="@{/admin/registerstudent}" th:object="${newstudent}" method="post" >
     <input type="text" th:field="*{courseStudent.id}" />
     <input type="hidden" th:field="*{id}" />
@@ -19,5 +29,12 @@
     <p><input type="submit"  value="Submit" class="btn btn-lg btn-default btn-block" /></p>
 
 </form>
+
+
+
+<!-- Footer -->
+<div th:replace="base :: footer"></div>
+<!-- /.Footer -->
+
 </body>
 </html>
