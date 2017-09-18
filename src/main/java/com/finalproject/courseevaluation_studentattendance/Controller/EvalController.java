@@ -37,13 +37,13 @@ public class EvalController {
     }
 
 //
-    @GetMapping("/evaluationentry/{id}")
+    @GetMapping("/evaluationentry/{id}")   // Course id
     public String getEvaluation(@PathVariable("id") long id,  Model model, Course cr) {
 
         Evaluation ev =  new Evaluation();
         ev.setCourseEvaluation(courseRepository.findOne(id));
 
-        System.out.println(id);
+        System.out.println("Course ID for this Eval: " + id);
         model.addAttribute("neweval", ev);
 
         return "evalpages/evaluationentry";
@@ -54,8 +54,9 @@ public class EvalController {
     @PostMapping("/evaluationentry")
     public String entrypost(@ModelAttribute("neweval") Evaluation eval, Model model, Course cr)
     {
+        model.addAttribute("neweval", eval);
 
-        Evaluation evs =  new Evaluation();
+       // Evaluation evs =  new Evaluation();
 
         evaluationService.addEvalToCourse(cr,eval);
 
