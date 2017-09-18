@@ -10,6 +10,11 @@
 
 </head>
 <body>
+
+<!--Navigation Admin-->
+<nav th:replace="base :: nav2Admin"></nav>
+<!--/.Navigation Admin-->
+
 <form action="#" th:action="@{/admin/registerstudent}" th:object="${newstudent}" method="post" >
     <input type="text" th:field="*{courseStudent.id}" />
     <input type="hidden" th:field="*{id}" />
@@ -24,5 +29,12 @@
     <p><input type="submit"  value="Submit" class="btn btn-lg btn-default btn-block" /></p>
 
 </form>
+
+
+
+<!-- Footer -->
+<div th:replace="base :: footer"></div>
+<!-- /.Footer -->
+
 </body>
 </html>

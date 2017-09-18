@@ -12,6 +12,12 @@
 
 <body id="page-top">
 
+<!--Navigation Admin-->
+<nav th:replace="base :: nav2Admin"></nav>
+<!--/.Navigation Admin-->
+
+
+
 <header>
     <div>
         <form action="#" th:action="@{/admin/addinstructortocourse/{crsid}(crsid=${course.id})}" th:object="${aInstructor}" method="post">
@@ -26,8 +32,12 @@
 </header>
 <!-- Bootstrap core JavaScript -->
 
-</div>
+
+
+
+<!-- Footer -->
+<div th:replace="base :: footer"></div>
+<!-- /.Footer -->
 
 </body>
-
 </html>

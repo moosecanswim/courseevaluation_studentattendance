@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
 
-    <title>Edit Communication</title>
+    <title>Teacher Courses</title>
 
     <!-- Header -->
     <div th:replace="base :: header"></div>
@@ -10,6 +10,13 @@
 
 </head>
 <body>
+
+<!--Navigation Admin-->
+<nav th:replace="base :: nav2Admin"></nav>
+<!--/.Navigation Admin-->
+
+
+
 <h1>List of All Courses for this Teacher</h1>
 
 
@@ -60,6 +67,11 @@
 <div><a href="/admin/home">Admin Home</a></div>
 
 
+
+
+<!-- Footer -->
+<div th:replace="base :: footer"></div>
+<!-- /.Footer -->
 
 </body>
 </html>

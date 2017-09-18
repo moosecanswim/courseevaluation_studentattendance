@@ -11,6 +11,11 @@
 </head>
 <body>
 
+<!--Navigation Admin-->
+<nav th:replace="base :: nav2Admin"></nav>
+<!--/.Navigation Admin-->
+
+
     <h2 th:inline="text">Course information for: [[${course.courseName}]] CRN [[${course.crn}]]</h2>
 
     <p th:text="'Course ID: ' + ${course.id}"/>
@@ -85,6 +90,10 @@
     <!--Link to the Admin Home page-->
     <div><a href="/admin/home">Admin Home</a></div>
 
+
+<!-- Footer -->
+<div th:replace="base :: footer"></div>
+<!-- /.Footer -->
 
 </body>
 </html>

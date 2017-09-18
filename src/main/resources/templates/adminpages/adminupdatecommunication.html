@@ -10,6 +10,11 @@
 
 </head>
 <body>
+
+<!--Navigation Admin-->
+<nav th:replace="base :: nav2Admin"></nav>
+<!--/.Navigation Admin-->
+
 <div class="container">
     <h1>Update Communication Form</h1>
     <p th:text="'Date today: ' + ${#dates.format(now, 'MMM dd, yyyy')}"></p>
@@ -40,4 +45,10 @@
     </form>
 </div>
 </body>
+
+
+<!-- Footer -->
+<div th:replace="base :: footer"></div>
+<!-- /.Footer -->
+
 </html>
