@@ -294,6 +294,16 @@ public class AdminController {
 
         return "adminpages/admineditpeople";
     }
+    @PostMapping("/processupdate")
+    public String processEditPerson(@Valid Person person, BindingResult result){
+        if (result.hasErrors()){
+            return "adminpages/admineditpeople";
+        }
+        else{
+            personService.update(person);
+        }
+        return "redirect:/admin/viewallpeople";
+    }
 
     @PostMapping("/updateperson")
     public String savePerson(@ModelAttribute("person") Person person)
