@@ -13,12 +13,14 @@
           th:object="${aCommunication}"
           method="POST">
         <fieldset>
+            <legend>Communication Form</legend>
             <!--//hidden id-->
             <input type="hidden" th:field="*{id}">
             <!--//mNumber input-->
-            M#: <input th:field="*{mNumber}">
-            Phone #: <input th:field="*{phoneNumber}">
-            Email: <input th:field="*{email}">
+            M#: <input th:field="*{mNumber}" placeholder="M-Number">
+            Name: <input th:field="*{name}" placeholder="Contact Name">
+            Phone #: <input th:field="*{phoneNumber}" placeholder="Phone Number ex(xxxyyzzzz)">
+            Email: <input th:field="*{email}" placeholder="Email">
             Course:
             <select th:field="*{courseInterestedCRN}">
                 <option value="">--select a course--</option>

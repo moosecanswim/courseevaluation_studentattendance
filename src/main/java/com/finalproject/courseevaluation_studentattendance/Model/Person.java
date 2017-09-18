@@ -27,7 +27,18 @@ public class Person {
     private Date startDate;
     private Boolean active;//true if user is active false if user has been archived
 
-  @ManyToMany(fetch = FetchType.EAGER)
+    // true(active for update) if the student doesn't have an m number, false (inactive) if the student has a M number already
+    private Boolean status;
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
+
+    @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(joinColumns = @JoinColumn(name="person_id"),
    inverseJoinColumns=@JoinColumn(name="role_id"))
   private Set<PersonRole>personRoles;

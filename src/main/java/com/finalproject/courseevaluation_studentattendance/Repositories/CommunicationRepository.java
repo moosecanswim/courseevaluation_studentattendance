@@ -33,11 +33,16 @@ public interface CommunicationRepository extends CrudRepository<Communication,Lo
 
 
     //course Crn
-    Set<Communication> findByCourseInterestedCRNContainsAndCallStatus(long crn,Boolean status);
-    Long countByCourseInterestedCRNContainsAndCallStatus(long crn,Boolean status);
+    Set<Communication> findByCourseInterestedCRNAndCallStatus(long crn,Boolean status);
+    Long countByCourseInterestedCRNAndCallStatus(long crn,Boolean status);
 
     //course name
-    Set<Communication> findByCourseInterestedContainsAndCallStatus(String courseName,Boolean status);
-    Long countByCourseInterestedContainsAndCallStatus(String courseName,Boolean status);
+    Set<Communication> findByCourseInterestedAndCallStatus(String courseName,Boolean status);
+    Long countByCourseInterestedAndCallStatus(String courseName,Boolean status);
 
+    //name
+    Iterable<Communication> findByNameLikeIgnoreCaseAndCallStatusTrue(String name);
+    Iterable<Communication> findByNameLikeIgnoreCaseAndCallStatusFalse(String name);
+    Long countByNameLikeIgnoreCaseAndCallStatusTrue(String name);
+    Long countByNameLikeIgnoreCaseAndCallStatusFalse(String name);
 }
