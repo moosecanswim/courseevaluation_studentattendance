@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8"/>
+    <title>Admin Home</title>
+</head>
+<body>
+<h1>List of All Classes for this Teacher</h1>
+
+
+<div th:text="'Instructor Name: ' + ${teacher?.firstName} + ' ' +${teacher?.lastName}"></div>
+
+
+<p>List of Courses</p>
+
+<table class="table table-striped" border="1">
+    <tr>
+        <td><b>ID</b></td>
+        <td><b>CRN</b></td>
+        <td><b>Course Name</b></td>
+        <td><b>Start Date</b></td>
+        <td><b>End Date</b></td>
+        <td><b>Class Available</b></td>
+        <td><b>View Evaluations</p></b></td>
+    </tr>
+
+
+    <!--iterate through all the existed courses-->
+    <th:block th:each="course:${listAllCoursesForThisTeacher}">
+        <tr>
+            <td><a th:text="${course.id}"></a></td>
+            <td><a th:text="${course.crn}"></a></td>
+            <td><a th:href="@{/admin/admincoursedetails/{id}(id=${course.id})}"  th:inline="text">[[${course.courseName}]]</a></td>
+            <td><a th:text="${course.startDate}"></a></td>
+            <td><a th:text="${course.endDate}"></a></td>
+            <td><a th:text="${course.status}"></a></td>
+            <td>
+                <a th:href="@{/admin/viewcourseevaluations/{id}(id=${course.id})}">View Evaluations</a>
+            </td>
+        </tr>
+    </th:block>
+</table>
+
+
+
+<p>any notifications ("email" from the submit attendance from the teacher)</p>
+
+
+<!--Create a new person-->
+<!--<div><a href="/admin/addperson">Create New Person</a></div>-->
+
+<!--Link to view the list of all people-->
+<div><a href="/admin/viewallpeople">View All People</a></div>
+<!--Link to view the list of all teachers-->
+<div><a href="/admin/viewallteachers">View All Teachers</a></div>
+<!--Link to view the list of all students-->
+<div><a href="/admin/viewallstudents">View All Students</a></div>
+
+
+
+</body>
+</html>

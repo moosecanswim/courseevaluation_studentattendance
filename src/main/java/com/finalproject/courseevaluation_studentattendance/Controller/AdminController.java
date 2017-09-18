@@ -245,7 +245,7 @@ public class AdminController {
         courseService.removeStudentFromCourse(course, student);
 
         String courseIDString = Long.toString(courseid);
-        return "rdirect:/admin/admincoursedatails/" + courseIDString;
+        return "redirect:/admin/admincoursedetails/" + courseIDString;
     }
 
 
@@ -294,6 +294,32 @@ public class AdminController {
 
         return "adminpages/admineditpeople";
     }
+
+
+    @PostMapping("/updateperson")
+    public String savePerson(@ModelAttribute("person") Person person)
+    {
+
+        personRepo.save(person);
+        return "redirect:/admin/home/";
+    }
+
+
+    // ===   See the List of this Teacher Courses
+    @GetMapping("/viewteachercourses/{id}") // teacher id
+    public String seeAllTeachers(@PathVariable("id") long id, Model model)
+    {
+
+        Person teacher = personService.findById(id);
+        model.addAttribute("teacher", teacher);
+
+        Iterable<Course> courses=teacher.getCourseInstructor();
+
+        model.addAttribute("listAllCoursesForThisTeacher", courses);
+        return "adminpages/adminviewoneteachercourses";
+    }
+
+
 
 
 
@@ -429,6 +455,9 @@ public class AdminController {
 //        personRepo.save(person);
 //        return"redirect:/admin/home";
 //    }
+
+
+
 
 
 
