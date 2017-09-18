@@ -83,6 +83,43 @@
     </div>
 </div>
 
+
+<div th:fragment="nav2">
+<nav class="navbar navbar-inverse fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">ResumeDB</a>
+        </div>
+        <ul class="nav navbar-nav">
+
+            <li class="active"><a href="/">Home</a></li>
+
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">AddToProfile<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+
+                    <li><a href="/addeducationtoperson">Add Education</a></li>
+                    <li><a href="/addexptoperson">Add Experience</a></li>
+                    <li><a href="/addskilltoperson">Add Skill</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="/displayoneprofile">Display Profile</a></li>
+                </ul>
+            </li>
+
+            <li><a href="/listnames">AllResumes</a></li>
+
+            <li><a href="/listallposting">AllJobPost</a></li>
+
+            <li><a href="/search">Search</a></li>
+
+            <li style="float: right"><a href="/logout">Logout</a></li>
+
+        </ul>
+    </div>
+</nav>
+</div>
+
+
 <div th:fragment="footer">
     <div class="container">
         <footer align="left">
