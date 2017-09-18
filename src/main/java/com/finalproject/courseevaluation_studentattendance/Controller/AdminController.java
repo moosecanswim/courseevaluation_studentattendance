@@ -395,6 +395,12 @@ public class AdminController {
                 model.addAttribute("communicationListAvalible",communicationService.showByStatus(true));
                 model.addAttribute("communicationListUnavalible",communicationService.showByStatus(false));
                 break;
+            case"name":
+                //search by name
+                System.out.println("adminController- searchCommunication: search by contact name");
+                model.addAttribute("communicationListAvalible",communicationService.findByNameAndAvalible(searchThing));
+                model.addAttribute("communicationListUnavalible",communicationService.findByNameAndUnavalible(searchThing));
+                break;
             case "courseCrn":
                 //search by course crn (check to make sure search thing is an long input
                 System.out.println("Search course crn");

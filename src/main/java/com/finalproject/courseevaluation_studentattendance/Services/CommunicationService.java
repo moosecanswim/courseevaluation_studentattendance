@@ -73,21 +73,33 @@ public class CommunicationService {
     public Iterable<Communication> showByStatus(Boolean status){
         return communicationRepository.findAllByCallStatus(status);
     }
+    //mNumber
     public Iterable<Communication> findByMNumberAndStatus(String mNumber, Boolean status){
         return communicationRepository.findByMNumberAndCallStatus(mNumber,status);
     }
     public Iterable<Communication> findByEmailAndStatus(String email, Boolean status){
         return communicationRepository.findByEmailAndCallStatus(email,status);
     }
+    //phone number
     public Iterable<Communication> findByPhoneNumberAndStatus(String phoneNumber, Boolean status){
         return communicationRepository.findByPhoneNumberContainsAndCallStatus(phoneNumber,status);
     }
     public Iterable<Communication> findByCrnAndStatus(Long crn, Boolean status){
-        return communicationRepository.findByCourseInterestedCRNContainsAndCallStatus(crn,status);
+        return communicationRepository.findByCourseInterestedCRNAndCallStatus(crn,status);
     }
+
+    //name
     public Iterable<Communication> findByCourseNameAndStatus(String courseName, Boolean status){
-        return communicationRepository.findByCourseInterestedContainsAndCallStatus(courseName,status);
+        return communicationRepository.findByCourseInterestedAndCallStatus(courseName,status);
     }
-
-
+    public Iterable<Communication> findByNameAndAvalible(String name){
+        long count = communicationRepository.countByNameLikeIgnoreCaseAndCallStatusTrue(name);
+        System.out.println("commService: there are " + count + " occurances of " +name +" true");
+        return communicationRepository.findByNameLikeIgnoreCaseAndCallStatusTrue(name);
+    }
+    public Iterable<Communication> findByNameAndUnavalible(String name) {
+        long count = communicationRepository.countByNameLikeIgnoreCaseAndCallStatusFalse(name);
+        System.out.println("commService: there are " + count + " occurances of " +name +"false");
+        return communicationRepository.findByNameLikeIgnoreCaseAndCallStatusFalse(name);
+    }
 }
