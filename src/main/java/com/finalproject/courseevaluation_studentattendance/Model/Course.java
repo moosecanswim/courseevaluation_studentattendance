@@ -158,4 +158,9 @@ public class Course {
     public void setCommunications(Set<Communication> communications) {
         this.communications = communications;
     }
+    @Override
+    public String toString(){
+        String output = String.format("Course: %s  (crn= %d)",this.courseName,this.crn);
+        return output;
+    }
 }

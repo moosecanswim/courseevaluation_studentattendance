@@ -291,6 +291,11 @@ public class AdminController {
 
         return "adminpages/admineditpeople";
     }
+
+
+
+    //COMMUNICATIONS
+
     @RequestMapping("/communicationhome")
     public String communicationHome(Model model){
         model.addAttribute("communicationListAvalible",communicationService.showAllAvalible());
@@ -304,15 +309,27 @@ public class AdminController {
         model.addAttribute("courseList",courseService.findAll());
         return "/adminpages/adminaddcommunication";
     }
-    @PostMapping("/addcommunication")
+    @PostMapping("/processcommunication")
     public String processCommunication(@Valid Communication aCom, BindingResult result){
         if(result.hasErrors()){
             System.out.println("Communication invalid- did not add");
             return "/adminpages/adminaddcommunication";
         }else{
+            aCom.setCourseInterested(courseService.findByCRN(Long.valueOf(aCom.getCourseInterestedCRN())));
             communicationService.create(aCom);
             return "redirect:/admin/communicationhome";
         }
+    }
+
+    @GetMapping("/updatecommunication/{id}")
+    public String updateCommunication(@PathVariable("id") long communicationId,Model model){
+        model.addAttribute("aCommunication",communicationService.findOne(communicationId));
+        return "/adminpages/adminaddcommunication";
+    }
+    @GetMapping("/togglecommunication/{id}")
+    public String toggleCommunication(@PathVariable("id") long communicationId){
+        communicationService.toggleCommunicationStatus(communicationService.findOne(communicationId));
+        return "redirect:/admin/communicationhome";
     }
 
 

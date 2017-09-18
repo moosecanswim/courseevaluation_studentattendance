@@ -17,6 +17,7 @@ public class Communication {
     @ManyToOne
     @JoinColumn(name="course_id")
     private Course courseInterested;
+    private String courseInterestedCRN;
     private String callDetails;
     private Boolean callStatus;
     //private Date createdOn;
@@ -90,5 +91,14 @@ public class Communication {
 
     public void setCallStatus(Boolean callStatus) {
         this.callStatus = callStatus;
+    }
+
+    public String getCourseInterestedCRN() {
+        return courseInterestedCRN;
+    }
+
+    public void setCourseInterestedCRN(String courseInterestedCRN) {
+        this.courseInterestedCRN = courseInterestedCRN;
+        //set the course interested here?
     }
 }

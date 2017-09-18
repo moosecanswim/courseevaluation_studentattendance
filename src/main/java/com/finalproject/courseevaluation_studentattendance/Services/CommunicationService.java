@@ -37,7 +37,11 @@ public class CommunicationService {
             System.out.println("Adding " + existCom.toString());
             communicationRepository.save(existCom);
         }
-    }public Iterable<Communication> showAll(){
+    }
+    public Communication findOne(long communicationId){
+        return communicationRepository.findOne(communicationId);
+    }
+    public Iterable<Communication> showAll(){
         return communicationRepository.findAll();
     }
     public Iterable<Communication> showAllAvalible(){
