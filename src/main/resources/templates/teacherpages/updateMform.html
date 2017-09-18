@@ -10,6 +10,7 @@
     <table class="table">
 
         <thead>
+        <tr>
         <td><strong>ID</strong></td>
         <td><strong>M-Number</strong></td>
         <td><strong>First Name</strong></td>
@@ -17,9 +18,11 @@
         <td><strong>User Name</strong></td>
         <td><strong>Password</strong></td>
         <td><strong>Email Address</strong></td>
+        </tr>
         </thead>
 
         <tbody>
+        <tr>
             <td th:text="${student.id}"></td>
             <td><input type="text" name="newMId"/></td>
             <td th:text="${student.firstName}"></td>
@@ -31,6 +34,7 @@
             <td>
                 <input type="submit"  value="update M number">
             </td>
+        </tr>
         </tbody>
 
 

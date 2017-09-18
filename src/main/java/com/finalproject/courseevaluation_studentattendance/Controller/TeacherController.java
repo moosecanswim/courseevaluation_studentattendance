@@ -1,5 +1,6 @@
 package com.finalproject.courseevaluation_studentattendance.Controller;
 
+import com.fasterxml.jackson.databind.util.ArrayIterator;
 import com.finalproject.courseevaluation_studentattendance.Model.*;
 import com.finalproject.courseevaluation_studentattendance.Repositories.*;
 import com.finalproject.courseevaluation_studentattendance.Services.CourseService;
@@ -201,7 +202,7 @@ public class TeacherController {
 
     //for delete or update M number for the student
     @GetMapping("/listallstudents/{courseId}")
-    public String updateMnumber(@PathVariable("courseId") Long courseId, Model model) {
+    public String updateMnumber(@ModelAttribute ()@PathVariable("courseId") Long courseId, Model model) {
 
 
         Course currentCourse = courseRepository.findOne(courseId);
@@ -225,11 +226,16 @@ public class TeacherController {
 
         }
 
+        //add an empty search student results
+//        ArrayList<Person> searchStudent= new ArrayList<>();
+//
+//        model.addAttribute("searchstudent", searchStudent);
+
         model.addAttribute("course", currentCourse);
         model.addAttribute("unvalidatedstudent", unvalidatedstudent);
         model.addAttribute("validatedstudent", validatedstudent);
 
-        return "teacherpages/updatemnum";
+        return "teacherpages/liststudentsofacourse";
 
     }
 
@@ -258,6 +264,8 @@ public class TeacherController {
         return "redirect:/teacher/listallstudents/{courseId}";
     }
 
+
+
     @RequestMapping("/delete/{courseId}/{studentId}")
     public String deletestudentwithnoMnumber(@PathVariable("courseId") Long courseId,@PathVariable("studentId") Long studentId, Model model) {
 
@@ -269,6 +277,66 @@ public class TeacherController {
         model.addAttribute("course", currentCourse);
 
         return "redirect:/teacher/listallstudents/{courseId}";
+    }
+
+
+
+    @RequestMapping("/searchstudent/{courseId}")
+    public String findstudents(@PathVariable("courseId") Long courseId, @RequestParam("searchBy") String searchBy, @RequestParam(value ="fname", required=false) String fname,
+                    @RequestParam(value ="lname", required=false) String lname, @RequestParam(value ="email", required=false) String email,
+                    Model model)
+    {
+
+        //have to add course to model in order to show course info and all stduents of that course!
+        Course currentCourse = courseRepository.findOne(courseId);
+        model.addAttribute("course", currentCourse);
+
+        if (searchBy=="all")
+        {
+            model.addAttribute("searchstudent", personRepository.findByFirstNameLikeAndLastNameLikeAndEmailLike(fname,lname,email) );
+            System.out.println("added to model !!");
+            return "teacherpages/studentsearchresult";
+//            return "redirect:/teacher/listallstudents/{courseId}";
+        }
+
+        if (searchBy=="first")
+        {
+            model.addAttribute("searchstudent", personRepository.findByFirstNameLike(fname) );
+//            return "redirect:/teacher/listallstudents/{courseId}";
+            return "teacherpages/studentsearchresult";
+        }
+
+
+        if (searchBy=="last")
+        {
+            model.addAttribute("searchstudent", personRepository.findByLastNameLike(fname) );
+//            return "redirect:/teacher/listallstudents/{courseId}";
+            return "teacherpages/studentsearchresult";
+        }
+
+        if (searchBy=="email")
+        {
+            model.addAttribute("searchstudent", personRepository.findByEmailLike(email) );
+//            return "redirect:/teacher/listallstudents/{courseId}";
+            return "teacherpages/studentsearchresult";
+        }
+
+
+
+        if (searchBy=="fandl")
+        {
+            model.addAttribute("searchstudent", personRepository.findByFirstNameLikeAndLastNameLike(fname, lname) );
+//            return "redirect:/teacher/listallstudents/{courseId}";
+            return "teacherpages/studentsearchresult";
+        }
+
+
+        else {
+
+            model.addAttribute("message", "Erro with the search, try again!");
+//            return "redirect:/teacher/listallstudents/{courseId}";
+            return "teacherpages/studentsearchresult";
+        }
     }
 
    @GetMapping("/addstudentstocourse/{id}")
