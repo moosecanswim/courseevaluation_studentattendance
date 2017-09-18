@@ -407,21 +407,16 @@ public class AdminController {
             case "courseCrn":
                 //search by course crn (check to make sure search thing is an long input
                 System.out.println("Search course crn");
-                try{
-                    Long crn=Long.valueOf(searchThing);
-                    model.addAttribute("communicationListAvalible",communicationService.findByCrnAndStatus(crn,true));
-                    model.addAttribute("communicationListUnvalible",communicationService.findByCrnAndStatus(crn,true));
 
-                }catch(Exception e){
-                    System.out.println("adminController- searchCommunication: search input not a long");
-                    return "redirect:/admin/communicationhome";
-                }
-                     break;
+                model.addAttribute("communicationListAvalible",communicationService.findByCrnAndStatus(searchThing,true));
+                model.addAttribute("communicationListUnvalible",communicationService.findByCrnAndStatus(searchThing,false));
+
+                break;
             case "courseName":
                 //search by course name (partial course names ok)
                 System.out.println("Search course name");
-                model.addAttribute("communicationListAvalible",communicationService.findByCourseNameAndStatus(searchThing,true));
-                model.addAttribute("communicationListUnvalible",communicationService.findByCourseNameAndStatus(searchThing,false));
+                //model.addAttribute("communicationListAvalible",communicationService.findByCourseNameAndStatus(searchThing,true));
+                //model.addAttribute("communicationListUnvalible",communicationService.findByCourseNameAndStatus(searchThing,false));
                 break;
             case "phoneNumber":
                 //search by phone number

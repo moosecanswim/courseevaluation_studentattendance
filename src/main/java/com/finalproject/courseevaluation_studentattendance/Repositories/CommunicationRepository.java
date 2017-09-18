@@ -13,28 +13,34 @@ public interface CommunicationRepository extends CrudRepository<Communication,Lo
     //M#
     Set<Communication> findByMNumber(String mNumber);
     Long countByMNumber(String mNumber);
-    Set<Communication> findByMNumberAndCallStatus(String mNumber, Boolean callStatus);
-    Long countByMNumberAndCallStatus(String mNumber, Boolean callStatus);
+    Set<Communication> findByMNumberLikeAndCallStatusTrue(String mNumber);
+    Long countByMNumberLikeAndCallStatusTrue(String mNumber);
+    Set<Communication> findByMNumberLikeAndCallStatusFalse(String mNumber);
+    Long countByMNumberLikeAndCallStatusFalse(String mNumber);
 
     //Email
     Set<Communication> findByEmail(String email);
     Long countByEmail(String email);
-    Set<Communication> findByEmailAndCallStatus(String email, Boolean callStatus);
-    Long countByEmailAndCallStatus(String email, Boolean callStatus);
+    Set<Communication> findByEmailLikeAndCallStatusTrue(String email);
+    Long countByEmailLikeAndCallStatusTrue(String email);
+    Set<Communication> findByEmailLikeAndCallStatusFalse(String email);
+    Long countByEmailLikeAndCallStatusFalse(String email);
 
 
     //phoneNumber
     Set<Communication> findByPhoneNumber(String phoneNumber);
     Long countByPhoneNumber(String phoneNumber);
-    Set<Communication> findByPhoneNumberAndCallStatus(String phoneNumber, Boolean callStatus);
-    Long countByPhoneNumberAndCallStatus(String phoneNumber, Boolean callStatus);
-    Set<Communication> findByPhoneNumberContainsAndCallStatus(String phoneNumber, Boolean callStatus);
-    Long countByPhoneNumberContainsAndCallStatus(String phoneNumber, Boolean callStatus);
+    Set<Communication> findByPhoneNumberLikeAndCallStatusTrue(String phoneNumber);
+    Long countByPhoneNumberLikeAndCallStatusTrue(String phoneNumber);
+    Set<Communication> findByPhoneNumberLikeAndCallStatusFalse(String phoneNumber);
+    Long countByPhoneNumberLikeAndCallStatusFalse(String phoneNumber);
 
 
     //course Crn
-    Set<Communication> findByCourseInterestedCRNAndCallStatus(long crn,Boolean status);
-    Long countByCourseInterestedCRNAndCallStatus(long crn,Boolean status);
+    Set<Communication> findByCourseInterestedCRNLikeAndCallStatusTrue(String crn);
+    Long countByCourseInterestedCRNLikeAndCallStatusTrue(String crn);
+    Set<Communication> findByCourseInterestedCRNLikeAndCallStatusFalse(String crn);
+    Long countByCourseInterestedCRNLikeAndCallStatusFalse(String crn);
 
     //course name
     Set<Communication> findByCourseInterestedAndCallStatus(String courseName,Boolean status);
