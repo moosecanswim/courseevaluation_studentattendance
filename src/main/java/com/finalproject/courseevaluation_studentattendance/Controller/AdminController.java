@@ -412,12 +412,12 @@ public class AdminController {
                 model.addAttribute("communicationListUnvalible",communicationService.findByCrnAndStatus(searchThing,false));
 
                 break;
-            case "courseName":
-                //search by course name (partial course names ok)
-                System.out.println("Search course name");
-                //model.addAttribute("communicationListAvalible",communicationService.findByCourseNameAndStatus(searchThing,true));
-                //model.addAttribute("communicationListUnvalible",communicationService.findByCourseNameAndStatus(searchThing,false));
-                break;
+//            case "courseName":
+//                //search by course name (partial course names ok)
+//                System.out.println("Search course name");
+//                model.addAttribute("communicationListAvalible",communicationService.findByCrnAndStatus(searchThing,true));
+//                model.addAttribute("communicationListUnvalible",communicationService.findByCrnAndStatus(searchThing,false));
+//                break;
             case "phoneNumber":
                 //search by phone number
                 System.out.println("Search phoneNumber");

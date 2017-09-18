@@ -1,9 +1,15 @@
 package com.finalproject.courseevaluation_studentattendance.Services;
 
 import com.finalproject.courseevaluation_studentattendance.Model.Communication;
+import com.finalproject.courseevaluation_studentattendance.Model.Course;
 import com.finalproject.courseevaluation_studentattendance.Repositories.CommunicationRepository;
+import com.google.common.collect.Iterables;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 @Service
 public class CommunicationService {
@@ -75,12 +81,19 @@ public class CommunicationService {
     }
     //mNumber
     public Iterable<Communication> findByMNumberAndStatus(String mNumber, Boolean status){
-        if(status==true){
-            return communicationRepository.findByPhoneNumberLikeAndCallStatusTrue("%"+mNumber+"%");
+        String first=mNumber.substring(0);
+        if(!first.equalsIgnoreCase("m")){
         }
         else{
-            return communicationRepository.findByPhoneNumberLikeAndCallStatusFalse("%"+mNumber+"%");
+            mNumber="M"+mNumber;
         }
+        if(status==true){
+            return communicationRepository.findByMNumberLikeAndCallStatusTrue("%"+mNumber+"%");
+        }
+        else{
+            return communicationRepository.findByMNumberLikeAndCallStatusFalse("%"+mNumber+"%");
+        }
+
 
     }
     //email
@@ -112,8 +125,34 @@ public class CommunicationService {
         }
 
     }
+//    //find by course name
+//    public Iterable<Communication> findByCourseNameAndStatus(String courseName,Boolean status){
+//        ArrayList<String> theCRNs = new ArrayList<String>();
+//
+//        Iterable<Course> coursesAll = courseService.findByCourseName("%"+courseName+"%");
+//        if(coursesAll.equals(null)){
+//            System.out.println("CommService-findByCourseNameAndStatus: no courses with that name");
+//        }else {
+//
+//            for(Course course:coursesAll){
+//                //do nothing
+//                theCRNs.add(String.valueOf(course.getCrn()));
+//            }
+//        }
+//            if(status==true){
+//            for(String l:theCRNs){
+//                Iterable<Communication> lList = findByCrnAndStatus(l,true);
+//                }
+//                return communicationRepository.findByCourseInterestedLikeAndCallStatusTrue(courseName);
+//            }
+//            else{
+//                return communicationRepository.findByCourseInterestedLikeAndCallStatusFalse(courseName);
+//            }
+//
+//
+//    }
 
-    //name
+    //contact name
     public Iterable<Communication> findByNameAndAvalible(String name){
         long count = communicationRepository.countByNameLikeIgnoreCaseAndCallStatusTrue(name);
         System.out.println("commService: there are " + count + " occurances of " +name +" true");

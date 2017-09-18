@@ -1,10 +1,19 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
-    <meta charset="UTF-8"/>
-    <title>Title</title>
+
+    <title>Course Eval</title>
+
+    <!-- Header -->
+    <div th:replace="base :: header"></div>
+    <!-- /.Header -->
+
 </head>
 <body>
+
+<!--Navigation Admin-->
+<nav th:replace="base :: nav2Admin"></nav>
+<!--/.Navigation Admin-->
 
 <!--Todo need to be corrected from eval side:-->
 <!--This page doesn't work because when evaluation is saving to DB, it creates a new course!-->
@@ -127,6 +136,11 @@
 
 <!--Link to the Admin Home page-->
 <div><a href="/admin/home">Admin Home</a></div>
+
+
+<!-- Footer -->
+<div th:replace="base :: footer"></div>
+<!-- /.Footer -->
 
 </body>
 </html>
