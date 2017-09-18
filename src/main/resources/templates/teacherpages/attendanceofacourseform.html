@@ -14,7 +14,7 @@
 
 <div  th:if="${!studentsofACourse.isEmpty()}">
 
-<form th:action="@{/teacher/markattendance/{courseId}(courseId=${course.id})}" method="post">
+<form th:action="@{/teacher/markattendancepo/{courseId}(courseId=${course.id})}" method="post">
     <table>
         <thead>
         <tr>
