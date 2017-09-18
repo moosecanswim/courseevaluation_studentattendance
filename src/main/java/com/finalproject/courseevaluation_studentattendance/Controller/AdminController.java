@@ -295,6 +295,14 @@ public class AdminController {
         return "adminpages/admineditpeople";
     }
 
+    @PostMapping("/updateperson")
+    public String savePerson(@ModelAttribute("person") Person person)
+    {
+
+        personRepo.save(person);
+        return "redirect:/admin/home/";
+    }
+
 
 
     //COMMUNICATIONS methods
