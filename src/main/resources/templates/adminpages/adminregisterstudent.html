@@ -2,8 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
 
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Register Student</title>
+
+    <!-- Header -->
+    <div th:replace="base :: header"></div>
+    <!-- /.Header -->
+
 </head>
 <body>
 <form action="#" th:action="@{/admin/registerstudent}" th:object="${newstudent}" method="post" >
