@@ -233,15 +233,29 @@ public class TeacherController {
 
     }
 
-    @RequestMapping("/update/{courseId}/{studentId}")
-    public String updateMnumberordeletestudent(@PathVariable("courseId") Long courseId, @PathVariable("studentId") Long studentId, @RequestParam("newMId") String newMId, Model model) {
+
+    @GetMapping("/update/{courseId}/{studentId}")
+    public String updateMnumber(@PathVariable("courseId") Long courseId, @PathVariable("studentId") Long studentId, Model model) {
+
+        Course currentCourse = courseRepository.findOne(courseId);
+        Person currentStudent= personRepository.findOne(studentId);
+        model.addAttribute("student", currentStudent);
+        model.addAttribute("course", currentCourse);
+
+        return "teacherpages/updateMform";
+    }
+
+
+    @PostMapping("/update/{courseId}/{studentId}")
+    public String updateMnumberordeletestudent(@PathVariable("courseId") Long courseId, @PathVariable("studentId") Long studentId, @RequestParam(value="newMId") String newMId, Model model) {
 
         Course currentCourse = courseRepository.findOne(courseId);
         Person currentStudent= personRepository.findOne(studentId);
         currentStudent.setmNumber(newMId);
+        personRepository.save(currentStudent);
         model.addAttribute("course", currentCourse);
 
-        return "redirect:/teacherpages/listallstudents/{courseId}";
+        return "redirect:/teacher/listallstudents/{courseId}";
     }
 
     @RequestMapping("/delete/{courseId}/{studentId}")
@@ -250,10 +264,11 @@ public class TeacherController {
         Course currentCourse = courseRepository.findOne(courseId);
         Person currentStudent= personRepository.findOne(studentId);
         currentCourse.removeStudent(currentStudent);
+        personRepository.delete(currentStudent);
 
         model.addAttribute("course", currentCourse);
 
-        return "redirect:/teacherpages/listallstudents/{courseId}";
+        return "redirect:/teacher/listallstudents/{courseId}";
     }
 
    @GetMapping("/addstudentstocourse/{id}")
