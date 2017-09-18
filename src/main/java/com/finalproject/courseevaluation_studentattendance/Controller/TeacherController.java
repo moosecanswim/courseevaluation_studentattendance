@@ -122,18 +122,14 @@ public class TeacherController {
         return "teacherpages/detailsofacourse";
     }
 
-
     @GetMapping("/markattendance/{courseId}")
     public String listAttendanceofaCourse(@PathVariable("courseId") Long courseId, Model model)
     {
-
 
         Course currentCourse = courseRepository.findOne(courseId);
         Iterable<Person> studentsofACourse = currentCourse.getStudent();
 
         Date now= new Date();
-
-
 
         model.addAttribute("now", now);
         model.addAttribute("course", currentCourse);
@@ -229,26 +225,36 @@ public class TeacherController {
 
         }
 
+        model.addAttribute("course", currentCourse);
         model.addAttribute("unvalidatedstudent", unvalidatedstudent);
         model.addAttribute("validatedstudent", validatedstudent);
 
         return "teacherpages/updatemnum";
 
-
-
     }
 
-    @PostMapping("/mforallstudents/{courseId}")
-    public String updateMnumberordeletestudent(@PathVariable("courseId") Long courseId, Model model) {
+    @RequestMapping("/update/{courseId}/{studentId}")
+    public String updateMnumberordeletestudent(@PathVariable("courseId") Long courseId, @PathVariable("studentId") Long studentId, @RequestParam("newMId") String newMId, Model model) {
 
         Course currentCourse = courseRepository.findOne(courseId);
-        Iterable<Person> studentsofACourse = currentCourse.getStudent();
-        model.addAttribute("allstudent", studentsofACourse);
+        Person currentStudent= personRepository.findOne(studentId);
+        currentStudent.setmNumber(newMId);
+        model.addAttribute("course", currentCourse);
 
         return "redirect:/teacherpages/listallstudents/{courseId}";
-
     }
 
+    @RequestMapping("/delete/{courseId}/{studentId}")
+    public String deletestudentwithnoMnumber(@PathVariable("courseId") Long courseId,@PathVariable("studentId") Long studentId, Model model) {
+
+        Course currentCourse = courseRepository.findOne(courseId);
+        Person currentStudent= personRepository.findOne(studentId);
+        currentCourse.removeStudent(currentStudent);
+
+        model.addAttribute("course", currentCourse);
+
+        return "redirect:/teacherpages/listallstudents/{courseId}";
+    }
 
    @GetMapping("/addstudentstocourse/{id}")
    public String getCourse(@PathVariable("id")Long id, Model model)
