@@ -187,6 +187,8 @@ public class Person {
         this.attendances.add(atn);
     }
 
+    public void removeAttendance(Attendance atn) {this.attendances.remove(atn);}
+
     public Date getStartDate() {
         return startDate;
     }

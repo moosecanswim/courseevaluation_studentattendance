@@ -142,7 +142,7 @@ public class TeacherController {
 
 
 
-    @PostMapping("/markattendance/{courseId}")
+    @PostMapping("/markattendancepo/{courseId}")
     public String postattendance(@PathVariable("courseId") Long courseId, @RequestParam(value = "attendanceStatus") String[] attendanceStatus, Model model)
     {
         Course currentCourse = courseRepository.findOne(courseId);
@@ -156,46 +156,40 @@ public class TeacherController {
 
         String nowdate= df.format(now);
 
-        for (Person student: studentsofACourse)
-        {
-
-            // TODO: update student attendance status (for the same day same course)
-            // make the following comment-out method work to prevent Att status being set twice for the same student for the same day
-            //if this same's attendance status has been set, only update the attendance status, rather than create a new attendance
-
-//            try {
+        System.out.println(nowdate);
 //
-//            for (Attendance att : student.getAttendances())
-//            {
-//
-//                if (att.getDate()== nowdate && att.getAttendanceCourse()==currentCourse)
-//                {
-////                       !!!maybe an update method here would work
-//                    att.setStatus(attendanceStatus[i]);
-//                    //attendanceRepository.save(att);
-//                    i+=1;
-//                    return "teacherpages/displyattforstudentsofacourse";
-//                }
-//
-//            } } catch (Exception e) {
-//                System.out.println("this is the first time marking attendance for the student today");
-//
-//            }
+        for (Person student: studentsofACourse) {
 
-             Attendance att = new Attendance();
+            if (attendanceRepository.findAllByAttendanceCourseEqualsAndDateEqualsAndPersonAttendanceEquals(currentCourse, nowdate, student) != null) {
+                Attendance attdel = attendanceRepository.findAllByAttendanceCourseEqualsAndDateEqualsAndPersonAttendanceEquals(currentCourse, nowdate, student);
+                System.out.println(attdel.toString());
+                student.removeAttendance(attdel);
+                System.out.println("here1111111");
+                attendanceRepository.delete(attdel);
+//                System.out.println("here2222211");
+            }
 
-//            df.format(now) returns a string
-                att.setDate(nowdate);
-//            att.setDate(now);
-                att.setStatus(attendanceStatus[i]);
+                Attendance attnew = new Attendance();
+                attnew.setDate(nowdate);
+                System.out.println("printing status" + attendanceStatus[i]);
+                attnew.setStatus(attendanceStatus[i]);
+                System.out.println("set stautus doone----");
                 i += 1;
-                att.setPersonAttendance(student);
-                att.setAttendanceCourse(currentCourse);
-                attendanceRepository.save(att);
+                attnew.setPersonAttendance(student);
+                student.addAttendance(attnew);
+                System.out.println("!!!!!!-----add att to student");
+                attnew.setAttendanceCourse(currentCourse);
+                attendanceRepository.save(attnew);
 
+                System.out.println("newset-------");
+
+                // problem is here is empty
+                System.out.println("!!!!!!!!"+student.getAttendances().toString());
 
         }
 
+
+        System.out.println("end loop------");
 
         model.addAttribute("now", now);
         model.addAttribute("course", currentCourse);
