@@ -6,15 +6,17 @@
 <body>
 
 <div class="container">
-<h2>Congrats!! You have been registered</h2>
+<h2>You have been registered for the course</h2>
 
+    <p th:text="${newstudent.mNumber}"></p>
     <p th:text="${newstudent.firstName}"></p>
     <p th:text="${newstudent.lastName}"></p>
-    <p th:text="${newstudent.username}"></p>
+    <!--<p th:text="${newstudent.username}"></p>-->
     <p th:text="${newstudent.email}"></p>
 
 
     <p><a th:href="@{/teacher/listallcourses}">Back to all course</a></p>
+    <p><a th:href="@{/teacher/listallstudents/{courseId}(courseId=${course.id})}">Validate student's info</a></p>
 
 </div>
 

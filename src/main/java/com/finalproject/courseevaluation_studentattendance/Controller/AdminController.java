@@ -305,6 +305,23 @@ public class AdminController {
     }
 
 
+    // ===   See the List of this Teacher Courses
+    @GetMapping("/viewteachercourses/{id}") // teacher id
+    public String seeAllTeachers(@PathVariable("id") long id, Model model)
+    {
+
+        Person teacher = personService.findById(id);
+        model.addAttribute("teacher", teacher);
+
+        Iterable<Course> courses=teacher.getCourseInstructor();
+
+        model.addAttribute("listAllCoursesForThisTeacher", courses);
+        return "adminpages/adminviewoneteachercourses";
+    }
+
+
+
+
 
     //COMMUNICATIONS methods
 
@@ -438,6 +455,9 @@ public class AdminController {
 //        personRepo.save(person);
 //        return"redirect:/admin/home";
 //    }
+
+
+
 
 
 

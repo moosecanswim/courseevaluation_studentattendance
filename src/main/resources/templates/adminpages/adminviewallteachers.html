@@ -19,8 +19,9 @@
     <td><strong>Email Address</strong></td>
     <td><strong>Start Date</strong></td>
     <td><strong>Active</strong></td>
+    <td><strong>See This Teacher Courses</strong></td>
 
-    <!--iterate through all the students for this course-->
+    <!--iterate through all the teachers-->
     <tr th:each="all:${listOfAllTeachers}">
         <td th:text="${all.id}"></td>
         <td th:text="${all.mNumber}"></td>
@@ -31,6 +32,9 @@
         <td th:text="${all.email}"></td>
         <td th:text="${all.startDate}"></td>
         <td th:text="${all.active}"></td>
+        <td>
+            <a th:href="@{/admin/viewteachercourses/{id}(id=${all.id})}">View Courses</a>
+        </td>
 
     </tr>
 </table>
