@@ -144,12 +144,15 @@ public class AdminController {
     }
 
     //need to taste viewing after the team is done with evaluation
-    @GetMapping("viewcourseevaluations/{id}")
+    @GetMapping("viewcourseevaluations/{id}")  // course id
     public String viewEvaluation(@PathVariable("id") long id, Model model){
         Course thiscourse = courseRepo.findOne(id);
         Iterable<Evaluation> thiscourseevaluation = thiscourse.getEvaluations();
+        Person courseInstructor = thiscourse.getInstructor();
+
         model.addAttribute("evaluation",thiscourseevaluation);
         model.addAttribute("course",thiscourse);
+        model.addAttribute("courseInstructor",courseInstructor);
         return"/adminpages/admincourseevaluation";
     }
 
@@ -228,8 +231,8 @@ public class AdminController {
         return "redirect:/admin/home"; //" + courseToGoTo;
     }
 
-//    ToDo need to check how it works:
-//    // ===   Remove Student from the Course
+
+//    // ===   Remove Student from the Course:
 //    @RequestMapping("course/{courseid}/removestudentfromcourse/{studentid}")
     @RequestMapping("/removestudentfromcourse/{courseid}/{studentid}")
     public String removeStudentFromCourse (@PathVariable("courseid")long courseid,
