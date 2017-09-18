@@ -23,6 +23,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.Principal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.SimpleFormatter;
 
@@ -113,8 +114,6 @@ public class TeacherController {
         model.addAttribute("course", currentCourse);
         model.addAttribute("studentsofACourse", studentsofACourse);
 
-
-
         return "teacherpages/detailsofacourse";
     }
 
@@ -199,6 +198,52 @@ public class TeacherController {
         return "teacherpages/displyattforstudentsofacourse";
     }
 
+    //for delete or update M number for the student
+    @GetMapping("/listallstudents/{courseId}")
+    public String updateMnumber(@PathVariable("courseId") Long courseId, Model model) {
+
+
+        Course currentCourse = courseRepository.findOne(courseId);
+        Iterable<Person> studentsofACourse = currentCourse.getStudent();
+        ArrayList<Person> unvalidatedstudent= new ArrayList<>();
+        ArrayList<Person> validatedstudent= new ArrayList<>();
+
+        //for student that M number is null put them in a unvalidated list
+        for (Person student:studentsofACourse)
+        {
+            if(student.getmNumber().isEmpty())
+            {
+                unvalidatedstudent.add(student);
+            }
+
+            if(student.getmNumber()!=null)
+            {
+                System.out.println("not null====" + student.getmNumber().toString());
+                validatedstudent.add(student);
+            }
+
+        }
+
+        model.addAttribute("unvalidatedstudent", unvalidatedstudent);
+        model.addAttribute("validatedstudent", validatedstudent);
+
+        return "teacherpages/updatemnum";
+
+
+
+    }
+
+    @PostMapping("/mforallstudents/{courseId}")
+    public String updateMnumberordeletestudent(@PathVariable("courseId") Long courseId, Model model) {
+
+        Course currentCourse = courseRepository.findOne(courseId);
+        Iterable<Person> studentsofACourse = currentCourse.getStudent();
+        model.addAttribute("allstudent", studentsofACourse);
+
+        return "redirect:/teacherpages/listallstudents/{courseId}";
+
+    }
+
 
    @GetMapping("/addstudentstocourse/{id}")
    public String getCourse(@PathVariable("id")Long id, Model model)
@@ -228,13 +273,12 @@ public class TeacherController {
        student.setCourseStudent(c);
        personRepository.save(student);
 //       personService.addStudentToCourse(student,c);
+       model.addAttribute("course", c);
        model.addAttribute("newstudent", student);
 //       personService.create(student);
 //      // personRepo.save(person);
        return "teacherpages/confirmstudent";
    }
-
-
 
    //why we need this method? T
    @RequestMapping("/displaystudents")
@@ -264,7 +308,7 @@ public class TeacherController {
        return "teacherpages/evaluation";
    }
 
-//the method to send email
+    //the method to send email
     //it sends email need to make the body
 
     @Autowired
