@@ -16,42 +16,35 @@
 
     <p>List of Courses</p>
 
-    <table class="table table-striped">
+    <table class="table table-striped" border="1">
         <tr>
             <td><b>ID</b></td>
             <td><b>CRN</b></td>
             <td><b>Course Name</b></td>
             <td><b>Start Date</b></td>
             <td><b>End Date</b></td>
-            <td><b>Available</b></td>
-            <td><b>Update</b></td>
-            <td><b>View Details</b></td>
-            <td><b>Delete</p></b></td>
+            <td><b>Class Available</b></td>
             <td><b>View Evaluations</p></b></td>
+            <td><strong>Action</strong></td>
         </tr>
 
 
         <!--iterate through all the existed courses-->
-                <th:block th:each="all:${allcourses}">
+                <th:block th:each="course:${allcourses}">
             <tr>
-                <td><a th:text="${all.id}"></a></td>
-                <td><a th:text="${all.crn}"></a></td>
-                <td><a th:text="${all.courseName}"></a></td>
-                <td><a th:text="${all.startDate}"></a></td>
-                <td><a th:text="${all.endDate}"></a></td>
-                <td><a th:text="${all.status}"></a></td>
+                <td><a th:text="${course.id}"></a></td>
+                <td><a th:text="${course.crn}"></a></td>
+                <td><a th:href="@{/admin/admincoursedetails/{id}(id=${course.id})}"  th:inline="text">[[${course.courseName}]]</a></td>
+                <td><a th:text="${course.startDate}"></a></td>
+                <td><a th:text="${course.endDate}"></a></td>
+                <td><a th:text="${course.status}"></a></td>
                 <td>
-                    <a th:href="@{/admin/updatecourse/{id}(id=${all.id})}">Update</a>
+                    <a th:href="@{/admin/viewcourseevaluations/{id}(id=${course.id})}">View Evaluations</a>
                 </td>
                 <td>
-                    <a th:href="@{/admin/admincoursedetails/{id}(id=${all.id})}">View Details</a>
-                </td>
-
-                <td>
-                    <a th:href="@{/admin/removecourse/{id}(id=${all.id})}">Remove Course</a>
-                </td>
-                <td>
-                    <a th:href="@{/admin/viewcourseevaluations/{id}(id=${all.id})}">View Evaluations</a>
+                    <a th:href="@{/admin/updatecourse/{id}(id=${course.id})}">Update</a>
+                    -
+                    <a th:href="@{/admin/removecourse/{id}(id=${course.id})}">Remove Course</a>
                 </td>
             </tr>
         </th:block>
