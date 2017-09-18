@@ -34,13 +34,16 @@ public class Course {
 
     @OneToMany(mappedBy = "courseStudent")
     private Set<Person>student;
-//
+
+    @OneToMany(mappedBy = "courseInterested", cascade=CascadeType.ALL)
+    private Set<Communication> communications;
 
     public Course(){
         setStatus(true);
         setEvaluations(new HashSet<Evaluation>());
         setCourseAttendances(new HashSet<Attendance>());
         setStudent(new HashSet<Person>());
+        setCommunications(new HashSet<Communication>());
 
     }
 
@@ -53,6 +56,7 @@ public class Course {
         setEvaluations(new HashSet<Evaluation>());
         setCourseAttendances(new HashSet<Attendance>());
         setStudent(new HashSet<Person>());
+        setCommunications(new HashSet<Communication>());
     }
 
     public long getId() {
@@ -145,5 +149,13 @@ public class Course {
     }
     public void addAttendance(Attendance att){
         this.courseAttendances.add(att);
+    }
+
+    public Set<Communication> getCommunications() {
+        return communications;
+    }
+
+    public void setCommunications(Set<Communication> communications) {
+        this.communications = communications;
     }
 }

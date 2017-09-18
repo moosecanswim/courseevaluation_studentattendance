@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Communication Home</title>
+</head>
+<body>
+    <h1>Communication Home</h1>
+
+    <h3>Open Communications</h3>
+
+    <a href="/admin/addcommunication">Create a call/email</a>
+    <table border="1">
+        <tr>
+            <th><strong>Id</strong></th>
+            <th><strong>Contact M#</strong></th>
+            <th><strong>Contact Phone#</strong></th>
+            <th><strong>Contact Email</strong></th>
+            <th><strong>Course Inquired</strong></th>
+            <th><strong>Call Details</strong></th>
+            <th><strong>Call Status</strong></th>
+            <th><strong>Actions</strong></th>
+        </tr>
+        <tr th:each="comm : ${communicationListAvalible}">
+            <td th:text="*{comm.id}"></td>
+            <td th:text="*{comm.mNumber}"></td>
+            <td th:text="*{comm.phoneNumber}"></td>
+            <td th:text="*{comm.email}"></td>
+            <td th:text="*{comm.courseInterested}"></td>
+            <td th:text="*{comm.callDetails}"></td>
+            <td th:text="*{comm.callStatus}"></td>
+            <td>
+                Update-Delete-mark addressed?
+            </td>
+
+        </tr>
+    </table>
+
+    <h3>Closed Communications (already taken care)</h3>
+    <table border="1">
+        <tr>
+            <th><strong>Id</strong></th>
+            <th><strong>Contact M#</strong></th>
+            <th><strong>Contact Phone#</strong></th>
+            <th><strong>Contact Email</strong></th>
+            <th><strong>Course Inquired</strong></th>
+            <th><strong>Call Details</strong></th>
+            <th><strong>Call Status</strong></th>
+            <th><strong>Actions</strong></th>
+        </tr>
+        <tr th:each="comm : ${communicationListUnavalible}">
+            <td th:text="*{comm.id}"></td>
+            <td th:text="*{comm.mNumber}"></td>
+            <td th:text="*{comm.phoneNumber}"></td>
+            <td th:text="*{comm.email}"></td>
+            <td th:text="*{comm.courseInterested}"></td>
+            <td th:text="*{comm.callDetails}"></td>
+            <td th:text="*{comm.callStatus}"></td>
+            <td>
+                Update-Delete-mark addressed?
+            </td>
+
+        </tr>
+    </table>
+<a href="/admin/Admin">Admin Dash</a>
+
+</body>
+</html>

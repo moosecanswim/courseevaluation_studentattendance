@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>New Communication</title>
+</head>
+<body>
+<div class="container">
+    <h1>New Communication</h1>
+
+    <form th:action="@{/admin/addcommunication}"
+          th:object="${aCommunication}"
+          method="POST">
+        <fieldset>
+            <!--//hidden id-->
+            <!--<input type="hidden" th:field="*{id}">-->
+            <!--//mNumber input-->
+            M#: <input th:field="*{mNumber}">
+            Phone #: <input th:field="*{phoneNumber}">
+            Email: <input th:field="*{email}">
+            Course:
+            <select th:field="*{courseInterested}">
+                <option th:each="course: ${courseList}"
+                        th:value="${course.crn}"
+                        th:text="${course.courseName}">
+                </option>
+            </select>
+            Call Details: <textarea th:field="*{callDetails}" col="50" row="4"></textarea>
+            <input type="submit" value="Submit new call/email"></select>
+
+        </fieldset>
+    </form>
+</div>
+</body>
+</html>

@@ -8,15 +8,17 @@ import com.finalproject.courseevaluation_studentattendance.Repositories.CourseRe
 import com.finalproject.courseevaluation_studentattendance.Repositories.EvaluationRepository;
 import com.finalproject.courseevaluation_studentattendance.Repositories.PersonRepository;
 import com.finalproject.courseevaluation_studentattendance.Repositories.RoleRepository;
-import com.finalproject.courseevaluation_studentattendance.Services.AttendanceService;
+import com.finalproject.courseevaluation_studentattendance.Services.CommunicationService;
 import com.finalproject.courseevaluation_studentattendance.Services.CourseService;
 import com.finalproject.courseevaluation_studentattendance.Services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import com.finalproject.courseevaluation_studentattendance.Model.Communication;
 
-import java.security.Principal;
+import javax.validation.Valid;
 import java.util.Set;
 
 
@@ -42,6 +44,8 @@ public class AdminController {
     EvaluationRepository evaluationRepo;
     @Autowired
     RoleRepository roleRepository;
+    @Autowired
+    CommunicationService communicationService;
 
 
 
@@ -287,7 +291,29 @@ public class AdminController {
 
         return "adminpages/admineditpeople";
     }
+    @RequestMapping("/communicationhome")
+    public String communicationHome(Model model){
+        model.addAttribute("communicationListAvalible",communicationService.showAllAvalible());
+        model.addAttribute("communicationListUnavalible",communicationService.showAllUnavalible());
+        return "/adminpages/admincommunicationhome";
+    }
 
+    @GetMapping("/addcommunication")
+    public String newCommunication(Model model){
+        model.addAttribute("aCommunication",new Communication());
+        model.addAttribute("courseList",courseService.findAll());
+        return "/adminpages/adminaddcommunication";
+    }
+    @PostMapping("/addcommunication")
+    public String processCommunication(@Valid Communication aCom, BindingResult result){
+        if(result.hasErrors()){
+            System.out.println("Communication invalid- did not add");
+            return "/adminpages/adminaddcommunication";
+        }else{
+            communicationService.create(aCom);
+            return "redirect:/admin/communicationhome";
+        }
+    }
 
 
     // admin create new person
