@@ -488,12 +488,12 @@ public class TeacherController {
                 .to(Lists.newArrayList(new InternetAddress("mymahder@gmail.com","admin")))
                 .subject("Testing Email")
                 .body("Course Closed.  Attendance for the class has been attached.")
-                .attachment(getCsvForecastAttachment("Attendance",course))
+                .attachment(getCsvAttendanceAttachment("Attendance",course))
                 .encoding("UTF-8").build();
         System.out.println("test it");
         emailService.send(email);
     }
-    private EmailAttachment getCsvForecastAttachment(String filename,Course course) {
+    private EmailAttachment getCsvAttendanceAttachment(String filename,Course course) {
 
 
 
