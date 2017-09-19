@@ -167,6 +167,20 @@ public class AdminController {
         return"/adminpages/admincourseevaluation";
     }
 
+    @GetMapping("admineval/{id}")  // course id
+    public String adminviewEvaluation(@PathVariable("id") long id, Model model){
+        Course thiscourse = courseRepo.findOne(id);
+
+       Iterable<Evaluation> thiscourseevaluation = thiscourse.getEvaluations();
+
+//        Person courseInstructor = thiscourse.getInstructor();
+
+        model.addAttribute("evals",thiscourseevaluation);
+//        model.addAttribute("course",thiscourse);
+//        model.addAttribute("courseInstructor",courseInstructor);
+        return"/adminpages/admineval";
+    }
+
     //this will allow the the admin to add an existing student to a course
     // the relationship between student and to courses is many to one so
     //it is not going to let them assign existing students to different courses
