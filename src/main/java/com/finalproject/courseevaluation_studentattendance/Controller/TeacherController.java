@@ -210,6 +210,22 @@ public class TeacherController {
         return "teacherpages/displyattforstudentsofacourse";
     }
 
+
+    //for testing: display attendance of in a table rather than list
+    @GetMapping("/attforonecourse/{id}")
+    public String attforonecourse(@PathVariable("id") Long courseId, Model model)
+    {
+
+        Course currentCourse = courseRepository.findOne(courseId);
+        Iterable<Person> studentsofACourse = currentCourse.getStudent();
+
+        model.addAttribute("course", currentCourse);
+        model.addAttribute("studentofacourse", studentsofACourse);
+
+        return "teacherpages/tableattofonecourse";
+    }
+
+
     //for delete or update M number for the student
     @GetMapping("/listallstudents/{courseId}")
     public String updateMnumber(@PathVariable("courseId") Long courseId, Model model) {
@@ -326,7 +342,8 @@ public class TeacherController {
         ArrayList<Person> validatedstudent= new ArrayList<>();
 
 
-        //for student that M number is null put them in a unvalidated list
+        //tried iframe and some other things to display(redirect) search result on the same page with student info without creating a new HTML, it didn't work,
+        // so now we are just creating a new HTML of the search result and put student info together within the result page, need to find a better solution later!!!!
         for (Person student:studentsofACourse)
         {
             if(student.getmNumber().isEmpty())
@@ -525,6 +542,8 @@ public class TeacherController {
 
         return attachment;
     }
+
+
 
 
 }
