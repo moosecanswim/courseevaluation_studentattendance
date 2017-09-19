@@ -237,37 +237,11 @@ public class TeacherController {
     @GetMapping("/listallstudents/{courseId}")
     public String updateMnumber(@PathVariable("courseId") Long courseId, Model model) {
 
-
         Course currentCourse = courseRepository.findOne(courseId);
-        Iterable<Person> studentsofACourse = currentCourse.getStudent();
-        ArrayList<Person> unvalidatedstudent= new ArrayList<>();
-        ArrayList<Person> validatedstudent= new ArrayList<>();
-
-
-        //for student that M number is null put them in a unvalidated list
-        for (Person student:studentsofACourse)
-        {
-            if(student.getmNumber().isEmpty())
-            {
-                unvalidatedstudent.add(student);
-            }
-
-            if(!student.getmNumber().isEmpty())
-            {
-                System.out.println("not null====" + student.getmNumber().toString());
-                validatedstudent.add(student);
-            }
-
-        }
-
-        //add an empty search student results
-//        ArrayList<Person> searchStudent= new ArrayList<>();
-//
-//        model.addAttribute("searchstudent", searchStudent);
 
         model.addAttribute("course", currentCourse);
-        model.addAttribute("unvalidatedstudent", unvalidatedstudent);
-        model.addAttribute("validatedstudent", validatedstudent);
+        model.addAttribute("unvalidatedstudent", courseService.unvalidatedStudent(courseId));
+        model.addAttribute("validatedstudent", courseService.validatedStudent(courseId));
 
         return "teacherpages/liststudentsofacourse";
 
@@ -345,38 +319,11 @@ public class TeacherController {
                     Model model)
     {
 
-
         Course currentCourse = courseRepository.findOne(courseId);
-        Iterable<Person> studentsofACourse = currentCourse.getStudent();
-        ArrayList<Person> unvalidatedstudent= new ArrayList<>();
-        ArrayList<Person> validatedstudent= new ArrayList<>();
-
-
-        //tried iframe and some other things to display(redirect) search result on the same page with student info without creating a new HTML, it didn't work,
-        // so now we are just creating a new HTML of the search result and put student info together within the result page, need to find a better solution later!!!!
-        for (Person student:studentsofACourse)
-        {
-            if(student.getmNumber().isEmpty())
-            {
-                unvalidatedstudent.add(student);
-            }
-
-            if(!student.getmNumber().isEmpty())
-            {
-                System.out.println("not null====" + student.getmNumber().toString());
-                validatedstudent.add(student);
-            }
-
-        }
-
-        //add an empty search student results
-//        ArrayList<Person> searchStudent= new ArrayList<>();
-//
-//        model.addAttribute("searchstudent", searchStudent);
 
         model.addAttribute("course", currentCourse);
-        model.addAttribute("unvalidatedstudent", unvalidatedstudent);
-        model.addAttribute("validatedstudent", validatedstudent);
+        model.addAttribute("unvalidatedstudent", courseService.unvalidatedStudent(courseId));
+        model.addAttribute("validatedstudent", courseService.validatedStudent(courseId));
 
         if (searchBy.equalsIgnoreCase("all"))
         {
