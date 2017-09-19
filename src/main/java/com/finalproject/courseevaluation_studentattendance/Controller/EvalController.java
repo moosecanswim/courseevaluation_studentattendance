@@ -9,8 +9,10 @@ import com.finalproject.courseevaluation_studentattendance.Services.EvaluationSe
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import javax.websocket.server.PathParam;
 import java.util.Date;
 
@@ -53,8 +55,12 @@ public class EvalController {
     }
 
     @PostMapping("/evaluationentry/{courseId}")
-    public String entrypost(@ModelAttribute("neweval") Evaluation eval,@PathVariable("courseId")long courseId, Model model)
+    public String entrypost(@Valid @ModelAttribute("neweval") Evaluation eval, @PathVariable("courseId")long courseId, BindingResult bindingResult,Model model)
     {
+        if(bindingResult.hasErrors())
+        {
+            return "evalpages/evaluationentry";
+        }
         Course cr=courseRepository.findOne(courseId);
         evaluationService.addEvalToCourse(eval,cr);
         return "evalpages/confirmeval";
@@ -69,8 +75,12 @@ public class EvalController {
     }
 
     @PostMapping("/searchcourse")
-    public String searchCoursePost(@RequestParam("crnfield")long crn, Model model,Course course )
+    public String searchCoursePost(@Valid @RequestParam("crnfield")long crn, Course course,BindingResult bindingResult,Model model )
     {
+        if(bindingResult.hasErrors())
+        {
+            return "evalpages/evaluationentry";
+        }
         model.addAttribute("searcheval", courseRepository.findAllByCrn(crn));
 
 

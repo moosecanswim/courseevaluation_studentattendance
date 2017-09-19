@@ -18,7 +18,8 @@
     <div class="container">
         <h2 th:inline="text">Course information for: [[${course.courseName}]] (crn:[[${course.crn}]])</h2>
         <!--If the Instructor is not assigned to the course yet, this div will display Instructor: null null:-->
-        <h3 th:text="'Instructor: ' + ${courseInstructor.firstName} + ' ' +${courseInstructor.lastName}"></h3>
+
+        <h3 th:text="'Instructor: ' + ${courseInstructor?.firstName} + ' ' +${courseInstructor?.lastName}"></h3>
 
         <p th:text="'Course ID: ' + ${course.id}"/>
         <p th:text="'Course CRN: ' + ${course.crn}"/>
@@ -84,7 +85,7 @@
 
         <p><a th:href="@{/admin/registerstudentforcourse/{id}(id=${course.id})}">Register Student</a></p>
 
-        //
+
     </div>
 
     <!-- Footer -->
