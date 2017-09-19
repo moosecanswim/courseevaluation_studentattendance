@@ -34,7 +34,8 @@
     <!--iterate through all the students-->
     <tr th:each="all:${listOfAllStudents}">
         <td th:text="${all.id}"></td>
-        <td th:text="${all.mNumber}"></td>
+        <td> <a th:href="@{/admin/studentinformation/{mNumber} (mNumber=${all.id})}" th:inline="text">[[${all.mNumber}]]</a></td>
+        <!--<td th:text="${all.mNumber}"></td>-->
         <td th:text="${all.firstName}"></td>
         <td th:text="${all.lastName}"></td>
         <td th:text="${all.username}"></td>
