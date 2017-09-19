@@ -2,75 +2,87 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Title</title>
+    <title>Student Attendance</title>
+    <!-- Header -->
+    <div th:replace="base :: header"></div>
+    <!-- /.Header -->
 </head>
 <body>
+    <!--Navigation Teacher-->
+    <nav th:replace="base :: nav2Teacher"></nav>
+    <!--/.Navigation Teacher-->
+    <div class="container">
 
-<p>Student Attendance: </p>
-<p th:text="'Date today: ' + ${nowdate}"></p>
+        <p>Student Attendance: </p>
+        <p th:text="'Date today: ' + ${nowdate}"></p>
 
-<!--should be a form allow input of students' attendance info-->
-
-
-<div  th:if="${!studentsofACourse.isEmpty()}">
-
-    <form th:action="@{/teacher/markattendancepo/{courseId}(courseId=${course.id})}" method="post">
-
-
-        <p>Input date for marking the attendance: </p>
-
-        <p><input type="text" name="attdate" placeholder="MM/dd/yyyy" /></p>
+        <!--should be a form allow input of students' attendance info-->
 
 
-        <table>
-            <thead>
-            <tr>
-                StudentFullName
-            </tr>
-            <tr>
-                StudentEmail
-            </tr>
-            <tr>
-                Attendance
-            </tr>
-            </thead>
+        <div  th:if="${!studentsofACourse.isEmpty()}">
+
+            <form th:action="@{/teacher/markattendancepo/{courseId}(courseId=${course.id})}" method="post">
+
+
+                <p>Input date for marking the attendance: </p>
+
+                <p><input type="text" name="attdate" placeholder="MM/dd/yyyy" /></p>
+
+
+                <table>
+                    <thead>
+                    <tr>
+                        StudentFullName
+                    </tr>
+                    <tr>
+                        StudentEmail
+                    </tr>
+                    <tr>
+                        Attendance
+                    </tr>
+                    </thead>
 
 
 
-            <tbody>
-            <th:block th:each="student:${studentsofACourse}">
+                    <tbody>
+                    <th:block th:each="student:${studentsofACourse}">
 
-                <tr>
-                    <td th:text="${student.firstName} + ' ' +${student.lastName} "></td>
-                    <td th:text="${student.email}"></td>
+                        <tr>
+                            <td th:text="${student.firstName} + ' ' +${student.lastName} "></td>
+                            <td th:text="${student.email}"></td>
 
-                    <td><select name="attendanceStatus">
-                        <!--<th:block th:each="director:${alldirector}">-->
-                        <option value="NotMarked">  </option>
-                        <option value="Present">Present</option>
-                        <option value="Absent">Absent</option>
-                        <option value="Late">Late</option>
-                        <!--<option value="-1">Not a department head</option>-->
+                            <td><select name="attendanceStatus">
+                                <!--<th:block th:each="director:${alldirector}">-->
+                                <option value="NotMarked">  </option>
+                                <option value="Present">Present</option>
+                                <option value="Absent">Absent</option>
+                                <option value="Late">Late</option>
+                                <!--<option value="-1">Not a department head</option>-->
 
-                        <!--</th:block>-->
-                    </select>
-                    </td>
+                                <!--</th:block>-->
+                            </select>
+                            </td>
 
-                </tr>
+                        </tr>
 
 
-            </th:block>
-            </tbody>
-        </table>
+                    </th:block>
+                    </tbody>
+                </table>
 
-        <p><input type="submit" class="btn btn-default navbar-btn" value="Mark Attendance" />
-            <input type="reset" class="btn btn-default navbar-btn" value="Reset" /></p>
-    </form>
-</div>
+                <p><input type="submit" class="btn btn-default navbar-btn" value="Mark Attendance" />
+                    <input type="reset" class="btn btn-default navbar-btn" value="Reset" /></p>
+            </form>
+        </div>
 
-<div  th:if="${studentsofACourse.isEmpty()}">
-    <p>No Student information available!</p>
-</div>
+        <div  th:if="${studentsofACourse.isEmpty()}">
+            <p>No Student information available!</p>
+        </div>
 
+    </div>
+
+    <!-- Footer -->
+    <div th:replace="base :: footer"></div>
+    <!-- /.Footer -->
 </body>
 </html>
