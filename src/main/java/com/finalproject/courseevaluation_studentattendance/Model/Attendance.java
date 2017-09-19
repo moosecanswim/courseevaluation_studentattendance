@@ -1,5 +1,8 @@
 package com.finalproject.courseevaluation_studentattendance.Model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
@@ -12,7 +15,9 @@ public class Attendance {
     private long id;
 
 //    private Date date;
+    @DateTimeFormat(pattern = "MM/dd/yyyy")
     private String date;
+    @NotEmpty
     private String status;
 
     @ManyToOne

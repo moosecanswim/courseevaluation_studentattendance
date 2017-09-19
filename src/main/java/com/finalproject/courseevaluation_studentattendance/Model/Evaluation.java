@@ -1,5 +1,7 @@
 package com.finalproject.courseevaluation_studentattendance.Model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -12,12 +14,17 @@ public class Evaluation {
     private long id;
 
     //excellent/above average/ average/ fair/ poor
-
+    @NotEmpty
     private String content;
+    @NotEmpty
     private String quality;
+    @NotEmpty
     private String experience;
+    @NotEmpty
     private String materials;
+    @NotEmpty
     private String environment;
+    @NotEmpty
     private String equipment;
 
     // text area to add what they want

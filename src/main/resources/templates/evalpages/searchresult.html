@@ -5,6 +5,13 @@
     <title>Title</title>
 </head>
 <body>
+
+<div  th:if="${searcheval.isEmpty()}">
+    <p>No matching course is found!</p>
+</div>
+
+
+<div  th:if="${!searcheval.isEmpty()}">
 <table>
     <tr>
         <th>CRN</th>
@@ -16,16 +23,18 @@
     </tr>
 
     <tr>
-        <td th:text="${searcheval.crn}"></td>
-        <td th:text="${searcheval.courseName}"></td>
-        <td th:text="${searcheval.startDate}"></td>
-        <td th:text="${searcheval.endDate}"></td>
-
-
+        <th:block th:each="item:${searcheval}">
+        <td th:text="${item.crn}"></td>
+        <td th:text="${item.courseName}"></td>
+        <td th:text="${item.startDate}"></td>
+        <td th:text="${item.endDate}"></td>
+            <td><a th:href="@{/eval/evaluationentry/{id}(id=${item.id})}">Evaluate this course</a></td>
+        </th:block>
 
     </tr>
-    <a th:href="@{/eval/evaluationentry/{id}(id=${searcheval.id})}">Evaluate this course</a>
+
 
 </table>
+</div>
 </body>
 </html>

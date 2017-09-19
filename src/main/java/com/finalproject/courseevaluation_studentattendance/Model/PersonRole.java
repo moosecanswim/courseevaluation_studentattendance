@@ -1,5 +1,7 @@
 package com.finalproject.courseevaluation_studentattendance.Model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.HashSet;
@@ -12,7 +14,7 @@ public class PersonRole {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    //@NotEmpty
+    @NotEmpty
     private String roleName;
 
     @ManyToMany(mappedBy = "personRoles", fetch = FetchType.LAZY)

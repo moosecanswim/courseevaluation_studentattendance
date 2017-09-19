@@ -272,14 +272,28 @@ public class TeacherController {
     }
 
 
-    @GetMapping("/displayoneeval/{id}")
-    public String displayoneEval(@PathVariable("id") long evalId, Model model) {
+//    @GetMapping("/displayoneeval/{id}")
+//    public String displayoneEval(@PathVariable("id") long evalId, Model model) {
+//
+//
+//        model.addAttribute("neweval", evaluationRepository.findOne(evalId));
+//
+//        return "teacherpages/displayoneeval";
+//    }
 
 
-        model.addAttribute("neweval", evaluationRepository.findOne(evalId));
+    @GetMapping("/displayallevalsofonecourse/{courseId}")
+    public String displayallEvalofonecourse(@PathVariable("courseId") long courseId, Model model) {
 
-        return "teacherpages/displayoneeval";
+        Course currentCourse = courseRepository.findOne(courseId);
+
+        Iterable<Evaluation> allevalofonecourse= currentCourse.getEvaluations();
+
+        model.addAttribute("neweval", allevalofonecourse);
+
+        return "teacherpages/displayallevalofacourse";
     }
+
 
     @RequestMapping("/delete/{courseId}/{studentId}")
     public String deletestudentwithnoMnumber(@PathVariable("courseId") Long courseId,@PathVariable("studentId") Long studentId, Model model) {
@@ -365,14 +379,12 @@ public class TeacherController {
             return "teacherpages/studentsearchresult";
         }
 
-
         if (searchBy.equalsIgnoreCase("fandl"))
         {
             model.addAttribute("searchstudent", personRepository.findAllByFirstNameLikeAndLastNameLike(fname, lname) );
 //            return "redirect:/teacher/listallstudents/{courseId}";
             return "teacherpages/studentsearchresult";
         }
-
 
         else {
 
@@ -418,46 +430,6 @@ public class TeacherController {
        return "teacherpages/confirmstudent";
    }
 
-   //why we need this method? T
-   @RequestMapping("/displaystudents")
-    public String displayStudents(@ModelAttribute("lstudents")Person person, Model model)
-   {
-        model.addAttribute("lstudents", personRepo.findAll());
-        return "teacherpages/displaystudents";
-   }
-
-//
-//   @RequestMapping("searchcrn")
-//    public String searchForCRN(@ModelAttribute("crn") Evaluation eval, Model model, Course cse)
-//   {
-//
-//   }
-//    @GetMapping("/evaluationspercourse/{id}")
-//    public  String matchEvaluationPerCourse(@PathVariable("id") long id, Model model, Course cr)
-//    {
-//
-//    model.addAttribute("matchevtocr", evaluationService.matchCourseToEvals(cr));
-//    return "teacher/evaluationspercourse";
-//
-//    }
-
-
-
-
-   @GetMapping("/evaluation/{id}")
-    public String getEvaluation(@PathVariable("id")Long id, Model model)
-   {
-       model.addAttribute("neweval", new Evaluation());
-    return "teacherpages/evaluation";
-   }
-   @PostMapping("/evaluation/{id}")
-   public String postEvaluation(@PathVariable("id")Long id,Evaluation evaluation, Model model)
-   {
-       model.addAttribute("neweval", evaluation);
-       evaluationRepository.save(evaluation);
-       return "teacherpages/evaluation";
-   }
-
     //the method to send email
     //it sends email need to make the body
 
@@ -501,7 +473,7 @@ public class TeacherController {
 //
 //        }
 //
-return head;
+          return head;
 
     }
     @Autowired
