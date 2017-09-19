@@ -79,8 +79,17 @@ section {
 }
 
 
-/* Footer */
+ /*!*Footer*!*/
+/*TODO: need to display the footer at the botton of the screen*/
 footer {
-    padding: 100px 0;
+    /*remove:*/
+    /*padding: 100px 0;*/
+
+    /*additionals:*/
+    /*this depends on screen size:*/
+    /*padding: 350px 0;*/
+    padding: 30% 0;
+    text-align: center;
+
 }
 

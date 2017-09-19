@@ -94,8 +94,10 @@ public class AdminController {
 //
     //End date for the course isn't going to be entered here but it will be set when the teacher says the course ended
     @PostMapping("/addcourse")
-    public String postCourse(@ModelAttribute("newcourse")Course newcourse)
-    {
+    public String postCourse(@Valid @ModelAttribute("newcourse")Course newcourse, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()){
+            return"adminpages/adminaddcourse";
+        }
         courseRepo.save(newcourse);
         return"redirect:/admin/home";
     }
@@ -124,9 +126,12 @@ public class AdminController {
     }
 
     @PostMapping("/registerstudent")
-    public String saveStudent(@ModelAttribute("newstudent") Person newstudent)
+    public String saveStudent(@Valid @ModelAttribute("newstudent") Person newstudent, BindingResult bindingResult)
     {
-
+     if(bindingResult.hasErrors())
+     {
+         return "adminpages/adminregisterstudent";
+     }
         personService.create(newstudent);
         return "redirect:/admin/home/";
     }
@@ -166,6 +171,20 @@ public class AdminController {
         model.addAttribute("course",thiscourse);
         model.addAttribute("courseInstructor",courseInstructor);
         return"/adminpages/admincourseevaluation";
+    }
+
+    @GetMapping("admineval/{id}")  // course id
+    public String adminviewEvaluation(@PathVariable("id") long id, Model model){
+        Course thiscourse = courseRepo.findOne(id);
+
+       Iterable<Evaluation> thiscourseevaluation = thiscourse.getEvaluations();
+
+//        Person courseInstructor = thiscourse.getInstructor();
+
+        model.addAttribute("evals",thiscourseevaluation);
+//        model.addAttribute("course",thiscourse);
+//        model.addAttribute("courseInstructor",courseInstructor);
+        return"/adminpages/admineval";
     }
 
     //this will allow the the admin to add an existing student to a course
@@ -351,9 +370,12 @@ public class AdminController {
 
 
     @PostMapping("/updateperson")
-    public String savePerson(@ModelAttribute("person") Person person)
+    public String savePerson(@Valid @ModelAttribute("person") Person person, BindingResult bindingResult)
     {
-
+       if(bindingResult.hasErrors())
+       {
+           return"adminpages/admineditpeople";
+       }
         personRepo.save(person);
         return "redirect:/admin/home/";
     }

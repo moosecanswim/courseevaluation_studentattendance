@@ -1,6 +1,9 @@
 package com.finalproject.courseevaluation_studentattendance.Model;
 
 
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
@@ -13,17 +16,21 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+
     private String mNumber;
 
+    @NotEmpty
     private String firstName;
-
+    @NotEmpty
     private String lastName;
 
     private String username;
 
     private String password;
-
+    @NotEmpty
     private String email;
+
+    @DateTimeFormat(pattern = "MM/dd/yyyy")
     private Date startDate;
     private Boolean active;//true if user is active false if user has been archived
 
@@ -39,7 +46,7 @@ public class Person {
     }
 
     @ManyToMany(fetch = FetchType.EAGER)
-  @JoinTable(joinColumns = @JoinColumn(name="person_id"),
+    @JoinTable(joinColumns = @JoinColumn(name="person_id"),
    inverseJoinColumns=@JoinColumn(name="role_id"))
   private Set<PersonRole>personRoles;
 

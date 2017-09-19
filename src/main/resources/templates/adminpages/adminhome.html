@@ -54,7 +54,9 @@
                 <td th:text="${{course.endDate}}"></td>
                 <td th:text="${course.status}"></td>
                 <td>
-                    <a th:href="@{/admin/viewcourseevaluations/{id}(id=${course.id})}">View Evaluations</a>
+                    <!--<a th:href="@{/admin/viewcourseevaluations/{id}(id=${course.id})}">View Evaluations</a>-->
+
+                    <a th:href="@{/admin/admineval/{id}(id=${course.id})}">>View Evaluations</a>
                 </td>
                 <td>
                     <a th:href="@{/admin/updatecourse/{id}(id=${course.id})}">Update</a>
