@@ -1,10 +1,21 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Title</title>
+
+    <title>Evaluation</title>
+
+    <!-- Header -->
+    <div th:replace="base :: header"></div>
+    <!-- /.Header -->
+
 </head>
 <body>
+
+<!--Navigation Student-->
+<nav th:replace="base :: nav2Student"></nav>
+<!--/.Navigation Student-->
+
+<div class="container">
 <form th:action="@{/eval/evaluationentry/{courseId} (courseId=${courseId})}" th:object="${neweval}" method="post" >
     <!--<input type="hidden" th:field="*{id}">-->
 <p><h4>1. How would you rate the course content? </h4></p>
@@ -86,5 +97,11 @@
     <input type="submit"  value="Save" class="btn btn-lg btn-default btn-block" />
 
 </form>
+</div>
+
+<!-- Footer -->
+<div th:replace="base :: footer"></div>
+<!-- /.Footer -->
+
 </body>
 </html>

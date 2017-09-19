@@ -9,6 +9,7 @@ body {
 
 body {
     font-size:18px;
+    /*padding-bottom:20px*/
 }
 
 
@@ -94,5 +95,26 @@ footer {
     text-align: center;
     left: 0;
     right: 0;
+    /*padding-top:20px*/
+
+    background-color: white;
+    color: black;
+
+    /*background-color: black;*/
+    /*color: white;*/
 }
+
+
+/*My Additionals*/
+.container {
+    padding-bottom:60px;   /* Height of the footer */
+}
+
+/*can add another clear div*/
+/*to make footer not overlapping the page content*/
+/*.clear {*/
+    /*clear: both;*/
+    /*height: 60px; }*/
+
+/*<div class="clear"></div>*/
 
