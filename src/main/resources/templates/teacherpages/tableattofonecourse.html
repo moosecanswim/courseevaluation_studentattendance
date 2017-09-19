@@ -3,9 +3,6 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Title</title>
-    <!-- Header -->
-    <div th:replace="base :: header"></div>
-    <!-- /.Header -->
 </head>
 <body>
     <!--Navigation Teacher-->
@@ -28,11 +25,13 @@
 
         <table border="1">
 
-            <tr>
-                <th>Student name</th>
-                <th>
-                    <!--this should be date-->
-                </th>
+    <tr>
+        <th>Student ID</th>
+        <th>Student name</th>
+        <th>Student M-number</th>
+        <th:block th:each="item:${onestu.attendances}">
+            <th th:text="${item.date}"></th>
+        </th:block>
 
             </tr>
 
