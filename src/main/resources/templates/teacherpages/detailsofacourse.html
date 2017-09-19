@@ -12,8 +12,8 @@
     <p th:text="'Course ID: ' + ${course.id}"/>
     <p th:text="'Course Name: '+ ${course.courseName}" />
     <p th:text="'Course CRN:' + ${course.crn}"/>
-    <p th:text="'Course StartDate:' + ${course.startDate}"/>
-    <p th:text="'Course EndDate:' + ${course.endDate}"/>
+    <p th:text="'Course StartDate:' + ${{course.startDate}}"/>
+    <p th:text="'Course EndDate:' + ${{course.endDate}}"/>
     <p th:text="'Course Status:' + ${course.status}"/>
     <br/>
 

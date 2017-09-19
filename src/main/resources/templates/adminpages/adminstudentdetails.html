@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8"/>
+    <title>Student Details</title>
+    <div th:replace="base :: header"></div>
+</head>
+<body>
+    <div th:replace="base :: navAdmin"></div>
+    <div class="container">
+        <h1>Admin View: Student Details</h1>
+
+        <h3>Contact Information</h3>
+
+
+        <h3>Courses Enrolled</h3>
+        <table class="table table-striped" border="1">
+            <tr>
+                <td><b>ID</b></td>
+                <td><b>CRN</b></td>
+                <td><b>Course Name</b></td>
+                <td><b>Start Date</b></td>
+                <td><b>End Date</b></td>
+                <td><b>Class Available</b></td>
+                <td><strong>Action</strong></td>
+            </tr>
+
+
+            <!--iterate through all the existed courses-->
+
+            <tr th:each="course:${allCoursesEnrolled}">
+                <td th:text="${course.id}"></td>
+                <td th:text="${course.crn}"></td>
+                <td th:text="${course.courseName}"></td>
+                <td th:text="${{course.startDate}}"></td>
+                <td th:text="${{course.endDate}}"></td>
+                <td th:text="${course.status}"></td>
+                <td>
+                    remove student from course
+                    -
+                    student attendance?
+                </td>
+            </tr>
+
+        </table>
+
+        <h3>Courses Completed</h3>
+        <table class="table table-striped" border="1">
+            <tr>
+                <td><b>ID</b></td>
+                <td><b>CRN</b></td>
+                <td><b>Course Name</b></td>
+                <td><b>Start Date</b></td>
+                <td><b>End Date</b></td>
+                <td><b>Class Available</b></td>
+                <td><strong>Action</strong></td>
+            </tr>
+
+
+            <!--iterate through all the existed courses-->
+            <tr th:each="course:${allCoursesEnded}">
+                <td th:text="${course.id}"></td>
+                <td th:text="${course.crn}"></td>
+                <td th:text="${course.courseName}"></td>
+                <td th:text="${{course.startDate}}"></td>
+                <td th:text="${{course.endDate}}"></td>
+                <td th:text="${course.status}"></td>
+                <td>
+                    student attendance?
+                </td>
+            </tr>
+        </table>
+
+    </div>
+    <div th:replace="base :: footer"></div>
+</body>
+</html>

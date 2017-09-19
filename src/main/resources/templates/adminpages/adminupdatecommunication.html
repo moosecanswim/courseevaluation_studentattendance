@@ -27,9 +27,13 @@
             <input type="hidden" th:field="*{id}">
             <!--//mNumber input-->
             M#: <input th:field="*{mNumber}">
+
             Name: <input th:field="*{name}">
+
             Phone #: <input th:field="*{phoneNumber}">
+
             Email: <input th:field="*{email}">
+
             Course:
             <select th:field="*{courseInterestedCRN}">
                 <option value="">--select a course--</option>
@@ -38,7 +42,9 @@
                         th:text="${course.courseName}">
                 </option>
             </select>
+
             Call Details: <textarea th:field="*{callDetails}" col="50" row="4"></textarea>
+
             <input type="submit" value="Submit call/email"></select>
 
         </fieldset>

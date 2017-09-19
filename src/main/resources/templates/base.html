@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+      <!--xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">-->
+<head lang="en">
 
 </head>
 <body>
@@ -13,6 +15,7 @@
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Bootstrap Core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -73,7 +76,7 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li style="float: right"><a href="/logout">Logout</a></li>
+                <li><a href="/logout">Logout</a></li>
             </ul>
 
         </div>
@@ -96,12 +99,61 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li style="float: right"><a href="/logout">Logout</a></li>
+                <!--TOdo: display here the logged teacher username (add dependency for security 4 in pom file)-->
+                <!--<li>Logged user: <span sec:authentication="name">The job seeker is not logged in yet</span></li>-->
+                <!--<li style="float: right"><a href="/logout">Logout</a></li>-->
+                <li><a href="/logout">Logout</a></li>
             </ul>
         </div>
     </nav>
 </div>
 <!-- /.Navigation Teacher -->
+
+
+<!-- Navigation Default/Welcome Page -->
+<div th:fragment="nav2Welcome">
+    <nav class="navbar navbar-inverse fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Courses DB</a>
+            </div>
+
+            <ul class="nav navbar-nav">
+                <li><a href="/">Welcome</a></li>
+                <li><a href="/viewcourses">View Courses</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/login">Login</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<!-- /.Navigation Default/Welcome Page -->
+
+
+<!-- Navigation Login Page -->
+<div th:fragment="nav2Login">
+    <nav class="navbar navbar-inverse fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Courses DB</a>
+            </div>
+
+            <ul class="nav navbar-nav">
+                <li><a href="/">Welcome</a></li>
+                <li><a href="/viewcourses">View Courses</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<!-- /.Navigation Login Page -->
+
 
 
 <!-- Footer -->

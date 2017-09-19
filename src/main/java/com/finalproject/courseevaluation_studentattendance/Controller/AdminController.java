@@ -22,6 +22,7 @@ import javax.validation.Valid;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -93,8 +94,10 @@ public class AdminController {
 //
     //End date for the course isn't going to be entered here but it will be set when the teacher says the course ended
     @PostMapping("/addcourse")
-    public String postCourse(@ModelAttribute("newcourse")Course newcourse)
-    {
+    public String postCourse(@Valid @ModelAttribute("newcourse")Course newcourse, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()){
+            return"adminpages/adminaddcourse";
+        }
         courseRepo.save(newcourse);
         return"redirect:/admin/home";
     }
@@ -123,9 +126,12 @@ public class AdminController {
     }
 
     @PostMapping("/registerstudent")
-    public String saveStudent(@ModelAttribute("newstudent") Person newstudent)
+    public String saveStudent(@Valid @ModelAttribute("newstudent") Person newstudent, BindingResult bindingResult)
     {
-
+     if(bindingResult.hasErrors())
+     {
+         return "adminpages/adminregisterstudent";
+     }
         personService.create(newstudent);
         return "redirect:/admin/home/";
     }
@@ -313,6 +319,45 @@ public class AdminController {
         return "adminpages/adminviewallstudents";
     }
 
+
+
+    /*
+    links-from admin/viewallstudents
+    admin/studentinformation/{mNumber} takes in an mNumber and finds an Iterable of all
+    profiles tied to that mNumber.  It then goes through each course and checks to see if
+    student profile is assigned as a student to that course.  when it finds a course
+    that the student's profile is in it checks to see if the course is avalible or has ended
+    if it has ended then it will add to studentCoursesAvalible otherwise it will add the course to
+    studentCourseUnavalible
+     */
+    @GetMapping("/studentinformation/{id}")
+    public String studentInformation(@PathVariable("id")Long id,Model model){
+        System.out.println("in StudentInformation");
+        Person aPerson=personService.findById(id);
+        Iterable<Person> studentProfiles = personService.findByMNumber(aPerson.getmNumber());
+        Set<Course> studentCoursesAvalible = new HashSet<Course>();
+        Set<Course> studentCoursesUnvalible = new HashSet<Course>();
+
+        for(Course c : courseService.findAll()){
+           for(Person s:studentProfiles){
+               if(c.getStudent().contains(s)){
+                  if(c.getStatus()){
+                      studentCoursesAvalible.add(c);
+                  }
+                  else{
+                      studentCoursesUnvalible.add(c);
+                  }
+               }
+           }
+
+        }
+        model.addAttribute("allCoursesEnrolled", studentCoursesAvalible);
+        model.addAttribute("allCoursesEnded",studentCoursesUnvalible);
+    return "adminpages/adminstudentdetails";
+    }
+
+
+
     //admin edit the information of all people
     //this just takes back to the  registration form
     //which we need to change, updating person is going to be a little different after that
@@ -325,9 +370,12 @@ public class AdminController {
 
 
     @PostMapping("/updateperson")
-    public String savePerson(@ModelAttribute("person") Person person)
+    public String savePerson(@Valid @ModelAttribute("person") Person person, BindingResult bindingResult)
     {
-
+       if(bindingResult.hasErrors())
+       {
+           return"adminpages/admineditpeople";
+       }
         personRepo.save(person);
         return "redirect:/admin/home/";
     }

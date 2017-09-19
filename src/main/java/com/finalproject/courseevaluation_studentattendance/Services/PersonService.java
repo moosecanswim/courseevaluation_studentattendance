@@ -30,6 +30,9 @@ public class PersonService {
         return personRepo.findOne(id);
     }
 
+    public Iterable<Person> findByMNumber(String mNumber){
+       return personRepo.findAllByMNumberLike("%"+mNumber+"%");
+    }
 
     public void update(Person person){
         Person existingPerson = personRepo.findOne(person.getId());

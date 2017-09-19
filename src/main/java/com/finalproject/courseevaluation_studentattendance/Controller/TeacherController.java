@@ -19,10 +19,12 @@ import com.finalproject.courseevaluation_studentattendance.Repositories.PersonRe
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.mail.internet.InternetAddress;
+import javax.validation.Valid;
 import javax.websocket.server.PathParam;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
@@ -154,8 +156,10 @@ public class TeacherController {
 
 
     @PostMapping("/markattendancepo/{courseId}")
-    public String postattendance(@PathVariable("courseId") Long courseId, @RequestParam("attdate") String attdate, @RequestParam(value = "attendanceStatus") String[] attendanceStatus, Model model)
+    public String postattendance(@PathVariable("courseId") Long courseId, @RequestParam("attdate") String attdate,
+                                 @RequestParam(value = "attendanceStatus") String[] attendanceStatus,Model model)
     {
+
         Course currentCourse = courseRepository.findOne(courseId);
         Iterable<Person> studentsofACourse = currentCourse.getStudent();
 
@@ -280,8 +284,11 @@ public class TeacherController {
 
 
     @PostMapping("/update/{courseId}/{studentId}")
-    public String updateMnumberordeletestudent(@PathVariable("courseId") Long courseId, @PathVariable("studentId") Long studentId, @RequestParam(value="newMId") String newMId, Model model) {
-
+    public String updateMnumberordeletestudent(@Valid @PathVariable("courseId") Long courseId, @PathVariable("studentId") Long studentId,
+                                               @RequestParam(value="newMId") String newMId, BindingResult bindingResult,Model model) {
+            if(bindingResult.hasErrors()){
+                return "teacherpages/updateMform";
+            }
         Course currentCourse = courseRepository.findOne(courseId);
         Person currentStudent= personRepository.findOne(studentId);
         currentStudent.setmNumber(newMId);
@@ -437,9 +444,12 @@ public class TeacherController {
 
 
    @PostMapping("/addstudent/{id}")
-    public String postCourse(@PathVariable("id") Long id, @ModelAttribute("newstudent") Person student, Model model)
+    public String postCourse(@Valid @PathVariable("id") Long id, @ModelAttribute("newstudent") Person student, BindingResult bindingResult,Model model)
    {
-
+        if(bindingResult.hasErrors())
+        {
+            return "teacherpages/addstudent";
+        }
        Course c =  courseRepository.findOne(id);
        student.setCourseStudent(c);
        personRepository.save(student);
@@ -476,24 +486,7 @@ public class TeacherController {
         System.out.println("students in attachment method");
 
         sendEmailWithoutTemplating(course);
-//        for (Person pr:students)
-//        {
-//            System.out.println("students in course");
-//            String stname=pr.getFirstName()+pr.getmNumber()+"\n";
-//            Iterable<Attendance>attendances=pr.getAttendances();
-//            for (Attendance att:attendances)
-//            {
-//               String attdate=att.getDate();
-//               String attstatus=att.getStatus()+"\n";
-//                System.out.println("attendance for students");
-//               sendEmailWithoutTemplating(head,stname,attdate,attstatus);
-//               return attstatus;
-////               return attsatus;
-//            }
-//           return stname;
-//
-//        }
-//
+
           return head;
 
     }
@@ -506,7 +499,7 @@ public class TeacherController {
                 .from(new InternetAddress("mahifentaye@gmail.com", "Attendance INFO"))
                 .to(Lists.newArrayList(new InternetAddress("mymahder@gmail.com","admin")))
                 .subject("Testing Email")
-                .body("We need the attendance in the Email body.")
+                .body("Course Closed.  Attendance for the class has been attached.")
                 .attachment(getCsvForecastAttachment("Attendance",course))
                 .encoding("UTF-8").build();
 //		modelObject.put("recipent", recipent);
@@ -514,23 +507,17 @@ public class TeacherController {
         emailService.send(email);
     }
     private EmailAttachment getCsvForecastAttachment(String filename,Course course) {
-        String testData="Record Number,Student Name,M_Number,Date\n";
-        System.out.println("test before get course in attachment");
-        System.out.println(course.getCourseName());
-        System.out.println("test after get course in attachment");
+        String testData="Record Number,Student Name,M_Number,Date,Status\n";
         Iterable<Person> students = course.getStudent();
         for (Person std : students) {
-            System.out.println("nameeeeeeeeeeeeeee in attachment"+std.getFirstName());
             String studName= std.getFirstName() +" "+ std.getLastName();
             String studId = String.valueOf(std.getId());
             String mnum = String.valueOf(std.getmNumber());
             Iterable<Attendance> attendances=std.getAttendances();
-            System.out.println("idddddddddddddddddd in attachment"+std.getId());
             for (Attendance att: attendances) {
-            System.out.println("attt in attachment"+att.getDate());
                 String dates=String.valueOf(att.getDate());
                 String status=att.getStatus();
-                testData += studId+","+ studName+","+mnum+","+status+"\n";
+                testData += studId+","+ studName+","+mnum+","+dates+","+status+"\n";
 
             }
         }

@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import java.util.Date;
@@ -19,9 +20,11 @@ public class Course {
     private long id;
 
     @NotNull
+    @Min(1l)
     private long crn;
     @NotEmpty
     private String courseName;
+
     @DateTimeFormat(pattern = "MM/dd/yyyy")
     private Date startDate;
     @DateTimeFormat(pattern = "MM/dd/yyyy")
@@ -105,7 +108,7 @@ public class Course {
         this.endDate = endDate;
     }
 
-    public boolean isStatus() {
+    public boolean getStatus() {
         return status;
     }
 
