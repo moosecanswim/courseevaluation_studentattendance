@@ -20,10 +20,10 @@ public class Attendance {
     @NotEmpty
     private String status;
 
-    @NotEmpty
+
     @ManyToOne
     private Person personAttendance;
-    @NotEmpty
+
     @ManyToOne
     private Course attendanceCourse;
 

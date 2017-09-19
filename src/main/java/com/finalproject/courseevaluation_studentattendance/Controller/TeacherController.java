@@ -156,12 +156,10 @@ public class TeacherController {
 
 
     @PostMapping("/markattendancepo/{courseId}")
-    public String postattendance(@Valid @PathVariable("courseId") Long courseId, @RequestParam("attdate") String attdate,
-                                 @RequestParam(value = "attendanceStatus") String[] attendanceStatus, BindingResult bindingResult,Model model)
+    public String postattendance(@PathVariable("courseId") Long courseId, @RequestParam("attdate") String attdate,
+                                 @RequestParam(value = "attendanceStatus") String[] attendanceStatus,Model model)
     {
-        if (bindingResult.hasErrors()){
-            return "teacherpages/attendanceofacourseform";
-        }
+
         Course currentCourse = courseRepository.findOne(courseId);
         Iterable<Person> studentsofACourse = currentCourse.getStudent();
 
@@ -482,7 +480,7 @@ public class TeacherController {
         System.out.println(course.getCourseName());
         final Email email= DefaultEmail.builder()
                 .from(new InternetAddress("mahifentaye@gmail.com", "Attendance INFO"))
-                .to(Lists.newArrayList(new InternetAddress("mahifentaye@gmail.com","admin")))
+                .to(Lists.newArrayList(new InternetAddress("mymahder@gmail.com","admin")))
                 .subject("Testing Email")
                 .body("Course Closed.  Attendance for the class has been attached.")
                 .attachment(getCsvForecastAttachment("Attendance",course))
@@ -492,23 +490,17 @@ public class TeacherController {
         emailService.send(email);
     }
     private EmailAttachment getCsvForecastAttachment(String filename,Course course) {
-        String testData="Record Number,Student Name,M_Number,Date\n";
-        System.out.println("test before get course in attachment");
-        System.out.println(course.getCourseName());
-        System.out.println("test after get course in attachment");
+        String testData="Record Number,Student Name,M_Number,Date,Status\n";
         Iterable<Person> students = course.getStudent();
         for (Person std : students) {
-            System.out.println("nameeeeeeeeeeeeeee in attachment"+std.getFirstName());
             String studName= std.getFirstName() +" "+ std.getLastName();
             String studId = String.valueOf(std.getId());
             String mnum = String.valueOf(std.getmNumber());
             Iterable<Attendance> attendances=std.getAttendances();
-            System.out.println("idddddddddddddddddd in attachment"+std.getId());
             for (Attendance att: attendances) {
-            System.out.println("attt in attachment"+att.getDate());
                 String dates=String.valueOf(att.getDate());
                 String status=att.getStatus();
-                testData += studId+","+ studName+","+mnum+","+status+"\n";
+                testData += studId+","+ studName+","+mnum+","+dates+","+status+"\n";
 
             }
         }
