@@ -83,6 +83,7 @@ public class EvalController {
     @PostMapping("/searchcourse")
     public String searchCoursePost(@RequestParam("crnfield")long crn, Model model,Course course )
     {
+
         model.addAttribute("searcheval", courseRepository.findAllByCrn(crn));
 
 
