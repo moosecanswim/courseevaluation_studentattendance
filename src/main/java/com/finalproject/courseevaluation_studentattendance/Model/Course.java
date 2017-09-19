@@ -105,7 +105,7 @@ public class Course {
         this.endDate = endDate;
     }
 
-    public boolean isStatus() {
+    public boolean getStatus() {
         return status;
     }
 
