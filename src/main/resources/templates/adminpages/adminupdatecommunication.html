@@ -27,17 +27,13 @@
             <input type="hidden" th:field="*{id}">
             <!--//mNumber input-->
             M#: <input th:field="*{mNumber}">
-            <div th:if="${#fields.hasErrors('mNumber')}"  th:errors="*{mNumber}"
-                 class="well alert alert-warning" role="alert"></div>
+
             Name: <input th:field="*{name}">
-            <div th:if="${#fields.hasErrors('name')}"  th:errors="*{name}"
-                 class="well alert alert-warning" role="alert"></div>
+
             Phone #: <input th:field="*{phoneNumber}">
-            <div th:if="${#fields.hasErrors('phoneNumber')}"  th:errors="*{phoneNumber}"
-                 class="well alert alert-warning" role="alert"></div>
+
             Email: <input th:field="*{email}">
-            <div th:if="${#fields.hasErrors('email')}"  th:errors="*{email}"
-                 class="well alert alert-warning" role="alert"></div>
+
             Course:
             <select th:field="*{courseInterestedCRN}">
                 <option value="">--select a course--</option>
@@ -46,11 +42,9 @@
                         th:text="${course.courseName}">
                 </option>
             </select>
-            <div th:if="${#fields.hasErrors('courseInterestedCRN')}"  th:errors="*{courseInterestedCRN}"
-                 class="well alert alert-warning" role="alert"></div>
+
             Call Details: <textarea th:field="*{callDetails}" col="50" row="4"></textarea>
-            <div th:if="${#fields.hasErrors('callDetails')}"  th:errors="*{callDetails}"
-                 class="well alert alert-warning" role="alert"></div>
+
             <input type="submit" value="Submit call/email"></select>
 
         </fieldset>
