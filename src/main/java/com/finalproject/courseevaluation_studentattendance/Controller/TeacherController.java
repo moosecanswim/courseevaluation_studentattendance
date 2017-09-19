@@ -261,11 +261,11 @@ public class TeacherController {
 
 
     @PostMapping("/update/{courseId}/{studentId}")
-    public String updateMnumberordeletestudent(@Valid @PathVariable("courseId") Long courseId, @PathVariable("studentId") Long studentId,
-                                               @RequestParam(value="newMId") String newMId, BindingResult bindingResult,Model model) {
-            if(bindingResult.hasErrors()){
-                return "teacherpages/updateMform";
-            }
+    public String updateMnumberordeletestudent(@PathVariable("courseId") Long courseId,
+                                               @PathVariable("studentId") Long studentId,
+                                               @RequestParam(value="newMId") String newMId,
+                                               Model model) {
+
         Course currentCourse = courseRepository.findOne(courseId);
         Person currentStudent= personRepository.findOne(studentId);
         currentStudent.setmNumber(newMId);
@@ -403,11 +403,9 @@ public class TeacherController {
        Course c =  courseRepository.findOne(id);
        student.setCourseStudent(c);
        personRepository.save(student);
-//       personService.addStudentToCourse(student,c);
        model.addAttribute("course", c);
        model.addAttribute("newstudent", student);
-//       personService.create(student);
-//       personRepo.save(person);
+
        return "teacherpages/confirmstudent";
    }
 
@@ -418,28 +416,15 @@ public class TeacherController {
     public String emailAtCourseEnd(@PathVariable("id") long id, Model model) throws UnsupportedEncodingException {
         Course course=courseRepository.findOne(id);
         Date date= new Date();
-//        DateFormat df=new SimpleDateFormat("MM/dd/yyyy");
-        //sets the course end date with the current date when they click here
         course.setEndDate(date);
         courseRepository.save(course);
         System.out.println("test after save End date");
-        attachmentContent(course);
+        sendEmailWithoutTemplating(course);
         return "redirect:/teacher/listallcourses/";
 
     }
 
-    private String attachmentContent(Course course) throws UnsupportedEncodingException {
 
-        String head="StudentName,Date,Status";
-        Iterable<Person> students=course.getStudent();
-        System.out.println(course.getCourseName());
-        System.out.println("students in attachment method");
-
-        sendEmailWithoutTemplating(course);
-
-          return head;
-
-    }
     @Autowired
     public EmailService emailService;
     public void sendEmailWithoutTemplating(Course course) throws UnsupportedEncodingException {
@@ -450,13 +435,12 @@ public class TeacherController {
                 .to(Lists.newArrayList(new InternetAddress("mymahder@gmail.com","admin")))
                 .subject("Testing Email")
                 .body("Course Closed.  Attendance for the class has been attached.")
-                .attachment(getCsvForecastAttachment("Attendance",course))
+                .attachment(getCsvAttendanceAttachment("Attendance",course))
                 .encoding("UTF-8").build();
-//		modelObject.put("recipent", recipent);
         System.out.println("test it");
         emailService.send(email);
     }
-    private EmailAttachment getCsvForecastAttachment(String filename,Course course) {
+    private EmailAttachment getCsvAttendanceAttachment(String filename,Course course) {
 
 
 
