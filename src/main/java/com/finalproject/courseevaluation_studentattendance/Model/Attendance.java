@@ -20,7 +20,6 @@ public class Attendance {
     @NotEmpty
     private String status;
 
-
     @ManyToOne
     private Person personAttendance;
 

@@ -153,8 +153,6 @@ public class TeacherController {
 
     //display the attendance for a course of all students
 
-
-
     @PostMapping("/markattendancepo/{courseId}")
     public String postattendance(@PathVariable("courseId") Long courseId, @RequestParam("attdate") String attdate,
                                  @RequestParam(value = "attendanceStatus") String[] attendanceStatus,Model model)
@@ -165,14 +163,6 @@ public class TeacherController {
 
         int i=0;
 
-//        Date now= new Date();
-//
-//        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-//
-//        String nowdate= df.format(now);
-//
-//        System.out.println(nowdate);
-//
         for (Person student: studentsofACourse) {
 
             if (attendanceRepository.findAllByAttendanceCourseEqualsAndDateEqualsAndPersonAttendanceEquals(currentCourse, attdate, student) != null) {
@@ -441,8 +431,6 @@ public class TeacherController {
         emailService.send(email);
     }
     private EmailAttachment getCsvAttendanceAttachment(String filename,Course course) {
-
-
 
         String testData = "Course CRN: " + course.getCrn() + "," + "Course Name: "+ course.getCourseName() + "\n";
 
