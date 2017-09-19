@@ -93,8 +93,10 @@ public class AdminController {
 //
     //End date for the course isn't going to be entered here but it will be set when the teacher says the course ended
     @PostMapping("/addcourse")
-    public String postCourse(@ModelAttribute("newcourse")Course newcourse)
-    {
+    public String postCourse(@Valid @ModelAttribute("newcourse")Course newcourse, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()){
+            return"adminpages/adminaddcourse";
+        }
         courseRepo.save(newcourse);
         return"redirect:/admin/home";
     }
@@ -123,9 +125,12 @@ public class AdminController {
     }
 
     @PostMapping("/registerstudent")
-    public String saveStudent(@ModelAttribute("newstudent") Person newstudent)
+    public String saveStudent(@Valid @ModelAttribute("newstudent") Person newstudent, BindingResult bindingResult)
     {
-
+     if(bindingResult.hasErrors())
+     {
+         return "adminpages/adminregisterstudent";
+     }
         personService.create(newstudent);
         return "redirect:/admin/home/";
     }
@@ -325,9 +330,12 @@ public class AdminController {
 
 
     @PostMapping("/updateperson")
-    public String savePerson(@ModelAttribute("person") Person person)
+    public String savePerson(@Valid @ModelAttribute("person") Person person, BindingResult bindingResult)
     {
-
+       if(bindingResult.hasErrors())
+       {
+           return"adminpages/admineditpeople";
+       }
         personRepo.save(person);
         return "redirect:/admin/home/";
     }
