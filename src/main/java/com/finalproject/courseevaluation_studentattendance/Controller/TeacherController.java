@@ -138,7 +138,11 @@ public class TeacherController {
 
         Date now= new Date();
 
-        model.addAttribute("now", now);
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+
+        String nowdate= df.format(now);
+
+        model.addAttribute("nowdate", nowdate);
         model.addAttribute("course", currentCourse);
         model.addAttribute("studentsofACourse", studentsofACourse);
 
@@ -150,25 +154,25 @@ public class TeacherController {
 
 
     @PostMapping("/markattendancepo/{courseId}")
-    public String postattendance(@PathVariable("courseId") Long courseId, @RequestParam(value = "attendanceStatus") String[] attendanceStatus, Model model)
+    public String postattendance(@PathVariable("courseId") Long courseId, @RequestParam("attdate") String attdate, @RequestParam(value = "attendanceStatus") String[] attendanceStatus, Model model)
     {
         Course currentCourse = courseRepository.findOne(courseId);
         Iterable<Person> studentsofACourse = currentCourse.getStudent();
 
         int i=0;
 
-        Date now= new Date();
-
-        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-
-        String nowdate= df.format(now);
-
-        System.out.println(nowdate);
+//        Date now= new Date();
+//
+//        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+//
+//        String nowdate= df.format(now);
+//
+//        System.out.println(nowdate);
 //
         for (Person student: studentsofACourse) {
 
-            if (attendanceRepository.findAllByAttendanceCourseEqualsAndDateEqualsAndPersonAttendanceEquals(currentCourse, nowdate, student) != null) {
-                Attendance attdel = attendanceRepository.findAllByAttendanceCourseEqualsAndDateEqualsAndPersonAttendanceEquals(currentCourse, nowdate, student);
+            if (attendanceRepository.findAllByAttendanceCourseEqualsAndDateEqualsAndPersonAttendanceEquals(currentCourse, attdate, student) != null) {
+                Attendance attdel = attendanceRepository.findAllByAttendanceCourseEqualsAndDateEqualsAndPersonAttendanceEquals(currentCourse, attdate, student);
                 System.out.println(attdel.toString());
                 student.removeAttendance(attdel);
                 System.out.println("here1111111");
@@ -177,7 +181,7 @@ public class TeacherController {
             }
 
                 Attendance attnew = new Attendance();
-                attnew.setDate(nowdate);
+                attnew.setDate(attdate);
                 System.out.println("printing status" + attendanceStatus[i]);
                 attnew.setStatus(attendanceStatus[i]);
                 System.out.println("set stautus doone----");
@@ -198,7 +202,7 @@ public class TeacherController {
 
         System.out.println("end loop------");
 
-        model.addAttribute("now", now);
+        model.addAttribute("attdate", attdate);
         model.addAttribute("course", currentCourse);
         model.addAttribute("studentsofACourse", studentsofACourse);
 

@@ -7,7 +7,7 @@
 <body>
 
 <p>Student Attendance: </p>
-<p th:text="'Date today: ' + ${#dates.format(now, 'MMM dd, yyyy')}"></p>
+<p th:text="'Date today: ' + ${nowdate}"></p>
 
 <!--should be a form allow input of students' attendance info-->
 
@@ -15,6 +15,12 @@
 <div  th:if="${!studentsofACourse.isEmpty()}">
 
     <form th:action="@{/teacher/markattendancepo/{courseId}(courseId=${course.id})}" method="post">
+
+
+        <p>Input date for marking the attendance: </p>
+
+        <p><input type="text" name="attdate" placeholder="MM/dd/yyyy" /></p>
+
         <table>
             <thead>
             <tr>
@@ -32,7 +38,6 @@
 
             <tbody>
             <th:block th:each="student:${studentsofACourse}">
-
 
                 <tr>
                     <td th:text="${student.firstName} + ' ' +${student.lastName} "></td>
