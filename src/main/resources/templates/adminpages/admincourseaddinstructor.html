@@ -12,14 +12,10 @@
 
 <body id="page-top">
 
-<!--Navigation Admin-->
-<nav th:replace="base :: nav2Admin"></nav>
-<!--/.Navigation Admin-->
-
-
-
-<header>
-    <div>
+    <!--Navigation Admin-->
+    <nav th:replace="base :: nav2Admin"></nav>
+    <!--/.Navigation Admin-->
+    <div class="container">
         <form action="#" th:action="@{/admin/addinstructortocourse/{crsid}(crsid=${course.id})}" th:object="${aInstructor}" method="post">
             <input type="hidden" th:value="${course.id}">
             <h2> <label th:inline="text">Adding a Instructor for [[${course.courseName}]]</label></h2>
@@ -29,15 +25,10 @@
             <p><input type="submit" value="Add a Instructor!"></p>
         </form>
     </div>
-</header>
-<!-- Bootstrap core JavaScript -->
 
-
-
-
-<!-- Footer -->
-<div th:replace="base :: footer"></div>
-<!-- /.Footer -->
+    <!-- Footer -->
+    <div th:replace="base :: footer"></div>
+    <!-- /.Footer -->
 
 </body>
 </html>

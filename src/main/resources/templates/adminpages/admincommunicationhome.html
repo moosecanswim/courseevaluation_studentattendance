@@ -10,104 +10,106 @@
 
 </head>
 <body>
+    <!--Navigation Admin-->
+    <nav th:replace="base :: nav2Admin"></nav>
+    <!--/.Navigation Admin-->
 
-<!--Navigation Admin-->
-<nav th:replace="base :: nav2Admin"></nav>
-<!--/.Navigation Admin-->
+    <div class="container">
+        <h1>Communication Home</h1>
 
-    <h1>Communication Home</h1>
+        <h3>Open Communications</h3>
 
-    <h3>Open Communications</h3>
+        <a href="/admin/addcommunication">Create a call/email</a>
 
-    <a href="/admin/addcommunication">Create a call/email</a>
+        <table class="table table-striped" border="1">
+            <tr>
+                <th><strong>Id</strong></th>
+                <th><strong>Date Entered</strong></th>
+                <th><strong>M#</strong></th>
+                <th><strong>Contact Name</strong></th>
+                <th><strong>Contact Phone#</strong></th>
+                <th><strong>Contact Email</strong></th>
+                <th><strong>Course Inquired</strong></th>
+                <th><strong>Call Details</strong></th>
+                <!--<th><strong>Call Status</strong></th>-->
+                <th><strong>Actions</strong></th>
+            </tr>
+            <tr th:each="comm : ${communicationListAvalible}">
+                <td th:text="*{comm.id}"></td>
+                <th th:text="*{comm.createdOn}"></th>
+                <td th:text="*{comm.mNumber}"></td>
+                <td th:text="*{comm.name}"></td>
+                <td th:text="*{comm.phoneNumber}"></td>
+                <td th:text="*{comm.email}"></td>
+                <td th:text="*{comm.courseInterested}"></td>
+                <td th:text="*{comm.callDetails}"></td>
+                <!--<td th:text="*{comm.callStatus}"></td>-->
+                <td>
+                    <a th:href="@{/admin/updatecommunication/{id} (id=*{comm.id})}">Update</a>
+                    -
+                    <a th:href="@{/admin/togglecommunication/{id} (id=*{comm.id})}">Mark Closed</a>
+                </td>
 
-    <table class="table table-striped" border="1">
-        <tr>
-            <th><strong>Id</strong></th>
-            <th><strong>Date Entered</strong></th>
-            <th><strong>M#</strong></th>
-            <th><strong>Contact Name</strong></th>
-            <th><strong>Contact Phone#</strong></th>
-            <th><strong>Contact Email</strong></th>
-            <th><strong>Course Inquired</strong></th>
-            <th><strong>Call Details</strong></th>
-            <!--<th><strong>Call Status</strong></th>-->
-            <th><strong>Actions</strong></th>
-        </tr>
-        <tr th:each="comm : ${communicationListAvalible}">
-            <td th:text="*{comm.id}"></td>
-            <th th:text="*{comm.createdOn}"></th>
-            <td th:text="*{comm.mNumber}"></td>
-            <td th:text="*{comm.name}"></td>
-            <td th:text="*{comm.phoneNumber}"></td>
-            <td th:text="*{comm.email}"></td>
-            <td th:text="*{comm.courseInterested}"></td>
-            <td th:text="*{comm.callDetails}"></td>
-            <!--<td th:text="*{comm.callStatus}"></td>-->
-            <td>
-                <a th:href="@{/admin/updatecommunication/{id} (id=*{comm.id})}">Update</a>
-                -
-                <a th:href="@{/admin/togglecommunication/{id} (id=*{comm.id})}">Mark Closed</a>
-            </td>
+            </tr>
+        </table>
 
-        </tr>
-    </table>
+        <h3>Closed Communications (already taken care)</h3>
+        <table class="table table-striped" border="1">
+            <tr>
+                <th><strong>Id</strong></th>
+                <th><strong>Date Entered</strong></th>
+                <th><strong>M#</strong></th>
+                <th><strong>Contact Name</strong></th>
+                <th><strong>Contact Phone#</strong></th>
+                <th><strong>Contact Email</strong></th>
+                <th><strong>Course Inquired</strong></th>
+                <th><strong>Call Details</strong></th>
+                <!--<th><strong>Call Status</strong></th>-->
+                <th><strong>Actions</strong></th>
+            </tr>
+            <tr th:each="comm : ${communicationListUnavalible}">
+                <td th:text="*{comm.id}"></td>
+                <th th:text="*{comm.createdOn}"></th>
+                <td th:text="*{comm.mNumber}"></td>
+                <td th:text="*{comm.name}"></td>
+                <td th:text="*{comm.phoneNumber}"></td>
+                <td th:text="*{comm.email}"></td>
+                <td th:text="*{comm.courseInterested}"></td>
+                <td th:text="*{comm.callDetails}"></td>
+                <!--<td th:text="*{comm.callStatus}"></td>-->
+                <td>
+                    <a th:href="@{/admin/togglecommunication/{id} (id=*{comm.id})}">Mark Open</a>
+                </td>
 
-    <h3>Closed Communications (already taken care)</h3>
-    <table class="table table-striped" border="1">
-        <tr>
-            <th><strong>Id</strong></th>
-            <th><strong>Date Entered</strong></th>
-            <th><strong>M#</strong></th>
-            <th><strong>Contact Name</strong></th>
-            <th><strong>Contact Phone#</strong></th>
-            <th><strong>Contact Email</strong></th>
-            <th><strong>Course Inquired</strong></th>
-            <th><strong>Call Details</strong></th>
-            <!--<th><strong>Call Status</strong></th>-->
-            <th><strong>Actions</strong></th>
-        </tr>
-        <tr th:each="comm : ${communicationListUnavalible}">
-            <td th:text="*{comm.id}"></td>
-            <th th:text="*{comm.createdOn}"></th>
-            <td th:text="*{comm.mNumber}"></td>
-            <td th:text="*{comm.name}"></td>
-            <td th:text="*{comm.phoneNumber}"></td>
-            <td th:text="*{comm.email}"></td>
-            <td th:text="*{comm.courseInterested}"></td>
-            <td th:text="*{comm.callDetails}"></td>
-            <!--<td th:text="*{comm.callStatus}"></td>-->
-            <td>
-                <a th:href="@{/admin/togglecommunication/{id} (id=*{comm.id})}">Mark Open</a>
-            </td>
-
-        </tr>
-    </table>
+            </tr>
+        </table>
 
 
-    <h4>Chose an option to search by:</h4>
-    <form action="/admin/searchcommunication">
-        <select name="searchBy">
-            <option value="all">All</option>
-            <option value="name">Contact Name</option>
-            <option value="courseCrn">Course CRN</option>
-            <!--<option value="courseName">Course Name</option>-->
-            <option value="phoneNumber">Phone Number</option>
-            <option value="mNumber">M #</option>
-            <option value="email">Email</option>
-        </select>
-        <p>
-            <input name="searchThing" type="text" placeholder="Input Search"/>
-            <input type="submit" value="Go"/>
-        </p>
+        <h4>Chose an option to search by:</h4>
+        <form action="/admin/searchcommunication">
+            <select name="searchBy">
+                <option value="all">All</option>
+                <option value="name">Contact Name</option>
+                <option value="courseCrn">Course CRN</option>
+                <!--<option value="courseName">Course Name</option>-->
+                <option value="phoneNumber">Phone Number</option>
+                <option value="mNumber">M #</option>
+                <option value="email">Email</option>
+            </select>
+            <p>
+                <input name="searchThing" type="text" placeholder="Input Search"/>
+                <input type="submit" value="Go"/>
+            </p>
 
-    </form>
+        </form>
 
-<a href="/admin/home">Admin Dash</a>
+        <a href="/admin/home">Admin Dash</a>
+    </div>
 
-<!-- Footer -->
-<div th:replace="base :: footer"></div>
-<!-- /.Footer -->
+
+    <!-- Footer -->
+    <div th:replace="base :: footer"></div>
+    <!-- /.Footer -->
 
 </body>
 </html>

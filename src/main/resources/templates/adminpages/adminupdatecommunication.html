@@ -11,45 +11,45 @@
 </head>
 <body>
 
-<!--Navigation Admin-->
-<nav th:replace="base :: nav2Admin"></nav>
-<!--/.Navigation Admin-->
+    <!--Navigation Admin-->
+    <nav th:replace="base :: nav2Admin"></nav>
+    <!--/.Navigation Admin-->
 
-<div class="container">
-    <h1>Update Communication Form</h1>
-    <p th:text="'Date today: ' + ${#dates.format(now, 'MMM dd, yyyy')}"></p>
+    <div class="container">
+        <h1>Update Communication Form</h1>
+        <p th:text="'Date today: ' + ${#dates.format(now, 'MMM dd, yyyy')}"></p>
 
-    <form th:action="@{/admin/processcommunication/update}"
-          th:object="${aCommunication}"
-          method="POST">
-        <fieldset>
-            <!--//hidden id-->
-            <input type="hidden" th:field="*{id}">
-            <!--//mNumber input-->
-            M#: <input th:field="*{mNumber}">
+        <form th:action="@{/admin/processcommunication/update}"
+              th:object="${aCommunication}"
+              method="POST">
+            <fieldset>
+                <!--//hidden id-->
+                <input type="hidden" th:field="*{id}">
+                <!--//mNumber input-->
+                M#: <input th:field="*{mNumber}">
 
-            Name: <input th:field="*{name}">
+                Name: <input th:field="*{name}">
 
-            Phone #: <input th:field="*{phoneNumber}">
+                Phone #: <input th:field="*{phoneNumber}">
 
-            Email: <input th:field="*{email}">
+                Email: <input th:field="*{email}">
 
-            Course:
-            <select th:field="*{courseInterestedCRN}">
-                <option value="">--select a course--</option>
-                <option th:each="course: ${courseList}"
-                        th:value="${course.crn}"
-                        th:text="${course.courseName}">
-                </option>
-            </select>
+                Course:
+                <select th:field="*{courseInterestedCRN}">
+                    <option value="">--select a course--</option>
+                    <option th:each="course: ${courseList}"
+                            th:value="${course.crn}"
+                            th:text="${course.courseName}">
+                    </option>
+                </select>
 
-            Call Details: <textarea th:field="*{callDetails}" col="50" row="4"></textarea>
+                Call Details: <textarea th:field="*{callDetails}" col="50" row="4"></textarea>
 
-            <input type="submit" value="Submit call/email"></select>
+                <input type="submit" value="Submit call/email"></select>
 
-        </fieldset>
-    </form>
-</div>
+            </fieldset>
+        </form>
+    </div>
 </body>
 
 
