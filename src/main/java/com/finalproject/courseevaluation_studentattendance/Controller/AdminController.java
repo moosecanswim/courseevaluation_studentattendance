@@ -332,9 +332,8 @@ public class AdminController {
      */
     @GetMapping("/studentinformation/{id}")
     public String studentInformation(@PathVariable("id")Long id,Model model){
-        System.out.println("in StudentInformation");
-        Person aPerson=personService.findById(id);
-        Iterable<Person> studentProfiles = personService.findByMNumber(aPerson.getmNumber());
+        Person aStudent=personService.findById(id);
+        Iterable<Person> studentProfiles = personService.findByMNumber(aStudent.getmNumber());
         Set<Course> studentCoursesAvalible = new HashSet<Course>();
         Set<Course> studentCoursesUnvalible = new HashSet<Course>();
 
@@ -351,6 +350,7 @@ public class AdminController {
            }
 
         }
+        model.addAttribute("aStudent",aStudent);
         model.addAttribute("allCoursesEnrolled", studentCoursesAvalible);
         model.addAttribute("allCoursesEnded",studentCoursesUnvalible);
     return "adminpages/adminstudentdetails";

@@ -11,89 +11,89 @@
 </head>
 <body>
 
-<!--Navigation Admin-->
-<nav th:replace="base :: nav2Admin"></nav>
-<!--/.Navigation Admin-->
+    <!--Navigation Admin-->
+    <nav th:replace="base :: nav2Admin"></nav>
+    <!--/.Navigation Admin-->
+
+    <div class="container">
+        <h2 th:inline="text">Course information for: [[${course.courseName}]] (crn:[[${course.crn}]])</h2>
+        <!--If the Instructor is not assigned to the course yet, this div will display Instructor: null null:-->
+        <h3 th:text="'Instructor: ' + ${courseInstructor.firstName} + ' ' +${courseInstructor.lastName}"></h3>
+
+        <p th:text="'Course ID: ' + ${course.id}"/>
+        <p th:text="'Course CRN: ' + ${course.crn}"/>
+        <p th:text="'Course Name: '+ ${course.courseName}" />
+        <p th:text="'Start Date: '+ ${course.startDate}" />
+        <p th:text="'End Date: '+ ${course.endDate}" />
+        <p th:text="'Completion Status: '+ ${course.status}" />
+        <hr />
+
+        <div class="center">
+            <p>
+                <a th:href="@{/admin/registerstudentforcourse/{id}(id=${course.id})}">Register Student</a>
+                -
+                <a th:href="@{/admin/viewcourseevaluations/{id}(id=${course.id})}">See evaluations</a>
+                -
+                <a th:href="@{/admin/addinstructortocourse/{id}(id=${course.id})}">Assign Instructor</a>
+            </p>
+        </div>
+        <hr />
+
+        <!--Admin does not see the student's password-->
+        <h3>List of All Students Registered for the Cource: </h3>
+
+        <!--Display message if there is no registered ctudents for the course:-->
+        <div  th:if="${courseStudents.isEmpty()}">
+            <h4>No students have registered yet.</h4>
+            <p><a th:href="@{/admin/registerstudentforcourse/{id}(id=${course.id})}">Register Student</a></p>
+        </div>
 
 
-    <!--<h2 th:inline="text">Course information for: [[${course.courseName}]] CRN [[${course.crn}]]</h2>-->
-
-    <!--<p th:text="'Course ID: ' + ${course.id}"/>-->
-    <!--<p th:text="'Course CRN: ' + ${course.crn}"/>-->
-    <!--<p th:text="'Course Name: '+ ${course.courseName}" />-->
-    <!--<p th:text="'Start Date: '+ ${course.startDate}" />-->
-    <!--<p th:text="'End Date: '+ ${course.endDate}" />-->
-    <!--<p th:text="'Completion Status: '+ ${course.status}" />-->
-
-    <!--&lt;!&ndash;If the Instructor is not assigned to the course yet, this div will display Instructor: null null:&ndash;&gt;-->
-    <!--<div th:text="'Instructor: ' + ${courseInstructor?.firstName} + ' ' +${courseInstructor?.lastName}"></div>-->
-
-
-
-
-
-
-    <!--Admin does not see the student's password-->
-    <h3>List of All Students Registered for the Cource: </h3>
-
-    <table class="table table-striped" border="1">
-        <tr>
-            <td><strong>ID</strong></td>
-            <td><strong>M Number</strong></td>
-            <td><strong>First Name</strong></td>
-            <td><strong>Last Name</strong></td>
-            <td><strong>User Name</strong></td>
-            <!--<td><strong>Password</strong></td>-->
-            <td><strong>Email Address</strong></td>
-            <td><strong>Start Date</strong></td>
-            <td><strong>Active</strong></td>
-            <td><strong>Remove from Course</strong></td>
-        </tr>
-
-
-
-        <!--iterate through all the students for this course-->
-        <th:block th:each="alls:${courseStudents}">
+        <table class="table table-striped" border="1">
             <tr>
-                <td th:text="${alls.id}"></td>
-                <td th:text="${alls.mNumber}"></td>
-                <td th:text="${alls.firstName}"></td>
-                <td th:text="${alls.lastName}"></td>
-                <td th:text="${alls.username}"></td>
-                <!--<td th:text="${alls.password}"></td>-->
-                <td th:text="${alls.email}"></td>
-                <td th:text="${{alls.startDate}}"></td>
-                <td th:text="${alls.active}"></td>
-                <td>
-                    <!--Remove Student from current class:-->
-                    <!--/removestudentfromcourse/{courseid}/{studentid}"-->
-
-                    <a th:href="@{/admin/removestudentfromcourse/{courseid}/{studentid}(courseid=${course.id}, studentid=${alls.id})}">Remove</a>
-
-                    <!--<a th:href="@{/admin/course/{courseid}/removestudentfromcourse/{studentid}(studentid=${alls.id},courseid=${course.id})}">Remove</a>-->
-                </td>
+                <td><strong>ID</strong></td>
+                <td><strong>M Number</strong></td>
+                <td><strong>First Name</strong></td>
+                <td><strong>Last Name</strong></td>
+                <td><strong>User Name</strong></td>
+                <td><strong>Email Address</strong></td>
+                <td><strong>Start Date</strong></td>
+                <td><strong>Active</strong></td>
+                <td><strong>Remove from Course</strong></td>
             </tr>
-        </th:block>
-    </table>
 
-    <!--Display message if there is no registered ctudents for the course:-->
-    <div  th:if="${courseStudents.isEmpty()}">
-        <h4>No students have registered yet.</h4>
+
+
+            <!--iterate through all the students for this course-->
+            <th:block th:each="alls:${courseStudents}">
+                <tr>
+                    <td th:text="${alls.id}"></td>
+                    <td th:text="${alls.mNumber}"></td>
+                    <td th:text="${alls.firstName}"></td>
+                    <td th:text="${alls.lastName}"></td>
+                    <td th:text="${alls.username}"></td>
+                    <td th:text="${alls.email}"></td>
+                    <td th:text="${{alls.startDate}}"></td>
+                    <td th:text="${alls.active}"></td>
+                    <td>
+                        <a th:href="@{/admin/removestudentfromcourse/{courseid}/{studentid}(courseid=${course.id}, studentid=${alls.id})}">Remove</a>
+
+                        <!--<a th:href="@{/admin/course/{courseid}/removestudentfromcourse/{studentid}(studentid=${alls.id},courseid=${course.id})}">Remove</a>-->
+                    </td>
+                </tr>
+            </th:block>
+        </table>
+
+
+        <hr />
+        <p><a th:href="@{/admin/registerstudentforcourse/{id}(id=${course.id})}">Register Student</a></p>
+
+
     </div>
 
-    <!--link to the course evaluations for this course-->
-    <p><a th:href="@{/admin/viewcourseevaluations/{id}(id=${course.id})}">See evaluations</a></p>
-    <p><a th:href="@{/admin/addinstructortocourse/{id}(id=${course.id})}">Assign Instructor</a></p>
-    <p><a th:href="@{/admin/registerstudentforcourse/{id}(id=${course.id})}">Register Student</a></p>
-
-
-    <!--Link to the Admin Home page-->
-    <div><a href="/admin/home">Admin Home</a></div>
-
-
-<!-- Footer -->
-<div th:replace="base :: footer"></div>
-<!-- /.Footer -->
+    <!-- Footer -->
+    <div th:replace="base :: footer"></div>
+    <!-- /.Footer -->
 
 </body>
 </html>
