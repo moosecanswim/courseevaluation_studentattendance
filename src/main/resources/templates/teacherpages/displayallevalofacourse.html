@@ -2,77 +2,90 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>All Evaluations</title>
+    <!-- Header -->
+    <div th:replace="base :: header"></div>
+    <!-- /.Header -->
 </head>
 <body>
-
-<!--Section II-->
-<h2>Section II: Rating of the Course</h2>
-<table class="table table-striped" border="1">
-    <tr>
-        <td><b>Eval ID</b></td>
-        <td><b>Course Content</b></td>
-        <td><b>Instruction Quality</b></td>
-        <td><b>Training Experience</b></td>
-        <td><b>Textbook or Handouts</b></td>
-        <td><b>Environment and Seating</b></td>
-        <td><b>Computer Equipment</b></td>
-    </tr>
-    <!--iterate through all the evaluations for this course-->
-    <th:block th:each="eval:${neweval}">
-        <tr>
-            <td><a th:text="${eval.id}"></a></td>
-            <td><a th:text="${eval.content}"></a></td>
-            <td><a th:text="${eval.quality}"></a></td>
-            <td><a th:text="${eval.experience}"></a></td>
-            <td><a th:text="${eval.materials}"></a></td>
-            <td><a th:text="${eval.environment}"></a></td>
-            <td><a th:text="${eval.equipment}"></a></td>
-        </tr>
-    </th:block>
-</table>
+    <!--Navigation Teacher-->
+    <nav th:replace="base :: nav2Teacher"></nav>
+    <!--/.Navigation Teacher-->
+    <div class="container">
 
 
+        <!--Section II-->
+        <h2>Section II: Rating of the Course</h2>
+        <table class="table table-striped" border="1">
+            <tr>
+                <td><b>Eval ID</b></td>
+                <td><b>Course Content</b></td>
+                <td><b>Instruction Quality</b></td>
+                <td><b>Training Experience</b></td>
+                <td><b>Textbook or Handouts</b></td>
+                <td><b>Environment and Seating</b></td>
+                <td><b>Computer Equipment</b></td>
+            </tr>
+            <!--iterate through all the evaluations for this course-->
+            <th:block th:each="eval:${neweval}">
+                <tr>
+                    <td><a th:text="${eval.id}"></a></td>
+                    <td><a th:text="${eval.content}"></a></td>
+                    <td><a th:text="${eval.quality}"></a></td>
+                    <td><a th:text="${eval.experience}"></a></td>
+                    <td><a th:text="${eval.materials}"></a></td>
+                    <td><a th:text="${eval.environment}"></a></td>
+                    <td><a th:text="${eval.equipment}"></a></td>
+                </tr>
+            </th:block>
+        </table>
 
-<!--Section III-->
-<h2>Section III: Comments</h2>
-<table class="table table-striped" border="1">
-    <tr>
-        <td><b>Eval ID</b></td>
-        <td><b>Like About the Class</b></td>
-        <td><b>Dislike About the Class</b></td>
-        <td><b>Suggested Improvements</b></td>
-        <td><b>Classes to See Offered</b></td>
-    </tr>
-
-    <!--iterate through all the evaluations for this course-->
-    <th:block th:each="eval:${neweval}">
-        <tr>
-            <td><a th:text="${eval.id}"></a></td>
-            <td><a th:text="${eval.likes}"></a></td>
-            <td><a th:text="${eval.dislikes}"></a></td>
-            <td><a th:text="${eval.suggestions}"></a></td>
-            <td><a th:text="${eval.otherClass}"></a></td>
-        </tr>
-    </th:block>
-</table>
 
 
-<!--Section IV-->
-<h2>Section IV: Optional</h2>
-<table class="table table-striped" border="1">
-    <tr>
-        <td><b>Eval ID</b></td>
-        <td><b>How did you find out about the class</b></td>
-    </tr>
+        <!--Section III-->
+        <h2>Section III: Comments</h2>
+        <table class="table table-striped" border="1">
+            <tr>
+                <td><b>Eval ID</b></td>
+                <td><b>Like About the Class</b></td>
+                <td><b>Dislike About the Class</b></td>
+                <td><b>Suggested Improvements</b></td>
+                <td><b>Classes to See Offered</b></td>
+            </tr>
 
-    <!--iterate through all the evaluations for this course-->
-    <th:block th:each="eval:${neweval}">
-        <tr>
-            <td><a th:text="${eval.id}"></a></td>
-            <td><a th:text="${eval.findings}"></a></td>
-        </tr>
-    </th:block>
-</table>
+            <!--iterate through all the evaluations for this course-->
+            <th:block th:each="eval:${neweval}">
+                <tr>
+                    <td><a th:text="${eval.id}"></a></td>
+                    <td><a th:text="${eval.likes}"></a></td>
+                    <td><a th:text="${eval.dislikes}"></a></td>
+                    <td><a th:text="${eval.suggestions}"></a></td>
+                    <td><a th:text="${eval.otherClass}"></a></td>
+                </tr>
+            </th:block>
+        </table>
+
+
+        <!--Section IV-->
+        <h2>Section IV: Optional</h2>
+        <table class="table table-striped" border="1">
+            <tr>
+                <td><b>Eval ID</b></td>
+                <td><b>How did you find out about the class</b></td>
+            </tr>
+
+            <!--iterate through all the evaluations for this course-->
+            <th:block th:each="eval:${neweval}">
+                <tr>
+                    <td><a th:text="${eval.id}"></a></td>
+                    <td><a th:text="${eval.findings}"></a></td>
+                </tr>
+            </th:block>
+        </table>
+
+    </div>
+    <!-- Footer -->
+    <div th:replace="base :: footer"></div>
+    <!-- /.Footer -->
 </body>
 </html>
