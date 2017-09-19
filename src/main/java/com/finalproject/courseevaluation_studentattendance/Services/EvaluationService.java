@@ -28,38 +28,14 @@ public class EvaluationService {
     }
 
 //// method adds crn of the course to the evaluation repository
-  public void addEvalToCourse(Evaluation eval, Course cr)
-  {
-    Course eCourse = courseRepo.findOne(cr.getId());
-    if(eCourse==null){
-        System.out.println("Course Does not exist in the database so you may not add an evaluation to it");
-    }
-    else{
-        eCourse.addEvaluation(eval);
-        eval.setCourseEvaluation(eCourse);
-    }
-    //
-     //eval.setId(cr.getId());
-
-      //System.out.println(cr.getId());
-     // System.out.println(eval.getId());
-
-
-      //
-
-
-//      cr.addEvaluation(eval);
-//
-//        eval.setCourseEvaluation(cr);
-
-
-
-
-    //  eval.setId(crs.getId());
-
-     //
-     // eval.setId(cr.getId());
-
+  public void addEvalToCourse(Evaluation eval, Course cr) {
+      Course eCourse = courseRepo.findOne(cr.getId());
+      if (eCourse == null) {
+          System.out.println("Course Does not exist in the database so you may not add an evaluation to it");
+      } else {
+          eCourse.addEvaluation(eval);
+          eval.setCourseEvaluation(eCourse);
+      }
 
 
     evaluationRepo.save(eval);
@@ -76,6 +52,19 @@ public class EvaluationService {
       return evaluationRepo.findEvaluationsByCourseEvaluation_Id(course.getId());
 
   }
+
+//    public Evaluation findEvalsInCours(Evaluation eval, Course cr)
+////    {
+////         eval= evaluationRepo.findOne(cr.getId());
+////         if(cr.getId())
+////
+////         {
+////             for (Evaluation element : evaluationRepo.findAll()) {
+////
+////             }
+////         }
+////
+////    }
 
     public Evaluation SaveEntry(Evaluation aValuation)
     {

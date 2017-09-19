@@ -111,6 +111,17 @@ public class AdminController {
 
     }
 
+    @RequestMapping("/admincourseevaluation")
+    public String displayAll(Model model)
+    {
+
+
+
+       model.addAttribute("allevals", evaluationRepo.findAll());
+
+        return "adminpages/admincourseevaluation";
+    }
+
     @PostMapping("/registerstudent")
     public String saveStudent(@ModelAttribute("newstudent") Person newstudent)
     {
