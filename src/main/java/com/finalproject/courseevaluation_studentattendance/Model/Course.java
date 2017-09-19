@@ -1,9 +1,11 @@
 package com.finalproject.courseevaluation_studentattendance.Model;
 
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -16,10 +18,11 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @NotNull
     private long crn;
-
+    @NotEmpty
     private String courseName;
-
+    @DateTimeFormat(pattern = "MM/dd/yyyy")
     private Date startDate;
     @DateTimeFormat(pattern = "MM/dd/yyyy")
     private Date endDate;
