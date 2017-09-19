@@ -8,52 +8,54 @@
     <div th:replace="base :: header"></div>
     <!-- /.Header -->
 
+
 </head>
 <body>
 
-<!--Navigation Admin-->
-<nav th:replace="base :: nav2Welcome"></nav>
-<!--/.Navigation Admin-->
+<!--Navigation Default-->
+<nav th:replace="base :: nav2Default"></nav>
+<!--/.Navigation Default-->
 
-<form autocomplete="off" action="#"
-      th:action="@{/registrationteacher}"
-      th:object="${newTeacher}"
-      method="post" >
-    <!--<input type="text" th:field="*{perosn.id}" />-->
-    <!--<input type="hidden" th:field="*{id}" />-->
-    <p> <h4>M Number</h4> <input type="text" th:field="*{mNumber}"/></p>
-    <div th:if="${#fields.hasErrors('mNumber')}"  th:errors="*{mNumber}"
-         class="well alert alert-warning" role="alert"></div>
-    <p><h4>First Name</h4> <input type="text" th:field="*{firstName}"/></p>
-    <div th:if="${#fields.hasErrors('firstName')}"  th:errors="*{firstName}"
-         class="well alert alert-warning" role="alert"></div>
-    <p> <h4> Last Name  </h4> <input type="text" th:field="*{lastName}"/></p>
-    <div th:if="${#fields.hasErrors('lastName')}"  th:errors="*{lastName}"
-         class="well alert alert-warning" role="alert"></div>
-    <p> <h4> Username  </h4> <input type="text" th:field="*{username}"/></p>
-    <div th:if="${#fields.hasErrors('username')}"  th:errors="*{username}"
-         class="well alert alert-warning" role="alert"></div>
-    <p> <h4> Password  </h4> <input type="text" th:field="*{password}"/></p>
-    <div th:if="${#fields.hasErrors('password')}"  th:errors="*{password}"
-         class="well alert alert-warning" role="alert"></div>
-    <p> <h4> Email  </h4> <input type="email" th:field="*{email}"/></p>
-    <div th:if="${#fields.hasErrors('email')}"  th:errors="*{email}"
-         class="well alert alert-warning" role="alert"></div>
-    <p> <h4> Start Date</h4> <input type="date" th:field="*{startDate}"/></p>
-    <div th:if="${#fields.hasErrors('startDate')}"  th:errors="*{startDate}"
-         class="well alert alert-warning" role="alert"></div>
-    <!--<p th:text="'Sign up time: ' + *{startDate)}">-->
+<div class="container">
+    <form autocomplete="off" action="#"
+          th:action="@{/registrationteacher}"
+          th:object="${newTeacher}"
+          method="post" >
+        <!--<input type="text" th:field="*{perosn.id}" />-->
+        <!--<input type="hidden" th:field="*{id}" />-->
+        <p> <h4>M Number</h4> <input type="text" th:field="*{mNumber}"/></p>
+        <div th:if="${#fields.hasErrors('mNumber')}"  th:errors="*{mNumber}"
+             class="well alert alert-warning" role="alert"></div>
+        <p><h4>First Name</h4> <input type="text" th:field="*{firstName}"/></p>
+        <div th:if="${#fields.hasErrors('firstName')}"  th:errors="*{firstName}"
+             class="well alert alert-warning" role="alert"></div>
+        <p> <h4> Last Name  </h4> <input type="text" th:field="*{lastName}"/></p>
+        <div th:if="${#fields.hasErrors('lastName')}"  th:errors="*{lastName}"
+             class="well alert alert-warning" role="alert"></div>
+        <p> <h4> Username  </h4> <input type="text" th:field="*{username}"/></p>
+        <div th:if="${#fields.hasErrors('username')}"  th:errors="*{username}"
+             class="well alert alert-warning" role="alert"></div>
+        <p> <h4> Password  </h4> <input type="text" th:field="*{password}"/></p>
+        <div th:if="${#fields.hasErrors('password')}"  th:errors="*{password}"
+             class="well alert alert-warning" role="alert"></div>
+        <p> <h4> Email  </h4> <input type="email" th:field="*{email}"/></p>
+        <div th:if="${#fields.hasErrors('email')}"  th:errors="*{email}"
+             class="well alert alert-warning" role="alert"></div>
+        <p> <h4> Start Date</h4> <input type="date" th:field="*{startDate}"/></p>
+        <div th:if="${#fields.hasErrors('startDate')}"  th:errors="*{startDate}"
+             class="well alert alert-warning" role="alert"></div>
+        <!--<p th:text="'Sign up time: ' + *{startDate)}">-->
 
-    <!--active-->
-    <!--private String username;-->
+        <!--active-->
+        <!--private String username;-->
 
-    <!--private String password;-->
+        <!--private String password;-->
 
-    <!--&lt;!&ndash;th:text="${#dates.format(link.date, 'MMM dd, yyyy')}"&ndash;&gt;-->
-    <!--<p th:text="'Sign up date: ' + ${#dates.format(newstudent.startDate, 'MMM dd, yyyy')}" />-->
-    <p><input type="submit"  value="Submit" class="btn btn-lg btn-default btn-block" /></p>
-</form>
-
+        <!--&lt;!&ndash;th:text="${#dates.format(link.date, 'MMM dd, yyyy')}"&ndash;&gt;-->
+        <!--<p th:text="'Sign up date: ' + ${#dates.format(newstudent.startDate, 'MMM dd, yyyy')}" />-->
+        <p><input type="submit"  value="Submit" class="btn btn-lg btn-default btn-block" /></p>
+    </form>
+</div>
 
 <!-- Footer -->
 <div th:replace="base :: footer"></div>

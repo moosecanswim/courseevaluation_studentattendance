@@ -13,8 +13,11 @@
     <!--/.Navigation Teacher-->
     <div class="container">
 
-        <a th:href="@{/teacher/courseend/{id}(id=${course.id})}">Course has Ended</a>
-        <h2 th:inline="text">Course information for [[${course.courseName}]]</h2>
+        <h2 th:inline="text">Course information for: [[${course.courseName}]] (crn:[[${course.crn}]])</h2>
+        <!--If the Instructor is not assigned to the course yet, this div will display Instructor: null null:-->
+        <h3 th:text="'Instructor: ' + ${courseInstructor.firstName} + ' ' +${courseInstructor.lastName}"></h3>
+        <p><a th:href="@{/teacher/listallcourses}">Back to my course</a></p>
+        <br />
 
         <p th:text="'Course ID: ' + ${course.id}"/>
         <p th:text="'Course Name: '+ ${course.courseName}" />
@@ -22,44 +25,68 @@
         <p th:text="'Course StartDate:' + ${{course.startDate}}"/>
         <p th:text="'Course EndDate:' + ${{course.endDate}}"/>
         <p th:text="'Course Status:' + ${course.status}"/>
-        <br/>
+        <hr/>
 
-        <h2 th:inline="text">Course Instructor: [[${ins.firstName}]], [[${ins.lastName}]]</h2>
-        <br/>
+        <div class="center">
+            <a th:href="@{/teacher/addstudentstocourse/{id}(id=${course.id})}">Register students for the course</a>
+            -
+            <a th:href="@{/teacher/courseend/{id}(id=${course.id})}">Course has Ended</a>
+            -
+            <a th:href="@{/teacher/displayallevalsofonecourse/{id}(id=${course.id})}">See Course Evaluations</a>
+        </div>
+        <hr />
+
 
         <h2>List of students who registered for the course: </h2>
+
+        <div  th:if="${studentsofACourse.isEmpty()}">
+            <p>No students Are taking the class!</p>
+            <p><a th:href="@{/teacher/addstudentstocourse/{id}(id=${course.id})}">Register students for the course</a></p>
+        </div>
 
         <div  th:if="${!studentsofACourse.isEmpty()}">
 
             <p><a th:href="@{/teacher/markattendance/{courseId}(courseId=${course.id})}">Mark Attendance</a></p>
-            <!--<p th:text="'Date today: ' + ${#dates.format(now, 'MMM dd, yyyy')}"></p>-->
-
-            <!--should be a form allow input of students' attendance info-->
 
             <p><a th:href="@{/teacher/listallstudents/{courseId}/(courseId=${course.id})}">See and validate students</a></p>
 
-            <th:block th:each="student:${studentsofACourse}">
-                <p th:text="'Student M number:' + ${student.mNumber}"></p>
-                <p th:text="'Student Name: ' + ${student.firstName} + ' ' +${student.lastName} "></p>
-                <p th:text="'Student Email:' + ${student.email}"></p>
-            </th:block>
-            <br/>
-            <br/>
-        </div>
 
-        <div  th:if="${studentsofACourse.isEmpty()}">
-            <p>No students Are taking the class!</p>
+            <table class="table table-striped" border="1">
+                <tr>
+                    <!--<td><strong>ID</strong></td>-->
+                    <td><strong>M Number</strong></td>
+                    <td><strong>First Name</strong></td>
+                    <td><strong>Last Name</strong></td>
+                    <td><strong>Email Address</strong></td>
+                    <td><strong>Start Date</strong></td>
+                    <td><strong>Student Status</strong></td>
+                    <td><strong>Action</strong></td>
+                </tr>
+                <!--iterate through all the students for this course-->
+
+                <tr th:each="alls:${studentsofACourse}">
+                    <!--<td th:text="${alls.id}"></td>-->
+                    <td th:text="${alls.mNumber}"></td>
+                    <td th:text="${alls.firstName}"></td>
+                    <td th:text="${alls.lastName}"></td>
+                    <td th:text="${alls.email}"></td>
+                    <td th:text="${{alls.startDate}}"></td>
+                    <td th:text="${alls.active}"></td>
+                    <td>
+                        <a th:href="@{/admin/removestudentfromcourse/{courseid}/{studentid}(courseid=${course.id}, studentid=${alls.id})}">Remove</a>
+
+                        <!--<a th:href="@{/admin/course/{courseid}/removestudentfromcourse/{studentid}(studentid=${alls.id},courseid=${course.id})}">Remove</a>-->
+                    </td>
+                </tr>
+            </table>
+            <hr />
         </div>
 
         <br/>
-        <br/>
-
-        <p><a th:href="@{/teacher/addstudentstocourse/{id}(id=${course.id})}">Register students for the course</a></p>
-        <p><a th:href="@{/teacher/listallcourses}">Back to all course</a></p>
 
         <!--<p><a th:href="@{/teacher/displayoneeval/{id}(id=${course.id})}"> see evaluation</a></p>-->
 
-        <p><a th:href="@{/teacher/displayallevalsofonecourse/{id}(id=${course.id})}">See all evaluation of a course</a></p>
+
 
 
     </div>

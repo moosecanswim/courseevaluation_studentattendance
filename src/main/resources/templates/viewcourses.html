@@ -1,12 +1,22 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
-    <meta charset="UTF-8"/>
+
     <title>View Courses</title>
+
+    <!-- Header -->
+    <div th:replace="base :: header"></div>
+    <!-- /.Header -->
+
 </head>
 <body>
+<!--Navigation Student-->
+<nav th:replace="base :: nav2Student"></nav>
+<!--/.Navigation Student-->
+
+<div class="container">
     <h1>View Courses (insecure)</h1>
-    <table>
+    <table  class="table table-striped" border="1">
         <tr>
             <th>Id</th>
             <th>CRN</th>
@@ -29,5 +39,12 @@
         </tr>
     </table>
     <h3><a href="/">Go Home</a></h3>
+</div>
+
+
+    <!-- Footer -->
+    <div th:replace="base :: footer"></div>
+    <!-- /.Footer -->
+
 </body>
 </html>

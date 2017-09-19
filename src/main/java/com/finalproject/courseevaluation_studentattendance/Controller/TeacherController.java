@@ -105,7 +105,7 @@ public class TeacherController {
 
         Course currentCourse = courseRepository.findOne(courseId);
         Iterable<Person> studentsofACourse = currentCourse.getStudent();
-        model.addAttribute("ins", currentCourse.getInstructor());
+        model.addAttribute("courseInstructor", currentCourse.getInstructor());
 
 
         //move it to new route so it can stamp the time of the time actually submitted
