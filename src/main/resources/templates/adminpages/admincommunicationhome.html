@@ -98,8 +98,6 @@
         </select>
         <p>
             <input name="searchThing" type="text" placeholder="Input Search"/>
-        <div th:if="${#fields.hasErrors('searchThing')}"  th:errors="*{searchThing}"
-             class="well alert alert-warning" role="alert"></div>
             <input type="submit" value="Go"/>
         </p>
 

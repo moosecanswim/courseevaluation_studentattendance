@@ -19,10 +19,12 @@ import com.finalproject.courseevaluation_studentattendance.Repositories.PersonRe
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.mail.internet.InternetAddress;
+import javax.validation.Valid;
 import javax.websocket.server.PathParam;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
@@ -154,8 +156,12 @@ public class TeacherController {
 
 
     @PostMapping("/markattendancepo/{courseId}")
-    public String postattendance(@PathVariable("courseId") Long courseId, @RequestParam("attdate") String attdate, @RequestParam(value = "attendanceStatus") String[] attendanceStatus, Model model)
+    public String postattendance(@Valid @PathVariable("courseId") Long courseId, @RequestParam("attdate") String attdate,
+                                 @RequestParam(value = "attendanceStatus") String[] attendanceStatus, BindingResult bindingResult,Model model)
     {
+        if (bindingResult.hasErrors()){
+            return "teacherpages/attendanceofacourseform";
+        }
         Course currentCourse = courseRepository.findOne(courseId);
         Iterable<Person> studentsofACourse = currentCourse.getStudent();
 
@@ -264,8 +270,11 @@ public class TeacherController {
 
 
     @PostMapping("/update/{courseId}/{studentId}")
-    public String updateMnumberordeletestudent(@PathVariable("courseId") Long courseId, @PathVariable("studentId") Long studentId, @RequestParam(value="newMId") String newMId, Model model) {
-
+    public String updateMnumberordeletestudent(@Valid @PathVariable("courseId") Long courseId, @PathVariable("studentId") Long studentId,
+                                               @RequestParam(value="newMId") String newMId, BindingResult bindingResult,Model model) {
+            if(bindingResult.hasErrors()){
+                return "teacherpages/updateMform";
+            }
         Course currentCourse = courseRepository.findOne(courseId);
         Person currentStudent= personRepository.findOne(studentId);
         currentStudent.setmNumber(newMId);
@@ -420,9 +429,12 @@ public class TeacherController {
 
 
    @PostMapping("/addstudent/{id}")
-    public String postCourse(@PathVariable("id") Long id, @ModelAttribute("newstudent") Person student, Model model)
+    public String postCourse(@Valid @PathVariable("id") Long id, @ModelAttribute("newstudent") Person student, BindingResult bindingResult,Model model)
    {
-
+        if(bindingResult.hasErrors())
+        {
+            return "teacherpages/addstudent";
+        }
        Course c =  courseRepository.findOne(id);
        student.setCourseStudent(c);
        personRepository.save(student);
@@ -459,24 +471,7 @@ public class TeacherController {
         System.out.println("students in attachment method");
 
         sendEmailWithoutTemplating(course);
-//        for (Person pr:students)
-//        {
-//            System.out.println("students in course");
-//            String stname=pr.getFirstName()+pr.getmNumber()+"\n";
-//            Iterable<Attendance>attendances=pr.getAttendances();
-//            for (Attendance att:attendances)
-//            {
-//               String attdate=att.getDate();
-//               String attstatus=att.getStatus()+"\n";
-//                System.out.println("attendance for students");
-//               sendEmailWithoutTemplating(head,stname,attdate,attstatus);
-//               return attstatus;
-////               return attsatus;
-//            }
-//           return stname;
-//
-//        }
-//
+
           return head;
 
     }

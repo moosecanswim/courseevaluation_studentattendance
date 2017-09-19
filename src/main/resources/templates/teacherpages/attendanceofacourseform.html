@@ -20,6 +20,8 @@
         <p>Input date for marking the attendance: </p>
 
         <p><input type="text" name="attdate" placeholder="MM/dd/yyyy" /></p>
+        <div th:if="${#fields.hasErrors('attdate')}"  th:errors="*{attdate}"
+             class="well alert alert-warning" role="alert"></div>
 
         <table>
             <thead>
@@ -54,6 +56,7 @@
                         <!--</th:block>-->
                     </select>
                     </td>
+
                 </tr>
 
 
