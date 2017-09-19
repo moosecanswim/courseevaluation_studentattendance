@@ -23,18 +23,20 @@
 <table border="1">
 
     <tr>
+        <th>Student ID</th>
         <th>Student name</th>
-        <th>
-            <!--this should be date-->
-        </th>
+        <th>Student M-number</th>
+        <th:block th:each="item:${onestu.attendances}">
+            <th th:text="${item.date}"></th>
+        </th:block>
 
     </tr>
 
-    <tr th:each="item:${studentofacourse}">
-        <td th:text="${item.firstName} + ' ' + ${item.lastName}"/>
-        <td th:each="att:${item.attendances}"></td>
-        <td th:text="${att.status}"></td>
-    </tr>
+    <!--<tr th:each="item:${studentofacourse}">-->
+        <!--<td th:text="${item.firstName} + ' ' + ${item.lastName}"/>-->
+        <!--<td th:each="att:${item.attendances}"></td>-->
+        <!--<td th:text="${att.status}"></td>-->
+    <!--</tr>-->
 
 
 </table>
