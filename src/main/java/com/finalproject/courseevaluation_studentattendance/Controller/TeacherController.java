@@ -476,23 +476,23 @@ public class TeacherController {
         course.setEndDate(date);
         courseRepository.save(course);
         System.out.println("test after save End date");
-        attachmentContent(course);
+        sendEmailWithoutTemplating(course);
         return "redirect:/teacher/listallcourses/";
 
     }
 
-    private String attachmentContent(Course course) throws UnsupportedEncodingException {
-
-        String head="StudentName,Date,Status";
-        Iterable<Person> students=course.getStudent();
-        System.out.println(course.getCourseName());
-        System.out.println("students in attachment method");
-
-        sendEmailWithoutTemplating(course);
-
-          return head;
-
-    }
+//    private String attachmentContent(Course course) throws UnsupportedEncodingException {
+//
+//        String head="StudentName,Date,Status";
+//        Iterable<Person> students=course.getStudent();
+//        System.out.println(course.getCourseName());
+//        System.out.println("students in attachment method");
+//
+//        sendEmailWithoutTemplating(course);
+//
+//          return head;
+//
+//    }
     @Autowired
     public EmailService emailService;
     public void sendEmailWithoutTemplating(Course course) throws UnsupportedEncodingException {
