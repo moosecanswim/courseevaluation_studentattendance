@@ -11,9 +11,9 @@
 </head>
 <body>
 
-<!--Navigation Admin-->
-<nav th:replace="base :: nav2Admin"></nav>
-<!--/.Navigation Admin-->
+    <!--Navigation Admin-->
+    <nav th:replace="base :: nav2Admin"></nav>
+    <!--/.Navigation Admin-->
 
 
 
@@ -23,13 +23,13 @@
 
     <p>
         <a href="/admin/addcourse">Add new Course</a>
-         -
+        -
         <a href="/admin/communicationhome">Communication Home</a>
     </p>
     <a href="/admin/addcommunication">Quick Call Link (create a new call/email)</a>
 
 
-<p>List of Courses</p>
+    <p>List of Courses</p>
 
     <table class="table table-striped" border="1">
         <tr>
@@ -45,14 +45,14 @@
 
 
         <!--iterate through all the existed courses-->
-                <th:block th:each="course:${allcourses}">
+        <th:block th:each="course:${allcourses}">
             <tr>
-                <td><a th:text="${course.id}"></a></td>
-                <td><a th:text="${course.crn}"></a></td>
+                <td th:text="${course.id}"></td>
+                <td th:text="${course.crn}"></td>
                 <td><a th:href="@{/admin/admincoursedetails/{id}(id=${course.id})}"  th:inline="text">[[${course.courseName}]]</a></td>
-                <td><a th:text="${{course.startDate}}"></a></td>
-                <td><a th:text="${{course.endDate}}"></a></td>
-                <td><a th:text="${course.status}"></a></td>
+                <td th:text="${{course.startDate}}"></td>
+                <td th:text="${{course.endDate}}"></td>
+                <td th:text="${course.status}"></td>
                 <td>
                     <!--<a th:href="@{/admin/viewcourseevaluations/{id}(id=${course.id})}">View Evaluations</a>-->
 
@@ -87,9 +87,9 @@
 
 
 
-<!-- Footer -->
-<div th:replace="base :: footer"></div>
-<!-- /.Footer -->
+    <!-- Footer -->
+    <div th:replace="base :: footer"></div>
+    <!-- /.Footer -->
 
 </body>
 </html>
