@@ -110,7 +110,7 @@
 <!-- /.Navigation Teacher -->
 
 
-<!-- Navigation Default/Welcome Page -->
+<!-- Navigation Welcome Page -->
 <div th:fragment="nav2Welcome">
     <nav class="navbar navbar-inverse fixed-top">
         <div class="container-fluid">
@@ -131,11 +131,32 @@
         </div>
     </nav>
 </div>
-<!-- /.Navigation Default/Welcome Page -->
+<!-- /.Navigation Welcome Page -->
 
 
-<!-- Navigation Login Page -->
-<div th:fragment="nav2Login">
+<!-- Navigation Default (used in login, register teacher pages) -->
+<div th:fragment="nav2Default">
+    <nav class="navbar navbar-inverse fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Courses DB</a>
+            </div>
+
+            <ul class="nav navbar-nav">
+                <li><a href="/">Welcome</a></li>
+            </ul>
+
+            <!--<ul class="nav navbar-nav navbar-right">-->
+                <!--<li><a href="/logout">Logout</a></li>-->
+            <!--</ul>-->
+        </div>
+    </nav>
+</div>
+<!-- /.Navigation Default -->
+
+
+<!-- Navigation Student -->
+<div th:fragment="nav2Student">
     <nav class="navbar navbar-inverse fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -146,15 +167,10 @@
                 <li><a href="/">Welcome</a></li>
                 <li><a href="/viewcourses">View Courses</a></li>
             </ul>
-
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="/logout">Logout</a></li>
-            </ul>
         </div>
     </nav>
 </div>
 <!-- /.Navigation Login Page -->
-
 
 
 <!-- Footer -->
