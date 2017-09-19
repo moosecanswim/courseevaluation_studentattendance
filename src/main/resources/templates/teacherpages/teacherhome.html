@@ -1,10 +1,20 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
-    <meta charset="UTF-8"/>
+
     <title>Teacher Home Page</title>
+
+    <!-- Header -->
+    <div th:replace="base :: header"></div>
+    <!-- /.Header -->
+
 </head>
 <body>
+
+    <!--Navigation Admin-->
+    <nav th:replace="base :: nav2Teacher"></nav>
+    <!--/.Navigation Admin-->
+
     <h1>Teacher Home Page</h1>
 
     <p>My profile</p>
@@ -16,5 +26,10 @@
 
     <p>My Courses links</p>
     <p><a href="/teacher/listallcourses">All my courses</a></p>
+
+    <!-- Footer -->
+    <div th:replace="base :: footer"></div>
+    <!-- /.Footer -->
+
 </body>
 </html>
