@@ -20,6 +20,7 @@
 <div class="container">
     <div>
         <form  th:action="@{/eval/searchcourse}"  method="post">
+
             <p>Enter CRN Number: <input type="number" name="crnfield" /></p>
 
             <p><input type="submit" value="Search CRN" /> <input type="reset" value="Reset" /> </p>
@@ -29,6 +30,8 @@
 
     <div>
         <form id="inner-form" class="form-horizontal form" th:action="@{eval/searchresult}">
+
+
             <div>
                 <table>
                     <tr>
@@ -42,6 +45,7 @@
                     </tr>
                 </table>
             </div>
+
         </form>
 
     </div>

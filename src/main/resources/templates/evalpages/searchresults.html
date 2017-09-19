@@ -22,29 +22,28 @@
 
 
     <div  th:if="${!searcheval.isEmpty()}">
-        <table>
+
+        <table class="table table-striped" border="1">
             <tr>
-                <th>CRN</th>
-                <th>Course Name</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-
-
+                <td><b>CRN</b></td>
+                <td><b>Course Name</b></td>
+                <td><b>Start Date</b></td>
+                <td><b>End Date</b></td>
             </tr>
 
-            <tr>
-                <th:block th:each="item:${searcheval}">
+            <th:block th:each="item:${searcheval}">
+                <tr>
                     <td th:text="${item.crn}"></td>
                     <td th:text="${item.courseName}"></td>
                     <td th:text="${item.startDate}"></td>
                     <td th:text="${item.endDate}"></td>
-                    <td><a th:href="@{/eval/evaluationentry/{id}(id=${item.id})}">Evaluate this course</a></td>
-                </th:block>
-
-            </tr>
-
-
+                    <td>
+                        <a th:href="@{/eval/evaluationentry/{id}(id=${item.id})}">Evaluate this course</a>
+                    </td>
+                </tr>
+            </th:block>
         </table>
+
     </div>
 </div>
 
