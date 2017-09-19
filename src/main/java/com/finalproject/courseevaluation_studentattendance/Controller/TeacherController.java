@@ -216,6 +216,7 @@ public class TeacherController {
         ArrayList<Person> unvalidatedstudent= new ArrayList<>();
         ArrayList<Person> validatedstudent= new ArrayList<>();
 
+
         //for student that M number is null put them in a unvalidated list
         for (Person student:studentsofACourse)
         {
@@ -300,16 +301,43 @@ public class TeacherController {
                     Model model)
     {
 
-        System.out.println("!!!!!!  " + searchBy);
 
         Course currentCourse = courseRepository.findOne(courseId);
+        Iterable<Person> studentsofACourse = currentCourse.getStudent();
+        ArrayList<Person> unvalidatedstudent= new ArrayList<>();
+        ArrayList<Person> validatedstudent= new ArrayList<>();
+
+
+        //for student that M number is null put them in a unvalidated list
+        for (Person student:studentsofACourse)
+        {
+            if(student.getmNumber().isEmpty())
+            {
+                unvalidatedstudent.add(student);
+            }
+
+            if(!student.getmNumber().isEmpty())
+            {
+                System.out.println("not null====" + student.getmNumber().toString());
+                validatedstudent.add(student);
+            }
+
+        }
+
+        //add an empty search student results
+//        ArrayList<Person> searchStudent= new ArrayList<>();
+//
+//        model.addAttribute("searchstudent", searchStudent);
+
         model.addAttribute("course", currentCourse);
-        System.out.println("Course added to model!!!");
+        model.addAttribute("unvalidatedstudent", unvalidatedstudent);
+        model.addAttribute("validatedstudent", validatedstudent);
 
         if (searchBy.equalsIgnoreCase("all"))
         {
             System.out.println("!!!!!!!!");
-            model.addAttribute("searchstudent", personRepository.findAllByFirstNameLikeAndLastNameLikeAndEmailLike(fname,lname,email) );
+            Iterable<Person> searchstudent = personRepository.findAllByFirstNameLikeAndLastNameLikeAndEmailLike(fname,lname,email);
+            model.addAttribute("searchstudent", searchstudent );
             System.out.println("added to model !!");
             return "teacherpages/studentsearchresult";
 //            return "redirect:/teacher/listallstudents/{courseId}";

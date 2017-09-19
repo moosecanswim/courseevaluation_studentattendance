@@ -14,7 +14,4 @@ public interface PersonRepository extends CrudRepository<Person,Long> {
     Iterable<Person> findAllByLastNameLike(String lastName);
     Iterable<Person> findAllByEmailLike(String firstName);
 
-
-
-
 }
