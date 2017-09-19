@@ -2,43 +2,55 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Title</title>
+    <title>Student Attendance</title>
+    <!-- Header -->
+    <div th:replace="base :: header"></div>
+    <!-- /.Header -->
 </head>
 <body>
-<p>Student Attendance: </p>
-<!--<p th:text="'Date today: ' + ${#dates.format(now, 'MMM dd, yyyy')}"></p>-->
+    <!--Navigation Teacher-->
+    <nav th:replace="base :: nav2Teacher"></nav>
+    <!--/.Navigation Teacher-->
+    <div class="container">
 
-<p th:text="'Date for the attendance: ' + ${attdate}"></p>
+        <p>Student Attendance: </p>
+        <!--<p th:text="'Date today: ' + ${#dates.format(now, 'MMM dd, yyyy')}"></p>-->
 
-<p th:text="'Course: ' + ${course.courseName}"></p>
+        <p th:text="'Date for the attendance: ' + ${attdate}"></p>
 
-<br/>
-<br/>
+        <p th:text="'Course: ' + ${course.courseName}"></p>
 
-<div  th:if="${!studentsofACourse.isEmpty()}">
+        <br/>
+        <br/>
 
-    <th:block th:each="student:${studentsofACourse}">
-        <p th:text="'Student Full Name: ' + ${student.firstName} + ' ' +${student.lastName} "></p>
-        <p th:text="'Student Email:' + ${student.email}"></p>
+        <div  th:if="${!studentsofACourse.isEmpty()}">
 
-        <th:block th:each="att:${student.attendances}">
-            <p th:text="'Attendance Id (just for checking): ' + ${att.id}"></p>
-            <p th:text="'Date: ' + ${{att.date}}"></p>
-            <p th:text="'Attendance Status: ' + ${att.status}"></p>
+            <th:block th:each="student:${studentsofACourse}">
+                <p th:text="'Student Full Name: ' + ${student.firstName} + ' ' +${student.lastName} "></p>
+                <p th:text="'Student Email:' + ${student.email}"></p>
 
-        </th:block>
-    </th:block>
+                <th:block th:each="att:${student.attendances}">
+                    <p th:text="'Attendance Id (just for checking): ' + ${att.id}"></p>
+                    <p th:text="'Date: ' + ${{att.date}}"></p>
+                    <p th:text="'Attendance Status: ' + ${att.status}"></p>
 
-<br/>
-<br/>
-</div>
+                </th:block>
+            </th:block>
 
-<div  th:if="${studentsofACourse.isEmpty()}">
-    <p>No information available!</p>
-</div>
+            <br/>
+            <br/>
+        </div>
 
-<p><a th:href="@{/teacher/listallstudents/{courseId}/(courseId=${course.id})}">Back to list of students</a></p>
+        <div  th:if="${studentsofACourse.isEmpty()}">
+            <p>No information available!</p>
+        </div>
+
+        <p><a th:href="@{/teacher/listallstudents/{courseId}/(courseId=${course.id})}">Back to list of students</a></p>
 
 
+    </div>
+    <!-- Footer -->
+    <div th:replace="base :: footer"></div>
+    <!-- /.Footer -->
 </body>
 </html>

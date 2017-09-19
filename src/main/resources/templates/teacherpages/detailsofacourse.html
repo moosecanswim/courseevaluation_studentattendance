@@ -3,57 +3,68 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Details of a course info</title>
+    <!-- Header -->
+    <div th:replace="base :: header"></div>
+    <!-- /.Header -->
 </head>
 <body>
+    <!--Navigation Teacher-->
+    <nav th:replace="base :: nav2Teacher"></nav>
+    <!--/.Navigation Teacher-->
+    <div class="container">
 
-<a th:href="@{/teacher/courseend/{id}(id=${course.id})}">Course has Ended</a>
-    <h2 th:inline="text">Course information for [[${course.courseName}]]</h2>
+        <a th:href="@{/teacher/courseend/{id}(id=${course.id})}">Course has Ended</a>
+        <h2 th:inline="text">Course information for [[${course.courseName}]]</h2>
 
-    <p th:text="'Course ID: ' + ${course.id}"/>
-    <p th:text="'Course Name: '+ ${course.courseName}" />
-    <p th:text="'Course CRN:' + ${course.crn}"/>
-    <p th:text="'Course StartDate:' + ${{course.startDate}}"/>
-    <p th:text="'Course EndDate:' + ${{course.endDate}}"/>
-    <p th:text="'Course Status:' + ${course.status}"/>
-    <br/>
+        <p th:text="'Course ID: ' + ${course.id}"/>
+        <p th:text="'Course Name: '+ ${course.courseName}" />
+        <p th:text="'Course CRN:' + ${course.crn}"/>
+        <p th:text="'Course StartDate:' + ${{course.startDate}}"/>
+        <p th:text="'Course EndDate:' + ${{course.endDate}}"/>
+        <p th:text="'Course Status:' + ${course.status}"/>
+        <br/>
 
-    <h2 th:inline="text">Course Instructor: [[${ins.firstName}]], [[${ins.lastName}]]</h2>
-    <br/>
+        <h2 th:inline="text">Course Instructor: [[${ins.firstName}]], [[${ins.lastName}]]</h2>
+        <br/>
 
-    <h2>List of students who registered for the course: </h2>
+        <h2>List of students who registered for the course: </h2>
 
-    <div  th:if="${!studentsofACourse.isEmpty()}">
+        <div  th:if="${!studentsofACourse.isEmpty()}">
 
-        <p><a th:href="@{/teacher/markattendance/{courseId}(courseId=${course.id})}">Mark Attendance</a></p>
-        <!--<p th:text="'Date today: ' + ${#dates.format(now, 'MMM dd, yyyy')}"></p>-->
+            <p><a th:href="@{/teacher/markattendance/{courseId}(courseId=${course.id})}">Mark Attendance</a></p>
+            <!--<p th:text="'Date today: ' + ${#dates.format(now, 'MMM dd, yyyy')}"></p>-->
 
-        <!--should be a form allow input of students' attendance info-->
+            <!--should be a form allow input of students' attendance info-->
 
-        <p><a th:href="@{/teacher/listallstudents/{courseId}/(courseId=${course.id})}">See and validate students</a></p>
+            <p><a th:href="@{/teacher/listallstudents/{courseId}/(courseId=${course.id})}">See and validate students</a></p>
 
-        <th:block th:each="student:${studentsofACourse}">
-            <p th:text="'Student M number:' + ${student.mNumber}"></p>
-            <p th:text="'Student Name: ' + ${student.firstName} + ' ' +${student.lastName} "></p>
-            <p th:text="'Student Email:' + ${student.email}"></p>
-        </th:block>
+            <th:block th:each="student:${studentsofACourse}">
+                <p th:text="'Student M number:' + ${student.mNumber}"></p>
+                <p th:text="'Student Name: ' + ${student.firstName} + ' ' +${student.lastName} "></p>
+                <p th:text="'Student Email:' + ${student.email}"></p>
+            </th:block>
+            <br/>
+            <br/>
+        </div>
+
+        <div  th:if="${studentsofACourse.isEmpty()}">
+            <p>No students Are taking the class!</p>
+        </div>
+
         <br/>
         <br/>
+
+        <p><a th:href="@{/teacher/addstudentstocourse/{id}(id=${course.id})}">Register students for the course</a></p>
+        <p><a th:href="@{/teacher/listallcourses}">Back to all course</a></p>
+
+        <!--<p><a th:href="@{/teacher/displayoneeval/{id}(id=${course.id})}"> see evaluation</a></p>-->
+
+        <p><a th:href="@{/teacher/displayallevalsofonecourse/{id}(id=${course.id})}">See all evaluation of a course</a></p>
+
+
     </div>
-
-    <div  th:if="${studentsofACourse.isEmpty()}">
-        <p>No students Are taking the class!</p>
-    </div>
-
-    <br/>
-    <br/>
-
-    <p><a th:href="@{/teacher/addstudentstocourse/{id}(id=${course.id})}">Register students for the course</a></p>
-    <p><a th:href="@{/teacher/listallcourses}">Back to all course</a></p>
-
-    <!--<p><a th:href="@{/teacher/displayoneeval/{id}(id=${course.id})}"> see evaluation</a></p>-->
-
-    <p><a th:href="@{/teacher/displayallevalsofonecourse/{id}(id=${course.id})}">See all evaluation of a course</a></p>
-
-
+    <!-- Footer -->
+    <div th:replace="base :: footer"></div>
+    <!-- /.Footer -->
 </body>
 </html>

@@ -1,25 +1,32 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-
+    <title>Confirm Student M Number</title>
+    <!-- Header -->
+    <div th:replace="base :: header"></div>
+    <!-- /.Header -->
 </head>
 <body>
+    <!--Navigation Teacher-->
+    <nav th:replace="base :: nav2Teacher"></nav>
+    <!--/.Navigation Teacher-->
+    <div class="container">
+        <h2>You have been registered for the course</h2>
 
-<div class="container">
-<h2>You have been registered for the course</h2>
-
-    <p th:text="${newstudent.mNumber}"></p>
-    <p th:text="${newstudent.firstName}"></p>
-    <p th:text="${newstudent.lastName}"></p>
-    <!--<p th:text="${newstudent.username}"></p>-->
-    <p th:text="${newstudent.email}"></p>
+        <p th:text="${newstudent.mNumber}"></p>
+        <p th:text="${newstudent.firstName}"></p>
+        <p th:text="${newstudent.lastName}"></p>
+        <!--<p th:text="${newstudent.username}"></p>-->
+        <p th:text="${newstudent.email}"></p>
 
 
-    <p><a th:href="@{/teacher/listallcourses}">Back to all course</a></p>
-    <p><a th:href="@{/teacher/listallstudents/{courseId}(courseId=${course.id})}">Validate student's info</a></p>
-    <p><a th:href="@{/teacher/addstudentstocourse/{id}(id=${course.id})}">Register another students for the course</a></p>
+        <p><a th:href="@{/teacher/listallcourses}">Back to all course</a></p>
+        <p><a th:href="@{/teacher/listallstudents/{courseId}(courseId=${course.id})}">Validate student's info</a></p>
+        <p><a th:href="@{/teacher/addstudentstocourse/{id}(id=${course.id})}">Register another students for the course</a></p>
 
-</div>
-
+    </div>
+    <!-- Footer -->
+    <div th:replace="base :: footer"></div>
+    <!-- /.Footer -->
 </body>
 </html>

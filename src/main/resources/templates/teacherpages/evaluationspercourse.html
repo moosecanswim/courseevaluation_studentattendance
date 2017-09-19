@@ -3,18 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <!-- Header -->
+    <div th:replace="base :: header"></div>
+    <!-- /.Header -->
 </head>
 <body>
-<th:block th:each="item:${matchevtocr}">
+    <!--Navigation Teacher-->
+    <nav th:replace="base :: nav2Teacher"></nav>
+    <!--/.Navigation Teacher-->
+    <div class="container">
 
-    <h2 th:inline="text">Course information </h2>
+        <th:block th:each="item:${matchevtocr}">
 
-    <p th:text="' ' + ${item.id}"/>
-    <p th:text="':' + ${item.content}"/>
+            <h2 th:inline="text">Course information </h2>
 
-
-
-
-</th:block>
+            <p th:text="' ' + ${item.id}"/>
+            <p th:text="':' + ${item.content}"/>
+        </th:block>
+    </div>
+    <!-- Footer -->
+    <div th:replace="base :: footer"></div>
+    <!-- /.Footer -->
 </body>
 </html>

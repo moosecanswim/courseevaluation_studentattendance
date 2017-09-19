@@ -15,8 +15,8 @@
     <!--Navigation Welcome-->
     <nav th:replace="base :: nav2Welcome"></nav>
     <!--/.Navigation Welcome-->
-
-    <h1>This is the welcome page!</h1>
+    <div class="container">
+        <h1>This is the welcome page!</h1>
 
     <!--<div  th:if="${!collectionOfAllMatchedJobs.isEmpty()}">-->
     <div   th:if="${message!=null}">
@@ -25,15 +25,14 @@
     <!--<div th:text="'Instructor: ' + ${courseInstructor?.firstName} + ' ' +${courseInstructor?.lastName}"></div>-->
 
 
-
-    <br />
-    <p><a href="/teacher/home">Teacher Home</a></p>
-    <p><a href="/admin/home">Admin Home</a></p>
-    <p><a href="/eval/home">Eval Home</a></p>
-    <br />
-    <p><a href="/login">Login</a></p>
-    <p><a href="/viewcourses">View Courses</a></p>
-
+        <br />
+        <p><a href="/teacher/home">Teacher Home</a></p>
+        <p><a href="/admin/home">Admin Home</a></p>
+        <p><a href="/eval/home">Eval Home</a></p>
+        <br />
+        <p><a href="/login">Login</a></p>
+        <p><a href="/viewcourses">View Courses/Register</a></p>
+    </div>
 
     <!-- Footer -->
     <div th:replace="base :: footer"></div>
