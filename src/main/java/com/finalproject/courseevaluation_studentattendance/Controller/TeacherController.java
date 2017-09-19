@@ -273,6 +273,14 @@ public class TeacherController {
     }
 
 
+    @GetMapping("/displayoneeval/{id}")
+    public String displayoneEval(@PathVariable("id") long evalId, Model model) {
+
+
+        model.addAttribute("neweval", evaluationRepository.findOne(evalId));
+
+        return "teacherpages/displayoneeval";
+    }
 
     @RequestMapping("/delete/{courseId}/{studentId}")
     public String deletestudentwithnoMnumber(@PathVariable("courseId") Long courseId,@PathVariable("studentId") Long studentId, Model model) {

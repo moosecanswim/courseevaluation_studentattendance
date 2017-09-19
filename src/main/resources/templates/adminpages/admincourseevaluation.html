@@ -50,7 +50,7 @@
         <td><b>Computer Equipment</b></td>
     </tr>
     <!--iterate through all the evaluations for this course-->
-    <th:block th:each="eval:${evaluation}">
+    <th:block th:each="eval:${allevals}">
         <tr>
             <td><a th:text="${eval.id}"></a></td>
             <td><a th:text="${eval.content}"></a></td>
@@ -77,7 +77,7 @@
     </tr>
 
     <!--iterate through all the evaluations for this course-->
-    <th:block th:each="eval:${evaluation}">
+    <th:block th:each="eval:${allevals}">
         <tr>
             <td><a th:text="${eval.id}"></a></td>
             <td><a th:text="${eval.likes}"></a></td>
@@ -98,7 +98,7 @@
     </tr>
 
     <!--iterate through all the evaluations for this course-->
-    <th:block th:each="eval:${evaluation}">
+    <th:block th:each="eval:${allevals}">
         <tr>
             <td><a th:text="${eval.id}"></a></td>
             <td><a th:text="${eval.findings}"></a></td>
