@@ -68,23 +68,37 @@
     <br/>
 
 
-    <h4>Chose an option to search student:</h4>
-    <form th:action="@{/teacher/searchstudent/{courseId}(courseId=${course.id})}">
+    <h4>Choose an option: search student by:</h4>
+
+    <form th:action="@{/teacher/searchstudent/{courseId}(courseId=${course.id})}" method="post">
         <select name="searchBy">
-            <option value="all">Search by Complete info</option>
+            <option value="all">First Name, Last Name and Email</option>
             <option value="first">First Name only</option>
             <option value="last">Last Name only</option>
             <option value="email">Email only</option>
             <option value="fandl">First Name and Last Name</option>
         </select>
         <p>
-            <input name="fname" type="text" required placeholder="FirstName"/>
-            <input name="lname" type="text" required placeholder="LastName"/>
-            <input name="email" type="text" required placeholder="Email"/>
+            <input name="fname" type="text" placeholder="FirstName"/>
+            <input name="lname" type="text" placeholder="LastName"/>
+            <input name="email" type="text" placeholder="Email"/>
             <input type="submit" value="Search"/>
         </p>
 
     </form>
+
+<!--http://localhost:8089/teacher/searchstudent/1-->
+
+
+<p>Search Results</p>
+
+<iframe src = "http://localhost:8089/teacher/searchstudent/1" width = 100% height = "200">
+    Sorry your browser does not support inline frames.
+</iframe>
+
+
+
+
 
     <!--<h4>Search result (Matching students)</h4>-->
 

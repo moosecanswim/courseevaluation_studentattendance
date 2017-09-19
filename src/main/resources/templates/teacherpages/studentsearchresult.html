@@ -8,8 +8,11 @@
 
 <h4>Search result (Matching students)</h4>
 
+
+<p th:text="${message}"></p>
+
 <div  th:if="${searchstudent.isEmpty()}">
-    No matching results found
+    No matching results found.
 </div>
 
 <div  th:if="${!searchstudent.isEmpty()}">
@@ -27,18 +30,23 @@
         </thead>
 
         <tbody>
-        <tr th:each="student:${searchstudent}">
+        <th:block th:each="student:${searchstudent}">
             <td th:text="${student.id}"></td>
             <td th:text="${student.mNumber}"></td>
             <td th:text="${student.firstName}"></td>
             <td th:text="${student.lastName}"></td>
             <td th:text="${student.email}"></td>
-        </tr>
+        </th:block>
         </tbody>
     </table>
 
-
 </div>
+
+
+
+<p>
+    <a th:href="@{/teacher/listallstudents/{courseId}/(courseId=${course.id})}">back to results</a>
+</p>
 
 
 </body>

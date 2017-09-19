@@ -202,7 +202,7 @@ public class TeacherController {
 
     //for delete or update M number for the student
     @GetMapping("/listallstudents/{courseId}")
-    public String updateMnumber(@ModelAttribute ()@PathVariable("courseId") Long courseId, Model model) {
+    public String updateMnumber(@PathVariable("courseId") Long courseId, Model model) {
 
 
         Course currentCourse = courseRepository.findOne(courseId);
@@ -280,52 +280,53 @@ public class TeacherController {
     }
 
 
-
     @RequestMapping("/searchstudent/{courseId}")
-    public String findstudents(@PathVariable("courseId") Long courseId, @RequestParam("searchBy") String searchBy, @RequestParam(value ="fname", required=false) String fname,
+    public String findstudents(@PathVariable("courseId") Long courseId, @RequestParam(value = "searchBy") String searchBy, @RequestParam(value ="fname", required=false) String fname,
                     @RequestParam(value ="lname", required=false) String lname, @RequestParam(value ="email", required=false) String email,
                     Model model)
     {
 
-        //have to add course to model in order to show course info and all stduents of that course!
+        System.out.println("!!!!!!  " + searchBy);
+
         Course currentCourse = courseRepository.findOne(courseId);
         model.addAttribute("course", currentCourse);
+        System.out.println("Course added to model!!!");
 
-        if (searchBy=="all")
+        if (searchBy.equalsIgnoreCase("all"))
         {
-            model.addAttribute("searchstudent", personRepository.findByFirstNameLikeAndLastNameLikeAndEmailLike(fname,lname,email) );
+            System.out.println("!!!!!!!!");
+            model.addAttribute("searchstudent", personRepository.findAllByFirstNameLikeAndLastNameLikeAndEmailLike(fname,lname,email) );
             System.out.println("added to model !!");
             return "teacherpages/studentsearchresult";
 //            return "redirect:/teacher/listallstudents/{courseId}";
         }
 
-        if (searchBy=="first")
+        if (searchBy.equalsIgnoreCase("first"))
         {
-            model.addAttribute("searchstudent", personRepository.findByFirstNameLike(fname) );
+            model.addAttribute("searchstudent", personRepository.findAllByFirstNameLike(fname) );
 //            return "redirect:/teacher/listallstudents/{courseId}";
             return "teacherpages/studentsearchresult";
         }
 
 
-        if (searchBy=="last")
+        if (searchBy.equalsIgnoreCase("last"))
         {
-            model.addAttribute("searchstudent", personRepository.findByLastNameLike(fname) );
+            model.addAttribute("searchstudent", personRepository.findAllByLastNameLike(lname) );
 //            return "redirect:/teacher/listallstudents/{courseId}";
             return "teacherpages/studentsearchresult";
         }
 
-        if (searchBy=="email")
+        if (searchBy.equalsIgnoreCase("email"))
         {
-            model.addAttribute("searchstudent", personRepository.findByEmailLike(email) );
+            model.addAttribute("searchstudent", personRepository.findAllByEmailLike(email) );
 //            return "redirect:/teacher/listallstudents/{courseId}";
             return "teacherpages/studentsearchresult";
         }
 
 
-
-        if (searchBy=="fandl")
+        if (searchBy.equalsIgnoreCase("fandl"))
         {
-            model.addAttribute("searchstudent", personRepository.findByFirstNameLikeAndLastNameLike(fname, lname) );
+            model.addAttribute("searchstudent", personRepository.findAllByFirstNameLikeAndLastNameLike(fname, lname) );
 //            return "redirect:/teacher/listallstudents/{courseId}";
             return "teacherpages/studentsearchresult";
         }
@@ -333,7 +334,8 @@ public class TeacherController {
 
         else {
 
-            model.addAttribute("message", "Erro with the search, try again!");
+            model.addAttribute("searchstudent", new ArrayList<Person>());
+            model.addAttribute("message", "Error with the search, try again!");
 //            return "redirect:/teacher/listallstudents/{courseId}";
             return "teacherpages/studentsearchresult";
         }
@@ -370,7 +372,7 @@ public class TeacherController {
        model.addAttribute("course", c);
        model.addAttribute("newstudent", student);
 //       personService.create(student);
-//      // personRepo.save(person);
+//       personRepo.save(person);
        return "teacherpages/confirmstudent";
    }
 
@@ -382,12 +384,9 @@ public class TeacherController {
         return "teacherpages/displaystudents";
    }
 
-//
-//   @RequestMapping("searchcrn")
-//    public String searchForCRN(@ModelAttribute("crn") Evaluation eval, Model model, Course cse)
-//   {
-//
-//   }
+
+
+
    @GetMapping("/evaluation/{id}")
     public String getEvaluation(@PathVariable("id")Long id, Model model)
    {
