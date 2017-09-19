@@ -287,11 +287,11 @@ public class TeacherController {
 
 
     @PostMapping("/update/{courseId}/{studentId}")
-    public String updateMnumberordeletestudent(@Valid @PathVariable("courseId") Long courseId, @PathVariable("studentId") Long studentId,
-                                               @RequestParam(value="newMId") String newMId, BindingResult bindingResult,Model model) {
-            if(bindingResult.hasErrors()){
-                return "teacherpages/updateMform";
-            }
+    public String updateMnumberordeletestudent(@PathVariable("courseId") Long courseId,
+                                               @PathVariable("studentId") Long studentId,
+                                               @RequestParam(value="newMId") String newMId,
+                                               Model model) {
+
         Course currentCourse = courseRepository.findOne(courseId);
         Person currentStudent= personRepository.findOne(studentId);
         currentStudent.setmNumber(newMId);
