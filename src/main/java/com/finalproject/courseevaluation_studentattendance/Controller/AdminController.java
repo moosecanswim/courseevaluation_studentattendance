@@ -114,17 +114,6 @@ public class AdminController {
 
     }
 
-    @RequestMapping("/admincourseevaluation")
-    public String displayAll(Model model)
-    {
-
-
-
-       model.addAttribute("allevals", evaluationRepo.findAll());
-
-        return "adminpages/admincourseevaluation";
-    }
-
     @PostMapping("/registerstudent")
     public String saveStudent(@Valid @ModelAttribute("newstudent") Person newstudent, BindingResult bindingResult)
     {
@@ -134,6 +123,13 @@ public class AdminController {
      }
         personService.create(newstudent);
         return "redirect:/admin/home/";
+    }
+    @RequestMapping("/admincourseevaluation")
+    public String displayAll(Model model)
+    {
+        model.addAttribute("allevals", evaluationRepo.findAll());
+
+        return "adminpages/admincourseevaluation";
     }
     @GetMapping("/updatecourse/{id}")
     public String editCourse(@PathVariable("id") long id, Model model)
@@ -332,9 +328,8 @@ public class AdminController {
      */
     @GetMapping("/studentinformation/{id}")
     public String studentInformation(@PathVariable("id")Long id,Model model){
-        System.out.println("in StudentInformation");
-        Person aPerson=personService.findById(id);
-        Iterable<Person> studentProfiles = personService.findByMNumber(aPerson.getmNumber());
+        Person aStudent=personService.findById(id);
+        Iterable<Person> studentProfiles = personService.findByMNumber(aStudent.getmNumber());
         Set<Course> studentCoursesAvalible = new HashSet<Course>();
         Set<Course> studentCoursesUnvalible = new HashSet<Course>();
 
@@ -351,6 +346,7 @@ public class AdminController {
            }
 
         }
+        model.addAttribute("aStudent",aStudent);
         model.addAttribute("allCoursesEnrolled", studentCoursesAvalible);
         model.addAttribute("allCoursesEnded",studentCoursesUnvalible);
     return "adminpages/adminstudentdetails";

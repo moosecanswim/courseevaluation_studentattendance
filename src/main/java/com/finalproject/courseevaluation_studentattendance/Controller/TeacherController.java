@@ -156,12 +156,10 @@ public class TeacherController {
 
 
     @PostMapping("/markattendancepo/{courseId}")
-    public String postattendance(@Valid @PathVariable("courseId") Long courseId, @RequestParam("attdate") String attdate,
-                                 @RequestParam(value = "attendanceStatus") String[] attendanceStatus, BindingResult bindingResult,Model model)
+    public String postattendance(@PathVariable("courseId") Long courseId, @RequestParam("attdate") String attdate,
+                                 @RequestParam(value = "attendanceStatus") String[] attendanceStatus,Model model)
     {
-        if (bindingResult.hasErrors()){
-            return "teacherpages/attendanceofacourseform";
-        }
+
         Course currentCourse = courseRepository.findOne(courseId);
         Iterable<Person> studentsofACourse = currentCourse.getStudent();
 
@@ -215,6 +213,25 @@ public class TeacherController {
 
         return "teacherpages/displyattforstudentsofacourse";
     }
+
+
+    //for testing: display attendance of in a table rather than list
+    @GetMapping("/attforonecourse/{id}")
+    public String attforonecourse(@PathVariable("id") Long courseId, Model model)
+    {
+
+        Course currentCourse = courseRepository.findOne(courseId);
+        Iterable<Person> studentsofACourse = currentCourse.getStudent();
+
+        Person onestu = studentsofACourse.iterator().next();
+
+        model.addAttribute("onestu", onestu);
+        model.addAttribute("course", currentCourse);
+        model.addAttribute("studentofacourse", studentsofACourse);
+
+        return "teacherpages/tableattofonecourse";
+    }
+
 
     //for delete or update M number for the student
     @GetMapping("/listallstudents/{courseId}")
@@ -335,7 +352,8 @@ public class TeacherController {
         ArrayList<Person> validatedstudent= new ArrayList<>();
 
 
-        //for student that M number is null put them in a unvalidated list
+        //tried iframe and some other things to display(redirect) search result on the same page with student info without creating a new HTML, it didn't work,
+        // so now we are just creating a new HTML of the search result and put student info together within the result page, need to find a better solution later!!!!
         for (Person student:studentsofACourse)
         {
             if(student.getmNumber().isEmpty())
@@ -482,7 +500,7 @@ public class TeacherController {
         System.out.println(course.getCourseName());
         final Email email= DefaultEmail.builder()
                 .from(new InternetAddress("mahifentaye@gmail.com", "Attendance INFO"))
-                .to(Lists.newArrayList(new InternetAddress("mahifentaye@gmail.com","admin")))
+                .to(Lists.newArrayList(new InternetAddress("mymahder@gmail.com","admin")))
                 .subject("Testing Email")
                 .body("Course Closed.  Attendance for the class has been attached.")
                 .attachment(getCsvForecastAttachment("Attendance",course))
@@ -492,23 +510,17 @@ public class TeacherController {
         emailService.send(email);
     }
     private EmailAttachment getCsvForecastAttachment(String filename,Course course) {
-        String testData="Record Number,Student Name,M_Number,Date\n";
-        System.out.println("test before get course in attachment");
-        System.out.println(course.getCourseName());
-        System.out.println("test after get course in attachment");
+        String testData="Record Number,Student Name,M_Number,Date,Status\n";
         Iterable<Person> students = course.getStudent();
         for (Person std : students) {
-            System.out.println("nameeeeeeeeeeeeeee in attachment"+std.getFirstName());
             String studName= std.getFirstName() +" "+ std.getLastName();
             String studId = String.valueOf(std.getId());
             String mnum = String.valueOf(std.getmNumber());
             Iterable<Attendance> attendances=std.getAttendances();
-            System.out.println("idddddddddddddddddd in attachment"+std.getId());
             for (Attendance att: attendances) {
-            System.out.println("attt in attachment"+att.getDate());
                 String dates=String.valueOf(att.getDate());
                 String status=att.getStatus();
-                testData += studId+","+ studName+","+mnum+","+status+"\n";
+                testData += studId+","+ studName+","+mnum+","+dates+","+status+"\n";
 
             }
         }
@@ -520,6 +532,8 @@ public class TeacherController {
 
         return attachment;
     }
+
+
 
 
 }

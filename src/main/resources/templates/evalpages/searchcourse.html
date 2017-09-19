@@ -8,6 +8,7 @@
     <title>Title</title>
 </head>
 <body>
+<div>
 <form  th:action="@{/eval/searchcourse}"  method="post">
 
     <p>Enter CRN Number: <input type="number" name="crnfield" /></p>
@@ -15,5 +16,33 @@
     <p><input type="submit" value="Search CRN" /> <input type="reset" value="Reset" /> </p>
 
 </form>
+</div>
+
+<div>
+<form id="inner-form" class="form-horizontal form" th:action="@{eval/searchresult}">
+    <body>
+
+    <div>
+    <table>
+
+
+        <tr>
+            <th:block th:each="item:${searcheval}">
+                <td><b>CRN</b></td>  <td th:text="${item.crn}"></td>
+                <td><b>Course Name</b></td> <td th:text="${item.courseName}"></td>
+                <td><b>Start Date</b></td> <td th:text="${item.startDate}"></td>
+               <td><b>End Date</b></td> <td th:text="${item.endDate}"></td>
+                <td><a th:href="@{/eval/evaluationentry/{id}(id=${item.id})}">Evaluate this course</a></td>
+            </th:block>
+
+        </tr>
+
+
+    </table>
+        </div>
+    </body>
+    </form>
+
+</div>
 </body>
 </html>
