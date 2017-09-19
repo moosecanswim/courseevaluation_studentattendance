@@ -23,7 +23,7 @@ public interface CourseRepository extends CrudRepository<Course,Long> {
 
    Course findByStartDate(String startDate);
 
-   Course findAllByCrn(long crn);
+   Iterable<Course> findAllByCrn(long crn);
    Long findById(long id);
 
 
