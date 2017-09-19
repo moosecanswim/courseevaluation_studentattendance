@@ -43,8 +43,8 @@
             <td><a th:text="${course.id}"></a></td>
             <td><a th:text="${course.crn}"></a></td>
             <td><a th:href="@{/admin/admincoursedetails/{id}(id=${course.id})}"  th:inline="text">[[${course.courseName}]]</a></td>
-            <td><a th:text="${course.startDate}"></a></td>
-            <td><a th:text="${course.endDate}"></a></td>
+            <td><a th:text="${{course.startDate}}"></a></td>
+            <td><a th:text="${{course.endDate}}"></a></td>
             <td><a th:text="${course.status}"></a></td>
             <td>
                 <a th:href="@{/admin/viewcourseevaluations/{id}(id=${course.id})}">View Evaluations</a>

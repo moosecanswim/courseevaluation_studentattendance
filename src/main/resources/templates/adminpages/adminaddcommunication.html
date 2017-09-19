@@ -30,9 +30,17 @@
             <input type="hidden" th:field="*{id}">
             <!--//mNumber input-->
             M#: <input th:field="*{mNumber}" placeholder="M-Number">
+            <div th:if="${#fields.hasErrors('mNumber')}"  th:errors="*{mNumber}"
+                 class="well alert alert-warning" role="alert"></div>
             Name: <input th:field="*{name}" placeholder="Contact Name">
+            <div th:if="${#fields.hasErrors('name')}"  th:errors="*{name}"
+                 class="well alert alert-warning" role="alert"></div>
             Phone #: <input th:field="*{phoneNumber}" placeholder="Phone Number ex(xxxyyzzzz)">
+            <div th:if="${#fields.hasErrors('phoneNumber')}"  th:errors="*{phoneNumber}"
+                 class="well alert alert-warning" role="alert"></div>
             Email: <input th:field="*{email}" placeholder="Email">
+            <div th:if="${#fields.hasErrors('email')}"  th:errors="*{email}"
+                 class="well alert alert-warning" role="alert"></div>
             Course:
             <select th:field="*{courseInterestedCRN}">
                 <option value="">--select a course--</option>

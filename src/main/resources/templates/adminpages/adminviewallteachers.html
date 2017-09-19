@@ -40,7 +40,7 @@
         <td th:text="${all.username}"></td>
         <!--<td th:text="${alls.password}"></td>-->
         <td th:text="${all.email}"></td>
-        <td th:text="${all.startDate}"></td>
+        <td th:text="${{all.startDate}}"></td>
         <td th:text="${all.active}"></td>
         <td>
             <a th:href="@{/admin/viewteachercourses/{id}(id=${all.id})}">View Courses</a>
