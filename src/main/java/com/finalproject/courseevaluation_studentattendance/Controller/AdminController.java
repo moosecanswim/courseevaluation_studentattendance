@@ -114,17 +114,6 @@ public class AdminController {
 
     }
 
-    @RequestMapping("/admincourseevaluation")
-    public String displayAll(Model model)
-    {
-
-
-
-       model.addAttribute("allevals", evaluationRepo.findAll());
-
-        return "adminpages/admincourseevaluation";
-    }
-
     @PostMapping("/registerstudent")
     public String saveStudent(@Valid @ModelAttribute("newstudent") Person newstudent, BindingResult bindingResult)
     {
@@ -134,6 +123,13 @@ public class AdminController {
      }
         personService.create(newstudent);
         return "redirect:/admin/home/";
+    }
+    @RequestMapping("/admincourseevaluation")
+    public String displayAll(Model model)
+    {
+        model.addAttribute("allevals", evaluationRepo.findAll());
+
+        return "adminpages/admincourseevaluation";
     }
     @GetMapping("/updatecourse/{id}")
     public String editCourse(@PathVariable("id") long id, Model model)
