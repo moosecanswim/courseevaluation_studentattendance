@@ -10,68 +10,62 @@
 
 </head>
 <body>
-
-<!--Navigation Admin-->
-<nav th:replace="base :: nav2Admin"></nav>
-<!--/.Navigation Admin-->
-
-
-
-<h1>List of All Courses for this Teacher</h1>
+    <!--Navigation Admin-->
+    <nav th:replace="base :: nav2Admin"></nav>
+    <!--/.Navigation Admin-->
+    <div class="container">
+        <h1>List of All Courses for this Teacher</h1>
 
 
-<div th:text="'Instructor Name: ' + ${teacher?.firstName} + ' ' +${teacher?.lastName}"></div>
+        <div th:text="'Instructor Name: ' + ${teacher?.firstName} + ' ' +${teacher?.lastName}"></div>
 
 
-<p>List of Courses</p>
+        <p>List of Courses</p>
 
-<table class="table table-striped" border="1">
-    <tr>
-        <td><b>ID</b></td>
-        <td><b>CRN</b></td>
-        <td><b>Course Name</b></td>
-        <td><b>Start Date</b></td>
-        <td><b>End Date</b></td>
-        <td><b>Class Available</b></td>
-        <td><b>View Evaluations</p></b></td>
-    </tr>
+        <table class="table table-striped" border="1">
+            <tr>
+                <td><b>ID</b></td>
+                <td><b>CRN</b></td>
+                <td><b>Course Name</b></td>
+                <td><b>Start Date</b></td>
+                <td><b>End Date</b></td>
+                <td><b>Class Available</b></td>
+                <td><b>View Evaluations</p></b></td>
+            </tr>
 
 
-    <!--iterate through all the courses for this Teacher-->
-    <th:block th:each="course:${listAllCoursesForThisTeacher}">
-        <tr>
-            <td><a th:text="${course.id}"></a></td>
-            <td><a th:text="${course.crn}"></a></td>
-            <td><a th:href="@{/admin/admincoursedetails/{id}(id=${course.id})}"  th:inline="text">[[${course.courseName}]]</a></td>
-            <td><a th:text="${{course.startDate}}"></a></td>
-            <td><a th:text="${{course.endDate}}"></a></td>
-            <td><a th:text="${course.status}"></a></td>
-            <td>
-                <a th:href="@{/admin/viewcourseevaluations/{id}(id=${course.id})}">View Evaluations</a>
-            </td>
-        </tr>
-    </th:block>
-</table>
+            <!--iterate through all the courses for this Teacher-->
+            <th:block th:each="course:${listAllCoursesForThisTeacher}">
+                <tr>
+                    <td><a th:text="${course.id}"></a></td>
+                    <td><a th:text="${course.crn}"></a></td>
+                    <td><a th:href="@{/admin/admincoursedetails/{id}(id=${course.id})}"  th:inline="text">[[${course.courseName}]]</a></td>
+                    <td><a th:text="${{course.startDate}}"></a></td>
+                    <td><a th:text="${{course.endDate}}"></a></td>
+                    <td><a th:text="${course.status}"></a></td>
+                    <td>
+                        <a th:href="@{/admin/viewcourseevaluations/{id}(id=${course.id})}">View Evaluations</a>
+                    </td>
+                </tr>
+            </th:block>
+        </table>
 
 
 
-<p>any notifications ("email" from the submit attendance from the teacher)</p>
+        <p>any notifications ("email" from the submit attendance from the teacher)</p>
 
 
-<!--Create a new person-->
-<!--<div><a href="/admin/addperson">Create New Person</a></div>-->
+        <!--Create a new person-->
+        <!--<div><a href="/admin/addperson">Create New Person</a></div>-->
 
-<!--Link to view the list of all teachers-->
-<div><a href="/admin/viewallteachers">Back to All Teachers</a></div>
-<!--Link to the Admin Home page-->
-<div><a href="/admin/home">Admin Home</a></div>
+        <!--Link to view the list of all teachers-->
+        <div><a href="/admin/viewallteachers">Back to All Teachers</a></div>
+        <!--Link to the Admin Home page-->
+        <div><a href="/admin/home">Admin Home</a></div>
+    </div>
 
-
-
-
-<!-- Footer -->
-<div th:replace="base :: footer"></div>
-<!-- /.Footer -->
-
+    <!-- Footer -->
+    <div th:replace="base :: footer"></div>
+    <!-- /.Footer -->
 </body>
 </html>

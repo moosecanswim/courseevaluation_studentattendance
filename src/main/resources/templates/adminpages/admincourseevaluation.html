@@ -10,114 +10,113 @@
 
 </head>
 <body>
-
-<!--Navigation Admin-->
-<nav th:replace="base :: nav2Admin"></nav>
-<!--/.Navigation Admin-->
-
-<!--Todo need to be corrected from eval side:-->
-<!--This page doesn't work because when evaluation is saving to DB, it creates a new course!-->
-
-
-<h1 th:text="'Evaluation for ' + ${course.courseName}+ ':'"></h1>
+    <!--Navigation Admin-->
+    <nav th:replace="base :: nav2Admin"></nav>
+    <!--/.Navigation Admin-->
+    <div class="container">
+        <!--Todo need to be corrected from eval side:-->
+        <!--This page doesn't work because when evaluation is saving to DB, it creates a new course!-->
 
 
-<!--Section I-->
-<h2>Section I: Course Information</h2>
-<p th:text="'Course ID: ' + ${course.id}"/>
-<p th:text="'Course CRN: ' + ${course.crn}"/>
-<p th:text="'Course Name: '+ ${course.courseName}" />
-<p th:text="'Start Date: '+ ${{course.startDate}}" />
-<p th:text="'End Date: '+ ${{course.endDate}}" />
-<p th:text="'Completion Status: '+ ${course.status}" />
-<!--If the Instructor is not assigned to the course yet, this div will display Instructor: null null:-->
-<div th:text="'Instructor\'s Name: ' + ${courseInstructor?.firstName} + ' ' +${courseInstructor?.lastName}"></div>
+        <h1 th:text="'Evaluation for ' + ${course.courseName}+ ':'"></h1>
 
 
-<h1>Course Evaluations Summary:</h1>
+        <!--Section I-->
+        <h2>Section I: Course Information</h2>
+        <p th:text="'Course ID: ' + ${course.id}"/>
+        <p th:text="'Course CRN: ' + ${course.crn}"/>
+        <p th:text="'Course Name: '+ ${course.courseName}" />
+        <p th:text="'Start Date: '+ ${{course.startDate}}" />
+        <p th:text="'End Date: '+ ${{course.endDate}}" />
+        <p th:text="'Completion Status: '+ ${course.status}" />
+        <!--If the Instructor is not assigned to the course yet, this div will display Instructor: null null:-->
+        <div th:text="'Instructor\'s Name: ' + ${courseInstructor?.firstName} + ' ' +${courseInstructor?.lastName}"></div>
 
 
-<!--Section II-->
-<h2>Section II: Rating of the Course</h2>
-<table class="table table-striped" border="1">
-    <tr>
-        <td><b>Eval ID</b></td>
-        <td><b>Course Content</b></td>
-        <td><b>Instruction Quality</b></td>
-        <td><b>Training Experience</b></td>
-        <td><b>Textbook or Handouts</b></td>
-        <td><b>Environment and Seating</b></td>
-        <td><b>Computer Equipment</b></td>
-    </tr>
-    <!--iterate through all the evaluations for this course-->
-    <th:block th:each="eval:${allevals}">
-        <tr>
-            <td><a th:text="${eval.id}"></a></td>
-            <td><a th:text="${eval.content}"></a></td>
-            <td><a th:text="${eval.quality}"></a></td>
-            <td><a th:text="${eval.experience}"></a></td>
-            <td><a th:text="${eval.materials}"></a></td>
-            <td><a th:text="${eval.environment}"></a></td>
-            <td><a th:text="${eval.equipment}"></a></td>
-        </tr>
-    </th:block>
-</table>
+        <h1>Course Evaluations Summary:</h1>
 
 
-
-<!--Section III-->
-<h2>Section III: Comments</h2>
-<table class="table table-striped" border="1">
-    <tr>
-        <td><b>Eval ID</b></td>
-        <td><b>Like About the Class</b></td>
-        <td><b>Dislike About the Class</b></td>
-        <td><b>Suggested Improvements</b></td>
-        <td><b>Classes to See Offered</b></td>
-    </tr>
-
-    <!--iterate through all the evaluations for this course-->
-    <th:block th:each="eval:${allevals}">
-        <tr>
-            <td><a th:text="${eval.id}"></a></td>
-            <td><a th:text="${eval.likes}"></a></td>
-            <td><a th:text="${eval.dislikes}"></a></td>
-            <td><a th:text="${eval.suggestions}"></a></td>
-            <td><a th:text="${eval.otherClass}"></a></td>
-        </tr>
-    </th:block>
-</table>
-
-
-<!--Section IV-->
-<h2>Section IV: Optional</h2>
-<table class="table table-striped" border="1">
-    <tr>
-        <td><b>Eval ID</b></td>
-        <td><b>How did you find out about the class</b></td>
-    </tr>
-
-    <!--iterate through all the evaluations for this course-->
-    <th:block th:each="eval:${allevals}">
-        <tr>
-            <td><a th:text="${eval.id}"></a></td>
-            <td><a th:text="${eval.findings}"></a></td>
-        </tr>
-    </th:block>
-</table>
+        <!--Section II-->
+        <h2>Section II: Rating of the Course</h2>
+        <table class="table table-striped" border="1">
+            <tr>
+                <td><b>Eval ID</b></td>
+                <td><b>Course Content</b></td>
+                <td><b>Instruction Quality</b></td>
+                <td><b>Training Experience</b></td>
+                <td><b>Textbook or Handouts</b></td>
+                <td><b>Environment and Seating</b></td>
+                <td><b>Computer Equipment</b></td>
+            </tr>
+            <!--iterate through all the evaluations for this course-->
+            <th:block th:each="eval:${allevals}">
+                <tr>
+                    <td><a th:text="${eval.id}"></a></td>
+                    <td><a th:text="${eval.content}"></a></td>
+                    <td><a th:text="${eval.quality}"></a></td>
+                    <td><a th:text="${eval.experience}"></a></td>
+                    <td><a th:text="${eval.materials}"></a></td>
+                    <td><a th:text="${eval.environment}"></a></td>
+                    <td><a th:text="${eval.equipment}"></a></td>
+                </tr>
+            </th:block>
+        </table>
 
 
 
-<!--<div class="panel-body">-->
-<!--<th:block th:each="course:${course}">-->
-    <!--<p th:text="${course.crn}" />-->
-    <!--<p th:text="${course.courseName}" />-->
-    <!--<p th:text="${course.startDate}" />-->
-    <!--<p th:text="${course.endDate}" />-->
-    <!--<p th:text="${course.status}" />-->
-<!--</th:block>-->
+        <!--Section III-->
+        <h2>Section III: Comments</h2>
+        <table class="table table-striped" border="1">
+            <tr>
+                <td><b>Eval ID</b></td>
+                <td><b>Like About the Class</b></td>
+                <td><b>Dislike About the Class</b></td>
+                <td><b>Suggested Improvements</b></td>
+                <td><b>Classes to See Offered</b></td>
+            </tr>
 
-    <!--<div th:each="item:${evaluation}">-->
+            <!--iterate through all the evaluations for this course-->
+            <th:block th:each="eval:${allevals}">
+                <tr>
+                    <td><a th:text="${eval.id}"></a></td>
+                    <td><a th:text="${eval.likes}"></a></td>
+                    <td><a th:text="${eval.dislikes}"></a></td>
+                    <td><a th:text="${eval.suggestions}"></a></td>
+                    <td><a th:text="${eval.otherClass}"></a></td>
+                </tr>
+            </th:block>
+        </table>
+
+
+        <!--Section IV-->
+        <h2>Section IV: Optional</h2>
+        <table class="table table-striped" border="1">
+            <tr>
+                <td><b>Eval ID</b></td>
+                <td><b>How did you find out about the class</b></td>
+            </tr>
+
+            <!--iterate through all the evaluations for this course-->
+            <th:block th:each="eval:${allevals}">
+                <tr>
+                    <td><a th:text="${eval.id}"></a></td>
+                    <td><a th:text="${eval.findings}"></a></td>
+                </tr>
+            </th:block>
+        </table>
+
+
+
+        <!--<div class="panel-body">-->
+        <!--<th:block th:each="course:${course}">-->
+        <!--<p th:text="${course.crn}" />-->
+        <!--<p th:text="${course.courseName}" />-->
+        <!--<p th:text="${course.startDate}" />-->
+        <!--<p th:text="${course.endDate}" />-->
+        <!--<p th:text="${course.status}" />-->
+        <!--</th:block>-->
+
+        <!--<div th:each="item:${evaluation}">-->
         <!--<p th:text="${item.content}" />-->
         <!--<p th:text="${item.quality}" />-->
         <!--<p th:text="${item.experience}" />-->
@@ -129,18 +128,20 @@
         <!--<p th:text="${item.suggestions}" />-->
         <!--<p th:text="${item.otherClass}" />-->
         <!--<p th:text="${item.findings}" />-->
-    <!--</div>-->
-<!--</div>-->
-<!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
 
 
-<!--Link to the Admin Home page-->
-<div><a href="/admin/home">Admin Home</a></div>
+        <!--Link to the Admin Home page-->
+        <div><a href="/admin/home">Admin Home</a></div>
+    </div>
 
 
-<!-- Footer -->
-<div th:replace="base :: footer"></div>
-<!-- /.Footer -->
+
+    <!-- Footer -->
+    <div th:replace="base :: footer"></div>
+    <!-- /.Footer -->
 
 </body>
 </html>
