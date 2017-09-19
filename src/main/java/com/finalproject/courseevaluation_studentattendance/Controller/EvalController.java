@@ -37,13 +37,14 @@ public class EvalController {
     }
 
 //
-    @GetMapping("/evaluationentry/{id}")   // Course id
-    public String getEvaluation(@PathVariable("id") long id,  Model model, Course cr) {
+    @GetMapping("/evaluationentry/{courseid}")
+    public String getEvaluation(@PathVariable("courseid") long id,  Model model, Course cr) {
 
         Evaluation ev =  new Evaluation();
         ev.setCourseEvaluation(courseRepository.findOne(id));
 
-        System.out.println("Course ID for this Eval: " + id);
+        System.out.println("Course Id is"+ id);
+        model.addAttribute("courseId",id);
         model.addAttribute("neweval", ev);
 
         return "evalpages/evaluationentry";
@@ -51,15 +52,11 @@ public class EvalController {
 
     }
 
-    @PostMapping("/evaluationentry")
-    public String entrypost(@ModelAttribute("neweval") Evaluation eval, Model model, Course cr)
+    @PostMapping("/evaluationentry/{courseId}")
+    public String entrypost(@ModelAttribute("neweval") Evaluation eval,@PathVariable("courseId")long courseId, Model model)
     {
-        model.addAttribute("neweval", eval);
-
-       // Evaluation evs =  new Evaluation();
-
-        evaluationService.addEvalToCourse(cr,eval);
-
+        Course cr=courseRepository.findOne(courseId);
+        evaluationService.addEvalToCourse(eval,cr);
         return "evalpages/confirmeval";
     }
 

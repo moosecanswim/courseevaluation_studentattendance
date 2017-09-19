@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<a href="/teacher/courseend">Course has Ended</a>
+<a th:href="@{/teacher/courseend/{id}(id=${course.id})}">Course has Ended</a>
     <h2 th:inline="text">Course information for [[${course.courseName}]]</h2>
 
     <p th:text="'Course ID: ' + ${course.id}"/>
@@ -48,7 +48,7 @@
 
     <p><a th:href="@{/teacher/addstudentstocourse/{id}(id=${course.id})}">Register students for the course</a></p>
     <p><a th:href="@{/teacher/listallcourses}">Back to all course</a></p>
-    <p><a th:href="@{/teacher/evaluation/{id}(id=${course.id})}">See evaluations</a></p>
+    <p><a th:href="@{/teacher/evaluationspercourse/{id}(id=${course.id})}">See evaluations</a></p>
 
 
 

@@ -16,13 +16,12 @@ public interface CourseRepository extends CrudRepository<Course,Long> {
 
 
    //this may be an issue because several courses can have the same name
+
    Course findByCourseName(String coursenames);
    Course findByCrn(long crn);
 
 
    Course findByStartDate(String startDate);
-
-
 
    Course findAllByCrn(long crn);
    Long findById(long id);

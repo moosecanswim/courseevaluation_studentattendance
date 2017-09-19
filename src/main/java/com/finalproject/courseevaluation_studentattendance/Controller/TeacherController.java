@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.util.ArrayIterator;
 import com.finalproject.courseevaluation_studentattendance.Model.*;
 import com.finalproject.courseevaluation_studentattendance.Repositories.*;
 import com.finalproject.courseevaluation_studentattendance.Services.CourseService;
+import com.finalproject.courseevaluation_studentattendance.Services.EvaluationService;
 import com.finalproject.courseevaluation_studentattendance.Services.PersonService;
 import com.google.common.collect.Lists;
 import it.ozimov.springboot.mail.model.Email;
@@ -26,9 +27,11 @@ import javax.websocket.server.PathParam;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.security.Principal;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+
 import java.util.Date;
 import java.util.logging.SimpleFormatter;
 
@@ -60,6 +63,9 @@ public class TeacherController {
 
     @Autowired
     EvaluationRepository evaluationRepository;
+
+    @Autowired
+    EvaluationService evaluationService;
 
     @RequestMapping("/home")
 //    public String teacherHome(Principal p, Model model)
@@ -384,6 +390,21 @@ public class TeacherController {
         return "teacherpages/displaystudents";
    }
 
+//
+//   @RequestMapping("searchcrn")
+//    public String searchForCRN(@ModelAttribute("crn") Evaluation eval, Model model, Course cse)
+//   {
+//
+//   }
+//    @GetMapping("/evaluationspercourse/{id}")
+//    public  String matchEvaluationPerCourse(@PathVariable("id") long id, Model model, Course cr)
+//    {
+//
+//    model.addAttribute("matchevtocr", evaluationService.matchCourseToEvals(cr));
+//    return "teacher/evaluationspercourse";
+//
+//    }
+
 
 
 
@@ -404,43 +425,94 @@ public class TeacherController {
     //the method to send email
     //it sends email need to make the body
 
+    @GetMapping("/courseend/{id}")
+    public String emailAtCourseEnd(@PathVariable("id") long id, Model model) throws UnsupportedEncodingException {
+        Course course=courseRepository.findOne(id);
+        Date date= new Date();
+//        DateFormat df=new SimpleDateFormat("MM/dd/yyyy");
+        //sets the course end date with the current date when they click here
+        course.setEndDate(date);
+        courseRepository.save(course);
+        System.out.println("test after save End date");
+        attachmentContent(course);
+        return "redirect:/teacher/displaystudents/";
+
+    }
+
+    private String attachmentContent(Course course) throws UnsupportedEncodingException {
+
+        String head="StudentName,Date,Status";
+        Iterable<Person> students=course.getStudent();
+        System.out.println(course.getCourseName());
+        System.out.println("students in attachment method");
+
+        sendEmailWithoutTemplating(course);
+//        for (Person pr:students)
+//        {
+//            System.out.println("students in course");
+//            String stname=pr.getFirstName()+pr.getmNumber()+"\n";
+//            Iterable<Attendance>attendances=pr.getAttendances();
+//            for (Attendance att:attendances)
+//            {
+//               String attdate=att.getDate();
+//               String attstatus=att.getStatus()+"\n";
+//                System.out.println("attendance for students");
+//               sendEmailWithoutTemplating(head,stname,attdate,attstatus);
+//               return attstatus;
+////               return attsatus;
+//            }
+//           return stname;
+//
+//        }
+//
+return head;
+
+    }
     @Autowired
     public EmailService emailService;
-    public void sendEmailWithoutTemplating() throws UnsupportedEncodingException {
+    public void sendEmailWithoutTemplating(Course course) throws UnsupportedEncodingException {
+        System.out.println("test before email");
+        System.out.println(course.getCourseName());
         final Email email= DefaultEmail.builder()
-                .from(new InternetAddress("mahifentaye@gmail.com", "Marco Tullio Cicero ne"))
+                .from(new InternetAddress("mahifentaye@gmail.com", "Attendance INFO"))
                 .to(Lists.newArrayList(new InternetAddress("mymahder@gmail.com","admin")))
                 .subject("Testing Email")
                 .body("We need the attendance in the Email body.")
-                .attachment(getCsvForecastAttachment("Attendance"))
+                .attachment(getCsvForecastAttachment("Attendance",course))
                 .encoding("UTF-8").build();
 //		modelObject.put("recipent", recipent);
         System.out.println("test it");
         emailService.send(email);
     }
+    private EmailAttachment getCsvForecastAttachment(String filename,Course course) {
+        String testData="Record Number,Student Name,M_Number,Date\n";
+        System.out.println("test before get course in attachment");
+        System.out.println(course.getCourseName());
+        System.out.println("test after get course in attachment");
+        Iterable<Person> students = course.getStudent();
+        for (Person std : students) {
+            System.out.println("nameeeeeeeeeeeeeee in attachment"+std.getFirstName());
+            String studName= std.getFirstName() +" "+ std.getLastName();
+            String studId = String.valueOf(std.getId());
+            String mnum = String.valueOf(std.getmNumber());
+            Iterable<Attendance> attendances=std.getAttendances();
+            System.out.println("idddddddddddddddddd in attachment"+std.getId());
+            for (Attendance att: attendances) {
+            System.out.println("attt in attachment"+att.getDate());
+                String dates=String.valueOf(att.getDate());
+                String status=att.getStatus();
+                testData += studId+","+ studName+","+mnum+","+status+"\n";
 
-    private EmailAttachment getCsvForecastAttachment(String filename) {
+            }
+        }
 
-        final String testData =
-                "RecordNUm,StudentName,Mnum,Date" +
-                        "\n1,0.9\n2,0.95\n3,1.0";
-        final DefaultEmailAttachment attachment = DefaultEmailAttachment.builder()
+         DefaultEmailAttachment attachment = DefaultEmailAttachment.builder()
                 .attachmentName(filename + ".csv")
                 .attachmentData(testData.getBytes(Charset.forName("UTF-8")))
                 .mediaType(MediaType.TEXT_PLAIN).build();
+
         return attachment;
     }
 
-    @GetMapping("/courseend")
-    public String emailAtCourseEnd(Model model) throws UnsupportedEncodingException {
-        Date now= new Date();
-
-        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-
-        String nowdate= df.format(now);
-        //we need to set the course end date with the current date when they click here
-        sendEmailWithoutTemplating();
-        return"redirect:/teacher/displaystudents/";
-    }
 
 }
