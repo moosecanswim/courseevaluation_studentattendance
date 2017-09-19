@@ -105,7 +105,7 @@ public class TeacherController {
 
         Course currentCourse = courseRepository.findOne(courseId);
         Iterable<Person> studentsofACourse = currentCourse.getStudent();
-        model.addAttribute("ins", currentCourse.getInstructor());
+        model.addAttribute("courseInstructor", currentCourse.getInstructor());
 
 
         //move it to new route so it can stamp the time of the time actually submitted
@@ -153,8 +153,6 @@ public class TeacherController {
 
     //display the attendance for a course of all students
 
-
-
     @PostMapping("/markattendancepo/{courseId}")
     public String postattendance(@PathVariable("courseId") Long courseId, @RequestParam("attdate") String attdate,
                                  @RequestParam(value = "attendanceStatus") String[] attendanceStatus,Model model)
@@ -165,14 +163,6 @@ public class TeacherController {
 
         int i=0;
 
-//        Date now= new Date();
-//
-//        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-//
-//        String nowdate= df.format(now);
-//
-//        System.out.println(nowdate);
-//
         for (Person student: studentsofACourse) {
 
             if (attendanceRepository.findAllByAttendanceCourseEqualsAndDateEqualsAndPersonAttendanceEquals(currentCourse, attdate, student) != null) {
@@ -223,6 +213,9 @@ public class TeacherController {
         Course currentCourse = courseRepository.findOne(courseId);
         Iterable<Person> studentsofACourse = currentCourse.getStudent();
 
+        Person onestu = studentsofACourse.iterator().next();
+
+        model.addAttribute("onestu", onestu);
         model.addAttribute("course", currentCourse);
         model.addAttribute("studentofacourse", studentsofACourse);
 
@@ -234,37 +227,11 @@ public class TeacherController {
     @GetMapping("/listallstudents/{courseId}")
     public String updateMnumber(@PathVariable("courseId") Long courseId, Model model) {
 
-
         Course currentCourse = courseRepository.findOne(courseId);
-        Iterable<Person> studentsofACourse = currentCourse.getStudent();
-        ArrayList<Person> unvalidatedstudent= new ArrayList<>();
-        ArrayList<Person> validatedstudent= new ArrayList<>();
-
-
-        //for student that M number is null put them in a unvalidated list
-        for (Person student:studentsofACourse)
-        {
-            if(student.getmNumber().isEmpty())
-            {
-                unvalidatedstudent.add(student);
-            }
-
-            if(!student.getmNumber().isEmpty())
-            {
-                System.out.println("not null====" + student.getmNumber().toString());
-                validatedstudent.add(student);
-            }
-
-        }
-
-        //add an empty search student results
-//        ArrayList<Person> searchStudent= new ArrayList<>();
-//
-//        model.addAttribute("searchstudent", searchStudent);
 
         model.addAttribute("course", currentCourse);
-        model.addAttribute("unvalidatedstudent", unvalidatedstudent);
-        model.addAttribute("validatedstudent", validatedstudent);
+        model.addAttribute("unvalidatedstudent", courseService.unvalidatedStudent(courseId));
+        model.addAttribute("validatedstudent", courseService.validatedStudent(courseId));
 
         return "teacherpages/liststudentsofacourse";
 
@@ -284,11 +251,11 @@ public class TeacherController {
 
 
     @PostMapping("/update/{courseId}/{studentId}")
-    public String updateMnumberordeletestudent(@Valid @PathVariable("courseId") Long courseId, @PathVariable("studentId") Long studentId,
-                                               @RequestParam(value="newMId") String newMId, BindingResult bindingResult,Model model) {
-            if(bindingResult.hasErrors()){
-                return "teacherpages/updateMform";
-            }
+    public String updateMnumberordeletestudent(@PathVariable("courseId") Long courseId,
+                                               @PathVariable("studentId") Long studentId,
+                                               @RequestParam(value="newMId") String newMId,
+                                               Model model) {
+
         Course currentCourse = courseRepository.findOne(courseId);
         Person currentStudent= personRepository.findOne(studentId);
         currentStudent.setmNumber(newMId);
@@ -342,38 +309,11 @@ public class TeacherController {
                     Model model)
     {
 
-
         Course currentCourse = courseRepository.findOne(courseId);
-        Iterable<Person> studentsofACourse = currentCourse.getStudent();
-        ArrayList<Person> unvalidatedstudent= new ArrayList<>();
-        ArrayList<Person> validatedstudent= new ArrayList<>();
-
-
-        //tried iframe and some other things to display(redirect) search result on the same page with student info without creating a new HTML, it didn't work,
-        // so now we are just creating a new HTML of the search result and put student info together within the result page, need to find a better solution later!!!!
-        for (Person student:studentsofACourse)
-        {
-            if(student.getmNumber().isEmpty())
-            {
-                unvalidatedstudent.add(student);
-            }
-
-            if(!student.getmNumber().isEmpty())
-            {
-                System.out.println("not null====" + student.getmNumber().toString());
-                validatedstudent.add(student);
-            }
-
-        }
-
-        //add an empty search student results
-//        ArrayList<Person> searchStudent= new ArrayList<>();
-//
-//        model.addAttribute("searchstudent", searchStudent);
 
         model.addAttribute("course", currentCourse);
-        model.addAttribute("unvalidatedstudent", unvalidatedstudent);
-        model.addAttribute("validatedstudent", validatedstudent);
+        model.addAttribute("unvalidatedstudent", courseService.unvalidatedStudent(courseId));
+        model.addAttribute("validatedstudent", courseService.validatedStudent(courseId));
 
         if (searchBy.equalsIgnoreCase("all"))
         {
@@ -453,11 +393,9 @@ public class TeacherController {
        Course c =  courseRepository.findOne(id);
        student.setCourseStudent(c);
        personRepository.save(student);
-//       personService.addStudentToCourse(student,c);
        model.addAttribute("course", c);
        model.addAttribute("newstudent", student);
-//       personService.create(student);
-//       personRepo.save(person);
+
        return "teacherpages/confirmstudent";
    }
 
@@ -468,28 +406,15 @@ public class TeacherController {
     public String emailAtCourseEnd(@PathVariable("id") long id, Model model) throws UnsupportedEncodingException {
         Course course=courseRepository.findOne(id);
         Date date= new Date();
-//        DateFormat df=new SimpleDateFormat("MM/dd/yyyy");
-        //sets the course end date with the current date when they click here
         course.setEndDate(date);
         courseRepository.save(course);
         System.out.println("test after save End date");
-        attachmentContent(course);
-        return "redirect:/teacher/displaystudents/";
-
-    }
-
-    private String attachmentContent(Course course) throws UnsupportedEncodingException {
-
-        String head="StudentName,Date,Status";
-        Iterable<Person> students=course.getStudent();
-        System.out.println(course.getCourseName());
-        System.out.println("students in attachment method");
-
         sendEmailWithoutTemplating(course);
-
-          return head;
+        return "redirect:/teacher/listallcourses/";
 
     }
+
+
     @Autowired
     public EmailService emailService;
     public void sendEmailWithoutTemplating(Course course) throws UnsupportedEncodingException {
@@ -500,26 +425,49 @@ public class TeacherController {
                 .to(Lists.newArrayList(new InternetAddress("mymahder@gmail.com","admin")))
                 .subject("Testing Email")
                 .body("Course Closed.  Attendance for the class has been attached.")
-                .attachment(getCsvForecastAttachment("Attendance",course))
+                .attachment(getCsvAttendanceAttachment("Attendance",course))
                 .encoding("UTF-8").build();
-//		modelObject.put("recipent", recipent);
         System.out.println("test it");
         emailService.send(email);
     }
-    private EmailAttachment getCsvForecastAttachment(String filename,Course course) {
-        String testData="Record Number,Student Name,M_Number,Date,Status\n";
+    private EmailAttachment getCsvAttendanceAttachment(String filename,Course course) {
+
+        String testData = "Course CRN: " + course.getCrn() + "," + "Course Name: "+ course.getCourseName() + "\n";
+
+        testData += "Instructor" + course.getInstructor().getFirstName() + " " + course.getInstructor().getLastName() +"\n";
+
+        testData += "\n";
+
+        testData +="Record Number,Student Name,M_Number\n";
         Iterable<Person> students = course.getStudent();
+        Person onestu = students.iterator().next();
+
+        testData += " " + "," + " " + "," + " " + ",";
+
+        for (Attendance att : onestu.getAttendances())
+        {
+
+           testData += att.getDate().toString() + ",";
+        }
+
+
+        testData += " "+"\n";
+
+
+
         for (Person std : students) {
             String studName= std.getFirstName() +" "+ std.getLastName();
             String studId = String.valueOf(std.getId());
             String mnum = String.valueOf(std.getmNumber());
             Iterable<Attendance> attendances=std.getAttendances();
+            testData += studId+","+ studName+","+mnum+",";
             for (Attendance att: attendances) {
                 String dates=String.valueOf(att.getDate());
                 String status=att.getStatus();
-                testData += studId+","+ studName+","+mnum+","+dates+","+status+"\n";
+                testData += status+ ",";
 
             }
+            testData += "\n";
         }
 
          DefaultEmailAttachment attachment = DefaultEmailAttachment.builder()

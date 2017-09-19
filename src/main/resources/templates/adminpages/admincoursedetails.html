@@ -39,8 +39,8 @@
         </div>
         <hr />
 
-        <!--Admin does not see the student's password-->
-        <h3>List of All Students Registered for the Cource: </h3>
+
+        <h3>List of All Students Registered for the course: </h3>
 
         <!--Display message if there is no registered ctudents for the course:-->
         <div  th:if="${courseStudents.isEmpty()}">
@@ -61,34 +61,30 @@
                 <td><strong>Active</strong></td>
                 <td><strong>Remove from Course</strong></td>
             </tr>
-
-
-
             <!--iterate through all the students for this course-->
-            <th:block th:each="alls:${courseStudents}">
-                <tr>
-                    <td th:text="${alls.id}"></td>
-                    <td th:text="${alls.mNumber}"></td>
-                    <td th:text="${alls.firstName}"></td>
-                    <td th:text="${alls.lastName}"></td>
-                    <td th:text="${alls.username}"></td>
-                    <td th:text="${alls.email}"></td>
-                    <td th:text="${{alls.startDate}}"></td>
-                    <td th:text="${alls.active}"></td>
-                    <td>
-                        <a th:href="@{/admin/removestudentfromcourse/{courseid}/{studentid}(courseid=${course.id}, studentid=${alls.id})}">Remove</a>
 
-                        <!--<a th:href="@{/admin/course/{courseid}/removestudentfromcourse/{studentid}(studentid=${alls.id},courseid=${course.id})}">Remove</a>-->
-                    </td>
-                </tr>
-            </th:block>
+            <tr th:each="alls:${courseStudents}">
+                <td th:text="${alls.id}"></td>
+                <td th:text="${alls.mNumber}"></td>
+                <td th:text="${alls.firstName}"></td>
+                <td th:text="${alls.lastName}"></td>
+                <td th:text="${alls.username}"></td>
+                <td th:text="${alls.email}"></td>
+                <td th:text="${{alls.startDate}}"></td>
+                <td th:text="${alls.active}"></td>
+                <td>
+                    <a th:href="@{/admin/removestudentfromcourse/{courseid}/{studentid}(courseid=${course.id}, studentid=${alls.id})}">Remove</a>
+
+                    <!--<a th:href="@{/admin/course/{courseid}/removestudentfromcourse/{studentid}(studentid=${alls.id},courseid=${course.id})}">Remove</a>-->
+                </td>
+            </tr>
         </table>
-
-
         <hr />
+
+
         <p><a th:href="@{/admin/registerstudentforcourse/{id}(id=${course.id})}">Register Student</a></p>
 
-
+        //
     </div>
 
     <!-- Footer -->

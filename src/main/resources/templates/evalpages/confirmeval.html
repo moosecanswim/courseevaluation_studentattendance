@@ -1,11 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+
+    <title>Evaluation Confirm</title>
+
+    <!-- Header -->
+    <div th:replace="base :: header"></div>
+    <!-- /.Header -->
+
 </head>
 <body>
-<h1>Thanks for the feed back </h1>
+
+<!--Navigation Student-->
+<nav th:replace="base :: nav2Student"></nav>
+<!--/.Navigation Student-->
+<div class="container">
+    <h1>Thanks for the feed back </h1>
 
 
 <p><a href="/eval/searchcourse">Find another course for evaluation</a></p>
@@ -13,6 +23,12 @@
 <p><a href="/evalsend">Send email to Administrator</a></p>
 
 
+
+    <p><a href="/eval/searchcourse">Find another course for evaluation</a></p>
+</div>
+<!-- Footer -->
+<div th:replace="base :: footer"></div>
+<!-- /.Footer -->
 
 </body>
 </html>

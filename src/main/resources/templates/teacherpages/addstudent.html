@@ -1,11 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-<Title>Register Student To Courses</Title>
+    <Title>Register Student To Courses</Title>
+    <!-- Header -->
+    <div th:replace="base :: header"></div>
+    <!-- /.Header -->
 </head>
 <body>
+    <!--Navigation Teacher-->
+    <nav th:replace="base :: nav2Teacher"></nav>
+    <!--/.Navigation Teacher-->
+    <div class="container">
 
-    <form action="#" th:action="@{/teacher/addstudent/{id}(id=${course.id})}" th:object="${newstudent}" method="post" >
+    <form action="#"
+          th:action="@{/teacher/addstudent/{id}(id=${course.id})}"
+          th:object="${newstudent}"
+          method="post" >
+        <fieldset>
+            <legend>Register Student to Course</legend>
+
         <!--<input type="text" th:field="*{perosn.id}" />-->
         <input type="hidden" th:field="*{id}" />
         <p><h4>M number</h4> <input type="text" th:field="*{mNumber}"/></p>
@@ -27,8 +40,13 @@
         <p th:text="'Sign up date: ' + ${#dates.format(newstudent.startDate, 'MMM dd, yyyy')}" />
         <p><input type="submit"  value="Sign up for the course" class="btn btn-lg btn-default btn-block" /></p>
 
+        </fieldset>
     </form>
 
 
+    </div>
+    <!-- Footer -->
+    <div th:replace="base :: footer"></div>
+    <!-- /.Footer -->
 </body>
 </html>

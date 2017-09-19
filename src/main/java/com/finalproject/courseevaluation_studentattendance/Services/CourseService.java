@@ -7,6 +7,7 @@ import com.finalproject.courseevaluation_studentattendance.Repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -142,5 +143,45 @@ public class CourseService {
             System.out.println("CourseService/removeStudentFromCourse: student was not part of class to begin with");
         }
     }
+
+
+
+    public Iterable<Person> validatedStudent(Long courseId) {
+        Course currentCourse = courseRepo.findOne(courseId);
+        Iterable<Person> studentsofACourse = currentCourse.getStudent();
+        ArrayList<Person> validatedstudent = new ArrayList<>();
+
+
+        //for student that M number is null put them in a unvalidated list
+        for (Person student : studentsofACourse) {
+
+            if (!student.getmNumber().isEmpty()) {
+                System.out.println("!!!" + student.getmNumber().toString());
+                validatedstudent.add(student);
+            }
+        }
+
+        return validatedstudent;
+    }
+
+    public Iterable<Person> unvalidatedStudent(Long courseId) {
+        Course currentCourse = courseRepo.findOne(courseId);
+        Iterable<Person> studentsofACourse = currentCourse.getStudent();
+        ArrayList<Person> unvalidatedstudent = new ArrayList<>();
+
+
+
+        //for student that M number is null put them in a unvalidated list
+        for (Person student : studentsofACourse) {
+
+            if (student.getmNumber().isEmpty()) {
+                System.out.println("not null====" + student.getmNumber().toString());
+                unvalidatedstudent.add(student);
+            }
+        }
+
+        return unvalidatedstudent;
+    }
+
 
 }

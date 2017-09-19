@@ -2,44 +2,59 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Title</title>
+    <title>Update M Number Form</title>
+    <!-- Header -->
+    <div th:replace="base :: header"></div>
+    <!-- /.Header -->
 </head>
 <body>
+    <!--Navigation Teacher-->
+    <nav th:replace="base :: nav2Teacher"></nav>
+    <!--/.Navigation Teacher-->
+<div class="container">
+    <h1>Validate Students</h1>
+    <form th:action="@{/teacher/update/{courseId}/{studentId}(courseId=${course.id},studentId=${student.id})}"
+          method="post" >
+        <table class="table">
+            <legend>Update M-Number to Validate Student Registration</legend>
+            <fieldset>
+                <thead>
+                <tr>
+                    <td><strong>ID</strong></td>
+                    <td><strong>M-Number</strong></td>
+                    <td><strong>First Name</strong></td>
+                    <td><strong>Last Name</strong></td>
+                    <td><strong>User Name</strong></td>
+                    <td><strong>Password</strong></td>
+                    <td><strong>Email Address</strong></td>
+                </tr>
+                </thead>
 
-<form th:action="@{/teacher/update/{courseId}/{studentId}(courseId=${course.id},studentId=${student.id})}" method="post" >
-    <table class="table">
+                <tbody>
+                <tr>
+                    <td th:text="${student.id}"></td>
+                    <td><input type="text" name="newMId"/></td>
+                    <td th:text="${student.firstName}"></td>
+                    <td th:text="${student.lastName}"></td>
+                    <td th:text="${student.username}"></td>
+                    <td th:text="${student.password}"></td>
+                    <td th:text="${student.email}"></td>
 
-        <thead>
-        <tr>
-        <td><strong>ID</strong></td>
-        <td><strong>M-Number</strong></td>
-        <td><strong>First Name</strong></td>
-        <td><strong>Last Name</strong></td>
-        <td><strong>User Name</strong></td>
-        <td><strong>Password</strong></td>
-        <td><strong>Email Address</strong></td>
-        </tr>
-        </thead>
-
-        <tbody>
-        <tr>
-            <td th:text="${student.id}"></td>
-            <td><input type="text" name="newMId"/></td>
-            <td th:text="${student.firstName}"></td>
-            <td th:text="${student.lastName}"></td>
-            <td th:text="${student.username}"></td>
-            <td th:text="${student.password}"></td>
-            <td th:text="${student.email}"></td>
-
-            <td>
-                <input type="submit"  value="update M number">
-            </td>
-        </tr>
-        </tbody>
+                    <td>
+                        <input type="submit"  value="update M number">
+                    </td>
+                </tr>
+                </tbody>
+            </fieldset>
 
 
-    </table>
-</form>
 
+        </table>
+    </form>
+</div>
+
+    <!-- Footer -->
+    <div th:replace="base :: footer"></div>
+    <!-- /.Footer -->
 </body>
 </html>

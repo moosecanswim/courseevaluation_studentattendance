@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+
     <title>Title</title>
+
+    <!-- Header -->
+    <div th:replace="base :: header"></div>
+    <!-- /.Header -->
+
 </head>
 <body>
+
+<!--Navigation Student-->
+<nav th:replace="base :: nav2Student"></nav>
+<!--/.Navigation Student-->
+
 <!--<table class="table">-->
 
     <!--<th><strong>ID</strong></th>-->
@@ -42,5 +52,10 @@
 
     <!--</tr>-->
 <!--</table>-->
+
+<!-- Footer -->
+<div th:replace="base :: footer"></div>
+<!-- /.Footer -->
+
 </body>
 </html>

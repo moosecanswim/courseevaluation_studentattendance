@@ -10,22 +10,24 @@
 
 </head>
 <body>
-
     <!--Navigation Teacher-->
     <nav th:replace="base :: nav2Teacher"></nav>
     <!--/.Navigation Teacher-->
 
-    <h1>Teacher Home Page</h1>
+    <div class="container">
+        <h1>Teacher Home Page</h1>
 
-    <p>My profile</p>
+        <p>My profile</p>
 
-    <p th:text="'Instructor Id: ' + ${instructor.id}"></p>
-    <p th:text="'Instructor MNumber: ' + ${instructor.mNumber}"></p>
-    <p th:text="'Instructor Name: ' + ${instructor.firstName} + ' ' +${instructor.lastName} "></p>
-    <p th:text="'Instructor email: ' + ${instructor.email}"></p>
+        <p th:text="'Instructor Id: ' + ${instructor.id}"></p>
+        <p th:text="'Instructor MNumber: ' + ${instructor.mNumber}"></p>
+        <p th:text="'Instructor Name: ' + ${instructor.firstName} + ' ' +${instructor.lastName} "></p>
+        <p th:text="'Instructor email: ' + ${instructor.email}"></p>
 
-    <p>My Courses links</p>
-    <p><a href="/teacher/listallcourses">All my courses</a></p>
+        <p>My Courses links</p>
+        <p><a href="/teacher/listallcourses">All my courses</a></p>
+    </div>
+
 
     <!-- Footer -->
     <div th:replace="base :: footer"></div>

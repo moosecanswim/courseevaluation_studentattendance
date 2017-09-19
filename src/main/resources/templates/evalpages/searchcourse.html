@@ -3,46 +3,57 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" >
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Title</title>
+
+    <title>Eval Search Course</title>
+
+    <!-- Header -->
+    <div th:replace="base :: header"></div>
+    <!-- /.Header -->
+
 </head>
 <body>
-<div>
-<form  th:action="@{/eval/searchcourse}"  method="post">
 
-    <p>Enter CRN Number: <input type="number" name="crnfield" /></p>
+<!--Navigation Student-->
+<nav th:replace="base :: nav2Student"></nav>
+<!--/.Navigation Student-->
 
-    <p><input type="submit" value="Search CRN" /> <input type="reset" value="Reset" /> </p>
+<div class="container">
+    <div>
+        <form  th:action="@{/eval/searchcourse}"  method="post">
 
-</form>
-</div>
+            <p>Enter CRN Number: <input type="number" name="crnfield" /></p>
 
-<div>
-<form id="inner-form" class="form-horizontal form" th:action="@{eval/searchresult}">
-    <body>
+            <p><input type="submit" value="Search CRN" /> <input type="reset" value="Reset" /> </p>
+
+        </form>
+    </div>
 
     <div>
-    <table>
+        <form id="inner-form" class="form-horizontal form" th:action="@{eval/searchresult}">
 
 
-        <tr>
-            <th:block th:each="item:${searcheval}">
-                <td><b>CRN</b></td>  <td th:text="${item.crn}"></td>
-                <td><b>Course Name</b></td> <td th:text="${item.courseName}"></td>
-                <td><b>Start Date</b></td> <td th:text="${item.startDate}"></td>
-               <td><b>End Date</b></td> <td th:text="${item.endDate}"></td>
-                <td><a th:href="@{/eval/evaluationentry/{id}(id=${item.id})}">Evaluate this course</a></td>
-            </th:block>
+            <div>
+                <table>
+                    <tr>
+                        <th:block th:each="item:${searcheval}">
+                            <td><b>CRN</b></td>  <td th:text="${item.crn}"></td>
+                            <td><b>Course Name</b></td> <td th:text="${item.courseName}"></td>
+                            <td><b>Start Date</b></td> <td th:text="${item.startDate}"></td>
+                            <td><b>End Date</b></td> <td th:text="${item.endDate}"></td>
+                            <td><a th:href="@{/eval/evaluationentry/{id}(id=${item.id})}">Evaluate this course</a></td>
+                        </th:block>
+                    </tr>
+                </table>
+            </div>
 
-        </tr>
+        </form>
 
-
-    </table>
-        </div>
-    </body>
-    </form>
-
+    </div>
 </div>
+
+<!-- Footer -->
+<div th:replace="base :: footer"></div>
+<!-- /.Footer -->
+
 </body>
 </html>

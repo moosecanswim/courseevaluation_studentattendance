@@ -5,40 +5,49 @@
     <title>Title</title>
 </head>
 <body>
+    <!--Navigation Teacher-->
+    <nav th:replace="base :: nav2Teacher"></nav>
+    <!--/.Navigation Teacher-->
+    <div class="container">
+        <table border="1">
+            <tr>
+                <th>Course Id:</th>
+                <th>Course Name:</th>
+                <th>Course Crn:</th>
+            </tr>
+            <tr>
+                <td th:text="*{course.id}"/>
+                <td th:text="*{course.courseName}"/>
+                <td th:text="*{course.crn}"/>
 
-<table border="1">
-    <tr>
-        <th>Course Id:</th>
-        <th>Course Name:</th>
-        <th>Course Crn:</th>
-    </tr>
-    <tr>
-        <td th:text="*{course.id}"/>
-        <td th:text="*{course.courseName}"/>
-        <td th:text="*{course.crn}"/>
+            </tr>
+        </table>
 
-    </tr>
-</table>
+        <table border="1">
 
-<table border="1">
-
-    <tr>
+            <tr>
+        <th>Student ID</th>
         <th>Student name</th>
-        <th>
-            <!--this should be date-->
-        </th>
+        <th>Student M-number</th>
+        <th:block th:each="item:${onestu.attendances}">
+            <th th:text="${item.date}"></th>
+        </th:block>
 
-    </tr>
+            </tr>
 
-    <tr th:each="item:${studentofacourse}">
-        <td th:text="${item.firstName} + ' ' + ${item.lastName}"/>
-        <td th:each="att:${item.attendances}"></td>
+    <tr th:each="student:${studentofacourse}">
+        <td th:text="${student.id}"/>
+        <td th:text="${student.firstName} + ' ' + ${student.lastName}"/>
+        <td th:text="${student.mNumber}">not available</td>
+        <th:block th:each="att:${student.attendances}">
         <td th:text="${att.status}"></td>
+        </th:block>
     </tr>
 
-
-</table>
-
-
+        </table>
+    </div>
+    <!-- Footer -->
+    <div th:replace="base :: footer"></div>
+    <!-- /.Footer -->
 </body>
 </html>

@@ -10,58 +10,54 @@
 
 </head>
 <body>
+    <!--Navigation Admin-->
+    <nav th:replace="base :: nav2Admin"></nav>
+    <!--/.Navigation Admin-->
+    <div class="container">
+        <h1>List of All People in Montgomery College: </h1>
 
-<!--Navigation Admin-->
-<nav th:replace="base :: nav2Admin"></nav>
-<!--/.Navigation Admin-->
+        <table class="table table-striped" border="1">
 
+            <td><strong>ID</strong></td>
+            <td><strong>M Number</strong></td>
+            <td><strong>First Name</strong></td>
+            <td><strong>Last Name</strong></td>
+            <td><strong>User Name</strong></td>
+            <!--<td><strong>Password</strong></td>-->
+            <td><strong>Email Address</strong></td>
+            <td><strong>Start Date</strong></td>
+            <td><strong>Active</strong></td>
+            <td><strong>Actions</strong></td>
 
+            <!--iterate through all people-->
+            <tr th:each="all:${person}">
+                <td th:text="${all.id}"></td>
+                <td th:text="${all.mNumber}"></td>
+                <td th:text="${all.firstName}"></td>
+                <td th:text="${all.lastName}"></td>
+                <td th:text="${all.username}"></td>
+                <!--<td th:text="${alls.password}"></td>-->
+                <td th:text="${all.email}"></td>
+                <td th:text="${{all.startDate}}"></td>
+                <td th:text="${all.active}"></td>
+                <td>
+                    <a th:href="@{/admin/updateperson/{id}(id=${all.id})}">Update</a>
 
-<h1>List of All People in Montgomery College: </h1>
+                </td>
+            </tr>
+        </table>
 
-<table class="table table-striped" border="1">
+        <!--Link to view the list of all teachers-->
+        <div><a href="/admin/viewallteachers">View All Teachers</a></div>
+        <!--Link to view the list of all students-->
+        <div><a href="/admin/viewallstudents">View All Students</a></div>
+        <!--Link to the Admin Home page-->
+        <div><a href="/admin/home">Admin Home</a></div>
+    </div>
 
-    <td><strong>ID</strong></td>
-    <td><strong>M Number</strong></td>
-    <td><strong>First Name</strong></td>
-    <td><strong>Last Name</strong></td>
-    <td><strong>User Name</strong></td>
-    <!--<td><strong>Password</strong></td>-->
-    <td><strong>Email Address</strong></td>
-    <td><strong>Start Date</strong></td>
-    <td><strong>Active</strong></td>
-    <td><strong>Actions</strong></td>
-
-    <!--iterate through all people-->
-    <tr th:each="all:${person}">
-        <td th:text="${all.id}"></td>
-        <td th:text="${all.mNumber}"></td>
-        <td th:text="${all.firstName}"></td>
-        <td th:text="${all.lastName}"></td>
-        <td th:text="${all.username}"></td>
-        <!--<td th:text="${alls.password}"></td>-->
-        <td th:text="${all.email}"></td>
-        <td th:text="${{all.startDate}}"></td>
-        <td th:text="${all.active}"></td>
-        <td>
-        <a th:href="@{/admin/updateperson/{id}(id=${all.id})}">Update</a>
-
-        </td>
-    </tr>
-</table>
-
-<!--Link to view the list of all teachers-->
-<div><a href="/admin/viewallteachers">View All Teachers</a></div>
-<!--Link to view the list of all students-->
-<div><a href="/admin/viewallstudents">View All Students</a></div>
-<!--Link to the Admin Home page-->
-<div><a href="/admin/home">Admin Home</a></div>
-
-
-
-<!-- Footer -->
-<div th:replace="base :: footer"></div>
-<!-- /.Footer -->
+    <!-- Footer -->
+    <div th:replace="base :: footer"></div>
+    <!-- /.Footer -->
 
 </body>
 </html>

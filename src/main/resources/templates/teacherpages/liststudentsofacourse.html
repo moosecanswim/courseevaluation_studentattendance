@@ -2,115 +2,122 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Title</title>
+    <title>Students in a Course</title>
+    <!-- Header -->
+    <div th:replace="base :: header"></div>
+    <!-- /.Header -->
 </head>
 <body>
+    <!--Navigation Teacher-->
+    <nav th:replace="base :: nav2Teacher"></nav>
+    <!--/.Navigation Teacher-->
+    <div class="container">
+        <h1>Validate Students</h1>
+        <br />
+        <table class="table">
 
 
-<table class="table">
+            <h4>Student with validated IDs</h4>
+            <td><strong>ID</strong></td>
+            <td><strong>M-Number</strong></td>
+            <td><strong>First Name</strong></td>
+            <td><strong>Last Name</strong></td>
+            <td><strong>Email Address</strong></td>
 
+            <tr th:each="student:${validatedstudent}">
+                <td th:text="${student.id}"></td>
+                <td th:text="${student.mNumber}"></td>
+                <td th:text="${student.firstName}"></td>
+                <td th:text="${student.lastName}"></td>
+                <td th:text="${student.email}"></td>
 
-    <h4>Student with validated IDs</h4>
-    <td><strong>ID</strong></td>
-    <td><strong>M-Number</strong></td>
-    <td><strong>First Name</strong></td>
-    <td><strong>Last Name</strong></td>
-    <td><strong>Email Address</strong></td>
+                <!--<td>-->
+                <!--<a th:href="@{/detail/{id}(id=${i.id})}">Details</a>-->
 
-    <tr th:each="student:${validatedstudent}">
-        <td th:text="${student.id}"></td>
-        <td th:text="${student.mNumber}"></td>
-        <td th:text="${student.firstName}"></td>
-        <td th:text="${student.lastName}"></td>
-        <td th:text="${student.email}"></td>
+                <!--</td>-->
 
-        <!--<td>-->
-            <!--<a th:href="@{/detail/{id}(id=${i.id})}">Details</a>-->
-
-        <!--</td>-->
-
-    </tr>
-</table>
-
-
-
-<table class="table">
-
-
-    <h4>Student with unvalidated IDs</h4>
-    <td><strong>ID</strong></td>
-    <td><strong>M-Number</strong></td>
-    <td><strong>First Name</strong></td>
-    <td><strong>Last Name</strong></td>
-    <td><strong>Email Address</strong></td>
-
-    <tr th:each="student:${unvalidatedstudent}">
-        <td th:text="${student.id}"></td>
-        <td th:text="${student.mNumber}"></td>
-        <td th:text="${student.firstName}"></td>
-        <td th:text="${student.lastName}"></td>
-        <td th:text="${student.email}"></td>
-
-        <td>
-            <a th:href="@{/teacher/delete/{courseId}/{studentId}(courseId=${course.id} ,studentId=${student.id})}">delete</a>
-
-        </td>
-        <td>
-            <a th:href="@{/teacher/update/{courseId}/{studentId}(courseId=${course.id} ,studentId=${student.id})}">Update</a>
-        </td>
-
-    </tr>
-</table>
-
-
-    <br/>
-    <br/>
-    <br/>
-
-
-    <h4>Choose an option: search student by:</h4>
-
-    <form th:action="@{/teacher/searchstudent/{courseId}(courseId=${course.id})}" method="post">
-        <select name="searchBy">
-            <option value="all">First Name, Last Name and Email</option>
-            <option value="first">First Name only</option>
-            <option value="last">Last Name only</option>
-            <option value="email">Email only</option>
-            <option value="fandl">First Name and Last Name</option>
-        </select>
-        <p>
-            <input name="fname" type="text" placeholder="FirstName"/>
-            <input name="lname" type="text" placeholder="LastName"/>
-            <input name="email" type="text" placeholder="Email"/>
-            <input type="submit" value="Search"/>
-        </p>
-
-    </form>
-
-
-<p><a th:href="@{/teacher/detailsofacourse/{courseId}/(courseId=${course.id})}">Back to course detail</a></p>
-
-
-<!--http://localhost:8089/teacher/searchstudent/1-->
-
-
-<!--<p>Search Results</p>-->
-
-<!--<iframe src = "http://localhost:8089/teacher/searchstudent/1" width = 100% height = "200">-->
-    <!--Sorry your browser does not support inline frames.-->
-<!--</iframe>-->
+            </tr>
+        </table>
 
 
 
+        <table class="table">
 
 
-    <!--<h4>Search result (Matching students)</h4>-->
+            <h4>Student with unvalidated IDs</h4>
+            <td><strong>ID</strong></td>
+            <td><strong>M-Number</strong></td>
+            <td><strong>First Name</strong></td>
+            <td><strong>Last Name</strong></td>
+            <td><strong>Email Address</strong></td>
 
-    <!--<div  th:if="${searchstudent.isEmpty()}">-->
+            <tr th:each="student:${unvalidatedstudent}">
+                <td th:text="${student.id}"></td>
+                <td th:text="${student.mNumber}"></td>
+                <td th:text="${student.firstName}"></td>
+                <td th:text="${student.lastName}"></td>
+                <td th:text="${student.email}"></td>
+
+                <td>
+                    <a th:href="@{/teacher/delete/{courseId}/{studentId}(courseId=${course.id} ,studentId=${student.id})}">delete</a>
+
+                </td>
+                <td>
+                    <a th:href="@{/teacher/update/{courseId}/{studentId}(courseId=${course.id} ,studentId=${student.id})}">Update</a>
+                </td>
+
+            </tr>
+        </table>
+
+
+        <br/>
+        <br/>
+        <br/>
+
+
+        <h4>Choose an option: search student by:</h4>
+
+        <form th:action="@{/teacher/searchstudent/{courseId}(courseId=${course.id})}" method="post">
+            <select name="searchBy">
+                <option value="all">First Name, Last Name and Email</option>
+                <option value="first">First Name only</option>
+                <option value="last">Last Name only</option>
+                <option value="email">Email only</option>
+                <option value="fandl">First Name and Last Name</option>
+            </select>
+            <p>
+                <input name="fname" type="text" placeholder="FirstName"/>
+                <input name="lname" type="text" placeholder="LastName"/>
+                <input name="email" type="text" placeholder="Email"/>
+                <input type="submit" value="Search"/>
+            </p>
+
+        </form>
+
+
+        <p><a th:href="@{/teacher/detailsofacourse/{courseId}/(courseId=${course.id})}">Back to course detail</a></p>
+
+
+        <!--http://localhost:8089/teacher/searchstudent/1-->
+
+
+        <!--<p>Search Results</p>-->
+
+        <!--<iframe src = "http://localhost:8089/teacher/searchstudent/1" width = 100% height = "200">-->
+        <!--Sorry your browser does not support inline frames.-->
+        <!--</iframe>-->
+
+
+
+
+
+        <!--<h4>Search result (Matching students)</h4>-->
+
+        <!--<div  th:if="${searchstudent.isEmpty()}">-->
         <!--No matching results found-->
-    <!--</div>-->
+        <!--</div>-->
 
-    <!--<div  th:if="${!searchstudent.isEmpty()}">-->
+        <!--<div  th:if="${!searchstudent.isEmpty()}">-->
         <!--<table>-->
 
         <!--<thead>-->
@@ -126,18 +133,22 @@
 
         <!--<tbody>-->
         <!--<tr th:each="student:${searchstudent}">-->
-            <!--<td th:text="${student.id}"></td>-->
-            <!--<td th:text="${student.mNumber}"></td>-->
-            <!--<td th:text="${student.firstName}"></td>-->
-            <!--<td th:text="${student.lastName}"></td>-->
-            <!--<td th:text="${student.email}"></td>-->
+        <!--<td th:text="${student.id}"></td>-->
+        <!--<td th:text="${student.mNumber}"></td>-->
+        <!--<td th:text="${student.firstName}"></td>-->
+        <!--<td th:text="${student.lastName}"></td>-->
+        <!--<td th:text="${student.email}"></td>-->
         <!--</tr>-->
         <!--</tbody>-->
         <!--</table>-->
 
 
-    <!--</div>-->
+        <!--</div>-->
 
+    </div>
 
+    <!-- Footer -->
+    <div th:replace="base :: footer"></div>
+    <!-- /.Footer -->
 </body>
 </html>

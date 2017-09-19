@@ -3,34 +3,44 @@
 <head>
     <meta charset="UTF-8"/>
     <title>List of all courses of a teacher</title>
+    <!-- Header -->
+    <div th:replace="base :: header"></div>
+    <!-- /.Header -->
 </head>
 <body>
+    <!--Navigation Teacher-->
+    <nav th:replace="base :: nav2Teacher"></nav>
+    <!--/.Navigation Teacher-->
+    <div class="container">
+
+        <div  th:if="${!allcoursesofaInstructor.isEmpty()}">
+            <h2>List of Courses</h2>
 
 
-<div  th:if="${!allcoursesofaInstructor.isEmpty()}">
-    <h2>List of Courses</h2>
+            <table border="1">
+                <tr>
+                    <th>Course Id:</th>
+                    <th>Course Name:</th>
+                    <th>Course Crn:</th>
+                </tr>
+                <tr th:each="item:${allcoursesofaInstructor}">
+                    <td th:text="*{item.id}"/>
+                    <td><a th:href="@{/teacher/detailsofacourse/{id} (id=${item.id})}" th:inline="text">[[${item.courseName}]]</a></td>
+                    <td th:text="*{item.crn}"/>
 
+                </tr>
+            </table>
 
-    <table border="1">
-        <tr>
-            <th>Course Id:</th>
-            <th>Course Name:</th>
-            <th>Course Crn:</th>
-        </tr>
-        <tr th:each="item:${allcoursesofaInstructor}">
-            <td th:text="*{item.id}"/>
-            <td><a th:href="@{/teacher/detailsofacourse/{id} (id=${item.id})}" th:inline="text">[[${item.courseName}]]</a></td>
-            <td th:text="*{item.crn}"/>
+        </div>
 
-        </tr>
-    </table>
+        <div  th:if="${allcoursesofaInstructor.isEmpty()}">
+            <p>No information available</p>
+        </div>
 
-</div>
+    </div>
 
-<div  th:if="${allcoursesofaInstructor.isEmpty()}">
-    <p>No information available</p>
-</div>
-
-
+    <!-- Footer -->
+    <div th:replace="base :: footer"></div>
+    <!-- /.Footer -->
 </body>
 </html>
