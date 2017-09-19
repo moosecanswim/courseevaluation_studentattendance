@@ -5,41 +5,35 @@
     <title>Title</title>
 </head>
 <body>
-<!--<h1 th:text="'Evaluation for ' + ${course.courseName}+ ':'"></h1>-->
 
 
-<!--&lt;!&ndash;Section I&ndash;&gt;-->
-<!--<h2>Section I: Course Information</h2>-->
-<!--<p th:text="'Course ID: ' + ${course.id}"/>-->
-<!--<p th:text="'Course CRN: ' + ${course.crn}"/>-->
-<!--<p th:text="'Course Name: '+ ${course.courseName}" />-->
-<!--<p th:text="'Start Date: '+ ${{course.startDate}}" />-->
-<!--<p th:text="'End Date: '+ ${{course.endDate}}" />-->
-<!--<p th:text="'Completion Status: '+ ${course.status}" />-->
-<!--&lt;!&ndash;If the Instructor is not assigned to the course yet, this div will display Instructor: null null:&ndash;&gt;-->
-<!--<div th:text="'Instructor\'s Name: ' + ${courseInstructor?.firstName} + ' ' +${courseInstructor?.lastName}"></div>-->
+<h1>Course Evaluations Summary:</h1>
 
-<tr>
-    <td><b>Eval ID</b></td>
-    <td><b>Course Content</b></td>
-    <td><b>Instruction Quality</b></td>
-    <td><b>Training Experience</b></td>
-    <td><b>Textbook or Handouts</b></td>
-    <td><b>Environment and Seating</b></td>
-    <td><b>Computer Equipment</b></td>
-</tr>
-<!--iterate through all the evaluations for this course-->
-<th:block th:each="eval:${evals}">
+
+<!--Section II-->
+<h2>Section II: Rating of the Course</h2>
+<table class="table table-striped" border="1">
     <tr>
-        <td><a th:text="${eval.id}"></a></td>
-        <td><a th:text="${eval.content}"></a></td>
-        <td><a th:text="${eval.quality}"></a></td>
-        <td><a th:text="${eval.experience}"></a></td>
-        <td><a th:text="${eval.materials}"></a></td>
-        <td><a th:text="${eval.environment}"></a></td>
-        <td><a th:text="${eval.equipment}"></a></td>
+        <td><b>Eval ID</b></td>
+        <td><b>Course Content</b></td>
+        <td><b>Instruction Quality</b></td>
+        <td><b>Training Experience</b></td>
+        <td><b>Textbook or Handouts</b></td>
+        <td><b>Environment and Seating</b></td>
+        <td><b>Computer Equipment</b></td>
     </tr>
-</th:block>
+    <!--iterate through all the evaluations for this course-->
+    <th:block th:each="eval:${evals}">
+        <tr>
+            <td><a th:text="${eval.id}"></a></td>
+            <td><a th:text="${eval.content}"></a></td>
+            <td><a th:text="${eval.quality}"></a></td>
+            <td><a th:text="${eval.experience}"></a></td>
+            <td><a th:text="${eval.materials}"></a></td>
+            <td><a th:text="${eval.environment}"></a></td>
+            <td><a th:text="${eval.equipment}"></a></td>
+        </tr>
+    </th:block>
 </table>
 
 
@@ -79,10 +73,90 @@
     <!--iterate through all the evaluations for this course-->
     <th:block th:each="eval:${evals}">
         <tr>
-            <!--<td><a th:text="${eval.id}"></a></td>-->
+            <td><a th:text="${eval.id}"></a></td>
             <td><a th:text="${eval.findings}"></a></td>
         </tr>
     </th:block>
 </table>
+
+<!--&lt;!&ndash;<h1 th:text="'Evaluation for ' + ${course.courseName}+ ':'"></h1>&ndash;&gt;-->
+
+
+<!--&lt;!&ndash;&lt;!&ndash;Section I&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;<h2>Section I: Course Information</h2>&ndash;&gt;-->
+<!--&lt;!&ndash;<p th:text="'Course ID: ' + ${course.id}"/>&ndash;&gt;-->
+<!--&lt;!&ndash;<p th:text="'Course CRN: ' + ${course.crn}"/>&ndash;&gt;-->
+<!--&lt;!&ndash;<p th:text="'Course Name: '+ ${course.courseName}" />&ndash;&gt;-->
+<!--&lt;!&ndash;<p th:text="'Start Date: '+ ${{course.startDate}}" />&ndash;&gt;-->
+<!--&lt;!&ndash;<p th:text="'End Date: '+ ${{course.endDate}}" />&ndash;&gt;-->
+<!--&lt;!&ndash;<p th:text="'Completion Status: '+ ${course.status}" />&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;If the Instructor is not assigned to the course yet, this div will display Instructor: null null:&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;<div th:text="'Instructor\'s Name: ' + ${courseInstructor?.firstName} + ' ' +${courseInstructor?.lastName}"></div>&ndash;&gt;-->
+<!--<th:block th:each="eval:${evals}">-->
+<!--<tr>-->
+    <!--<td><b>Eval ID</b></td>-->
+    <!--<td><b>Course Content</b></td>-->
+    <!--<td><b>Instruction Quality</b></td>-->
+    <!--<td><b>Training Experience</b></td>-->
+    <!--<td><b>Textbook or Handouts</b></td>-->
+    <!--<td><b>Environment and Seating</b></td>-->
+    <!--<td><b>Computer Equipment</b></td>-->
+<!--</tr>-->
+<!--&lt;!&ndash;iterate through all the evaluations for this course&ndash;&gt;-->
+
+    <!--<tr>-->
+        <!--<td><a th:text="${eval.id}"></a></td>-->
+        <!--<td><a th:text="${eval.content}"></a></td>-->
+        <!--<td><a th:text="${eval.quality}"></a></td>-->
+        <!--<td><a th:text="${eval.experience}"></a></td>-->
+        <!--<td><a th:text="${eval.materials}"></a></td>-->
+        <!--<td><a th:text="${eval.environment}"></a></td>-->
+        <!--<td><a th:text="${eval.equipment}"></a></td>-->
+    <!--</tr>-->
+<!--</th:block>-->
+<!--</table>-->
+
+
+
+<!--&lt;!&ndash;Section III&ndash;&gt;-->
+<!--<h2>Section III: Comments</h2>-->
+<!--<table class="table table-striped" border="1">-->
+    <!--<tr>-->
+        <!--<td><b>Eval ID</b></td>-->
+        <!--<td><b>Like About the Class</b></td>-->
+        <!--<td><b>Dislike About the Class</b></td>-->
+        <!--<td><b>Suggested Improvements</b></td>-->
+        <!--<td><b>Classes to See Offered</b></td>-->
+    <!--</tr>-->
+
+    <!--&lt;!&ndash;iterate through all the evaluations for this course&ndash;&gt;-->
+    <!--<th:block th:each="eval:${evals}">-->
+        <!--<tr>-->
+            <!--<td><a th:text="${eval.id}"></a></td>-->
+            <!--<td><a th:text="${eval.likes}"></a></td>-->
+            <!--<td><a th:text="${eval.dislikes}"></a></td>-->
+            <!--<td><a th:text="${eval.suggestions}"></a></td>-->
+            <!--<td><a th:text="${eval.otherClass}"></a></td>-->
+        <!--</tr>-->
+    <!--</th:block>-->
+<!--</table>-->
+
+
+<!--&lt;!&ndash;Section IV&ndash;&gt;-->
+<!--<h2>Section IV: Optional</h2>-->
+<!--<table class="table table-striped" border="1">-->
+    <!--<tr>-->
+        <!--<td><b>Eval ID</b></td>-->
+        <!--<td><b>How did you find out about the class</b></td>-->
+    <!--</tr>-->
+
+    <!--&lt;!&ndash;iterate through all the evaluations for this course&ndash;&gt;-->
+    <!--<th:block th:each="eval:${evals}">-->
+        <!--<tr>-->
+            <!--&lt;!&ndash;<td><a th:text="${eval.id}"></a></td>&ndash;&gt;-->
+            <!--<td><a th:text="${eval.findings}"></a></td>-->
+        <!--</tr>-->
+    <!--</th:block>-->
+<!--</table>-->
 </body>
 </html>
