@@ -32,12 +32,14 @@
 
     </tr>
 
-    <!--<tr th:each="item:${studentofacourse}">-->
-        <!--<td th:text="${item.firstName} + ' ' + ${item.lastName}"/>-->
-        <!--<td th:each="att:${item.attendances}"></td>-->
-        <!--<td th:text="${att.status}"></td>-->
-    <!--</tr>-->
-
+    <tr th:each="student:${studentofacourse}">
+        <td th:text="${student.id}"/>
+        <td th:text="${student.firstName} + ' ' + ${student.lastName}"/>
+        <td th:text="${student.mNumber}">not available</td>
+        <th:block th:each="att:${student.attendances}">
+        <td th:text="${att.status}"></td>
+        </th:block>
+    </tr>
 
 </table>
 
