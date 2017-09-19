@@ -21,22 +21,17 @@
 <div>
 <form id="inner-form" class="form-horizontal form" th:action="@{eval/searchresult}">
     <body>
+
+    <div>
     <table>
-        <tr>
-            <th>CRN</th>
-            <th>Course Name</th>
-            <th>Start Date</th>
-            <th>End Date</th>
 
-
-        </tr>
 
         <tr>
             <th:block th:each="item:${searcheval}">
-                <td th:text="${item.crn}"></td>
-                <td th:text="${item.courseName}"></td>
-                <td th:text="${item.startDate}"></td>
-                <td th:text="${item.endDate}"></td>
+                <td><b>CRN</b></td>  <td th:text="${item.crn}"></td>
+                <td><b>Course Name</b></td> <td th:text="${item.courseName}"></td>
+                <td><b>Start Date</b></td> <td th:text="${item.startDate}"></td>
+               <td><b>End Date</b></td> <td th:text="${item.endDate}"></td>
                 <td><a th:href="@{/eval/evaluationentry/{id}(id=${item.id})}">Evaluate this course</a></td>
             </th:block>
 
@@ -44,6 +39,7 @@
 
 
     </table>
+        </div>
     </body>
     </form>
 

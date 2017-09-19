@@ -6,10 +6,17 @@
     <div th:replace="base :: header"></div>
 </head>
 <body>
-    <div th:replace="base :: navAdmin"></div>
+    <nav th:replace="base :: nav2Admin"></nav>
     <div class="container">
-        <h1>Admin View: Student Details</h1>
+        <h1 th:inline="text">Admin View: [[${aStudent.firstName}]] [[${aStudent.LastName}]]'s Details</h1>
+        <br />
+        <p th:inline="text">Name: [[${aStudent.firstName}]] [[${aStudent.LastName}]]</p>
+        <p th:inline="text">M#: [[${aStudent.mNumber}]]</p>
+        <p th:inline="text">Username: [[${aStudent.username}]]</p>
+        <p th:inline="text">Email: [[${aStudent.email}]]</p>
+        <p th:inline="text">Registration Date: [[${aStudent.startDate}]]</p>
 
+        <hr />
         <h3>Contact Information</h3>
 
 
@@ -36,9 +43,7 @@
                 <td th:text="${{course.endDate}}"></td>
                 <td th:text="${course.status}"></td>
                 <td>
-                    remove student from course
-                    -
-                    student attendance?
+                    <a th:href="@{/removestudentfromcourse/{courseid}/{studentid} (courseid=${course.id} , studentid=${aStudent.id})}">Un-Enroll student from class</a>
                 </td>
             </tr>
 
