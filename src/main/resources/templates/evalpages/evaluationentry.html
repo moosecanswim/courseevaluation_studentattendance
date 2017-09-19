@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<form action="#" th:action="@{/eval/evaluationentry/{courseId} (courseId=${courseId})}" th:object="${neweval}" method="post" >
+<form th:action="@{/eval/evaluationentry/{courseId} (courseId=${courseId})}" th:object="${neweval}" method="post" >
     <!--<input type="hidden" th:field="*{id}">-->
 <p><h4>1. How would you rate the course content? </h4></p>
 
@@ -149,11 +149,11 @@
     <textarea name='otherClass' id='comment14' cols=50 rows=3 onBlur="validate_length('coursesurvey', 'comment12', 500, 'Section III 4. Comment');"></textarea> <br><br>
 
     <p>1. How did you find out about the class? <br />
-        <label><input type="radio" name="findings" id="select15" value="25">Internet / Website </label>&nbsp;&nbsp;&nbsp;&nbsp;
+        <label><input type="radio" name="findings" id="select15" value="Internet">Internet / Website </label>&nbsp;&nbsp;&nbsp;&nbsp;
 
-        <label><input type="radio" name="findings" id="select15" value="28">Brochure - ITI schedule of classes </label><br>
-        <label><input type="radio" name="findings" id="select15" value="29">Word of Mouth </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <label><input type="radio" name="findings" id="select15" value="30">Other </label>
+        <label><input type="radio" name="findings" id="select15" value="Brochure">Brochure - ITI schedule of classes </label><br>
+        <label><input type="radio" name="findings" id="select15" value="Word of Mouth">Word of Mouth </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <label><input type="radio" name="findings" id="select15" value="other">Other </label>
         &nbsp;<input type="text"  name="findings" id="comment15" size=50 maxlength="100"><br>
 
     <p>2. If you have further questions, please feel free to contact us at 240-567-5510</p><br>

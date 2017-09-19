@@ -45,15 +45,12 @@
     <br/>
     <br/>
 
-
     <p><a th:href="@{/teacher/addstudentstocourse/{id}(id=${course.id})}">Register students for the course</a></p>
     <p><a th:href="@{/teacher/listallcourses}">Back to all course</a></p>
-    <p><a th:href="@{/teacher/evaluationspercourse/{id}(id=${course.id})}">See evaluations</a></p>
-    <p><a th:href="@{/teacher/displayoneeval/{id}(id=${course.id})}">see evaluation</a></p>
 
+    <!--<p><a th:href="@{/teacher/displayoneeval/{id}(id=${course.id})}"> see evaluation</a></p>-->
 
-
-
+    <p><a th:href="@{/teacher/displayallevalsofonecourse/{id}(id=${course.id})}">See all evaluation of a course</a></p>
 
 
 </body>
