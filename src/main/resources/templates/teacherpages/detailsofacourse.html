@@ -29,6 +29,8 @@
 
         <!--should be a form allow input of students' attendance info-->
 
+        <p><a th:href="@{/teacher/listallstudents/{courseId}/(courseId=${course.id})}">See and validate students</a></p>
+
         <th:block th:each="student:${studentsofACourse}">
             <p th:text="'Student M number:' + ${student.mNumber}"></p>
             <p th:text="'Student Name: ' + ${student.firstName} + ' ' +${student.lastName} "></p>
