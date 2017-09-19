@@ -477,7 +477,7 @@ public class TeacherController {
         courseRepository.save(course);
         System.out.println("test after save End date");
         attachmentContent(course);
-        return "redirect:/teacher/displaystudents/";
+        return "redirect:/teacher/listallcourses/";
 
     }
 
@@ -510,19 +510,45 @@ public class TeacherController {
         emailService.send(email);
     }
     private EmailAttachment getCsvForecastAttachment(String filename,Course course) {
-        String testData="Record Number,Student Name,M_Number,Date,Status\n";
+
+
+
+        String testData = "Course CRN: " + course.getCrn() + "," + "Course Name: "+ course.getCourseName() + "\n";
+
+        testData += "Instructor" + course.getInstructor().getFirstName() + " " + course.getInstructor().getLastName() +"\n";
+
+        testData += "\n";
+
+        testData +="Record Number,Student Name,M_Number\n";
         Iterable<Person> students = course.getStudent();
+        Person onestu = students.iterator().next();
+
+        testData += " " + "," + " " + "," + " " + ",";
+
+        for (Attendance att : onestu.getAttendances())
+        {
+
+           testData += att.getDate().toString() + ",";
+        }
+
+
+        testData += " "+"\n";
+
+
+
         for (Person std : students) {
             String studName= std.getFirstName() +" "+ std.getLastName();
             String studId = String.valueOf(std.getId());
             String mnum = String.valueOf(std.getmNumber());
             Iterable<Attendance> attendances=std.getAttendances();
+            testData += studId+","+ studName+","+mnum+",";
             for (Attendance att: attendances) {
                 String dates=String.valueOf(att.getDate());
                 String status=att.getStatus();
-                testData += studId+","+ studName+","+mnum+","+dates+","+status+"\n";
+                testData += status+ ",";
 
             }
+            testData += "\n";
         }
 
          DefaultEmailAttachment attachment = DefaultEmailAttachment.builder()
