@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="www.thymeleaf.org ">
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
     <title>Admin/Teacher Login</title>
+
+    <!-- Header -->
+    <div th:replace="base :: header"></div>
+    <!-- /.Header -->
 
 </head>
 <body>
 
+    <!--Navigation Welcome-->
+    <nav th:replace="base :: nav2Login"></nav>
+    <!--/.Navigation Welcome-->
 
     <div class="container" id="login">
 
@@ -25,6 +29,10 @@
             <div><input type="submit" value="Sign In"/></div>
         </form>
     </div><!-- /.container -->
+
+    <!-- Footer -->
+    <div th:replace="base :: footer"></div>
+    <!-- /.Footer -->
 
 </body>
 </html>
