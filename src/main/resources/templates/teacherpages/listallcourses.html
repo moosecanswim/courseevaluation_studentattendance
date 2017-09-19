@@ -8,23 +8,23 @@
 
 
 <div  th:if="${!allcoursesofaInstructor.isEmpty()}">
+    <h2 th:inline="text">[[${}]]'s List of Courses</h2>
 
 
-<th:block th:each="item:${allcoursesofaInstructor}">
+    <table border="1">
+        <tr>
+            <th>Course Id:</th>
+            <th>Course Name:</th>
+            <th>Course Crn:</th>
+        </tr>
+        <tr th:each="item:${allcoursesofaInstructor}">
+            <td th:text="*{item.id}"/>
+            <td><a th:href="@{/teacher/detailsofacourse/{id} (id=${item.id})}" th:inline="text">[[${item.courseName}]]</a></td>
+            <td th:text="*{item.crn}"/>
 
-    <h2 th:inline="text">Course information for [[${item.courseName}]]</h2>
+        </tr>
+    </table>
 
-    <p th:text="'Course ID: ' + ${item.id}"/>
-    <p th:text="'Course CRN:' + ${item.crn}"/>
-    <p th:text="'Course Name: '+ ${item.courseName}" />
-    <!--<p>Course Instructor: </p>-->
-    <!--<th:block th:each="ins:${item.instructor}">-->
-        <!--<p th:text="'Instructor: ' + ${ins.firstName} + ' ' +${ins.lastName} "/>-->
-    <!--</th:block>-->
-    <!--<p th:text="'Students registed for the courses:' + "/>-->
-
-    <p><a th:href="@{/teacher/detailsofacourse/{id}(id=${item.id})}">Show details</a></p>
-</th:block>
 </div>
 
 <div  th:if="${allcoursesofaInstructor.isEmpty()}">
