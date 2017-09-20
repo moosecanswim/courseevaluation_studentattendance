@@ -292,7 +292,7 @@ public class AdminController {
 
         String courseIDString = Long.toString(courseid);
 
-        String message= "<h2>You have successfully remove teh student from the course.</h2>";
+        String message= "<h2>You have successfully remove the student from the course.</h2>";
 
 
 //        String link = "<a th:href=\"@{/teacher/listallstudents/{courseId}(courseId=course.id)}\">Back to student's list</a>";
