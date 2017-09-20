@@ -110,4 +110,9 @@ footer {
     padding-bottom:60px;   /* Height of the footer */
 }
 
+.container-loggeduser {
+    text-align: right;
+    margin-left:auto;
+    margin-right:1%;
+}
 
