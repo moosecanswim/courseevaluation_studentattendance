@@ -255,7 +255,7 @@ public class TeacherController {
 
 
     @PostMapping("/update/{courseId}/{studentId}")
-    public String updateMnumberordeletestudent(@PathVariable("courseId") Long courseId,
+    public String updateMnumberstudent(@PathVariable("courseId") Long courseId,
                                                @PathVariable("studentId") Long studentId,
                                                @RequestParam(value="newMId") String newMId,
                                                Model model) {
@@ -268,6 +268,10 @@ public class TeacherController {
 
         return "redirect:/teacher/listallstudents/{courseId}";
     }
+
+
+
+
 
 
 //    @GetMapping("/displayoneeval/{id}")
@@ -303,8 +307,29 @@ public class TeacherController {
 
         model.addAttribute("course", currentCourse);
 
-        return "redirect:/teacher/listallstudents/{courseId}";
+        return "redirect:/teacher/delconfirmation/{courseId}";
     }
+
+
+    @RequestMapping ("/delconfirmation/{courseId}")
+    public String deleteconfirmation(@PathVariable("courseId") Long courseId, Model model)
+    {
+        String message= "<h2>You have successfully remove the student from the course.</h2>";
+
+
+//        String link = "<a th:href=\"@{/teacher/listallstudents/{courseId}(courseId=course.id)}\">Back to student's list</a>";
+
+        model.addAttribute("message", message);
+//        model.addAttribute("link", link);
+
+        model.addAttribute("courseId", courseId);
+
+        return "teacherpages/delconfirmation";
+
+    }
+
+
+
 
 
     @RequestMapping("/searchstudent/{courseId}")
