@@ -69,6 +69,9 @@ public class TeacherController {
     @Autowired
     EvaluationService evaluationService;
 
+    @Autowired
+    public EmailService emailService;
+
     @RequestMapping("/home")
 //    public String teacherHome(Principal p, Model model)
 //    {
@@ -415,8 +418,7 @@ public class TeacherController {
     }
 
 
-    @Autowired
-    public EmailService emailService;
+
     public void sendEmailWithoutTemplating(Course course) throws UnsupportedEncodingException {
         System.out.println("test before email");
         System.out.println(course.getCourseName());

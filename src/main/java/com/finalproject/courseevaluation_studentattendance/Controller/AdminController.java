@@ -61,7 +61,8 @@ public class AdminController {
     RoleRepository roleRepository;
     @Autowired
     CommunicationService communicationService;
-
+    @Autowired
+    public EmailService emailService;
 
 
 
@@ -551,8 +552,7 @@ public class AdminController {
         return "redirect:/teacher/listallcourses/";
 
     }
-    @Autowired
-    public EmailService emailService;
+
     public void sendEmailWithoutTemplating(Iterable<Evaluation>evaluations) throws UnsupportedEncodingException {
         System.out.println("test before email");
         Evaluation eval=new Evaluation();
