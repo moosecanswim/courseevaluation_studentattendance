@@ -305,7 +305,6 @@ public class AdminController {
     }
 
 
-
     // ===   See the List of All People
     @GetMapping("/viewallpeople")
     public String listallPeople(Person person, Model model)
