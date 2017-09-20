@@ -32,110 +32,113 @@
             <br/>
             2.Course Name: <input type="text" th:field="*{course.courseName}" th:disabled="true"/><br/>
             <br/>
-            3.Course StartDate: <input type="text" th:field="*{{course.startDate}}" th:disabled="true"/><br/>
+            3.Course Start Date: <input type="text" th:field="*{{course.startDate}}" th:disabled="true"/><br/>
+            <br/>
+            4.Instructor's  First Name: <input type="text" th:field="*{{course.instructor.firstName}}" th:disabled="true"/><br/>
+            5.Instructor's  Last Name:  <input type="text" th:field="*{{course.instructor.lastName}}" th:disabled="true"/><br/>
             <br/>
         </h4>
         <hr/>
     </form>
     <!--</div>-->
-<form th:action="@{/eval/evaluationentry/{courseId} (courseId=${courseId})}" th:object="${neweval}" method="post" >
-    <!--<input type="hidden" th:field="*{id}">-->
+    <form th:action="@{/eval/evaluationentry/{courseId} (courseId=${courseId})}" th:object="${neweval}" method="post" >
+        <!--<input type="hidden" th:field="*{id}">-->
 
-    <h3>Section II: Rate the Course</h3>
-    <div>
-        <br/>
-    </div>
-    1. How would you rate the course content? <br />&nbsp;&nbsp;
-    <label><input type="radio" th:name="content" id="select5" value="Excellent" checked />Excellent</label>&nbsp;&nbsp;&nbsp;&nbsp;
-    <label><input type="radio" th:name="content" id="select5" value="Above Average" />Above Average</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <label><input type="radio" th:name="content" id="select5" value="Average" />Average</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <label><input type="radio" th:name="content" id="select5" value="Fair" />Fair</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <label><input type="radio" th:name="content" id="select5" value="Poor" />Poor</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <br /><br />
-    <div th:if="${#fields.hasErrors('content')}"  th:errors="*{content}"
-         class="well alert alert-warning" role="alert"></div>
+        <h3>Section II: Rate the Course</h3>
+        <div>
+            <br/>
+        </div>
+        1. How would you rate the course content? <br />&nbsp;&nbsp;
+        <label><input type="radio" th:name="content" id="select5" value="Excellent" checked />Excellent</label>&nbsp;&nbsp;&nbsp;&nbsp;
+        <label><input type="radio" th:name="content" id="select5" value="Above Average" />Above Average</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <label><input type="radio" th:name="content" id="select5" value="Average" />Average</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <label><input type="radio" th:name="content" id="select5" value="Fair" />Fair</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <label><input type="radio" th:name="content" id="select5" value="Poor" />Poor</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <br /><br />
+        <div th:if="${#fields.hasErrors('content')}"  th:errors="*{content}"
+             class="well alert alert-warning" role="alert"></div>
 
-    2. How would you rate the quality of instruction?<br />&nbsp;&nbsp;
-    <label><input type="radio" name="quality" id="select6" value="Excellent" checked />Excellent</label>&nbsp;&nbsp;&nbsp;&nbsp;
-    <label><input type="radio" name="quality" id="select6" value="Above Average" />Above Average</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <label><input type="radio" name="quality" id="select6" value="Average" />Average</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <label><input type="radio" name="quality" id="select6" value="Fair" />Fair</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <label><input type="radio" name="quality" id="select6" value="Poor" />Poor</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <br /><br />
-    <div th:if="${#fields.hasErrors('quality')}"  th:errors="*{quality}"
-         class="well alert alert-warning" role="alert"></div>
-    3. How would you rate your overall training experience?<br />&nbsp;&nbsp;
-    <label><input type="radio" name="experience" id="select7" value="Excellent" checked />Excellent</label>&nbsp;&nbsp;&nbsp;&nbsp;
-    <label><input type="radio" name="experience" id="select7" value="Above Average" />Above Average</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <label><input type="radio" name="experience" id="select7" value="Average" />Average</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <label><input type="radio" name="experience" id="select7" value="Fair" />Fair</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <label><input type="radio" name="experience" id="select7" value="Poor" />Poor</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <br /><br />
-    <div th:if="${#fields.hasErrors('experience')}"  th:errors="*{experience}"
-         class="well alert alert-warning" role="alert"></div>
-    4. How would you rate the textbook or handouts? <br />&nbsp;&nbsp;
-    <label><input type="radio" name="materials" id="select8" value="Excellent" checked />Excellent</label>&nbsp;&nbsp;&nbsp;&nbsp;
-    <label><input type="radio" name="materials" id="select8" value="Above Average" />Above Average</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <label><input type="radio" name="materials" id="select8" value="Average" />Average</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <label><input type="radio" name="materials" id="select8" value="Fair" />Fair</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <label><input type="radio" name="materials" id="select8" value="Poor" />Poor</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <br /><br />
-    <div th:if="${#fields.hasErrors('materials')}"  th:errors="*{materials}"
-         class="well alert alert-warning" role="alert"></div>
-    5. How would you rate the classroom environment and seating? <br />&nbsp;&nbsp;
-    <label><input type="radio" name="environment" id="select9" value="Excellent"  checked />Excellent</label>&nbsp;&nbsp;&nbsp;&nbsp;
-    <label><input type="radio" name="environment" id="select9" value="Above Average" />Above Average</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <label><input type="radio" name="environment" id="select9" value="Average" />Average</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <label><input type="radio" name="environment" id="select9" value="Fair" />Fair</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <label><input type="radio" name="environment" id="select9" value="Poor" />Poor</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <br /><br />
-    <div th:if="${#fields.hasErrors('environment')}"  th:errors="*{environment}"
-         class="well alert alert-warning" role="alert"></div>
+        2. How would you rate the quality of instruction?<br />&nbsp;&nbsp;
+        <label><input type="radio" name="quality" id="select6" value="Excellent" checked />Excellent</label>&nbsp;&nbsp;&nbsp;&nbsp;
+        <label><input type="radio" name="quality" id="select6" value="Above Average" />Above Average</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <label><input type="radio" name="quality" id="select6" value="Average" />Average</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <label><input type="radio" name="quality" id="select6" value="Fair" />Fair</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <label><input type="radio" name="quality" id="select6" value="Poor" />Poor</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <br /><br />
+        <div th:if="${#fields.hasErrors('quality')}"  th:errors="*{quality}"
+             class="well alert alert-warning" role="alert"></div>
+        3. How would you rate your overall training experience?<br />&nbsp;&nbsp;
+        <label><input type="radio" name="experience" id="select7" value="Excellent" checked />Excellent</label>&nbsp;&nbsp;&nbsp;&nbsp;
+        <label><input type="radio" name="experience" id="select7" value="Above Average" />Above Average</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <label><input type="radio" name="experience" id="select7" value="Average" />Average</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <label><input type="radio" name="experience" id="select7" value="Fair" />Fair</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <label><input type="radio" name="experience" id="select7" value="Poor" />Poor</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <br /><br />
+        <div th:if="${#fields.hasErrors('experience')}"  th:errors="*{experience}"
+             class="well alert alert-warning" role="alert"></div>
+        4. How would you rate the textbook or handouts? <br />&nbsp;&nbsp;
+        <label><input type="radio" name="materials" id="select8" value="Excellent" checked />Excellent</label>&nbsp;&nbsp;&nbsp;&nbsp;
+        <label><input type="radio" name="materials" id="select8" value="Above Average" />Above Average</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <label><input type="radio" name="materials" id="select8" value="Average" />Average</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <label><input type="radio" name="materials" id="select8" value="Fair" />Fair</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <label><input type="radio" name="materials" id="select8" value="Poor" />Poor</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <br /><br />
+        <div th:if="${#fields.hasErrors('materials')}"  th:errors="*{materials}"
+             class="well alert alert-warning" role="alert"></div>
+        5. How would you rate the classroom environment and seating? <br />&nbsp;&nbsp;
+        <label><input type="radio" name="environment" id="select9" value="Excellent"  checked />Excellent</label>&nbsp;&nbsp;&nbsp;&nbsp;
+        <label><input type="radio" name="environment" id="select9" value="Above Average" />Above Average</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <label><input type="radio" name="environment" id="select9" value="Average" />Average</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <label><input type="radio" name="environment" id="select9" value="Fair" />Fair</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <label><input type="radio" name="environment" id="select9" value="Poor" />Poor</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <br /><br />
+        <div th:if="${#fields.hasErrors('environment')}"  th:errors="*{environment}"
+             class="well alert alert-warning" role="alert"></div>
 
-    6. How would you rate the classroom computer equipment? <br />&nbsp;&nbsp;
-    <label><input type="radio" name="equipment" id="select10" value="Excellent"  checked />Excellent</label>&nbsp;&nbsp;&nbsp;&nbsp;
-    <label><input type="radio" name="equipment" id="select10" value="Above Average" />Above Average</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <label><input type="radio" name="equipment" id="select10" value="Average" />Average</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <label><input type="radio" name="equipment" id="select10" value="Fair" />Fair</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <label><input type="radio" name="equipment" id="select10" value="Poor" />Poor</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <br /><br />
-    <div th:if="${#fields.hasErrors('equipment')}"  th:errors="*{equipment}"
-         class="well alert alert-warning" role="alert"></div>
-<hr/>
-    <h3>Section III: Comments</h3>
-    <div>
-        <br/>
-    </div>
-    1. What did you like about the class? <br />
-    <textarea name='likes' id='comment11' cols=50 rows=3 onBlur="validate_length('coursesurvey', 'comment9', 500, 'Section III 1. Comment');"></textarea> <br><br>
+        6. How would you rate the classroom computer equipment? <br />&nbsp;&nbsp;
+        <label><input type="radio" name="equipment" id="select10" value="Excellent"  checked />Excellent</label>&nbsp;&nbsp;&nbsp;&nbsp;
+        <label><input type="radio" name="equipment" id="select10" value="Above Average" />Above Average</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <label><input type="radio" name="equipment" id="select10" value="Average" />Average</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <label><input type="radio" name="equipment" id="select10" value="Fair" />Fair</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <label><input type="radio" name="equipment" id="select10" value="Poor" />Poor</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <br /><br />
+        <div th:if="${#fields.hasErrors('equipment')}"  th:errors="*{equipment}"
+             class="well alert alert-warning" role="alert"></div>
+        <hr/>
+        <h3>Section III: Comments</h3>
+        <div>
+            <br/>
+        </div>
+        1. What did you like about the class? <br />
+        <textarea name='likes' id='comment11' cols=50 rows=3 onBlur="validate_length('coursesurvey', 'comment9', 500, 'Section III 1. Comment');"></textarea> <br><br>
 
-    2. What didn't you like about the class? <br />
-    <textarea name='dislikes' id='comment12' cols=50 rows=3 onBlur="validate_length('coursesurvey', 'comment10', 500, 'Section III 2. Comment');"></textarea> <br><br>
+        2. What didn't you like about the class? <br />
+        <textarea name='dislikes' id='comment12' cols=50 rows=3 onBlur="validate_length('coursesurvey', 'comment10', 500, 'Section III 2. Comment');"></textarea> <br><br>
 
-    3. What improvements would you suggest? <br />
-    <textarea name='suggestions' id='comment13' cols=50 rows=3 onBlur="validate_length('coursesurvey', 'comment11', 500, 'Section III 3. Comment');"></textarea> <br><br>
+        3. What improvements would you suggest? <br />
+        <textarea name='suggestions' id='comment13' cols=50 rows=3 onBlur="validate_length('coursesurvey', 'comment11', 500, 'Section III 3. Comment');"></textarea> <br><br>
 
-    4.  What other classes would you like to see offered?<br />
-    <textarea name='otherClass' id='comment14' cols=50 rows=3 onBlur="validate_length('coursesurvey', 'comment12', 500, 'Section III 4. Comment');"></textarea> <br><br>
-    <hr/>
-    <h3>Section IV: Optional</h3>
-    <div>
-        <br/>
-    </div>
-    <p>1. How did you find out about the class? <br />
-        <label><input type="radio" name="findings" id="select15" value="Internet">Internet / Website </label>&nbsp;&nbsp;&nbsp;&nbsp;
-        <label><input type="radio" name="findings" id="select15" value="Brochure">Brochure - ITI schedule of classes </label><br>
-        <label><input type="radio" name="findings" id="select15" value="Word of Mouth">Word of Mouth </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <label><input type="radio" name="findings" id="select15" value="other">Other </label>
-        &nbsp;<input type="text"  name="findings" id="comment15" size=50 maxlength="100"><br>
+        4.  What other classes would you like to see offered?<br />
+        <textarea name='otherClass' id='comment14' cols=50 rows=3 onBlur="validate_length('coursesurvey', 'comment12', 500, 'Section III 4. Comment');"></textarea> <br><br>
+        <hr/>
+        <h3>Section IV: Optional</h3>
+        <div>
+            <br/>
+        </div>
+        <p>1. How did you find out about the class? <br />
+            <label><input type="radio" name="findings" id="select15" value="Internet">Internet / Website </label>&nbsp;&nbsp;&nbsp;&nbsp;
+            <label><input type="radio" name="findings" id="select15" value="Brochure">Brochure - ITI schedule of classes </label><br>
+            <label><input type="radio" name="findings" id="select15" value="Word of Mouth">Word of Mouth </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <label><input type="radio" name="findings" id="select15" value="other">Other </label>
+            &nbsp;<input type="text"  name="findings" id="comment15" size=50 maxlength="100"><br>
 
-    <p>2. If you have further questions, please feel free to contact us at 240-567-5510</p><br>
-    <br>
+        <p>2. If you have further questions, please feel free to contact us at 240-567-5510</p><br>
+        <br>
 
 
-    <input type="submit"  value="Save" class="btn btn-lg btn-default btn-block" />
+        <input type="submit"  value="Save" class="btn btn-lg btn-default btn-block" />
 
-</form>
+    </form>
 </div>
 
 <!-- Footer -->
