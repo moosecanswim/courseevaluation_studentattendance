@@ -1,8 +1,14 @@
 package com.finalproject.courseevaluation_studentattendance.Services;
 
+import com.finalproject.courseevaluation_studentattendance.Model.Evaluation;
 import com.finalproject.courseevaluation_studentattendance.Model.Person;
 import com.finalproject.courseevaluation_studentattendance.Model.PersonRole;
+import com.finalproject.courseevaluation_studentattendance.Repositories.EvaluationPagingService;
+import com.finalproject.courseevaluation_studentattendance.Repositories.EvaluationRepository;
 import com.finalproject.courseevaluation_studentattendance.Repositories.PersonRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,20 +17,30 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Transactional
 @Service
-public class SSPersonDetailsService implements UserDetailsService {
+public class SSPersonDetailsService implements UserDetailsService{
+
+
+    private EvaluationRepository evaluationRepository;
 
     private PersonRepository personRepository;
 
     public SSPersonDetailsService(PersonRepository personRepository){
         System.out.println("SSPersonDetailsService: constructor used.  repo size ("+personRepository.count()+")");
         this.personRepository=personRepository;
+//        this.evaluationRepository=evaluationRepository;
     }
 
+    public SSPersonDetailsService()
+    {
+
+    }
     @Override
     public UserDetails loadUserByUsername(String username){
         try{
@@ -52,4 +68,18 @@ public class SSPersonDetailsService implements UserDetailsService {
         }
         return authorities;
     }
+
+    SSPersonDetailsService(EvaluationRepository evaluationRepository){
+        this.evaluationRepository = evaluationRepository;
+    }
+
+
+//    @Override
+//    public Page<Evaluation> listAllByPage(Pageable pageable)
+//    {
+//        List<Evaluation> allBy = evaluationRepository.findAllBy(pageable);
+//        return (Page<Evaluation>) allBy;
+//
+//
+//    }
 }

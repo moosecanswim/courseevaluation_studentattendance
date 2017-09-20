@@ -14,8 +14,8 @@
 
 
 <!--Section II-->
-<h2>Section II: Rating of the Course</h2>
-<table class="table table-striped" border="1">
+<h2>Evaluation Report</h2>
+<table class="table table-striped table-inverse" border="4">
     <tr>
         <td><b>Eval ID</b></td>
         <td><b>Course Content</b></td>
@@ -24,6 +24,12 @@
         <td><b>Textbook or Handouts</b></td>
         <td><b>Environment and Seating</b></td>
         <td><b>Computer Equipment</b></td>
+        <td><b>Eval ID</b></td>
+        <td><b>Like About the Class</b></td>
+        <td><b>Dislike About the Class</b></td>
+        <td><b>Suggested Improvements</b></td>
+        <td><b>Classes to See Offered</b></td>
+        <td><b>How did you find out about the class</b></td>
     </tr>
     <!--iterate through all the evaluations for this course-->
     <th:block th:each="eval:${evals}">
@@ -35,6 +41,11 @@
             <td><a th:text="${eval.materials}"></a></td>
             <td><a th:text="${eval.environment}"></a></td>
             <td><a th:text="${eval.equipment}"></a></td>
+            <td><a th:text="${eval.likes}"></a></td>
+            <td><a th:text="${eval.dislikes}"></a></td>
+            <td><a th:text="${eval.suggestions}"></a></td>
+            <td><a th:text="${eval.otherClass}"></a></td>
+            <td><a th:text="${eval.findings}"></a></td>
         </tr>
     </th:block>
 </table>
@@ -42,45 +53,45 @@
 
 
 <!--Section III-->
-<h2>Section III: Comments</h2>
-<table class="table table-striped" border="1">
-    <tr>
-        <td><b>Eval ID</b></td>
-        <td><b>Like About the Class</b></td>
-        <td><b>Dislike About the Class</b></td>
-        <td><b>Suggested Improvements</b></td>
-        <td><b>Classes to See Offered</b></td>
-    </tr>
+<!--<h2>Section III: Comments</h2>-->
+<!--<table class="table table-striped" border="1">-->
+    <!--<tr>-->
+        <!--<td><b>Eval ID</b></td>-->
+        <!--<td><b>Like About the Class</b></td>-->
+        <!--<td><b>Dislike About the Class</b></td>-->
+        <!--<td><b>Suggested Improvements</b></td>-->
+        <!--<td><b>Classes to See Offered</b></td>-->
+    <!--</tr>-->
 
-    <!--iterate through all the evaluations for this course-->
-    <th:block th:each="eval:${evals}">
-        <tr>
-            <td><a th:text="${eval.id}"></a></td>
-            <td><a th:text="${eval.likes}"></a></td>
-            <td><a th:text="${eval.dislikes}"></a></td>
-            <td><a th:text="${eval.suggestions}"></a></td>
-            <td><a th:text="${eval.otherClass}"></a></td>
-        </tr>
-    </th:block>
-</table>
+    <!--&lt;!&ndash;iterate through all the evaluations for this course&ndash;&gt;-->
+    <!--<th:block th:each="eval:${evals}">-->
+        <!--<tr>-->
+            <!--<td><a th:text="${eval.id}"></a></td>-->
+            <!--<td><a th:text="${eval.likes}"></a></td>-->
+            <!--<td><a th:text="${eval.dislikes}"></a></td>-->
+            <!--<td><a th:text="${eval.suggestions}"></a></td>-->
+            <!--<td><a th:text="${eval.otherClass}"></a></td>-->
+        <!--</tr>-->
+    <!--</th:block>-->
+<!--</table>-->
 
 
 <!--Section IV-->
-<h2>Section IV: Optional</h2>
-<table class="table table-striped" border="1">
-    <tr>
-        <td><b>Eval ID</b></td>
-        <td><b>How did you find out about the class</b></td>
-    </tr>
+<!--<h2>Section IV: Optional</h2>-->
+<!--<table class="table table-striped" border="1">-->
+    <!--<tr>-->
+        <!--<td><b>Eval ID</b></td>-->
+        <!--<td><b>How did you find out about the class</b></td>-->
+    <!--</tr>-->
 
-    <!--iterate through all the evaluations for this course-->
-    <th:block th:each="eval:${evals}">
-        <tr>
-            <td><a th:text="${eval.id}"></a></td>
-            <td><a th:text="${eval.findings}"></a></td>
-        </tr>
-    </th:block>
-</table>
+    <!--&lt;!&ndash;iterate through all the evaluations for this course&ndash;&gt;-->
+    <!--<th:block th:each="eval:${evals}">-->
+        <!--<tr>-->
+            <!--<td><a th:text="${eval.id}"></a></td>-->
+            <!--<td><a th:text="${eval.findings}"></a></td>-->
+        <!--</tr>-->
+    <!--</th:block>-->
+<!--</table>-->
 
 <!--&lt;!&ndash;<h1 th:text="'Evaluation for ' + ${course.courseName}+ ':'"></h1>&ndash;&gt;-->
 

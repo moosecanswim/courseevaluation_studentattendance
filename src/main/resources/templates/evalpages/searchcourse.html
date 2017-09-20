@@ -7,7 +7,7 @@
     <title>Eval Search Course</title>
 
     <!-- Header -->
-    <th:block th:replace="base :: header"></th:block>
+    <div th:replace="base :: header"></div>
     <!-- /.Header -->
 
 </head>
@@ -29,30 +29,22 @@
     </div>
 
     <div>
+
+
         <form id="inner-form" class="form-horizontal form" th:action="@{eval/searchresult}">
 
 
             <div>
-            <br>
-                <table class="table table-striped" border="1">
-                    <th:block th:each="item:${searcheval}">
-                        <tr>
-                            <td><b>CRN</b></td>
-                            <td><b>Course Name</b></td>
-                            <td><b>Start Date</b></td>
-                            <td><b>End Date</b></td>
-                            <td><b>Action</b></td>
-                        </tr>
-                        <tr>
-                            <td th:text="${item.crn}"></td>
-                            <td th:text="${item.courseName}"></td>
-                            <td th:text="${item.startDate}"></td>
-                            <td th:text="${item.endDate}"></td>
-                            <td>
-                                <a th:href="@{/eval/evaluationentry/{id}(id=${item.id})}">Evaluate this course</a>
-                            </td>
-                        </tr>
-                    </th:block>
+                <table class="table table-inverse">
+                    <tr>
+                        <th:block th:each="item:${searcheval}">
+                            <td><b>CRN</b></td>  <td th:text="${item.crn}"></td>
+                            <td><b>Course Name</b></td> <td th:text="${item.courseName}"></td>
+                            <td><b>Start Date</b></td> <td th:text="${item.startDate}"></td>
+                            <td><b>End Date</b></td> <td th:text="${item.endDate}"></td>
+                            <td><a th:href="@{/eval/evaluationentry/{id}(id=${item.id})}">Evaluate this course</a></td>
+                        </th:block>
+                    </tr>
                 </table>
             </div>
 

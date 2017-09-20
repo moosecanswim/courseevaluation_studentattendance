@@ -25,7 +25,7 @@
 
     </tr>
     <!--iterate through all the evaluations for this course-->
-    <th:block th:each="eval:${ev}">
+    <th:block th:each="eval:${evals}">
         <tr>
             <td><a th:text="${eval.id}"></a></td>
             <td><a th:text="${eval.content}"></a></td>

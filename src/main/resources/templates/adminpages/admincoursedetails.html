@@ -47,16 +47,15 @@
             <p>
                 <a th:href="@{/admin/registerstudentforcourse/{id}(id=${course.id})}">Register Student</a>
                 -
-                <a th:href="@{/admin/viewcourseevaluations/{id}(id=${course.id})}">See evaluations</a>
-
-                <!--hide this if no instructor is assigned-->
-                <th:block th:if="${courseInstructor!=null}">
-                    -
-                    <a th:href="@{/admin/addinstructortocourse/{id}(id=${course.id})}">Change Instructor</a>
-                </th:block>
+                <a th:href="@{/admin/admineval/{id}(id=${course.id})}">View Evaluations</a>
+                -
+                <a th:href="@{/admin/addinstructortocourse/{id}(id=${course.id})}">Assign Instructor</a>
             </p>
         </div>
         <hr />
+
+
+        <h3>List of All Students Registered for the course: </h3>
 
         <!--Display message if there is no registered ctudents for the course:-->
         <div  th:if="${courseStudents.isEmpty()}">
