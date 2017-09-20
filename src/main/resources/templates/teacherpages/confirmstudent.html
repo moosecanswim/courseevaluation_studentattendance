@@ -18,11 +18,11 @@
     <div class="container">
         <h2>You have been registered for the course</h2>
 
-        <p th:text="'M number: '${newstudent.mNumber}"></p>
-        <p th:text="'First Name: '${newstudent.firstName}"></p>
-        <p th:text="'Last Name: '${newstudent.lastName}"></p>
+        <p th:text="'M number: ' + ${newstudent.mNumber}"></p>
+        <p th:text="'First Name: ' + ${newstudent.firstName}"></p>
+        <p th:text="'Last Name: ' + ${newstudent.lastName}"></p>
         <!--<p th:text="${newstudent.username}"></p>-->
-        <p th:text="'Email: '${newstudent.email}"></p>
+        <p th:text="'Email: ' + ${newstudent.email}"></p>
 
 
         <p><a th:href="@{/teacher/detailsofacourse/{id} (id=${course.id})}">Back to Course Details</a></p>

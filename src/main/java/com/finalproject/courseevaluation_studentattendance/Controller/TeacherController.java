@@ -182,7 +182,7 @@ public class TeacherController {
                 attnew.setDate(attdate);
                 System.out.println("printing status" + attendanceStatus[i]);
                 attnew.setStatus(attendanceStatus[i]);
-                System.out.println("set stautus doone----");
+                System.out.println("set status done----");
                 i += 1;
                 attnew.setPersonAttendance(student);
                 student.addAttendance(attnew);
@@ -200,12 +200,16 @@ public class TeacherController {
 
         System.out.println("end loop------");
 
+        Person onestu = studentsofACourse.iterator().next();
+
+        model.addAttribute("onestu", onestu);
+
         model.addAttribute("attdate", attdate);
         model.addAttribute("course", currentCourse);
-        model.addAttribute("studentsofACourse", studentsofACourse);
+        model.addAttribute("studentofacourse", studentsofACourse);
 
 
-        return "teacherpages/displyattforstudentsofacourse";
+        return "teacherpages/tableattofonecourse";
     }
 
 
@@ -222,14 +226,13 @@ public class TeacherController {
         model.addAttribute("onestu", onestu);
         model.addAttribute("course", currentCourse);
         model.addAttribute("studentofacourse", studentsofACourse);
-
         return "teacherpages/tableattofonecourse";
     }
 
-    @GetMapping("/updateperson/{id}")
-    public String editPerson(@PathVariable("id") long id, Principal principal,Model model){
+    @GetMapping("/updateperson")
+    public String editPerson(Principal principal,Model model){
         Person instructor=personRepo.findByUsername(principal.getName());
-        model.addAttribute("instructor", personRepo.findOne(instructor.getId()));
+        model.addAttribute("instructor", instructor);
 
         return "teacherpages/teacheredit";
     }
@@ -284,9 +287,6 @@ public class TeacherController {
 
         return "redirect:/teacher/listallstudents/{courseId}";
     }
-
-
-
 
 
 
