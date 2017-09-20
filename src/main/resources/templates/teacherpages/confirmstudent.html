@@ -25,9 +25,9 @@
         <p th:text="${newstudent.email}"></p>
 
 
-        <p><a th:href="@{/teacher/detailsofacourse/{id} (id=${course.id})}">Back to Course Page</a></p>
-        <p><a th:href="@{/teacher/listallcourses}">Back to all course</a></p>
-        <p><a th:href="@{/teacher/listallstudents/{courseId}(courseId=${course.id})}">Validate student's info</a></p>
+        <p><a th:href="@{/teacher/detailsofacourse/{id} (id=${course.id})}">Back to Course Details</a></p>
+        <!--<p><a th:href="@{/teacher/listallcourses}">Back to all course</a></p>-->
+        <!--<p><a th:href="@{/teacher/listallstudents/{courseId}(courseId=${course.id})}">Validate student's info</a></p>-->
         <p><a th:href="@{/teacher/addstudentstocourse/{id}(id=${course.id})}">Register another students for the course</a></p>
 
     </div>
