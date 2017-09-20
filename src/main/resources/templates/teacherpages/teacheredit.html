@@ -15,6 +15,7 @@
     <form action="#" th:action="@{/teacher/updateperson}" th:object="${instructor}" method="post" >
         <!--<input type="text" th:field="*{perosn.id}" />-->
         <input type="hidden" th:field="*{id}" />
+        <input type="hidden" th:field="*{mNumber}" />
         <!--<p> <h4>M Number</h4> <input type="text" th:field="*{mNumber}"/></p>-->
         <!--<div th:if="${#fields.hasErrors('mNumber')}"  th:errors="*{mNumber}"-->
              <!--class="well alert alert-warning" role="alert"></div>-->
