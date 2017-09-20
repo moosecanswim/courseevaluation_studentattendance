@@ -73,25 +73,25 @@ public class TeacherController {
     public EmailService emailService;
 
     @RequestMapping("/home")
-//    public String teacherHome(Principal p, Model model)
-//    {
-//        model.addAttribute("instructor", personRepository.findByUsername(p.getName()));
-//        return "teacherpages/teacherhome";
-//    }
-
-    //just for testing until security/login option is added
-    public String teacherHometest(Model model)
+    public String teacherHome(Principal p, Model model)
     {
-        model.addAttribute("instructor", personRepository.findByUsername("teacher"));
+        model.addAttribute("instructor", personRepository.findByUsername(p.getName()));
         return "teacherpages/teacherhome";
     }
 
+    //just for testing until security/login option is added
+//    public String teacherHometest(Model model)
+//    {
+//        model.addAttribute("instructor", personRepository.findByUsername("teacher"));
+//        return "teacherpages/teacherhome";
+//    }
+
     //this route can be combine with the teacherhome page later
     @GetMapping("/listallcourses")
-//    public String listCourse(Principal p, Model model)
-    public String listCourse(Model model)
+    public String listCourse(Principal p, Model model)
+//    public String listCourse(Model model)
     {
-        Person instructor = personRepository.findByUsername("teacher");
+        Person instructor = personRepository.findByUsername(p.getName());
 
         Iterable<Course> allCoursesofAInstructor = instructor.getCourseInstructor();
 
