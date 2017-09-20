@@ -108,6 +108,7 @@ footer {
 /*My Additionals*/
 .container {
     padding-bottom:60px;   /* Height of the footer */
+    background-color: white;
 }
 
 .container-loggeduser {
@@ -116,3 +117,9 @@ footer {
     margin-right:1%;
 }
 
+body#admin-page{
+    background-color: darkorange;
+}
+body#teacher-page{
+    background-color: #9acfea;
+}
