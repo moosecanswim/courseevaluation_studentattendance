@@ -50,17 +50,6 @@
 
     <h2>List of students who registered for the course: </h2>
 
-    <hr/>
-    <div class="center">
-        <a th:href="@{/teacher/markattendance/{courseId}(courseId=${course.id})}">Mark Attendance</a>
-        -
-        <a th:href="@{/teacher/attforonecourse/{id}(id=${course.id})}">See Attendance Record</a>
-        -
-        <a th:href="@{/teacher/listallstudents/{courseId}/(courseId=${course.id})}">See and validate students</a>
-
-    </div>
-    <hr/>
-
     <!--warning message panel if student list is empty-->
     <div  th:if="${studentsofACourse.isEmpty()}">
         <div class="panel panel-warning">
@@ -74,6 +63,17 @@
     </div>
 
     <div  th:if="${!studentsofACourse.isEmpty()}">
+
+        <hr/>
+        <div class="center">
+            <a th:href="@{/teacher/listallstudents/{courseId}/(courseId=${course.id})}">Validate students/update M-number</a>
+            -
+            <a th:href="@{/teacher/markattendance/{courseId}(courseId=${course.id})}">Mark Attendance</a>
+            -
+            <a th:href="@{/teacher/attforonecourse/{id}(id=${course.id})}">See Attendance Record</a>
+
+        </div>
+        <hr/>
 
 
         <table class="table table-striped" border="1">

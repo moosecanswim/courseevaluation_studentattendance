@@ -21,8 +21,7 @@
 
         <table class="table">
 
-
-            <h4>Student with validated IDs</h4>
+            <h3>Student with validated IDs</h3>
             <td><strong>ID</strong></td>
             <td><strong>M-Number</strong></td>
             <td><strong>First Name</strong></td>
@@ -49,7 +48,7 @@
         <table class="table">
 
 
-            <h4>Student with unvalidated IDs</h4>
+            <h3>Student without validated IDs</h3>
             <td><strong>ID</strong></td>
             <td><strong>M-Number</strong></td>
             <td><strong>First Name</strong></td>
@@ -80,24 +79,28 @@
         <br/>
 
 
-        <h4>Choose an option: search student by:</h4>
+        <!--<h4>Choose an option: search student by:</h4>-->
 
-        <form th:action="@{/teacher/searchstudent/{courseId}(courseId=${course.id})}" method="post">
-            <select name="searchBy">
-                <option value="all">First Name, Last Name and Email</option>
-                <option value="first">First Name only</option>
-                <option value="last">Last Name only</option>
-                <option value="email">Email only</option>
-                <option value="fandl">First Name and Last Name</option>
-            </select>
-            <p>
-                <input name="fname" type="text" placeholder="FirstName"/>
-                <input name="lname" type="text" placeholder="LastName"/>
-                <input name="email" type="text" placeholder="Email"/>
-                <input type="submit" value="Search"/>
-            </p>
+        <!--<form th:action="@{/teacher/searchstudent/{courseId}(courseId=${course.id})}" method="post">-->
+            <!--<select name="searchBy">-->
+                <!--<option value="all">First Name, Last Name and Email</option>-->
+                <!--<option value="first">First Name only</option>-->
+                <!--<option value="last">Last Name only</option>-->
+                <!--<option value="email">Email only</option>-->
+                <!--<option value="fandl">First Name and Last Name</option>-->
+            <!--</select>-->
+            <!--<p>-->
+                <!--<input name="fname" type="text" placeholder="FirstName"/>-->
+                <!--<input name="lname" type="text" placeholder="LastName"/>-->
+                <!--<input name="email" type="text" placeholder="Email"/>-->
+                <!--<input type="submit" value="Search"/>-->
+            <!--</p>-->
 
-        </form>
+        <!--</form>-->
+
+        <!--<br/>-->
+        <!--<br/>-->
+
 
         <h4>Search result (Matching students)</h4>
 
@@ -105,11 +108,36 @@
         <p th:text="${message}"></p>
 
         <div  th:if="${searchstudent.isEmpty()}">
-            No matching results found.
+            <h4>No matching students found!</h4>
+
+            <hr/>
+            <div>
+
+
+                <a th:href="@{/teacher/listallstudents/{courseId}/(courseId=${course.id})}">Search again</a>
+                -
+                 <a th:href="@{/teacher/detailsofacourse/{courseId}/(courseId=${course.id})}">Back to course detail</a>
+            </div>
+            <hr/>
         </div>
 
         <div  th:if="${!searchstudent.isEmpty()}">
-            <table>
+            <hr/>
+
+            <div>
+
+
+                <a th:href="@{/teacher/listallstudents/{courseId}/(courseId=${course.id})}">Search again</a>
+                -
+                <a th:href="@{/teacher/detailsofacourse/{courseId}/(courseId=${course.id})}">Back to course detail</a>
+            </div>
+            <hr/>
+
+            <div>
+                <br/>
+            </div>
+
+            <table class="table">
 
                 <thead>
                 <tr>
@@ -135,13 +163,6 @@
 
         </div>
 
-
-
-        <p>
-            <a th:href="@{/teacher/listallstudents/{courseId}/(courseId=${course.id})}">back to results</a>
-        </p>
-
-        <p><a th:href="@{/teacher/detailsofacourse/{courseId}/(courseId=${course.id})}">Back to course detail</a></p>
 
     </div>
     <!-- Footer -->
