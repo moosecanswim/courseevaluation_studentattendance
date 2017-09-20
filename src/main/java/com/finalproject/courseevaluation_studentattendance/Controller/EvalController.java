@@ -57,7 +57,7 @@ public class EvalController {
         Evaluation ev =  new Evaluation();
         ev.setCourseEvaluation(courseRepository.findOne(id));
 
-        System.out.println("Course Id is"+ id);
+        System.out.println("Course Id is: "+ id);
 
         model.addAttribute("courseId",id);
         model.addAttribute("neweval", ev);
