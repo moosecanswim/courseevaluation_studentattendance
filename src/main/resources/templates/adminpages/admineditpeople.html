@@ -8,11 +8,11 @@
     <!-- /.Header -->
 
 </head>
-<body>
+<body id="admin-page">
+    <!--Navigation Admin-->
+    <nav th:replace="base :: nav2Admin"></nav>
+    <!--/.Navigation Admin-->
     <div class="container">
-        <!--Navigation Admin-->
-        <nav th:replace="base :: nav2Admin"></nav>
-        <!--/.Navigation Admin-->
 
         <form action="#" th:action="@{/admin/updateperson}" th:object="${person}" method="post" >
             <!--<input type="text" th:field="*{perosn.id}" />-->
@@ -27,7 +27,7 @@
             <div th:if="${#fields.hasErrors('lastName')}"  th:errors="*{lastName}"
                  class="well alert alert-warning" role="alert"></div>
             <p> <h4> Email  </h4> <input type="email" th:field="*{email}"/></p>
-            <div th:if="${#fields.hasErrors('text')}"  th:errors="*{email}"
+            <div th:if="${#fields.hasErrors('email')}"  th:errors="*{email}"
                  class="well alert alert-warning" role="alert"></div>
             <p> <h4> Start Date  </h4> <input type="text" th:field="*{startDate}"/></p>
             <div th:if="${#fields.hasErrors('startDate')}"  th:errors="*{startDate}"

@@ -191,6 +191,7 @@ public class AdminController {
 //        Person courseInstructor = thiscourse.getInstructor();
 
         model.addAttribute("evals",thiscourseevaluation);
+        model.addAttribute("course",thiscourse);
 //        model.addAttribute("course",thiscourse);
 //        model.addAttribute("courseInstructor",courseInstructor);
         return"/adminpages/admineval";
@@ -394,7 +395,7 @@ public class AdminController {
            return"adminpages/admineditpeople";
        }
         personRepo.save(person);
-        return "redirect:/admin/home/";
+        return "redirect:/admin/viewallpeople";
     }
 
     // ===   See the List of this Teacher Courses

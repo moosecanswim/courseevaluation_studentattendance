@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <title>Confirm Student M Number</title>
     <!-- Header -->
@@ -10,19 +11,23 @@
     <!--Navigation Teacher-->
     <nav th:replace="base :: nav2Teacher"></nav>
     <!--/.Navigation Teacher-->
+    <div class="container-loggeduser">
+        Logged user:  <span sec:authentication="name">The Teacher is not logged in yet</span>
+    </div>
+
     <div class="container">
         <h2>You have been registered for the course</h2>
 
-        <p th:text="${newstudent.mNumber}"></p>
-        <p th:text="${newstudent.firstName}"></p>
-        <p th:text="${newstudent.lastName}"></p>
+        <p th:text="'M number: ' + ${newstudent.mNumber}"></p>
+        <p th:text="'First Name: ' + ${newstudent.firstName}"></p>
+        <p th:text="'Last Name: ' + ${newstudent.lastName}"></p>
         <!--<p th:text="${newstudent.username}"></p>-->
-        <p th:text="${newstudent.email}"></p>
+        <p th:text="'Email: ' + ${newstudent.email}"></p>
 
 
-        <p><a th:href="@{/teacher/detailsofacourse/{id} (id=${course.id})}">Back to Course Page</a></p>
-        <p><a th:href="@{/teacher/listallcourses}">Back to all course</a></p>
-        <p><a th:href="@{/teacher/listallstudents/{courseId}(courseId=${course.id})}">Validate student's info</a></p>
+        <p><a th:href="@{/teacher/detailsofacourse/{id} (id=${course.id})}">Back to Course Details</a></p>
+        <!--<p><a th:href="@{/teacher/listallcourses}">Back to all course</a></p>-->
+        <!--<p><a th:href="@{/teacher/listallstudents/{courseId}(courseId=${course.id})}">Validate student's info</a></p>-->
         <p><a th:href="@{/teacher/addstudentstocourse/{id}(id=${course.id})}">Register another students for the course</a></p>
 
     </div>

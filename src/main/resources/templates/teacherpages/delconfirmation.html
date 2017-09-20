@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 
     <title>Details of a course info</title>
@@ -8,20 +9,24 @@
     <!-- /.Header -->
 </head>
 <body>
-<!--Navigation Teacher-->
-<nav th:replace="base :: nav2Teacher"></nav>
-<!--/.Navigation Teacher-->
-<div class="container">
+    <!--Navigation Teacher-->
+    <nav th:replace="base :: nav2Teacher"></nav>
+    <!--/.Navigation Teacher-->
+    <div class="container-loggeduser">
+        Logged user:  <span sec:authentication="name">The Teacher is not logged in yet</span>
+    </div>
+
+    <div class="container">
 
 
-<p th:utext="${message}"/>
-<p><a th:href="@{|/teacher/listallstudents/${courseId}|}"> Back to list of students</a></p>
-    <p><a th:href="@{|/teacher/detailsofacourse/${courseId}|}"> Back to detail of the course</a></p>
+        <p th:utext="${message}"/>
+        <p><a th:href="@{|/teacher/listallstudents/${courseId}|}"> Back to list of students</a></p>
+        <p><a th:href="@{|/teacher/detailsofacourse/${courseId}|}"> Back to detail of the course</a></p>
 
-</div>
-<!-- Footer -->
-<div th:replace="base :: footer"></div>
-<!-- /.Footer -->
+    </div>
+    <!-- Footer -->
+    <div th:replace="base :: footer"></div>
+    <!-- /.Footer -->
 </body>
 </html>
 </body>

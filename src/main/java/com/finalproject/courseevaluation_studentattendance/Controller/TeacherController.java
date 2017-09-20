@@ -6,6 +6,7 @@ import com.finalproject.courseevaluation_studentattendance.Repositories.*;
 import com.finalproject.courseevaluation_studentattendance.Services.CourseService;
 import com.finalproject.courseevaluation_studentattendance.Services.EvaluationService;
 import com.finalproject.courseevaluation_studentattendance.Services.PersonService;
+import com.finalproject.courseevaluation_studentattendance.Services.RoleService;
 import com.google.common.collect.Lists;
 import it.ozimov.springboot.mail.model.Email;
 import it.ozimov.springboot.mail.model.EmailAttachment;
@@ -53,7 +54,8 @@ public class TeacherController {
 
     @Autowired
     PersonRepository personRepo;
-
+    @Autowired
+    RoleService roleService;
     @Autowired
     PersonService personService;
 
@@ -76,8 +78,11 @@ public class TeacherController {
     public String teacherHome(Principal p, Model model)
     {
         model.addAttribute("instructor", personRepository.findByUsername(p.getName()));
+        model.addAttribute("allcoursesofaInstructor",personRepository.findByUsername(p.getName()).getCourseInstructor() );
         return "teacherpages/teacherhome";
     }
+
+
 
     //just for testing until security/login option is added
 //    public String teacherHometest(Model model)
@@ -89,7 +94,6 @@ public class TeacherController {
     //this route can be combine with the teacherhome page later
     @GetMapping("/listallcourses")
     public String listCourse(Principal p, Model model)
-//    public String listCourse(Model model)
     {
         Person instructor = personRepository.findByUsername(p.getName());
 
@@ -99,7 +103,6 @@ public class TeacherController {
 
         return "teacherpages/listallcourses";
     }
-
 
     //list course info and all students/mark attendance
     @GetMapping("/detailsofacourse/{id}")
@@ -181,7 +184,7 @@ public class TeacherController {
                 attnew.setDate(attdate);
                 System.out.println("printing status" + attendanceStatus[i]);
                 attnew.setStatus(attendanceStatus[i]);
-                System.out.println("set stautus doone----");
+                System.out.println("set status done----");
                 i += 1;
                 attnew.setPersonAttendance(student);
                 student.addAttendance(attnew);
@@ -191,7 +194,7 @@ public class TeacherController {
 
                 System.out.println("newset-------");
 
-                // problem is here is empty
+                // problem solved
                 System.out.println("!!!!!!!!"+student.getAttendances().toString());
 
         }
@@ -199,12 +202,16 @@ public class TeacherController {
 
         System.out.println("end loop------");
 
+        Person onestu = studentsofACourse.iterator().next();
+
+        model.addAttribute("onestu", onestu);
+
         model.addAttribute("attdate", attdate);
         model.addAttribute("course", currentCourse);
-        model.addAttribute("studentsofACourse", studentsofACourse);
+        model.addAttribute("studentofacourse", studentsofACourse);
 
 
-        return "teacherpages/displyattforstudentsofacourse";
+        return "teacherpages/tableattofonecourse";
     }
 
 
@@ -221,10 +228,25 @@ public class TeacherController {
         model.addAttribute("onestu", onestu);
         model.addAttribute("course", currentCourse);
         model.addAttribute("studentofacourse", studentsofACourse);
-
         return "teacherpages/tableattofonecourse";
     }
 
+    @GetMapping("/updateperson")
+    public String editPerson(Principal principal,Model model){
+        Person instructor=personRepo.findByUsername(principal.getName());
+        model.addAttribute("instructor", instructor);
+
+        return "teacherpages/teacheredit";
+    }
+
+
+    @PostMapping("/updateperson")
+    public String savePerson(@Valid @ModelAttribute("instructor") Person instructor, BindingResult bindingResult)
+    {
+
+        personService.update(instructor);
+        return "redirect:/teacher/home/";
+    }
 
     //for delete or update M number for the student
     @GetMapping("/listallstudents/{courseId}")
@@ -249,16 +271,15 @@ public class TeacherController {
         model.addAttribute("student", currentStudent);
         model.addAttribute("course", currentCourse);
 
-        return "teacherpages/" +
-                "teMform";
+        return "teacherpages/updateMform";
     }
 
 
     @PostMapping("/update/{courseId}/{studentId}")
     public String updateMnumberstudent(@PathVariable("courseId") Long courseId,
-                                               @PathVariable("studentId") Long studentId,
-                                               @RequestParam(value="newMId") String newMId,
-                                               Model model) {
+                                       @PathVariable("studentId") Long studentId,
+                                       @RequestParam(value="newMId") String newMId,
+                                       Model model) {
 
         Course currentCourse = courseRepository.findOne(courseId);
         Person currentStudent= personRepository.findOne(studentId);
@@ -322,8 +343,8 @@ public class TeacherController {
 
     @RequestMapping("/searchstudent/{courseId}")
     public String findstudents(@PathVariable("courseId") Long courseId, @RequestParam(value = "searchBy") String searchBy, @RequestParam(value ="fname", required=false) String fname,
-                    @RequestParam(value ="lname", required=false) String lname, @RequestParam(value ="email", required=false) String email,
-                    Model model)
+                               @RequestParam(value ="lname", required=false) String lname, @RequestParam(value ="email", required=false) String email,
+                               Model model)
     {
 
         Course currentCourse = courseRepository.findOne(courseId);
@@ -407,11 +428,12 @@ public class TeacherController {
         {
             return "teacherpages/addstudent";
         }
-       Course c =  courseRepository.findOne(id);
-       student.setCourseStudent(c);
-       personRepository.save(student);
-       model.addAttribute("course", c);
-       model.addAttribute("newstudent", student);
+        Course c =  courseRepository.findOne(id);
+        student.setCourseStudent(c);
+        student.addRole(roleService.findByRoleName("DEFAULT"));
+        personRepository.save(student);
+        model.addAttribute("course", c);
+        model.addAttribute("newstudent", student);
 
        return "teacherpages/confirmstudent";
    }
@@ -464,7 +486,7 @@ public class TeacherController {
         for (Attendance att : onestu.getAttendances())
         {
 
-           testData += att.getDate().toString() + ",";
+            testData += att.getDate().toString() + ",";
         }
 
 
@@ -487,7 +509,7 @@ public class TeacherController {
             testData += "\n";
         }
 
-         DefaultEmailAttachment attachment = DefaultEmailAttachment.builder()
+        DefaultEmailAttachment attachment = DefaultEmailAttachment.builder()
                 .attachmentName(filename + ".csv")
                 .attachmentData(testData.getBytes(Charset.forName("UTF-8")))
                 .mediaType(MediaType.TEXT_PLAIN).build();

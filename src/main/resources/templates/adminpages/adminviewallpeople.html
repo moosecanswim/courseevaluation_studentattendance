@@ -9,14 +9,18 @@
     <!-- /.Header -->
 
 </head>
-<body>
+<body id="admin-page">
     <!--Navigation Admin-->
     <nav th:replace="base :: nav2Admin"></nav>
     <!--/.Navigation Admin-->
+    <div>
+        <br/>
+        <br/>
+    </div>
     <div class="container">
         <h1>List of All People in Montgomery College: </h1>
 
-        <table class="table table-striped" border="1">
+        <table class="table table-striped">
 
             <td><strong>ID</strong></td>
             <td><strong>M Number</strong></td>
@@ -47,11 +51,11 @@
             </tr>
         </table>
 
-        <!--Link to view the list of all teachers-->
-        <div><a href="/admin/viewallteachers">View All Teachers</a></div>
-        <!--Link to view the list of all students-->
-        <div><a href="/admin/viewallstudents">View All Students</a></div>
-        <!--Link to the Admin Home page-->
+        <!--&lt;!&ndash;Link to view the list of all teachers&ndash;&gt;-->
+        <!--<div><a href="/admin/viewallteachers">View All Teachers</a></div>-->
+        <!--&lt;!&ndash;Link to view the list of all students&ndash;&gt;-->
+        <!--<div><a href="/admin/viewallstudents">View All Students</a></div>-->
+        <!--&lt;!&ndash;Link to the Admin Home page&ndash;&gt;-->
         <div><a href="/admin/home">Admin Home</a></div>
     </div>
 

@@ -8,7 +8,7 @@
     <!-- /.Header -->
 
 </head>
-<body>
+<body id="admin-page">
     <!--Navigation Admin-->
     <nav th:replace="base :: nav2Admin"></nav>
     <!--/.Navigation Admin-->
@@ -20,7 +20,7 @@
 
         <a href="/admin/addcommunication" class="btn btn-primary btn-lg active" bgcolor="Black" role="button" aria-pressed="true">Add communication</a>
 
-        <table class="table table-striped" border="1">
+        <table class="table table-striped">
             <tr>
                 <th><strong>Id</strong></th>
                 <th><strong>Date Entered</strong></th>
@@ -55,7 +55,7 @@
         </table>
 
         <h3>Closed Communications (already taken care)</h3>
-        <table class="table table-striped" border="1">
+        <table class="table table-striped">
             <tr>
                 <th><strong>Id</strong></th>
                 <th><strong>Date Entered</strong></th>

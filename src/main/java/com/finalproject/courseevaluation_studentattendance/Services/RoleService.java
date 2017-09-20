@@ -31,5 +31,11 @@ public class RoleService {
             System.out.println("RoleService:role existed so it was not added");
         }
     }
+    public PersonRole findByRoleName(String roleName){
+        System.out.println("roleService- findByroleName: roleName input is "+ roleName);
+        roleName=roleName.toUpperCase();
+        System.out.println("roleService- findByroleName: roleName all caps is "+ roleName);
+        return roleRepo.findByRoleName(roleName);
+    }
 
 }

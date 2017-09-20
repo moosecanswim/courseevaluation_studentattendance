@@ -7,20 +7,20 @@
     <th:block th:replace="base :: header"></th:block>
     <!-- /.Header -->
 </head>
-<body>
-<!--Navigation Teacher-->
-<nav th:replace="base :: nav2Admin"></nav>
-<!--/.Navigation Teacher-->
-<div class="container">
+<body id="admin-page">
+    <!--Navigation Teacher-->
+    <nav th:replace="base :: nav2Admin"></nav>
+    <!--/.Navigation Teacher-->
+    <div class="container">
 
 
-<p th:utext="${message}"/>
+        <p th:utext="${message}"/>
 
 
-</div>
-<!-- Footer -->
-<div th:replace="base :: footer"></div>
-<!-- /.Footer -->
+    </div>
+    <!-- Footer -->
+    <div th:replace="base :: footer"></div>
+    <!-- /.Footer -->
 </body>
 </html>
 </body>

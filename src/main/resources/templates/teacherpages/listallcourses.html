@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 
     <title>List of all courses of a teacher</title>
@@ -11,11 +12,15 @@
     <!--Navigation Teacher-->
     <nav th:replace="base :: nav2Teacher"></nav>
     <!--/.Navigation Teacher-->
+    <div class="container-loggeduser">
+        Logged user:  <span sec:authentication="name">The Teacher is not logged in yet</span>
+    </div>
+
     <div class="container">
 
         <div  th:if="${!allcoursesofaInstructor.isEmpty()}">
             <h2>List of Courses</h2>
-
+            <br/>
 
             <table class="table table-striped" border="1">
                 <tr>
@@ -35,7 +40,7 @@
         </div>
 
         <div  th:if="${allcoursesofaInstructor.isEmpty()}">
-            <p>You are not assigned to teach any course yet.</p>
+            <h3>You are not assigned to teach any course yet.</h3>
         </div>
 
     </div>
