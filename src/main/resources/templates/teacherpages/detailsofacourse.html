@@ -33,7 +33,7 @@
             <a th:href="@{/teacher/courseend/{id}(id=${course.id})}">Course has Ended</a>
             -
             <a th:href="@{/teacher/displayallevalsofonecourse/{id}(id=${course.id})}">See Course Evaluations</a>
-
+                -
             <a th:href="@{/teacher/attforonecourse/{id}(id=${course.id})}">See Attendance Record</a>
 
         </div>
@@ -50,8 +50,6 @@
         <div  th:if="${!studentsofACourse.isEmpty()}">
 
             <p><a th:href="@{/teacher/markattendance/{courseId}(courseId=${course.id})}">Mark Attendance</a></p>
-
-            <p><a th:href="@{/teacher/listallstudents/{courseId}/(courseId=${course.id})}">See and validate students</a></p>
 
 
             <table class="table table-striped" border="1">
@@ -82,6 +80,7 @@
                     </td>
                 </tr>
             </table>
+            <p><a th:href="@{/teacher/listallstudents/{courseId}/(courseId=${course.id})}">See and validate students</a></p>
             <hr />
         </div>
 
