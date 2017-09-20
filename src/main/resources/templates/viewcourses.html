@@ -14,12 +14,16 @@
 <nav th:replace="base :: nav2Student"></nav>
 <!--/.Navigation Student-->
 
+<div>
+    <br/>
+    <br/>
+    <br/>
+</div>
 <div class="container">
     <h1>View All Courses - Montgomery College</h1>
     <table  class="table table-striped" border="1">
         <tr>
             <th>Id</th>
-            <th>CRN</th>
             <th>Name</th>
             <th>Start Date</th>
             <th>End Date</th>
@@ -28,7 +32,6 @@
         </tr>
         <tr th:each="course:${courseList}">
             <td th:text="*{course.id}"></td>
-            <td th:text="*{course.crn}"></td>
             <td th:text="*{course.courseName}"></td>
             <td th:text="*{{course.startDate}}"></td>
             <td th:text="*{{course.endDate}}"></td>

@@ -26,18 +26,18 @@
 
         <!--<input type="text" th:field="*{perosn.id}" />-->
         <input type="hidden" th:field="*{id}" />
-        <p><h4>M number</h4> <input type="text" th:field="*{mNumber}"/></p>
-        <div th:if="${#fields.hasErrors('mNumber')}"  th:errors="*{mNumber}"
-             class="well alert alert-warning" role="alert"></div>
-        <p><h4>First Name</h4> <input type="text" th:field="*{firstName}"/></p>
-        <div th:if="${#fields.hasErrors('firstName')}"  th:errors="*{firstName}"
-             class="well alert alert-warning" role="alert"></div>
-        <p> <h4> Last Name  </h4> <input type="text" th:field="*{lastName}"/></p>
-        <div th:if="${#fields.hasErrors('lastName')}"  th:errors="*{lastName}"
-             class="well alert alert-warning" role="alert"></div>
-        <p> <h4> Email  </h4> <input type="email" th:field="*{email}"/></p>
-        <div th:if="${#fields.hasErrors('email')}"  th:errors="*{email}"
-             class="well alert alert-warning" role="alert"></div>
+            <p><h4>M Number</h4> <input type="text" th:field="*{mNumber}"/></p>
+            <div th:if="${#fields.hasErrors('mNumber')}"  th:errors="*{mNumber}"
+                 class="well alert alert-warning" role="alert"></div>
+            <p><h4>First Name</h4> <input required type="text" th:field="*{firstName}"/></p>
+            <div th:if="${#fields.hasErrors('firstName')}"  th:errors="*{firstName}"
+                 class="well alert alert-warning" role="alert"></div>
+            <p> <h4> Last Name  </h4> <input required type="text" th:field="*{lastName}"/></p>
+            <div th:if="${#fields.hasErrors('lastName')}"  th:errors="*{lastName}"
+                 class="well alert alert-warning" role="alert"></div>
+            <p> <h4> Email  </h4> <input required type="email" th:field="*{email}"/></p>
+            <div th:if="${#fields.hasErrors('email')}"  th:errors="*{email}"
+                 class="well alert alert-warning" role="alert"></div>
 
         <!--<p th:text="'Sign up time: ' + *{startDate)}">-->
 

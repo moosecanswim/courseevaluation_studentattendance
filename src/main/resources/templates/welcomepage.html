@@ -13,33 +13,26 @@
 
     <!--Navigation Welcome-->
     <nav th:replace="base :: nav2Welcome"></nav>
+    <div>
+        <br/>
+        <br/>
+        <br/>
+    </div>
     <!--/.Navigation Welcome-->
+
+    <!-- Main Content -->
     <div class="container">
-    <div class="jumbotron">
-        <h1 class="display-3">Start Learning Today!</h1>
-        <p class="lead">It is never late to start learning what you Love!</p>
-        <hr class="my-4">
-        <p>Find Classes to register for</p>
-        <p class="lead">
-            <a class="btn btn-primary btn-lg" href="/viewcourses" role="button">Courses</a>
-        </p>
+        <div class="jumbotron">
+            <h1 class="display-3">Start Learning Today!</h1>
+            <p class="lead">It is never late to start learning what you Love!</p>
+            <hr class="my-4">
+            <p>Find Classes to register for</p>
+            <p class="lead">
+                <a class="btn btn-primary btn-lg" href="/viewcourses" role="button">Courses</a>
+            </p>
+        </div>
     </div>
-
-    <!--<div  th:if="${!collectionOfAllMatchedJobs.isEmpty()}">-->
-    <div   th:if="${message!=null}">
-        <div th:text="${message}"></div>
-    </div>
-    <!--<div th:text="'Instructor: ' + ${courseInstructor?.firstName} + ' ' +${courseInstructor?.lastName}"></div>-->
-
-
-        <br />
-        <p><a href="/teacher/home">Teacher Home</a></p>
-        <p><a href="/admin/home">Admin Home</a></p>
-        <p><a href="/eval/home">Eval Home</a></p>
-        <br />
-        <!--<p><a href="/login">Login</a></p>-->
-        <!--<p><a href="/viewcourses">View Courses</a></p>-->
-    </div>
+    <!-- /.Main Content -->
 
     <!-- Footer -->
     <div th:replace="base :: footer"></div>
