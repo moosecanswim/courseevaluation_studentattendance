@@ -572,16 +572,28 @@ public class AdminController {
     public void sendEmailWithoutTemplating(Iterable<Evaluation>evaluations) throws UnsupportedEncodingException {
         System.out.println("test before email");
         Evaluation eval=new Evaluation();
+        Person admin=new Person();
+        System.out.println();
         for (Evaluation neval:evaluations) {
             eval=neval;
+            System.out.println("Courssssssssssssss"+eval.getCourseEvaluation().toString());
         }
-
+        PersonRole nrole=roleRepository.findByRoleName("ADMIN");
+        Iterable<Person>persons=nrole.getPeople();
+        for (Person np:persons)
+        {
+            admin=np;
+            System.out.println("Admin name-----------"+np.getFirstName()+np.getLastName());
+            System.out.println("Admin Roles"+np.getPersonRoles().toString());
+        }
+        String adminemail=String.valueOf(admin.getEmail());
+        System.out.println("emailllllllllllll"+adminemail);
             System.out.println(eval.getContent());
             final Email email = DefaultEmail.builder()
                     .from(new InternetAddress("mahifentaye@gmail.com", "Evaluation INFO"))
-                    .to(Lists.newArrayList(new InternetAddress("mymahder@gmail.com", "admin")))
+                    .to(Lists.newArrayList(new InternetAddress(adminemail, "admin")))
                     .subject("Evaluation for" + eval.getCourseEvaluation())
-                    .body("Evaluation for this class has been attached.")
+                    .body("Evaluation for "+eval.getCourseEvaluation()+ " has been attached.")
                     .attachment(getCsvEvaluationAttachment("Evaluation", evaluations))
                     .encoding("UTF-8").build();
             System.out.println("test it");

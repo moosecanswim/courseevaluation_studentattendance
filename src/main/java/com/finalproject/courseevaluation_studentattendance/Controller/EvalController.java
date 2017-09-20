@@ -86,6 +86,8 @@ public class EvalController {
         return "evalpages/searchcourse";
     }
 
+
+    //We do not limit the number of evaluations per course!!!
     @PostMapping("/searchcourse")
 //    public String searchCoursePost(@Valid @RequestParam("crnfield")long crn, Course course,BindingResult bindingResult,Model model )
     public String searchCoursePost(@RequestParam("crnfield")Long crn, Model model )
@@ -99,7 +101,6 @@ public class EvalController {
         }
 
         model.addAttribute("searcheval", courseRepository.findAllByCrn(crn));
-
 
     //return "evalpages/searchresult";
        return "evalpages/searchcourse";
