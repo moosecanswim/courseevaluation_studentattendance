@@ -21,9 +21,9 @@
         <br/>
         <br/>
     </div>
-    <div class="container">
-        <form>
-        <h3>Section I:Course Information</h3>
+    <!--<div class="container">-->
+    <form>
+        <h3>Section I: Course Information</h3>
         <div>
             <br/>
         </div>
@@ -36,12 +36,12 @@
             <br/>
         </h4>
         <hr/>
-        </form>
-    </div>
+    </form>
+    <!--</div>-->
 <form th:action="@{/eval/evaluationentry/{courseId} (courseId=${courseId})}" th:object="${neweval}" method="post" >
     <!--<input type="hidden" th:field="*{id}">-->
 
-    <h3>Section II:Rate the Course</h3>
+    <h3>Section II: Rate the Course</h3>
     <div>
         <br/>
     </div>
@@ -102,7 +102,7 @@
     <div th:if="${#fields.hasErrors('equipment')}"  th:errors="*{equipment}"
          class="well alert alert-warning" role="alert"></div>
 <hr/>
-    <h3>Section III:Comments</h3>
+    <h3>Section III: Comments</h3>
     <div>
         <br/>
     </div>
@@ -118,7 +118,7 @@
     4.  What other classes would you like to see offered?<br />
     <textarea name='otherClass' id='comment14' cols=50 rows=3 onBlur="validate_length('coursesurvey', 'comment12', 500, 'Section III 4. Comment');"></textarea> <br><br>
     <hr/>
-    <h3>Section IV:Optional</h3>
+    <h3>Section IV: Optional</h3>
     <div>
         <br/>
     </div>
