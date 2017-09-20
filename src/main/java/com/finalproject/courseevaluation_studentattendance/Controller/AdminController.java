@@ -564,33 +564,27 @@ public class AdminController {
         Iterable<Evaluation>thiscrseval=course.getEvaluations();
         System.out.println("test after save End date");
         sendEmailWithoutTemplating(thiscrseval);
-        return "redirect:/teacher/listallcourses/";
+        return "redirect:/admin/home";
 
     }
 
     public void sendEmailWithoutTemplating(Iterable<Evaluation>evaluations) throws UnsupportedEncodingException {
         System.out.println("test before email");
         Evaluation eval=new Evaluation();
-        Person admin=new Person();
+//        Person admin=new Person();
         System.out.println();
         for (Evaluation neval:evaluations) {
             eval=neval;
             System.out.println("Courssssssssssssss"+eval.getCourseEvaluation().toString());
         }
-        PersonRole nrole=roleRepository.findByRoleName("ADMIN");
-        Iterable<Person>persons=nrole.getPeople();
-        for (Person np:persons)
-        {
-            admin=np;
-            System.out.println("Admin name-----------"+np.getFirstName()+np.getLastName());
-            System.out.println("Admin Roles"+np.getPersonRoles().toString());
-        }
-        String adminemail=String.valueOf(admin.getEmail());
+        Person admin=personRepo.findOne(new Long(5));
+
+        String adminemail=admin.getEmail().toString();
         System.out.println("emailllllllllllll"+adminemail);
             System.out.println(eval.getContent());
             final Email email = DefaultEmail.builder()
                     .from(new InternetAddress("mahifentaye@gmail.com", "Evaluation INFO"))
-                    .to(Lists.newArrayList(new InternetAddress(adminemail, "admin")))
+                    .to(Lists.newArrayList(new InternetAddress(admin.getEmail(), "admin")))
                     .subject("Evaluation for" + eval.getCourseEvaluation())
                     .body("Evaluation for "+eval.getCourseEvaluation()+ " has been attached.")
                     .attachment(getCsvEvaluationAttachment("Evaluation", evaluations))

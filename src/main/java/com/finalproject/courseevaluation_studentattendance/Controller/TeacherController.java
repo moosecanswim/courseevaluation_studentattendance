@@ -436,9 +436,10 @@ public class TeacherController {
     public void sendEmailWithoutTemplating(Course course) throws UnsupportedEncodingException {
         System.out.println("test before email");
         System.out.println(course.getCourseName());
+        Person admin=personRepo.findOne(new Long(5));
         final Email email= DefaultEmail.builder()
                 .from(new InternetAddress("mahifentaye@gmail.com", "Attendance INFO"))
-                .to(Lists.newArrayList(new InternetAddress("mymahder@gmail.com","admin")))
+                .to(Lists.newArrayList(new InternetAddress(admin.getEmail(),"admin")))
                 .subject("Attendance for" + course.getCourseName())
                 .body("Course Closed.  Attendance for the class has been attached.")
                 .attachment(getCsvAttendanceAttachment("Attendance",course))
