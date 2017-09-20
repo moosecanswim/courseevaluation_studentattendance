@@ -570,7 +570,7 @@ public class AdminController {
     }
     private EmailAttachment getCsvEvaluationAttachment(String filename, Iterable<Evaluation>evaluations) {
 
-        String testData = "Course Content"+","+"Instruction Qyality"+","+"Training Experience"+","+"Textbooks or Handouts"+","+
+        String testData = "Course Content"+","+"Instruction Quality"+","+"Training Experience"+","+"Textbooks or Handouts"+","+
                 "Environment and Seating"+","+"Computer Equipment"+","+"Likes"+","+"Dislikes"+","+"Suggegstions"+","+"Other classes"+","+
                 "How did you find about this class"+"\n";
 
