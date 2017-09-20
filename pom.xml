@@ -66,6 +66,15 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
+
+
+		<!--Dependency for Security: thymeleaf-extras-springsecurity4-->
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity4</artifactId>
+		</dependency>
+
+
 		<dependency>
 			<groupId>it.ozimov</groupId>
 			<artifactId>spring-boot-email-core</artifactId>

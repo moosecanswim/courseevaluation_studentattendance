@@ -23,34 +23,34 @@
 
             <p>Enter CRN Number: <input type="number" name="crnfield" /></p>
 
-            <p><input type="submit" value="Search CRN" /> <input type="reset" value="Reset" /> </p>
+            <p><input type="submit" value="Search By CRN" /> <input type="reset" value="Reset" /> </p>
 
         </form>
     </div>
 
-    <div>
+    <!--<div>-->
 
 
-        <form id="inner-form" class="form-horizontal form" th:action="@{eval/searchresult}">
+        <!--<form id="inner-form" class="form-horizontal form" th:action="@{eval/searchresult}">-->
 
 
-            <div>
-                <table class="table table-inverse">
-                    <tr>
-                        <th:block th:each="item:${searcheval}">
-                            <td><b>CRN</b></td>  <td th:text="${item.crn}"></td>
-                            <td><b>Course Name</b></td> <td th:text="${item.courseName}"></td>
-                            <td><b>Start Date</b></td> <td th:text="${item.startDate}"></td>
-                            <td><b>End Date</b></td> <td th:text="${item.endDate}"></td>
-                            <td><a th:href="@{/eval/evaluationentry/{id}(id=${item.id})}">Evaluate this course</a></td>
-                        </th:block>
-                    </tr>
-                </table>
-            </div>
+            <!--<div>-->
+                <!--<table class="table table-inverse">-->
+                    <!--<tr>-->
+                        <!--<th:block th:each="item:${searcheval}">-->
+                            <!--<td><b>CRN</b></td>  <td th:text="${item.crn}"></td>-->
+                            <!--<td><b>Course Name</b></td> <td th:text="${item.courseName}"></td>-->
+                            <!--<td><b>Start Date</b></td> <td th:text="${item.startDate}"></td>-->
+                            <!--<td><b>End Date</b></td> <td th:text="${item.endDate}"></td>-->
+                            <!--<td><a th:href="@{/eval/evaluationentry/{id}(id=${item.id})}">Evaluate this course</a></td>-->
+                        <!--</th:block>-->
+                    <!--</tr>-->
+                <!--</table>-->
+            <!--</div>-->
 
-        </form>
+        <!--</form>-->
 
-    </div>
+    <!--</div>-->
 </div>
 
 <!-- Footer -->

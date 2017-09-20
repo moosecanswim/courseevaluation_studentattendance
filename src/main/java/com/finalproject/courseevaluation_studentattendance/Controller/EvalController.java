@@ -89,14 +89,14 @@ public class EvalController {
 //        {
 //            return "evalpages/evaluationentry";
 //        }
-        if(crn==null){
-            return "evalpages/searchcourse";
-        }
+//        if(crn==null){
+//            return "evalpages/searchcourse";
+//        }
 
         model.addAttribute("searcheval", courseRepository.findAllByCrn(crn));
 
     //return "evalpages/searchresult";
-       return "evalpages/searchcourse";
+       return "evalpages/searchresults";
     }
 
 
