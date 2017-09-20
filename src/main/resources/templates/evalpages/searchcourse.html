@@ -18,8 +18,8 @@
 <!--/.Navigation Student-->
 
 <div class="container">
-    <div>
-        <form  th:action="@{/eval/searchcourse}"  method="post">
+    <div >
+        <form th:action="@{/eval/searchcourse}"  method="post">
 
             <p>Enter CRN Number: <input type="number" name="crnfield" /></p>
 
@@ -29,11 +29,13 @@
     </div>
 
     <div>
+
+
         <form id="inner-form" class="form-horizontal form" th:action="@{eval/searchresult}">
 
 
             <div>
-                <table>
+                <table class="table table-inverse">
                     <tr>
                         <th:block th:each="item:${searcheval}">
                             <td><b>CRN</b></td>  <td th:text="${item.crn}"></td>

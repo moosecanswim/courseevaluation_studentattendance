@@ -6,6 +6,7 @@ import com.finalproject.courseevaluation_studentattendance.Model.Person;
 import com.finalproject.courseevaluation_studentattendance.Repositories.*;
 import com.sun.org.apache.bcel.internal.generic.NEW;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -26,6 +27,7 @@ public class EvaluationService {
     public EvaluationService(EvaluationRepository evalRepo){
         this.evaluationRepo=evalRepo;
     }
+
 
 //// method adds crn of the course to the evaluation repository
   public void addEvalToCourse(Evaluation eval, Course cr) {
@@ -52,6 +54,7 @@ public class EvaluationService {
       return evaluationRepo.findEvaluationsByCourseEvaluation_Id(course.getId());
 
   }
+
 
 //    public Evaluation findEvalsInCours(Evaluation eval, Course cr)
 ////    {
