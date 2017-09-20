@@ -158,7 +158,6 @@ public class TeacherController {
     }
 
     //display the attendance for a course of all students
-
     @PostMapping("/markattendancepo/{courseId}")
     public String postattendance(@PathVariable("courseId") Long courseId, @RequestParam("attdate") String attdate,
                                  @RequestParam(value = "attendanceStatus") String[] attendanceStatus,Model model)
@@ -212,6 +211,27 @@ public class TeacherController {
 
 
         return "teacherpages/tableattofonecourse";
+    }
+
+    //adding update attendence option
+    @GetMapping("/updateattendance/{courseId}")
+    public String updateAttendanceofaCourse(@PathVariable("courseId") Long courseId, Model model)
+    {
+
+        Course currentCourse = courseRepository.findOne(courseId);
+        Iterable<Person> studentsofACourse = currentCourse.getStudent();
+
+        Date now= new Date();
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+        String nowdate= df.format(now);
+
+        model.addAttribute("onestu",studentsofACourse.iterator().next() );
+
+        model.addAttribute("nowdate", nowdate);
+        model.addAttribute("course", currentCourse);
+        model.addAttribute("studentsofACourse", studentsofACourse);
+
+        return "teacherpages/updateattofacourseform";
     }
 
 
@@ -437,7 +457,7 @@ public class TeacherController {
         model.addAttribute("course", c);
         model.addAttribute("newstudent", student);
 
-       return "teacherpages/confirmstudent";
+        return "teacherpages/confirmstudent";
    }
 
     //the method to send email
