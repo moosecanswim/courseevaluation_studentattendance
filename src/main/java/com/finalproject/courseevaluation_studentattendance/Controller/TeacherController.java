@@ -69,26 +69,29 @@ public class TeacherController {
     @Autowired
     EvaluationService evaluationService;
 
-    @RequestMapping("/home")
-//    public String teacherHome(Principal p, Model model)
-//    {
-//        model.addAttribute("instructor", personRepository.findByUsername(p.getName()));
-//        return "teacherpages/teacherhome";
-//    }
+    @Autowired
+    public EmailService emailService;
 
-    //just for testing until security/login option is added
-    public String teacherHometest(Model model)
+    @RequestMapping("/home")
+    public String teacherHome(Principal p, Model model)
     {
-        model.addAttribute("instructor", personRepository.findByUsername("teacher"));
+        model.addAttribute("instructor", personRepository.findByUsername(p.getName()));
         return "teacherpages/teacherhome";
     }
 
+    //just for testing until security/login option is added
+//    public String teacherHometest(Model model)
+//    {
+//        model.addAttribute("instructor", personRepository.findByUsername("teacher"));
+//        return "teacherpages/teacherhome";
+//    }
+
     //this route can be combine with the teacherhome page later
     @GetMapping("/listallcourses")
-//    public String listCourse(Principal p, Model model)
-    public String listCourse(Model model)
+    public String listCourse(Principal p, Model model)
+//    public String listCourse(Model model)
     {
-        Person instructor = personRepository.findByUsername("teacher");
+        Person instructor = personRepository.findByUsername(p.getName());
 
         Iterable<Course> allCoursesofAInstructor = instructor.getCourseInstructor();
 
@@ -246,12 +249,13 @@ public class TeacherController {
         model.addAttribute("student", currentStudent);
         model.addAttribute("course", currentCourse);
 
-        return "teacherpages/updateMform";
+        return "teacherpages/" +
+                "teMform";
     }
 
 
     @PostMapping("/update/{courseId}/{studentId}")
-    public String updateMnumberordeletestudent(@PathVariable("courseId") Long courseId,
+    public String updateMnumberstudent(@PathVariable("courseId") Long courseId,
                                                @PathVariable("studentId") Long studentId,
                                                @RequestParam(value="newMId") String newMId,
                                                Model model) {
@@ -264,6 +268,10 @@ public class TeacherController {
 
         return "redirect:/teacher/listallstudents/{courseId}";
     }
+
+
+
+
 
 
 //    @GetMapping("/displayoneeval/{id}")
@@ -299,8 +307,17 @@ public class TeacherController {
 
         model.addAttribute("course", currentCourse);
 
-        return "redirect:/teacher/listallstudents/{courseId}";
+        String message= "<h2>You have successfully remove the student from the course.</h2>";
+
+
+//       String link = "<a th:href=\"@{/teacher/listallstudents/{courseId}(courseId=course.id)}\">Back to student's list</a>";
+
+        model.addAttribute("message", message);
+        model.addAttribute("courseId", courseId);
+        return "teacherpages/delconfirmation";
     }
+
+
 
 
     @RequestMapping("/searchstudent/{courseId}")
@@ -415,15 +432,14 @@ public class TeacherController {
     }
 
 
-    @Autowired
-    public EmailService emailService;
+
     public void sendEmailWithoutTemplating(Course course) throws UnsupportedEncodingException {
         System.out.println("test before email");
         System.out.println(course.getCourseName());
         final Email email= DefaultEmail.builder()
                 .from(new InternetAddress("mahifentaye@gmail.com", "Attendance INFO"))
                 .to(Lists.newArrayList(new InternetAddress("mymahder@gmail.com","admin")))
-                .subject("Testing Email")
+                .subject("Attendance for" + course.getCourseName())
                 .body("Course Closed.  Attendance for the class has been attached.")
                 .attachment(getCsvAttendanceAttachment("Attendance",course))
                 .encoding("UTF-8").build();

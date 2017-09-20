@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
+
     <title>Student Attendance</title>
     <!-- Header -->
-    <div th:replace="base :: header"></div>
+    <th:block th:replace="base :: header"></th:block>
     <!-- /.Header -->
 </head>
 <body>
@@ -45,7 +45,9 @@
             <p>No information available!</p>
         </div>
 
-        <p><a th:href="@{/teacher/listallstudents/{courseId}/(courseId=${course.id})}">Back to list of students</a></p>
+        <p>
+            <a th:href="@{/teacher/detailsofacourse/{id} (id=${course.id})}">Back to Course Page</a>
+        </p>
 
 
     </div>

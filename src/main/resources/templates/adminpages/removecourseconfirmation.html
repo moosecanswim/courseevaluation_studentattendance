@@ -2,30 +2,26 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
 
-    <title>Eval Home</title>
-
+    <title>Details of a course info</title>
     <!-- Header -->
     <th:block th:replace="base :: header"></th:block>
     <!-- /.Header -->
-
 </head>
 <body>
-
-<!--Navigation Student-->
-<nav th:replace="base :: nav2Student"></nav>
-<!--/.Navigation Student-->
-
+<!--Navigation Teacher-->
+<nav th:replace="base :: nav2Admin"></nav>
+<!--/.Navigation Teacher-->
 <div class="container">
-    <h2>Find the course to evaluation</h2>
-    <br/>
 
 
-    <p><a href="/eval/searchcourse">Search by Course CRN</a></p>
+<p th:utext="${message}"/>
+
+
 </div>
-
 <!-- Footer -->
 <div th:replace="base :: footer"></div>
 <!-- /.Footer -->
-
+</body>
+</html>
 </body>
 </html>

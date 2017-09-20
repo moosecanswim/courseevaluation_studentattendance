@@ -3,11 +3,9 @@
 <head lang="en">
 
     <title>Register Student</title>
-
     <!-- Header -->
-    <div th:replace="base :: header"></div>
+    <th:block th:replace="base :: header"></th:block>
     <!-- /.Header -->
-
 </head>
 <body>
     <!--Navigation Admin-->
@@ -34,7 +32,7 @@
                 <p> <h4> Last Name  </h4> <input type="text" th:field="*{lastName}" placeholder="Last Name"/></p>
                 <div th:if="${#fields.hasErrors('lastName')}"  th:errors="*{lastName}"
                      class="well alert alert-warning" role="alert"></div>
-                <p> <h4> Email  </h4> <input type="text" th:field="*{email}" placeholder="Email"/></p>
+                <p> <h4> Email  </h4> <input type="email" th:field="*{email}" placeholder="Email"/></p>
                 <div th:if="${#fields.hasErrors('email')}"  th:errors="*{email}"
                      class="well alert alert-warning" role="alert"></div>
                 <p> <h4> Start Date  </h4> <input type="text" th:field="*{startDate}"/></p>

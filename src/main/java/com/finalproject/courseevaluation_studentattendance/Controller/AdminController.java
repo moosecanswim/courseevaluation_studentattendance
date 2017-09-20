@@ -11,14 +11,24 @@ import com.finalproject.courseevaluation_studentattendance.Repositories.RoleRepo
 import com.finalproject.courseevaluation_studentattendance.Services.CommunicationService;
 import com.finalproject.courseevaluation_studentattendance.Services.CourseService;
 import com.finalproject.courseevaluation_studentattendance.Services.PersonService;
+import com.google.common.collect.Lists;
+import it.ozimov.springboot.mail.model.Email;
+import it.ozimov.springboot.mail.model.EmailAttachment;
+import it.ozimov.springboot.mail.model.defaultimpl.DefaultEmail;
+import it.ozimov.springboot.mail.model.defaultimpl.DefaultEmailAttachment;
+import it.ozimov.springboot.mail.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import com.finalproject.courseevaluation_studentattendance.Model.Communication;
 
+import javax.mail.internet.InternetAddress;
 import javax.validation.Valid;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -44,13 +54,15 @@ public class AdminController {
     @Autowired
     CourseRepository courseRepo;
 
+
     @Autowired
     EvaluationRepository evaluationRepo;
     @Autowired
     RoleRepository roleRepository;
     @Autowired
     CommunicationService communicationService;
-
+    @Autowired
+    public EmailService emailService;
 
 
 
@@ -246,7 +258,7 @@ public class AdminController {
 
 
     // ===   Remove Course from the list of courses
-    @RequestMapping("removecourse/{id}") //Course id
+    @RequestMapping("/removecourse/{id}") //Course id
     public String removeCourse (@PathVariable("id")long id, Model model){
 
         Course course = courseRepo.findOne(id);
@@ -255,7 +267,11 @@ public class AdminController {
 
         courseService.removeCourse(course);
 
-        return "redirect:/admin/home"; //" + courseToGoTo;
+        String message= "<h2>You have successfully remove the course.</h2>";
+
+        model.addAttribute("message", message);
+
+        return "adminpages/removecourseconfirmation"; //" + courseToGoTo;
     }
 
 
@@ -275,12 +291,18 @@ public class AdminController {
         courseService.removeStudentFromCourse(course, student);
 
         String courseIDString = Long.toString(courseid);
-        return "redirect:/admin/admincoursedetails/" + courseIDString;
+
+        String message= "<h2>You have successfully remove the student from the course.</h2>";
+
+
+//        String link = "<a th:href=\"@{/teacher/listallstudents/{courseId}(courseId=course.id)}\">Back to student's list</a>";
+
+        model.addAttribute("message", message);
+
+        model.addAttribute("courseId", courseid);
+
+        return "adminpages/removepersonconfirmation";
     }
-
-
-
-
 
 
     // ===   See the List of All People
@@ -512,26 +534,100 @@ public class AdminController {
     }
 
 
-    // admin create new person
-//    @GetMapping("/addperson")
-//    public String addPerson(Model model)
-//    {
-//        model.addAttribute("person", new Person());
-//        return "adminpages/adminaddperson";
-//    }
-//
-//    // Validate entered information and if it is valid display the result
-//    // Person must have first name, last name, and email address
-//    @PostMapping("/addperson")
-//    public String postPerson(@ModelAttribute("person") Person person)
-//    {
-//        personRepo.save(person);
-//        return"redirect:/admin/home";
-//    }
+//     admin create new Student
+    @GetMapping("/addperson")
+    public String addPerson(Model model)
+    {
+        model.addAttribute("person", new Person());
+        return "adminpages/adminaddperson";
+    }
+
+    // Validate entered information and if it is valid display the result
+    // Person must have first name, last name, and email address
+    @PostMapping("/addperson")
+    public String postPerson(@Valid @ModelAttribute("person") Person person, BindingResult bindingResult)
+    {
+        if(bindingResult.hasErrors())
+        {
+            return "adminpages/adminaddperson";
+        }
+
+        personService.create(person);
+        return"redirect:/admin/home";
+    }
 
 
 
+    @GetMapping("/sendevaluation/{id}")
+    public String emailEvaluation(@PathVariable("id") long id, Model model) throws UnsupportedEncodingException {
+        Course course=courseRepo.findOne(id);
+        Iterable<Evaluation>thiscrseval=course.getEvaluations();
+        System.out.println("test after save End date");
+        sendEmailWithoutTemplating(thiscrseval);
+        return "redirect:/teacher/listallcourses/";
 
+    }
+
+    public void sendEmailWithoutTemplating(Iterable<Evaluation>evaluations) throws UnsupportedEncodingException {
+        System.out.println("test before email");
+        Evaluation eval=new Evaluation();
+        Person admin=new Person();
+        System.out.println();
+        for (Evaluation neval:evaluations) {
+            eval=neval;
+            System.out.println("Courssssssssssssss"+eval.getCourseEvaluation().toString());
+        }
+        PersonRole nrole=roleRepository.findByRoleName("ADMIN");
+        Iterable<Person>persons=nrole.getPeople();
+        for (Person np:persons)
+        {
+            admin=np;
+            System.out.println("Admin name-----------"+np.getFirstName()+np.getLastName());
+            System.out.println("Admin Roles"+np.getPersonRoles().toString());
+        }
+        String adminemail=String.valueOf(admin.getEmail());
+        System.out.println("emailllllllllllll"+adminemail);
+            System.out.println(eval.getContent());
+            final Email email = DefaultEmail.builder()
+                    .from(new InternetAddress("mahifentaye@gmail.com", "Evaluation INFO"))
+                    .to(Lists.newArrayList(new InternetAddress(adminemail, "admin")))
+                    .subject("Evaluation for" + eval.getCourseEvaluation())
+                    .body("Evaluation for "+eval.getCourseEvaluation()+ " has been attached.")
+                    .attachment(getCsvEvaluationAttachment("Evaluation", evaluations))
+                    .encoding("UTF-8").build();
+            System.out.println("test it");
+            emailService.send(email);
+
+    }
+    private EmailAttachment getCsvEvaluationAttachment(String filename, Iterable<Evaluation>evaluations) {
+
+        String testData = "Course Content"+","+"Instruction Quality"+","+"Training Experience"+","+"Textbooks or Handouts"+","+
+                "Environment and Seating"+","+"Computer Equipment"+","+"Likes"+","+"Dislikes"+","+"Suggegstions"+","+"Other classes"+","+
+                "How did you find about this class"+"\n";
+
+        for(Evaluation eval:evaluations) {
+            String content = eval.getContent();
+            String quality = eval.getQuality();
+            String experience = eval.getExperience();
+            String textbook = eval.getMaterials();
+            String environment = eval.getEnvironment();
+            String equipment = eval.getEquipment();
+            String likes = eval.getLikes();
+            String dislikes = eval.getDislikes();
+            String suggestion = eval.getSuggestions();
+            String otherclass = eval.getOtherClass();
+            String hearaboutclass=eval.getFindings();
+
+            testData += content + "," + quality + "," + experience + "," + textbook + "," + environment + "," + equipment
+                    + "," + likes + "," + dislikes + "," + suggestion + "," + otherclass + ","+hearaboutclass+"\n";
+        }
+        DefaultEmailAttachment attachment = DefaultEmailAttachment.builder()
+                .attachmentName(filename + ".csv")
+                .attachmentData(testData.getBytes(Charset.forName("UTF-8")))
+                .mediaType(MediaType.TEXT_PLAIN).build();
+
+        return attachment;
+    }
 
 
 }

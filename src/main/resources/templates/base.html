@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
       <!--xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">-->
-<head lang="en">
-
+<head>
+    <title>Montgomery College Database</title>
 </head>
 <body>
 
-<title>Montgomery College Database</title>
 
 
 <!-- Header -->
-<div th:fragment="header">
+<th:block th:fragment="header">
+
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -26,7 +27,7 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 
-</div>
+</th:block>
 <!-- /.Header -->
 
 
@@ -37,12 +38,13 @@
     <nav class="navbar navbar-inverse fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">Courses DB</a>
+                <a class="navbar-brand" href="https://github.com/moosecanswim/courseevaluation_studentattendance.git">Courses DB</a>
             </div>
             <ul class="nav navbar-nav">
 
                 <li><a href="/">Welcome</a></li>
                 <li class="active"><a href="/admin/home">Admin Home</a></li>
+
 
                 <!--Communication dropdown-->
                 <li class="dropdown">
@@ -90,12 +92,14 @@
     <nav class="navbar navbar-inverse fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">Courses DB</a>
+                <a class="navbar-brand" href="https://github.com/moosecanswim/courseevaluation_studentattendance.git">Courses DB</a>
             </div>
 
             <ul class="nav navbar-nav">
                 <li><a href="/">Welcome</a></li>
                 <li class="active"><a href="/teacher/home">Teacher Home</a></li>
+                <li><a href="/teacher/listallcourses">List of my course</a></li>
+
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
@@ -115,13 +119,13 @@
     <nav class="navbar navbar-inverse fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">Courses DB</a>
+                <a class="navbar-brand" href="https://github.com/moosecanswim/courseevaluation_studentattendance.git">Courses DB</a>
             </div>
 
             <ul class="nav navbar-nav">
                 <li class="active"><a href="/">Welcome</a></li>
                 <li><a href="/viewcourses">View Courses</a></li>
-                <li><a href="/eval/home">Evaluate a Course</a></li>
+                <li><a href="/eval/searchcourse">Evaluate a Course</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
@@ -140,7 +144,7 @@
     <nav class="navbar navbar-inverse fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">Courses DB</a>
+                <a class="navbar-brand" href="https://github.com/moosecanswim/courseevaluation_studentattendance.git">Courses DB</a>
             </div>
 
             <ul class="nav navbar-nav">
@@ -161,13 +165,13 @@
     <nav class="navbar navbar-inverse fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">Courses DB</a>
+                <a class="navbar-brand" href="https://github.com/moosecanswim/courseevaluation_studentattendance.git">Courses DB</a>
             </div>
 
             <ul class="nav navbar-nav">
                 <li class="active"><a href="/">Welcome</a></li>
                 <li><a href="/viewcourses">View Courses</a></li>
-                <li><a href="/eval/home">Evaluate a Course</a></li>
+                <li><a href="/eval/searchcourse">Evaluate a Course</a></li>
             </ul>
         </div>
     </nav>

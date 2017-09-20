@@ -3,9 +3,8 @@
 <head lang="en">
 
     <title>Course Info</title>
-
     <!-- Header -->
-    <div th:replace="base :: header"></div>
+    <th:block th:replace="base :: header"></th:block>
     <!-- /.Header -->
 
 </head>
@@ -16,15 +15,31 @@
     <!--/.Navigation Admin-->
 
     <div class="container">
+        <!--warning messages to apear-->
+        <div  th:if="${courseInstructor==null}">
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <div class="panel-title">No Teacher Assigned to this class!</div>
+                    <div class="panel-body">
+                        <p><a th:href="@{/admin/addinstructortocourse/{id}(id=${course.id})}">Asign Teacher to class</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
         <h2 th:inline="text">Course information for: [[${course.courseName}]] (crn:[[${course.crn}]])</h2>
         <!--If the Instructor is not assigned to the course yet, this div will display Instructor: null null:-->
-        <h3 th:text="'Instructor: ' + ${courseInstructor.firstName} + ' ' +${courseInstructor.lastName}"></h3>
+
+
+        <h3 th:text="'Instructor: ' + ${courseInstructor?.firstName} + ' ' +${courseInstructor?.lastName}"></h3>
 
         <p th:text="'Course ID: ' + ${course.id}"/>
         <p th:text="'Course CRN: ' + ${course.crn}"/>
         <p th:text="'Course Name: '+ ${course.courseName}" />
-        <p th:text="'Start Date: '+ ${course.startDate}" />
-        <p th:text="'End Date: '+ ${course.endDate}" />
+        <p th:text="'Start Date: '+ ${{course.startDate}}" />
+        <p th:text="'End Date: '+ ${{course.endDate}}" />
         <p th:text="'Completion Status: '+ ${course.status}" />
         <hr />
 
@@ -44,12 +59,18 @@
 
         <!--Display message if there is no registered ctudents for the course:-->
         <div  th:if="${courseStudents.isEmpty()}">
-            <h4>No students have registered yet.</h4>
-            <p><a th:href="@{/admin/registerstudentforcourse/{id}(id=${course.id})}">Register Student</a></p>
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <div class="panel-title">No Students Have Registered Course!</div>
+                    <div class="panel-body">
+                        <p><a th:href="@{/admin/registerstudentforcourse/{id}(id=${course.id})}">Register Student</a></p>
+                    </div>
+                </div>
+            </div>
         </div>
 
-
-        <table class="table table-striped" border="1">
+        <h3>List of All Students Registered for the course: </h3>
+        <table class="table table-striped">
             <tr>
                 <td><strong>ID</strong></td>
                 <td><strong>M Number</strong></td>
@@ -84,7 +105,7 @@
 
         <p><a th:href="@{/admin/registerstudentforcourse/{id}(id=${course.id})}">Register Student</a></p>
 
-        //
+
     </div>
 
     <!-- Footer -->

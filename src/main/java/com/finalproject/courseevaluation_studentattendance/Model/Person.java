@@ -1,6 +1,7 @@
 package com.finalproject.courseevaluation_studentattendance.Model;
 
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -28,6 +29,7 @@ public class Person {
 
     private String password;
     @NotEmpty
+    @Email
     private String email;
 
     @DateTimeFormat(pattern = "MM/dd/yyyy")

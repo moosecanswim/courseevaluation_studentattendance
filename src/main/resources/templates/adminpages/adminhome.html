@@ -3,9 +3,8 @@
 <head lang="en">
 
     <title>Admin Home</title>
-
     <!-- Header -->
-    <div th:replace="base :: header"></div>
+    <th:block th:replace="base :: header"></th:block>
     <!-- /.Header -->
 
 </head>
@@ -43,7 +42,8 @@
                     <td>
                         <!--<a th:href="@{/admin/viewcourseevaluations/{id}(id=${course.id})}">View Evaluations</a>-->
 
-                        <a th:href="@{/admin/admineval/{id}(id=${course.id})}">View Evaluations</a>
+                        <a th:href="@{/admin/admineval/{id}(id=${course.id})}">View Evaluations</a>  or
+                        <a th:href="@{/admin/sendevaluation/{id}(id=${course.id})}">Email Evaluations</a>
                     </td>
                     <td>
                         <a th:href="@{/admin/updatecourse/{id}(id=${course.id})}">Update</a>
@@ -56,11 +56,11 @@
 
 
 
-        <p>any notifications ("email" from the submit attendance from the teacher)</p>
+        <!--<p>any notifications ("email" from the submit attendance from the teacher)</p>-->
 
 
         <!--Create a new person-->
-        <div><a href="/admin/addperson">Add A Student / Teacher</a></div>
+        <div><a href="/admin/addperson">Add a Student</a></div>
     </div>
 
     <!-- Footer -->

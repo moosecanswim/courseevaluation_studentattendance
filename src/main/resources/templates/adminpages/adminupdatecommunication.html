@@ -5,7 +5,7 @@
     <title>Edit Communication</title>
 
     <!-- Header -->
-    <div th:replace="base :: header"></div>
+    <th:block th:replace="base :: header"></th:block>
     <!-- /.Header -->
 
 </head>
@@ -50,11 +50,12 @@
             </fieldset>
         </form>
     </div>
+
+
+    <!-- Footer -->
+    <div th:replace="base :: footer"></div>
+    <!-- /.Footer -->
+
+
 </body>
-
-
-<!-- Footer -->
-<div th:replace="base :: footer"></div>
-<!-- /.Footer -->
-
 </html>

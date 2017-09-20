@@ -1,16 +1,14 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
 
     <title>New Teacher</title>
-
     <!-- Header -->
-    <div th:replace="base :: header"></div>
+    <th:block th:replace="base :: header"></th:block>
     <!-- /.Header -->
-
-
 </head>
 <body>
+
 
 <!--Navigation Default-->
 <nav th:replace="base :: nav2Default"></nav>
@@ -35,7 +33,7 @@
         <p> <h4> Username  </h4> <input type="text" th:field="*{username}"/></p>
         <div th:if="${#fields.hasErrors('username')}"  th:errors="*{username}"
              class="well alert alert-warning" role="alert"></div>
-        <p> <h4> Password  </h4> <input type="text" th:field="*{password}"/></p>
+        <p> <h4> Password  </h4> <input type="password" th:field="*{password}"/></p>
         <div th:if="${#fields.hasErrors('password')}"  th:errors="*{password}"
              class="well alert alert-warning" role="alert"></div>
         <p> <h4> Email  </h4> <input type="email" th:field="*{email}"/></p>

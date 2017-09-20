@@ -3,9 +3,8 @@
 <head lang="en">
 
     <title>New Person</title>
-
     <!-- Header -->
-    <div th:replace="base :: header"></div>
+    <th:block th:replace="base :: header"></th:block>
     <!-- /.Header -->
 
 </head>
@@ -15,7 +14,7 @@
     <!--/.Navigation Admin-->
     <div class="container">
         <form action="#"
-              th:action="@{/addperson}"
+              th:action="@{/admin/addperson}"
               th:object="${person}"
               method="post" >
             <legend>Add Person</legend>
@@ -27,7 +26,7 @@
                      class="well alert alert-warning" role="alert"></div>
                 <p><h4>First Name</h4> <input type="text" th:field="*{firstName}"/></p>
                 <div th:if="${#fields.hasErrors('firstName')}"  th:errors="*{firstName}"
-                     class="well alert alert-warning" role="alert"></div>
+                class="well alert alert-warning" role="alert"></div>
                 <p> <h4> Last Name  </h4> <input type="text" th:field="*{lastName}"/></p>
                 <div th:if="${#fields.hasErrors('lastName')}"  th:errors="*{lastName}"
                      class="well alert alert-warning" role="alert"></div>
