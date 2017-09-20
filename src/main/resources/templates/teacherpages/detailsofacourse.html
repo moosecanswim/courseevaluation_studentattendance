@@ -33,7 +33,7 @@
             <a th:href="@{/teacher/courseend/{id}(id=${course.id})}">Course has Ended</a>
             -
             <a th:href="@{/teacher/displayallevalsofonecourse/{id}(id=${course.id})}">See Course Evaluations</a>
-                -
+            -
             <a th:href="@{/teacher/attforonecourse/{id}(id=${course.id})}">See Attendance Record</a>
 
         </div>
@@ -42,9 +42,17 @@
 
         <h2>List of students who registered for the course: </h2>
 
+
+        <!--warning message panel if student list is empty-->
         <div  th:if="${studentsofACourse.isEmpty()}">
-            <p>No students Are taking the class!</p>
-            <p><a th:href="@{/teacher/addstudentstocourse/{id}(id=${course.id})}">Register students for the course</a></p>
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <div class="panel-title">No Students Taking Course!</div>
+                    <div class="panel-body">
+                        <p><a th:href="@{/teacher/addstudentstocourse/{id}(id=${course.id})}">Register students for the course</a></p>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div  th:if="${!studentsofACourse.isEmpty()}">
