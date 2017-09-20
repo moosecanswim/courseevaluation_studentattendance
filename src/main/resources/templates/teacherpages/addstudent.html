@@ -30,7 +30,7 @@
         <p> <h4> Last Name  </h4> <input type="text" th:field="*{lastName}"/></p>
         <div th:if="${#fields.hasErrors('lastName')}"  th:errors="*{lastName}"
              class="well alert alert-warning" role="alert"></div>
-        <p> <h4> Email  </h4> <input type="email" th:field="*{email}"/></p>
+        <p> <h4> Email  </h4> <input type="text" th:field="*{email}"/></p>
         <div th:if="${#fields.hasErrors('email')}"  th:errors="*{email}"
              class="well alert alert-warning" role="alert"></div>
 
