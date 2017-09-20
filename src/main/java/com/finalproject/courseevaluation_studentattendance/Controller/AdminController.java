@@ -258,7 +258,7 @@ public class AdminController {
 
 
     // ===   Remove Course from the list of courses
-    @RequestMapping("removecourse/{id}") //Course id
+    @RequestMapping("/removecourse/{id}") //Course id
     public String removeCourse (@PathVariable("id")long id, Model model){
 
         Course course = courseRepo.findOne(id);
@@ -267,7 +267,11 @@ public class AdminController {
 
         courseService.removeCourse(course);
 
-        return "redirect:/admin/home"; //" + courseToGoTo;
+        String message= "<h2>You have successfully remove the course.</h2>";
+
+        model.addAttribute("message", message);
+
+        return "adminpages/removecourseconfirmation"; //" + courseToGoTo;
     }
 
 
@@ -287,11 +291,18 @@ public class AdminController {
         courseService.removeStudentFromCourse(course, student);
 
         String courseIDString = Long.toString(courseid);
-        return "redirect:/admin/admincoursedetails/" + courseIDString;
+
+        String message= "<h2>You have successfully remove teh student from the course.</h2>";
+
+
+//        String link = "<a th:href=\"@{/teacher/listallstudents/{courseId}(courseId=course.id)}\">Back to student's list</a>";
+
+        model.addAttribute("message", message);
+
+        model.addAttribute("courseId", courseid);
+
+        return "adminpages/removepersonconfirmation";
     }
-
-
-
 
 
 

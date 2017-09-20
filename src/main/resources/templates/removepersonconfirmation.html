@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>Details of a course info</title>
+    <!-- Header -->
+    <th:block th:replace="base :: header"></th:block>
+    <!-- /.Header -->
+</head>
+<body>
+<!--Navigation Teacher-->
+<nav th:replace="base :: nav2Admin"></nav>
+<!--/.Navigation Teacher-->
+<div class="container">
+
+
+<p th:utext="${message}"/>
+
+<p><a th:href="@{|/admin/admincoursedetails/${courseId}|}"> Back to course detail</a></p>
+
+</div>
+<!-- Footer -->
+<div th:replace="base :: footer"></div>
+<!-- /.Footer -->
+</body>
+</html>
+</body>
+</html>
