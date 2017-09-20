@@ -15,8 +15,10 @@
 <!--/.Navigation Student-->
 
 <div class="container">
-    <h1>View Courses (insecure)</h1>
-    <table  class="table table-striped" border="1">
+    <h1>View All Courses in Montgomery College</h1>
+    <!--<table  class="table table-striped" border="1">-->
+
+    <table  class="table table-striped">
         <tr>
             <th>Id</th>
             <th>CRN</th>
@@ -30,8 +32,8 @@
             <td th:text="*{course.id}"></td>
             <td th:text="*{course.crn}"></td>
             <td th:text="*{course.courseName}"></td>
-            <td th:text="*{course.startDate}"></td>
-            <td th:text="*{course.endDate}"></td>
+            <td th:text="*{{course.startDate}}"></td>
+            <td th:text="*{{course.endDate}}"></td>
             <td th:text="*{course.status}"></td>
             <!--<td>-->
                 <!--<a th:href="@{/teacher/detailsofacourse/{id} (id=*{course.id})}">Register for class</a>-->
