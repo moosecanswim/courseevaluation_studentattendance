@@ -16,40 +16,67 @@
 <!--/.Navigation Student-->
 
 <div class="container">
+    <h1>Evaluate a Course</h1>
+    <div>
+        <br/>
+    </div>
     <div  th:if="${searcheval.isEmpty()}">
         <br/>
         <h2>No matching course found!</h2>
 
         <h3>Search Again:</h3>
-            <div>
-                <form  th:action="@{/eval/searchcourse}"  method="post">
-
-                    <p>Enter CRN Number: <input required type="number" name="crnfield" placeholder="Course CRN"/></p>
-
-                    <p><input type="submit" value="Search By CRN" /> <input type="reset" value="Reset" /> </p>
-
-                </form>
-            </div>
+        <div>
+            <form  th:action="@{/eval/searchcourse}"  method="post">
+                <div class="container">
+                    <h4>You need to provide a Course Registration Number(CRN) to fill out Evaluation</h4><br/>
+                    <!--<p>Enter CRN Number: <input required type="number" name="crnfield" placeholder="Course CRN"/></p>-->
+                    <div class="form-group">
+                        <p>Enter CRN Number: <input required type="number" name="crnfield" class="form-control input-lg" placeholder="Course CRN" tabindex="3"/></p>
+                    </div>
+                    <!--<div class="form-group">-->
+                    <!--<input type="text" th:field="*{crn}" name="crn" id="crn" class="form-control input-lg" placeholder="Course CRN" tabindex="3">-->
+                    <!--</div>-->
+                    <p><input type="submit" value="Search By CRN" /><input type="reset" value="Reset" /></p>
+                </div>
+            </form>
+        </div>
 
     </div>
 
 
     <div  th:if="${!searcheval.isEmpty()}">
 
+        <h3>Search Again:</h3>
+        <div>
+            <form  th:action="@{/eval/searchcourse}"  method="post">
+                <div class="container">
+                    <h4>You need to provide a Course Registration Number(CRN) to fill out Evaluation</h4><br/>
+                    <!--<p>Enter CRN Number: <input required type="number" name="crnfield" placeholder="Course CRN"/></p>-->
+                    <div class="form-group">
+                        <p>Enter CRN Number: <input required type="number" name="crnfield" class="form-control input-lg" placeholder="Course CRN" tabindex="3"/></p>
+                    </div>
+                    <!--<div class="form-group">-->
+                    <!--<input type="text" th:field="*{crn}" name="crn" id="crn" class="form-control input-lg" placeholder="Course CRN" tabindex="3">-->
+                    <!--</div>-->
+                    <p><input type="submit" value="Search By CRN" /><input type="reset" value="Reset" /></p>
+                </div>
+            </form>
+        </div>
         <table class="table table-striped" border="1">
             <tr>
                 <td><b>CRN</b></td>
                 <td><b>Course Name</b></td>
                 <td><b>Start Date</b></td>
                 <td><b>End Date</b></td>
+                <td><b>Evaluate</b></td>
             </tr>
 
             <th:block th:each="item:${searcheval}">
                 <tr>
                     <td th:text="${item.crn}"></td>
                     <td th:text="${item.courseName}"></td>
-                    <td th:text="${item.startDate}"></td>
-                    <td th:text="${item.endDate}"></td>
+                    <td th:text="${{item.startDate}}"></td>
+                    <td th:text="${{item.endDate}}"></td>
                     <td>
                         <a th:href="@{/eval/evaluationentry/{id}(id=${item.id})}">Evaluate this course</a>
                     </td>

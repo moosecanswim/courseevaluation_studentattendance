@@ -16,10 +16,35 @@
 <!--/.Navigation Student-->
 
 <div class="container">
+    <h1>Evaluate a Course</h1>
+    <div>
+        <br/>
+        <br/>
+    </div>
+    <div class="container">
+        <form>
+        <h3>Section I:Course Information</h3>
+        <div>
+            <br/>
+        </div>
+        <h4>
+            1.Course Registration Number CRN# : <input type="text" th:field="*{course.crn}" th:disabled="true"/><br/>
+            <br/>
+            2.Course Name: <input type="text" th:field="*{course.courseName}" th:disabled="true"/><br/>
+            <br/>
+            3.Course StartDate: <input type="text" th:field="*{{course.startDate}}" th:disabled="true"/><br/>
+            <br/>
+        </h4>
+        <hr/>
+        </form>
+    </div>
 <form th:action="@{/eval/evaluationentry/{courseId} (courseId=${courseId})}" th:object="${neweval}" method="post" >
     <!--<input type="hidden" th:field="*{id}">-->
 
-
+    <h3>Section II:Rate the Course</h3>
+    <div>
+        <br/>
+    </div>
     1. How would you rate the course content? <br />&nbsp;&nbsp;
     <label><input type="radio" th:name="content" id="select5" value="Excellent" checked />Excellent</label>&nbsp;&nbsp;&nbsp;&nbsp;
     <label><input type="radio" th:name="content" id="select5" value="Above Average" />Above Average</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -76,8 +101,11 @@
     <br /><br />
     <div th:if="${#fields.hasErrors('equipment')}"  th:errors="*{equipment}"
          class="well alert alert-warning" role="alert"></div>
-
-
+<hr/>
+    <h3>Section III:Comments</h3>
+    <div>
+        <br/>
+    </div>
     1. What did you like about the class? <br />
     <textarea name='likes' id='comment11' cols=50 rows=3 onBlur="validate_length('coursesurvey', 'comment9', 500, 'Section III 1. Comment');"></textarea> <br><br>
 
@@ -89,7 +117,11 @@
 
     4.  What other classes would you like to see offered?<br />
     <textarea name='otherClass' id='comment14' cols=50 rows=3 onBlur="validate_length('coursesurvey', 'comment12', 500, 'Section III 4. Comment');"></textarea> <br><br>
-
+    <hr/>
+    <h3>Section IV:Optional</h3>
+    <div>
+        <br/>
+    </div>
     <p>1. How did you find out about the class? <br />
         <label><input type="radio" name="findings" id="select15" value="Internet">Internet / Website </label>&nbsp;&nbsp;&nbsp;&nbsp;
         <label><input type="radio" name="findings" id="select15" value="Brochure">Brochure - ITI schedule of classes </label><br>

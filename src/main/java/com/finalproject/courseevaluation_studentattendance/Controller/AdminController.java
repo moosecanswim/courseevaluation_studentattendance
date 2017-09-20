@@ -190,6 +190,7 @@ public class AdminController {
 //        Person courseInstructor = thiscourse.getInstructor();
 
         model.addAttribute("evals",thiscourseevaluation);
+        model.addAttribute("course",thiscourse);
 //        model.addAttribute("course",thiscourse);
 //        model.addAttribute("courseInstructor",courseInstructor);
         return"/adminpages/admineval";

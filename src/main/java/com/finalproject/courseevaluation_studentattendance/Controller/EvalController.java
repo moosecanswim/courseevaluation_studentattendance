@@ -2,6 +2,7 @@ package com.finalproject.courseevaluation_studentattendance.Controller;
 
 import com.finalproject.courseevaluation_studentattendance.Model.Course;
 import com.finalproject.courseevaluation_studentattendance.Model.Evaluation;
+import com.finalproject.courseevaluation_studentattendance.Model.Person;
 import com.finalproject.courseevaluation_studentattendance.Repositories.CourseRepository;
 import com.finalproject.courseevaluation_studentattendance.Repositories.EvaluationRepository;
 import com.finalproject.courseevaluation_studentattendance.Services.CourseService;
@@ -48,12 +49,16 @@ public class EvalController {
     public String getEvaluation(@PathVariable("courseid") long id,  Model model) {
 
         Evaluation ev =  new Evaluation();
+        Course course=courseRepository.findOne(id);
+        Person inst=course.getInstructor();
         ev.setCourseEvaluation(courseRepository.findOne(id));
 
         System.out.println("Course Id is: "+ id);
 
         model.addAttribute("courseId",id);
         model.addAttribute("neweval", ev);
+        model.addAttribute("course",course);
+        model.addAttribute("instructor",inst);
 
         return "evalpages/evaluationentry";
 
