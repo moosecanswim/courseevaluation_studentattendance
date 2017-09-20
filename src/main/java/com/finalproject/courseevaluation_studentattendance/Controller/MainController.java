@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 public class MainController {
@@ -40,8 +41,25 @@ public class MainController {
     public String login(){
         return "login";
     }
+    @RequestMapping("/processlogin")
+    public String processLogin(Principal p){
+        //could have an issue when passing the roles in a string or if someone is assigned both roles
+        System.out.println("the principal is " +p.getName());
+        Person tempP = personService.findByUsername(p.getName());
 
-
+        if(personService.personHasRole(tempP,"ADMIN")){
+            //send them to the admin home
+            System.out.println("Going to admin home");
+            return "redirect:/admin/home";
+        }
+        else if(personService.personHasRole(tempP,"TEACHER")){
+            //send them to teacher home
+            System.out.println("Going to teacher home");
+            return "redirect:/teacher/home";
+        }
+        System.out.println("Error, going home home");
+        return "redirect:/";
+    }
 
 
     // ========== Teacher Registration FORM ==========
@@ -50,6 +68,7 @@ public class MainController {
         model.addAttribute("newTeacher", new Person());
         return "registerteacher";
     }
+
     @RequestMapping(value="/registrationteacher", method = RequestMethod.POST)
     public String processRegistrationSeekerPage (@Valid @ModelAttribute("newTeacher") Person person,
                                                  BindingResult result, Model model)

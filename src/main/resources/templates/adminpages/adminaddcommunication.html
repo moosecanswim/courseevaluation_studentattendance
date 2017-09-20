@@ -25,24 +25,32 @@
                 <legend>Communication Form</legend>
                 <!--//hidden id-->
                 <input type="hidden" th:field="*{id}">
+                <table>
                 <!--//mNumber input-->
-                M#: <input th:field="*{mNumber}" placeholder="M-Number">
+                    <tr>
+                        <td>   M#:</td><td> <input th:field="*{mNumber}" placeholder="M-Number"></td>
+                    </tr>
+                    <tr>
+                        <td> Name:</td><td> <input th:field="*{name}" placeholder="Contact Name"> </td>
+                    </tr>
+                    <tr>
+                        <td> Phone #: </td> <td><input th:field="*{phoneNumber}" placeholder="Phone Number ex(xxxyyzzzz)"></td>
+                    </tr>
+                    <tr>
+                        <td>  Email:</td> <td><input th:field="*{email}" placeholder="Email"></td>
+                    </tr>
+                </table>
 
-                Name: <input th:field="*{name}" placeholder="Contact Name">
-
-                Phone #: <input th:field="*{phoneNumber}" placeholder="Phone Number ex(xxxyyzzzz)">
-
-                Email: <input th:field="*{email}" placeholder="Email">
-
-                Course:
-                <select th:field="*{courseInterestedCRN}">
+                <p>   Course:</p>
+            <p> <select th:field="*{courseInterestedCRN}">
                     <option value="">--select a course--</option>
                     <option th:each="course: ${courseList}"
                             th:value="${course.crn}"
                             th:text="${course.courseName}">
                     </option>
-                </select>
-                Call Details: <textarea th:field="*{callDetails}" col="50" row="4"></textarea>
+               </select></p>
+                <p>  Call Details: </p>
+                <p><textarea th:field="*{callDetails}" col="50" row="4"></textarea></p>
                 <input type="submit" value="Submit call/email"></select>
 
             </fieldset>

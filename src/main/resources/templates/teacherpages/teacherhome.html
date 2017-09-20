@@ -26,7 +26,8 @@
         <br/>
         <br/>
 
-        <h3>My profile</h3>
+        <h2>My profile</h2>
+        <br/>
 
         <!--<p th:text="'Instructor Id: ' + ${instructor.id}"></p>-->
         <p th:text="'MNumber: ' + ${instructor.mNumber}"></p>
@@ -36,6 +37,37 @@
 
         <!--<p>My Courses links</p>-->
         <!--<p><a href="/teacher/listallcourses">All my courses</a></p>-->
+    </div>
+
+    <div class="container">
+
+        <div  th:if="${!allcoursesofaInstructor.isEmpty()}">
+
+            <h2>List of Courses</h2>
+            <br/>
+            <table class="table table-striped" border="1">
+                <tr>
+                    <th>Course Id</th>
+                    <th>Course Name</th>
+                    <th>Course Crn</th>
+                    <th>Active</th>
+                </tr>
+                <tr th:each="item:${allcoursesofaInstructor}">
+                    <td th:text="${item.id}"/>
+                    <td><a th:href="@{/teacher/detailsofacourse/{id} (id=${item.id})}" th:inline="text">[[${item.courseName}]]</a></td>
+                    <td th:text="${item.crn}"/>
+                    <td th:text="${item.status}"/>
+                </tr>
+            </table>
+
+        </div>
+
+        <div  th:if="${allcoursesofaInstructor.isEmpty()}">
+            <h2>List of Courses</h2>
+            <br/>
+            <h3>You are not assigned to teach any course yet.</h3>
+        </div>
+
     </div>
 
     <!-- Footer -->
