@@ -3,9 +3,8 @@
 <head lang="en">
 
     <title>New Person</title>
-
     <!-- Header -->
-    <div th:replace="base :: header"></div>
+    <th:block th:replace="base :: header"></th:block>
     <!-- /.Header -->
 
 </head>
@@ -15,7 +14,7 @@
     <!--/.Navigation Admin-->
     <div class="container">
         <form action="#"
-              th:action="@{/addperson}"
+              th:action="@{/admin/addperson}"
               th:object="${person}"
               method="post" >
             <legend>Add Person</legend>
