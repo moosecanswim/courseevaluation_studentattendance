@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-      <!--xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">-->
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+      <!--xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"-->
+
 <head>
     <title>Montgomery College Database</title>
 </head>
@@ -106,6 +108,7 @@
                 <!--TOdo: display here the logged teacher username (add dependency for security 4 in pom file)-->
                 <!--<li>Logged user: <span sec:authentication="name">The job seeker is not logged in yet</span></li>-->
                 <!--<li style="float: right"><a href="/logout">Logout</a></li>-->
+                <li><h6>Logged user: <span sec:authentication="name">The Teacher is not logged in yet</span></h6></li>
                 <li><a href="/logout">Logout</a></li>
             </ul>
         </div>
