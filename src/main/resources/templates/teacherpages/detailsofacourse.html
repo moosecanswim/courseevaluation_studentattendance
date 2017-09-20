@@ -16,7 +16,7 @@
         <h2 th:inline="text">Course information for: [[${course.courseName}]] (crn:[[${course.crn}]])</h2>
         <!--If the Instructor is not assigned to the course yet, this div will display Instructor: null null:-->
         <h3 th:text="'Instructor: ' + ${courseInstructor.firstName} + ' ' +${courseInstructor.lastName}"></h3>
-        <p><a th:href="@{/teacher/listallcourses}">Back to my course</a></p>
+        <!--<p><a th:href="@{/teacher/listallcourses}">Back to my course</a></p>-->
 
         <br />
 
