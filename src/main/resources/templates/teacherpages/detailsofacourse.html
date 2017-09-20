@@ -18,12 +18,12 @@
 
     <div class="container">
 
-        <h2 th:inline="text">Course information for: [[${course.courseName}]] (crn:[[${course.crn}]])</h2>
+        <h2 th:inline="text">Course information for: [[${course.courseName}]] (CRN:[[${course.crn}]])</h2>
         <!--If the Instructor is not assigned to the course yet, this div will display Instructor: null null:-->
         <!--<h3 th:text="'Instructor: ' + ${courseInstructor.firstName} + ' ' +${courseInstructor.lastName}"></h3>-->
         <!--<p><a th:href="@{/teacher/listallcourses}">Back to my course</a></p>-->
-        <hr/>
 
+        <hr/>
         <div class="center">
             <!--<a th:href="@{/teacher/addstudentstocourse/{id}(id=${course.id})}">Register students for the course</a>-->
             <!-- - -->
@@ -33,7 +33,6 @@
             <!--<a th:href="@{/teacher/attforonecourse/{id}(id=${course.id})}">See Attendance Record</a>-->
             -
             <a th:href="@{/teacher/addstudentstocourse/{id}(id=${course.id})}">Register students for the course</a>
-
         </div>
         <hr />
 
@@ -47,69 +46,69 @@
         <div/>
         <br/>
         <br/>
-        </div>
+    </div>
 
-        <h2>List of students who registered for the course: </h2>
+    <h2>List of students who registered for the course: </h2>
 
-        <hr/>
-        <div class="center">
-            <a th:href="@{/teacher/markattendance/{courseId}(courseId=${course.id})}">Mark Attendance</a>
-            -
-            <a th:href="@{/teacher/attforonecourse/{id}(id=${course.id})}">See Attendance Record</a>
-            -
-            <a th:href="@{/teacher/listallstudents/{courseId}/(courseId=${course.id})}">See and validate students</a>
+    <hr/>
+    <div class="center">
+        <a th:href="@{/teacher/markattendance/{courseId}(courseId=${course.id})}">Mark Attendance</a>
+        -
+        <a th:href="@{/teacher/attforonecourse/{id}(id=${course.id})}">See Attendance Record</a>
+        -
+        <a th:href="@{/teacher/listallstudents/{courseId}/(courseId=${course.id})}">See and validate students</a>
 
-        </div>
-        <hr/>
+    </div>
+    <hr/>
 
-        <!--warning message panel if student list is empty-->
-        <div  th:if="${studentsofACourse.isEmpty()}">
-            <div class="panel panel-warning">
-                <div class="panel-heading">
-                    <div class="panel-title">No Students Taking Course!</div>
-                    <div class="panel-body">
-                        <p><a th:href="@{/teacher/addstudentstocourse/{id}(id=${course.id})}">Register students for the course</a></p>
-                    </div>
+    <!--warning message panel if student list is empty-->
+    <div  th:if="${studentsofACourse.isEmpty()}">
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <div class="panel-title">No Students Taking Course!</div>
+                <div class="panel-body">
+                    <p><a th:href="@{/teacher/addstudentstocourse/{id}(id=${course.id})}">Register students for the course</a></p>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div  th:if="${!studentsofACourse.isEmpty()}">
+    <div  th:if="${!studentsofACourse.isEmpty()}">
 
 
-            <table class="table table-striped" border="1">
-                <tr>
-                    <!--<td><strong>ID</strong></td>-->
-                    <td><strong>M Number</strong></td>
-                    <td><strong>First Name</strong></td>
-                    <td><strong>Last Name</strong></td>
-                    <td><strong>Email Address</strong></td>
-                    <td><strong>Start Date</strong></td>
-                    <td><strong>Student Status</strong></td>
-                    <td><strong>Action</strong></td>
-                </tr>
-                <!--iterate through all the students for this course-->
+        <table class="table table-striped" border="1">
+            <tr>
+                <!--<td><strong>ID</strong></td>-->
+                <td><strong>M Number</strong></td>
+                <td><strong>First Name</strong></td>
+                <td><strong>Last Name</strong></td>
+                <td><strong>Email Address</strong></td>
+                <td><strong>Start Date</strong></td>
+                <td><strong>Student Status</strong></td>
+                <td><strong>Action</strong></td>
+            </tr>
+            <!--iterate through all the students for this course-->
 
-                <tr th:each="alls:${studentsofACourse}">
-                    <!--<td th:text="${alls.id}"></td>-->
-                    <td th:text="${alls.mNumber}"></td>
-                    <td th:text="${alls.firstName}"></td>
-                    <td th:text="${alls.lastName}"></td>
-                    <td th:text="${alls.email}"></td>
-                    <td th:text="${{alls.startDate}}"></td>
-                    <td th:text="${alls.active}"></td>
-                    <td>
-                        <a th:href="@{/teacher/delete/{courseId}/{studentId}(courseId=${course.id}, studentId=${alls.id})}">Remove</a>
+            <tr th:each="alls:${studentsofACourse}">
+                <!--<td th:text="${alls.id}"></td>-->
+                <td th:text="${alls.mNumber}"></td>
+                <td th:text="${alls.firstName}"></td>
+                <td th:text="${alls.lastName}"></td>
+                <td th:text="${alls.email}"></td>
+                <td th:text="${{alls.startDate}}"></td>
+                <td th:text="${alls.active}"></td>
+                <td>
+                    <a th:href="@{/teacher/delete/{courseId}/{studentId}(courseId=${course.id}, studentId=${alls.id})}">Remove</a>
 
-                        <!--<a th:href="@{/admin/course/{courseid}/removestudentfromcourse/{studentid}(studentid=${alls.id},courseid=${course.id})}">Remove</a>-->
-                    </td>
-                </tr>
-            </table>
-        </div>
+                    <!--<a th:href="@{/admin/course/{courseid}/removestudentfromcourse/{studentid}(studentid=${alls.id},courseid=${course.id})}">Remove</a>-->
+                </td>
+            </tr>
+        </table>
+    </div>
 
-        <br/>
+    <br/>
 
-        <!--<p><a th:href="@{/teacher/displayoneeval/{id}(id=${course.id})}"> see evaluation</a></p>-->
+    <!--<p><a th:href="@{/teacher/displayoneeval/{id}(id=${course.id})}"> see evaluation</a></p>-->
 
 
 

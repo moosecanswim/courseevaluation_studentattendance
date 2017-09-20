@@ -29,9 +29,18 @@
 
 
 
-        <h2 th:inline="text">Course information for: [[${course.courseName}]] (crn:[[${course.crn}]])</h2>
+        <h2 th:inline="text">Course information for: [[${course.courseName}]] (CRN: [[${course.crn}]])</h2>
         <!--If the Instructor is not assigned to the course yet, this div will display Instructor: null null:-->
+        <hr />
 
+        <div class="center">
+            <p>
+                <a th:href="@{/admin/admineval/{id}(id=${course.id})}">See Course Evaluations</a>
+                -
+                <a th:href="@{/admin/addinstructortocourse/{id}(id=${course.id})}">Assign Instructor</a>
+            </p>
+        </div>
+        <hr />
 
         <h3 th:text="'Instructor: ' + ${courseInstructor?.firstName} + ' ' +${courseInstructor?.lastName}"></h3>
 
@@ -41,22 +50,18 @@
         <p th:text="'Start Date: '+ ${{course.startDate}}" />
         <p th:text="'End Date: '+ ${{course.endDate}}" />
         <p th:text="'Completion Status: '+ ${course.status}" />
-        <hr />
 
+
+        <br>
+        <br>
+        <h3>List of All Students Registered for the course: </h3>
+        <hr />
         <div class="center">
             <p>
-                <a th:href="@{/admin/registerstudentforcourse/{id}(id=${course.id})}">Register Student</a>
-                -
-                <a th:href="@{/admin/admineval/{id}(id=${course.id})}">View Evaluations</a>
-                -
-                <a th:href="@{/admin/addinstructortocourse/{id}(id=${course.id})}">Assign Instructor</a>
+                <a th:href="@{/admin/registerstudentforcourse/{id}(id=${course.id})}">Register students for the course</a>
             </p>
         </div>
         <hr />
-
-
-        <h3>List of All Students Registered for the course: </h3>
-
         <!--Display message if there is no registered ctudents for the course:-->
         <div  th:if="${courseStudents.isEmpty()}">
             <div class="panel panel-warning">
@@ -69,7 +74,7 @@
             </div>
         </div>
 
-        <h3>List of All Students Registered for the course: </h3>
+        <!--<h3>List of All Students Registered for the course: </h3>-->
         <table class="table table-striped">
             <tr>
                 <td><strong>ID</strong></td>
@@ -100,10 +105,10 @@
                 </td>
             </tr>
         </table>
-        <hr />
+        <!--<hr />-->
 
 
-        <p><a th:href="@{/admin/registerstudentforcourse/{id}(id=${course.id})}">Register Student</a></p>
+        <!--<p><a th:href="@{/admin/registerstudentforcourse/{id}(id=${course.id})}">Register Student</a></p>-->
 
 
     </div>
