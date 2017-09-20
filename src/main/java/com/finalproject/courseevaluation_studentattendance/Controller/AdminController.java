@@ -11,14 +11,24 @@ import com.finalproject.courseevaluation_studentattendance.Repositories.RoleRepo
 import com.finalproject.courseevaluation_studentattendance.Services.CommunicationService;
 import com.finalproject.courseevaluation_studentattendance.Services.CourseService;
 import com.finalproject.courseevaluation_studentattendance.Services.PersonService;
+import com.google.common.collect.Lists;
+import it.ozimov.springboot.mail.model.Email;
+import it.ozimov.springboot.mail.model.EmailAttachment;
+import it.ozimov.springboot.mail.model.defaultimpl.DefaultEmail;
+import it.ozimov.springboot.mail.model.defaultimpl.DefaultEmailAttachment;
+import it.ozimov.springboot.mail.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import com.finalproject.courseevaluation_studentattendance.Model.Communication;
 
+import javax.mail.internet.InternetAddress;
 import javax.validation.Valid;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -43,6 +53,7 @@ public class AdminController {
 
     @Autowired
     CourseRepository courseRepo;
+
 
     @Autowired
     EvaluationRepository evaluationRepo;
@@ -531,7 +542,61 @@ public class AdminController {
 
 
 
+    @GetMapping("/sendevaluation/{id}")
+    public String emailEvaluation(@PathVariable("id") long id, Model model) throws UnsupportedEncodingException {
+        Course course=courseRepo.findOne(id);
+        Iterable<Evaluation>thiscrseval=course.getEvaluations();
+        System.out.println("test after save End date");
+        sendEmailWithoutTemplating(thiscrseval);
+        return "redirect:/teacher/listallcourses/";
 
+    }
+    @Autowired
+    public EmailService emailService;
+    public void sendEmailWithoutTemplating(Iterable<Evaluation>evaluations) throws UnsupportedEncodingException {
+        System.out.println("test before email");
+        for (Evaluation eval:evaluations) {
+            System.out.println(eval.getContent());
+            final Email email = DefaultEmail.builder()
+                    .from(new InternetAddress("mahifentaye@gmail.com", "Evaluation INFO"))
+                    .to(Lists.newArrayList(new InternetAddress("mymahder@gmail.com", "admin")))
+                    .subject("Evaluation for" + eval.getCourseEvaluation())
+                    .body("Evaluation for this class has been attached.")
+                    .attachment(getCsvEvaluationAttachment("Evaluation", evaluations))
+                    .encoding("UTF-8").build();
+            System.out.println("test it");
+            emailService.send(email);
+        }
+    }
+    private EmailAttachment getCsvEvaluationAttachment(String filename, Iterable<Evaluation>evaluations) {
+
+        String testData = "Course Content"+","+"Instruction Qyality"+","+"Training Experience"+","+"Textbooks or Handouts"+","+
+                "Environment and Seating"+","+"Computer Equipment"+","+"Likes"+","+"Dislikes"+","+"Suggegstions"+","+"Other classes"+","+
+                "How did you find about this class"+"\n";
+
+        for(Evaluation eval:evaluations) {
+            String content = eval.getContent();
+            String quality = eval.getQuality();
+            String experience = eval.getExperience();
+            String textbook = eval.getMaterials();
+            String environment = eval.getEnvironment();
+            String equipment = eval.getEquipment();
+            String likes = eval.getLikes();
+            String dislikes = eval.getDislikes();
+            String suggestion = eval.getSuggestions();
+            String otherclass = eval.getOtherClass();
+            String hearaboutclass=eval.getFindings();
+
+            testData += content + "," + quality + "," + experience + "," + textbook + "," + environment + "," + equipment
+                    + "," + likes + "," + dislikes + "," + suggestion + "," + otherclass + ","+hearaboutclass+"\n";
+        }
+        DefaultEmailAttachment attachment = DefaultEmailAttachment.builder()
+                .attachmentName(filename + ".csv")
+                .attachmentData(testData.getBytes(Charset.forName("UTF-8")))
+                .mediaType(MediaType.TEXT_PLAIN).build();
+
+        return attachment;
+    }
 
 
 }

@@ -423,7 +423,7 @@ public class TeacherController {
         final Email email= DefaultEmail.builder()
                 .from(new InternetAddress("mahifentaye@gmail.com", "Attendance INFO"))
                 .to(Lists.newArrayList(new InternetAddress("mymahder@gmail.com","admin")))
-                .subject("Testing Email")
+                .subject("Attendance for" + course.getCourseName())
                 .body("Course Closed.  Attendance for the class has been attached.")
                 .attachment(getCsvAttendanceAttachment("Attendance",course))
                 .encoding("UTF-8").build();
