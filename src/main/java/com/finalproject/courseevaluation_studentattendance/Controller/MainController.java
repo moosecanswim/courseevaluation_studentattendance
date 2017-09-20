@@ -62,14 +62,13 @@ public class MainController {
     }
 
 
-
-
     // ========== Teacher Registration FORM ==========
     @RequestMapping(value="/registrationteacher", method = RequestMethod.GET)
     public String showRegistrationTeacherPage (Model model){
         model.addAttribute("newTeacher", new Person());
         return "registerteacher";
     }
+
     @RequestMapping(value="/registrationteacher", method = RequestMethod.POST)
     public String processRegistrationSeekerPage (@Valid @ModelAttribute("newTeacher") Person person,
                                                  BindingResult result, Model model)

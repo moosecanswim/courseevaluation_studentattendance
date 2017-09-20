@@ -76,8 +76,11 @@ public class TeacherController {
     public String teacherHome(Principal p, Model model)
     {
         model.addAttribute("instructor", personRepository.findByUsername(p.getName()));
+        model.addAttribute("allcoursesofaInstructor",personRepository.findByUsername(p.getName()).getCourseInstructor() );
         return "teacherpages/teacherhome";
     }
+
+
 
     //just for testing until security/login option is added
 //    public String teacherHometest(Model model)
@@ -89,7 +92,6 @@ public class TeacherController {
     //this route can be combine with the teacherhome page later
     @GetMapping("/listallcourses")
     public String listCourse(Principal p, Model model)
-//    public String listCourse(Model model)
     {
         Person instructor = personRepository.findByUsername(p.getName());
 
@@ -99,7 +101,6 @@ public class TeacherController {
 
         return "teacherpages/listallcourses";
     }
-
 
     //list course info and all students/mark attendance
     @GetMapping("/detailsofacourse/{id}")
