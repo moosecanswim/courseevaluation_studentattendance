@@ -6,6 +6,7 @@ import com.finalproject.courseevaluation_studentattendance.Repositories.*;
 import com.finalproject.courseevaluation_studentattendance.Services.CourseService;
 import com.finalproject.courseevaluation_studentattendance.Services.EvaluationService;
 import com.finalproject.courseevaluation_studentattendance.Services.PersonService;
+import com.finalproject.courseevaluation_studentattendance.Services.RoleService;
 import com.google.common.collect.Lists;
 import it.ozimov.springboot.mail.model.Email;
 import it.ozimov.springboot.mail.model.EmailAttachment;
@@ -53,7 +54,8 @@ public class TeacherController {
 
     @Autowired
     PersonRepository personRepo;
-
+    @Autowired
+    RoleService roleService;
     @Autowired
     PersonService personService;
 
@@ -178,22 +180,22 @@ public class TeacherController {
 //                System.out.println("here2222211");
             }
 
-                Attendance attnew = new Attendance();
-                attnew.setDate(attdate);
-                System.out.println("printing status" + attendanceStatus[i]);
-                attnew.setStatus(attendanceStatus[i]);
-                System.out.println("set stautus doone----");
-                i += 1;
-                attnew.setPersonAttendance(student);
-                student.addAttendance(attnew);
-                System.out.println("!!!!!!-----add att to student");
-                attnew.setAttendanceCourse(currentCourse);
-                attendanceRepository.save(attnew);
+            Attendance attnew = new Attendance();
+            attnew.setDate(attdate);
+            System.out.println("printing status" + attendanceStatus[i]);
+            attnew.setStatus(attendanceStatus[i]);
+            System.out.println("set stautus doone----");
+            i += 1;
+            attnew.setPersonAttendance(student);
+            student.addAttendance(attnew);
+            System.out.println("!!!!!!-----add att to student");
+            attnew.setAttendanceCourse(currentCourse);
+            attendanceRepository.save(attnew);
 
-                System.out.println("newset-------");
+            System.out.println("newset-------");
 
-                // problem is here is empty
-                System.out.println("!!!!!!!!"+student.getAttendances().toString());
+            // problem is here is empty
+            System.out.println("!!!!!!!!"+student.getAttendances().toString());
 
         }
 
@@ -272,9 +274,9 @@ public class TeacherController {
 
     @PostMapping("/update/{courseId}/{studentId}")
     public String updateMnumberstudent(@PathVariable("courseId") Long courseId,
-                                               @PathVariable("studentId") Long studentId,
-                                               @RequestParam(value="newMId") String newMId,
-                                               Model model) {
+                                       @PathVariable("studentId") Long studentId,
+                                       @RequestParam(value="newMId") String newMId,
+                                       Model model) {
 
         Course currentCourse = courseRepository.findOne(courseId);
         Person currentStudent= personRepository.findOne(studentId);
@@ -338,8 +340,8 @@ public class TeacherController {
 
     @RequestMapping("/searchstudent/{courseId}")
     public String findstudents(@PathVariable("courseId") Long courseId, @RequestParam(value = "searchBy") String searchBy, @RequestParam(value ="fname", required=false) String fname,
-                    @RequestParam(value ="lname", required=false) String lname, @RequestParam(value ="email", required=false) String email,
-                    Model model)
+                               @RequestParam(value ="lname", required=false) String lname, @RequestParam(value ="email", required=false) String email,
+                               Model model)
     {
 
         Course currentCourse = courseRepository.findOne(courseId);
@@ -396,41 +398,42 @@ public class TeacherController {
         }
     }
 
-   @GetMapping("/addstudentstocourse/{id}")
-   public String getCourse(@PathVariable("id")Long id, Model model)
-   {
+    @GetMapping("/addstudentstocourse/{id}")
+    public String getCourse(@PathVariable("id")Long id, Model model)
+    {
 
-       Date now= new Date();
+        Date now= new Date();
 
-       Person student = new Person();
+        Person student = new Person();
 
-       student.setStartDate(now);
+        student.setStartDate(now);
 
-       System.out.println(student.getStartDate());
+        System.out.println(student.getStartDate());
 
-       model.addAttribute("course", courseRepository.findOne(id));
+        model.addAttribute("course", courseRepository.findOne(id));
 
-       model.addAttribute("newstudent", student);
+        model.addAttribute("newstudent", student);
 
-       return "teacherpages/addstudent";
-   }
+        return "teacherpages/addstudent";
+    }
 
 
-   @PostMapping("/addstudent/{id}")
+    @PostMapping("/addstudent/{id}")
     public String postCourse(@Valid @PathVariable("id") Long id, @ModelAttribute("newstudent") Person student, BindingResult bindingResult,Model model)
-   {
+    {
         if(bindingResult.hasErrors())
         {
             return "teacherpages/addstudent";
         }
-       Course c =  courseRepository.findOne(id);
-       student.setCourseStudent(c);
-       personRepository.save(student);
-       model.addAttribute("course", c);
-       model.addAttribute("newstudent", student);
+        Course c =  courseRepository.findOne(id);
+        student.setCourseStudent(c);
+        student.addRole(roleService.findByRoleName("DEFAULT"));
+        personRepository.save(student);
+        model.addAttribute("course", c);
+        model.addAttribute("newstudent", student);
 
-       return "teacherpages/confirmstudent";
-   }
+        return "teacherpages/confirmstudent";
+    }
 
     //the method to send email
     //it sends email need to make the body
@@ -480,7 +483,7 @@ public class TeacherController {
         for (Attendance att : onestu.getAttendances())
         {
 
-           testData += att.getDate().toString() + ",";
+            testData += att.getDate().toString() + ",";
         }
 
 
@@ -503,7 +506,7 @@ public class TeacherController {
             testData += "\n";
         }
 
-         DefaultEmailAttachment attachment = DefaultEmailAttachment.builder()
+        DefaultEmailAttachment attachment = DefaultEmailAttachment.builder()
                 .attachmentName(filename + ".csv")
                 .attachmentData(testData.getBytes(Charset.forName("UTF-8")))
                 .mediaType(MediaType.TEXT_PLAIN).build();
