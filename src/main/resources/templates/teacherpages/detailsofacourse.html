@@ -17,6 +17,7 @@
         <!--If the Instructor is not assigned to the course yet, this div will display Instructor: null null:-->
         <h3 th:text="'Instructor: ' + ${courseInstructor.firstName} + ' ' +${courseInstructor.lastName}"></h3>
         <p><a th:href="@{/teacher/listallcourses}">Back to my course</a></p>
+
         <br />
 
         <p th:text="'Course ID: ' + ${course.id}"/>
@@ -82,7 +83,7 @@
                     <td th:text="${{alls.startDate}}"></td>
                     <td th:text="${alls.active}"></td>
                     <td>
-                        <a th:href="@{/admin/removestudentfromcourse/{courseid}/{studentid}(courseid=${course.id}, studentid=${alls.id})}">Remove</a>
+                        <a th:href="@{/delete/{courseId}/{studentId}(courseId=${course.id}, studentId=${alls.id})}">Remove</a>
 
                         <!--<a th:href="@{/admin/course/{courseid}/removestudentfromcourse/{studentid}(studentid=${alls.id},courseid=${course.id})}">Remove</a>-->
                     </td>
