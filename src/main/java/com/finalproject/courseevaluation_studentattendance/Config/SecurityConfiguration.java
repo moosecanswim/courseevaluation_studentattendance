@@ -1,8 +1,10 @@
 package com.finalproject.courseevaluation_studentattendance.Config;
 
 
+import com.finalproject.courseevaluation_studentattendance.Repositories.EvaluationRepository;
 import com.finalproject.courseevaluation_studentattendance.Repositories.PersonRepository;
 import com.finalproject.courseevaluation_studentattendance.Services.SSPersonDetailsService;
+import org.omg.CORBA.PRIVATE_MEMBER;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -19,6 +21,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
 
+    @Autowired
+    private EvaluationRepository evaluationRepository;
     @Autowired
     private SSPersonDetailsService personService;
     @Autowired
@@ -52,7 +56,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("ADMIN").password("password").roles("ADMIN");
+//        auth.inMemoryAuthentication().withUser("ADMIN").password("password").roles("ADMIN");
         auth.userDetailsService(userDetailsServiceBean());
     }
 }

@@ -1,19 +1,11 @@
 package com.finalproject.courseevaluation_studentattendance.Controller;
 
-import com.finalproject.courseevaluation_studentattendance.Model.Attendance;
 import com.finalproject.courseevaluation_studentattendance.Model.Course;
 import com.finalproject.courseevaluation_studentattendance.Model.Evaluation;
-import com.finalproject.courseevaluation_studentattendance.Model.Person;
 import com.finalproject.courseevaluation_studentattendance.Repositories.CourseRepository;
 import com.finalproject.courseevaluation_studentattendance.Repositories.EvaluationRepository;
 import com.finalproject.courseevaluation_studentattendance.Services.CourseService;
 import com.finalproject.courseevaluation_studentattendance.Services.EvaluationService;
-import com.google.common.collect.Lists;
-import it.ozimov.springboot.mail.model.Email;
-import it.ozimov.springboot.mail.model.EmailAttachment;
-import it.ozimov.springboot.mail.model.defaultimpl.DefaultEmail;
-import it.ozimov.springboot.mail.model.defaultimpl.DefaultEmailAttachment;
-import it.ozimov.springboot.mail.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -27,6 +19,7 @@ import javax.websocket.server.PathParam;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.util.Date;
+
 
 @Controller
 @RequestMapping("/eval")
@@ -105,6 +98,9 @@ public class EvalController {
     //return "evalpages/searchresult";
        return "evalpages/searchcourse";
     }
+
+
+
 
 
 }
