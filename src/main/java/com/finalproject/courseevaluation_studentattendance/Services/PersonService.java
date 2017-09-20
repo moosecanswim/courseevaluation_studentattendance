@@ -2,6 +2,7 @@ package com.finalproject.courseevaluation_studentattendance.Services;
 
 import com.finalproject.courseevaluation_studentattendance.Model.Course;
 import com.finalproject.courseevaluation_studentattendance.Model.Person;
+import com.finalproject.courseevaluation_studentattendance.Model.PersonRole;
 import com.finalproject.courseevaluation_studentattendance.Repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,15 @@ public class PersonService {
         this.personRepo=personRepository;
     }
 
+    public Person findByUsername(String username){
+        Person exPerson = personRepo.findByUsername(username);
+        if(exPerson == null){
+           throw new RuntimeException("username: " + username + " does not exist in personRepository");
+        }
+        else{
+            return exPerson;
+        }
+    }
 
     public Person findById(long id){
         return personRepo.findOne(id);
@@ -49,6 +59,7 @@ public class PersonService {
         personRepo.save(existingPerson);
 
     }
+
 
     //create a person that does not exist in the database.
     //assigns a default username if it is blank or null
@@ -80,14 +91,23 @@ public class PersonService {
     }
 
 
-//    public void addStudentToCourse(Person per, Course course)
-//    {
-//
-//       per.addCourse(course);
-//       personRepo.save(per);
-//
-//    }
+    //check to see if a person has a role
+    public Boolean personHasRole(Person aPerson, String aRoleName){
+        Boolean output = false;
 
+        Person ePerson = personRepo.findOne(aPerson.getId());
+        if(ePerson == null){
+            throw new RuntimeException("person does not exist in person repository");
+        }
+        PersonRole eRole = roleRepo.findByRoleName(aRoleName);
+        if(eRole == null){
+            throw new RuntimeException("Role " + aRoleName + "does not exist in role repository");
+        }
+        if(ePerson.getPersonRoles().contains(eRole)){
+            output = true;
+        }
+        return output;
+    }
 
 
 

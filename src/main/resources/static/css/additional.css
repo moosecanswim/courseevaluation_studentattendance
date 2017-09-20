@@ -110,11 +110,4 @@ footer {
     padding-bottom:60px;   /* Height of the footer */
 }
 
-/*can add another clear div*/
-/*to make footer not overlapping the page content*/
-/*.clear {*/
-    /*clear: both;*/
-    /*height: 60px; }*/
-
-/*<div class="clear"></div>*/
 

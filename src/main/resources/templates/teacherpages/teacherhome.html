@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 
     <title>Teacher Home Page</title>
@@ -13,7 +14,10 @@
     <!--Navigation Teacher-->
     <nav th:replace="base :: nav2Teacher"></nav>
     <!--/.Navigation Teacher-->
-
+    <!--style="right-justified"-->
+    <div calass="loggeduser">
+         <h6>Logged user: <span sec:authentication="name">The Teacher is not logged in yet</span></h6></li>
+    </div>
     <div class="container">
         <h1>Teacher Home Page</h1>
 
@@ -31,7 +35,6 @@
 
         <!--<p>My Courses links</p>-->
         <!--<p><a href="/teacher/listallcourses">All my courses</a></p>-->
-
     </div>
 
     <div class="container">
