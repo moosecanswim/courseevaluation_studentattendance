@@ -1,17 +1,31 @@
 package com.finalproject.courseevaluation_studentattendance.Controller;
 
+import com.finalproject.courseevaluation_studentattendance.Model.Attendance;
 import com.finalproject.courseevaluation_studentattendance.Model.Course;
 import com.finalproject.courseevaluation_studentattendance.Model.Evaluation;
+import com.finalproject.courseevaluation_studentattendance.Model.Person;
 import com.finalproject.courseevaluation_studentattendance.Repositories.CourseRepository;
 import com.finalproject.courseevaluation_studentattendance.Repositories.EvaluationRepository;
 import com.finalproject.courseevaluation_studentattendance.Services.CourseService;
 import com.finalproject.courseevaluation_studentattendance.Services.EvaluationService;
+import com.google.common.collect.Lists;
+import it.ozimov.springboot.mail.model.Email;
+import it.ozimov.springboot.mail.model.EmailAttachment;
+import it.ozimov.springboot.mail.model.defaultimpl.DefaultEmail;
+import it.ozimov.springboot.mail.model.defaultimpl.DefaultEmailAttachment;
+import it.ozimov.springboot.mail.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.internet.InternetAddress;
+import javax.validation.Valid;
 import javax.websocket.server.PathParam;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.util.Date;
 
 @Controller
@@ -53,8 +67,12 @@ public class EvalController {
     }
 
     @PostMapping("/evaluationentry/{courseId}")
-    public String entrypost(@ModelAttribute("neweval") Evaluation eval,@PathVariable("courseId")long courseId, Model model)
+    public String entrypost(@Valid @ModelAttribute("neweval") Evaluation eval, @PathVariable("courseId")long courseId, BindingResult bindingResult,Model model)
     {
+        if(bindingResult.hasErrors())
+        {
+            return "evalpages/evaluationentry";
+        }
         Course cr=courseRepository.findOne(courseId);
         evaluationService.addEvalToCourse(eval,cr);
         return "evalpages/confirmeval";
@@ -69,15 +87,23 @@ public class EvalController {
     }
 
     @PostMapping("/searchcourse")
-    public String searchCoursePost(@RequestParam("crnfield")long crn, Model model,Course course )
+//    public String searchCoursePost(@Valid @RequestParam("crnfield")long crn, Course course,BindingResult bindingResult,Model model )
+    public String searchCoursePost(@RequestParam("crnfield")Long crn, Model model )
     {
+//        if(bindingResult.hasErrors())
+//        {
+//            return "evalpages/evaluationentry";
+//        }
+        if(crn==null){
+            return "evalpages/searchcourse";
+        }
+
         model.addAttribute("searcheval", courseRepository.findAllByCrn(crn));
 
 
     //return "evalpages/searchresult";
        return "evalpages/searchcourse";
     }
-
 
 
 }

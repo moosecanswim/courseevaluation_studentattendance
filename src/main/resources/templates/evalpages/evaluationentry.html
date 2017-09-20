@@ -5,7 +5,7 @@
     <title>Evaluation</title>
 
     <!-- Header -->
-    <div th:replace="base :: header"></div>
+    <th:block th:replace="base :: header"></th:block>
     <!-- /.Header -->
 
 </head>
@@ -18,7 +18,7 @@
 <div class="container">
 <form th:action="@{/eval/evaluationentry/{courseId} (courseId=${courseId})}" th:object="${neweval}" method="post" >
     <!--<input type="hidden" th:field="*{id}">-->
-<p><h4>1. How would you rate the course content? </h4></p>
+
 
     1. How would you rate the course content? <br />&nbsp;&nbsp;
     <label><input type="radio" th:name="content" id="select5" value="Excellent" />Excellent</label>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -27,6 +27,8 @@
     <label><input type="radio" th:name="content" id="select5" value="Fair" />Fair</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <label><input type="radio" th:name="content" id="select5" value="Poor" />Poor</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <br /><br />
+    <div th:if="${#fields.hasErrors('content')}"  th:errors="*{content}"
+         class="well alert alert-warning" role="alert"></div>
 
     2. How would you rate the quality of instruction?<br />&nbsp;&nbsp;
     <label><input type="radio" name="quality" id="select6" value="Excellent" />Excellent</label>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -35,7 +37,8 @@
     <label><input type="radio" name="quality" id="select6" value="Fair" />Fair</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <label><input type="radio" name="quality" id="select6" value="Poor" />Poor</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <br /><br />
-
+    <div th:if="${#fields.hasErrors('quality')}"  th:errors="*{quality}"
+         class="well alert alert-warning" role="alert"></div>
     3. How would you rate your overall training experience?<br />&nbsp;&nbsp;
     <label><input type="radio" name="experience" id="select7" value="Excellent" />Excellent</label>&nbsp;&nbsp;&nbsp;&nbsp;
     <label><input type="radio" name="experience" id="select7" value="Above Average" />Above Average</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -43,7 +46,8 @@
     <label><input type="radio" name="experience" id="select7" value="Fair" />Fair</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <label><input type="radio" name="experience" id="select7" value="Poor" />Poor</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <br /><br />
-
+    <div th:if="${#fields.hasErrors('experience')}"  th:errors="*{experience}"
+         class="well alert alert-warning" role="alert"></div>
     4. How would you rate the textbook or handouts? <br />&nbsp;&nbsp;
     <label><input type="radio" name="materials" id="select8" value="Excellent" />Excellent</label>&nbsp;&nbsp;&nbsp;&nbsp;
     <label><input type="radio" name="materials" id="select8" value="Above Average" />Above Average</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -51,7 +55,8 @@
     <label><input type="radio" name="materials" id="select8" value="Fair" />Fair</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <label><input type="radio" name="materials" id="select8" value="Poor" />Poor</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <br /><br />
-
+    <div th:if="${#fields.hasErrors('materials')}"  th:errors="*{materials}"
+         class="well alert alert-warning" role="alert"></div>
     5. How would you rate the classroom environment and seating? <br />&nbsp;&nbsp;
     <label><input type="radio" name="environment" id="select9" value="Excellent" />Excellent</label>&nbsp;&nbsp;&nbsp;&nbsp;
     <label><input type="radio" name="environment" id="select9" value="Above Average" />Above Average</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -59,6 +64,8 @@
     <label><input type="radio" name="environment" id="select9" value="Fair" />Fair</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <label><input type="radio" name="environment" id="select9" value="Poor" />Poor</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <br /><br />
+    <div th:if="${#fields.hasErrors('environment')}"  th:errors="*{environment}"
+         class="well alert alert-warning" role="alert"></div>
 
     6. How would you rate the classroom computer equipment? <br />&nbsp;&nbsp;
     <label><input type="radio" name="equipment" id="select10" value="Excellent" />Excellent</label>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -67,7 +74,8 @@
     <label><input type="radio" name="equipment" id="select10" value="Fair" />Fair</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <label><input type="radio" name="equipment" id="select10" value="Poor" />Poor</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <br /><br />
-
+    <div th:if="${#fields.hasErrors('equipment')}"  th:errors="*{equipment}"
+         class="well alert alert-warning" role="alert"></div>
 
 
     1. What did you like about the class? <br />

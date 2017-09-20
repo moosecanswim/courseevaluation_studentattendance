@@ -69,6 +69,9 @@ public class TeacherController {
     @Autowired
     EvaluationService evaluationService;
 
+    @Autowired
+    public EmailService emailService;
+
     @RequestMapping("/home")
 //    public String teacherHome(Principal p, Model model)
 //    {
@@ -246,7 +249,8 @@ public class TeacherController {
         model.addAttribute("student", currentStudent);
         model.addAttribute("course", currentCourse);
 
-        return "teacherpages/updateMform";
+        return "teacherpages/" +
+                "teMform";
     }
 
 
@@ -440,15 +444,14 @@ public class TeacherController {
     }
 
 
-    @Autowired
-    public EmailService emailService;
+
     public void sendEmailWithoutTemplating(Course course) throws UnsupportedEncodingException {
         System.out.println("test before email");
         System.out.println(course.getCourseName());
         final Email email= DefaultEmail.builder()
                 .from(new InternetAddress("mahifentaye@gmail.com", "Attendance INFO"))
                 .to(Lists.newArrayList(new InternetAddress("mymahder@gmail.com","admin")))
-                .subject("Testing Email")
+                .subject("Attendance for" + course.getCourseName())
                 .body("Course Closed.  Attendance for the class has been attached.")
                 .attachment(getCsvAttendanceAttachment("Attendance",course))
                 .encoding("UTF-8").build();

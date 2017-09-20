@@ -2,45 +2,45 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
 
-    <title>Title??</title>
+    <title>Title????</title>
 
-    <!-- Header -->
-    <div th:replace="base :: header"></div>
-    <!-- /.Header -->
+    <!--&lt;!&ndash; Header &ndash;&gt;-->
+    <!--<th:block th:replace="base :: header"></th:block>-->
+    <!--&lt;!&ndash; /.Header &ndash;&gt;-->
 
 </head>
 <body>
 
-<!--Navigation Student-->
-<nav th:replace="base :: nav2Student"></nav>
-<!--/.Navigation Student-->
+<!--&lt;!&ndash;Navigation Student&ndash;&gt;-->
+<!--<nav th:replace="base :: nav2Student"></nav>-->
+<!--&lt;!&ndash;/.Navigation Student&ndash;&gt;-->
 
-<div class="container">
-    <table>
-        <tr>
-            <th>CRN</th>
-            <th>Course Name</th>
-            <th>Start Date</th>
-            <th>End Date</th>
-
-
-        </tr>
-
-        <tr th:each="item : ${crn}">
-            <td th:text="${item.crn}"></td>
-            <td th:text="${item.courseName}"></td>
-            <td th:text="${item.startDate}"></td>
-            <td th:text="${item.endDate}"></td>
+<!--<div class="container">-->
+    <!--<table>-->
+        <!--<tr>-->
+            <!--<th>CRN</th>-->
+            <!--<th>Course Name</th>-->
+            <!--<th>Start Date</th>-->
+            <!--<th>End Date</th>-->
 
 
+        <!--</tr>-->
 
-        </tr>
+        <!--<tr th:each="item : ${crn}">-->
+            <!--<td th:text="${item.crn}"></td>-->
+            <!--<td th:text="${item.courseName}"></td>-->
+            <!--<td th:text="${item.startDate}"></td>-->
+            <!--<td th:text="${item.endDate}"></td>-->
 
-    </table>
-</div>
-<!-- Footer -->
-<div th:replace="base :: footer"></div>
-<!-- /.Footer -->
+
+
+        <!--</tr>-->
+
+    <!--</table>-->
+<!--</div>-->
+<!--&lt;!&ndash; Footer &ndash;&gt;-->
+<!--<div th:replace="base :: footer"></div>-->
+<!--&lt;!&ndash; /.Footer &ndash;&gt;-->
 
 </body>
 </html>

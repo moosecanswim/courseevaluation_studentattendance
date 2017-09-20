@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+
     <title>All Evaluations</title>
     <!-- Header -->
-    <div th:replace="base :: header"></div>
+    <th:block th:replace="base :: header"></th:block>
     <!-- /.Header -->
 </head>
 <body>
@@ -29,13 +29,13 @@
             <!--iterate through all the evaluations for this course-->
             <th:block th:each="eval:${neweval}">
                 <tr>
-                    <td><a th:text="${eval.id}"></a></td>
-                    <td><a th:text="${eval.content}"></a></td>
-                    <td><a th:text="${eval.quality}"></a></td>
-                    <td><a th:text="${eval.experience}"></a></td>
-                    <td><a th:text="${eval.materials}"></a></td>
-                    <td><a th:text="${eval.environment}"></a></td>
-                    <td><a th:text="${eval.equipment}"></a></td>
+                    <td th:text="${eval.id}"></td>
+                    <td th:text="${eval.content}"></td>
+                    <td th:text="${eval.quality}"></td>
+                    <td th:text="${eval.experience}"></td>
+                    <td th:text="${eval.materials}"></td>
+                    <td th:text="${eval.environment}"></td>
+                    <td th:text="${eval.equipment}"></td>
                 </tr>
             </th:block>
         </table>
@@ -56,11 +56,11 @@
             <!--iterate through all the evaluations for this course-->
             <th:block th:each="eval:${neweval}">
                 <tr>
-                    <td><a th:text="${eval.id}"></a></td>
-                    <td><a th:text="${eval.likes}"></a></td>
-                    <td><a th:text="${eval.dislikes}"></a></td>
-                    <td><a th:text="${eval.suggestions}"></a></td>
-                    <td><a th:text="${eval.otherClass}"></a></td>
+                    <td th:text="${eval.id}"></td>
+                    <td th:text="${eval.likes}"></td>
+                    <td th:text="${eval.dislikes}"></td>
+                    <td th:text="${eval.suggestions}"></td>
+                    <td th:text="${eval.otherClass}"></td>
                 </tr>
             </th:block>
         </table>
@@ -77,8 +77,8 @@
             <!--iterate through all the evaluations for this course-->
             <th:block th:each="eval:${neweval}">
                 <tr>
-                    <td><a th:text="${eval.id}"></a></td>
-                    <td><a th:text="${eval.findings}"></a></td>
+                    <td th:text="${eval.id}"></td>
+                    <td th:text="${eval.findings}"></td>
                 </tr>
             </th:block>
         </table>

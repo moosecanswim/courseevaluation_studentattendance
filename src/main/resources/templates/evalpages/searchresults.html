@@ -1,56 +1,55 @@
-<!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head>
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
 
-    <title>Eval Search Result</title>
+    <!--<title>Eval Search Result</title>-->
 
-    <!-- Header -->
-    <div th:replace="base :: header"></div>
-    <!-- /.Header -->
+<!--&lt;!&ndash; Header &ndash;&gt;-->
+<!--<th:block th:replace="base :: header"></th:block>-->
+<!--&lt;!&ndash; /.Header &ndash;&gt;-->
 
-</head>
-<body>
+<!--</head>-->
+<!--<body>-->
 
-<!--Navigation Student-->
-<nav th:replace="base :: nav2Student"></nav>
-<!--/.Navigation Student-->
+<!--&lt;!&ndash;Navigation Student&ndash;&gt;-->
+<!--<nav th:replace="base :: nav2Student"></nav>-->
+<!--&lt;!&ndash;/.Navigation Student&ndash;&gt;-->
 
-<div class="container">
-    <div  th:if="${searcheval.isEmpty()}">
-        <p>No matching course is found!</p>
-    </div>
-
-
-    <div  th:if="${!searcheval.isEmpty()}">
-        <table>
-            <tr>
-                <th>CRN</th>
-                <th>Course Name</th>
-                <th>Start Date</th>
-                <th>End Date</th>
+<!--<div class="container">-->
+    <!--<div  th:if="${searcheval.isEmpty()}">-->
+        <!--<p>No matching course is found!</p>-->
+    <!--</div>-->
 
 
-            </tr>
+    <!--<div  th:if="${!searcheval.isEmpty()}">-->
 
-            <tr>
-                <th:block th:each="item:${searcheval}">
-                    <td th:text="${item.crn}"></td>
-                    <td th:text="${item.courseName}"></td>
-                    <td th:text="${item.startDate}"></td>
-                    <td th:text="${item.endDate}"></td>
-                    <td><a th:href="@{/eval/evaluationentry/{id}(id=${item.id})}">Evaluate this course</a></td>
-                </th:block>
+        <!--<table class="table table-striped" border="1">-->
+            <!--<tr>-->
+                <!--<td><b>CRN</b></td>-->
+                <!--<td><b>Course Name</b></td>-->
+                <!--<td><b>Start Date</b></td>-->
+                <!--<td><b>End Date</b></td>-->
+            <!--</tr>-->
 
-            </tr>
+            <!--<th:block th:each="item:${searcheval}">-->
+                <!--<tr>-->
+                    <!--<td th:text="${item.crn}"></td>-->
+                    <!--<td th:text="${item.courseName}"></td>-->
+                    <!--<td th:text="${item.startDate}"></td>-->
+                    <!--<td th:text="${item.endDate}"></td>-->
+                    <!--<td>-->
+                        <!--<a th:href="@{/eval/evaluationentry/{id}(id=${item.id})}">Evaluate this course</a>-->
+                    <!--</td>-->
+                <!--</tr>-->
+            <!--</th:block>-->
+        <!--</table>-->
 
+    <!--</div>-->
+<!--</div>-->
 
-        </table>
-    </div>
-</div>
+<!--&lt;!&ndash; Footer &ndash;&gt;-->
+<!--<div th:replace="base :: footer"></div>-->
+<!--&lt;!&ndash; /.Footer &ndash;&gt;-->
 
-<!-- Footer -->
-<div th:replace="base :: footer"></div>
-<!-- /.Footer -->
-
-</body>
-</html>
+<!--</body>-->
+<!--</html>-->
