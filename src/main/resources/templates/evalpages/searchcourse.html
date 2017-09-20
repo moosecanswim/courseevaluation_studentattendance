@@ -16,19 +16,33 @@
 <!--Navigation Student-->
 <nav th:replace="base :: nav2Student"></nav>
 <!--/.Navigation Student-->
-
+<div>
+    <br/>
+    <br/>
+    <br/>
+</div>
 <div class="container">
+    <h1>Evaluate a Course</h1>
+    <div>
+        <br/>
+    </div>
 
     <h1>Start your evaluation by searching the course by CRN:</h1>
     <br>
     <br>
     <div>
         <form  th:action="@{/eval/searchcourse}"  method="post">
-
-            <p>Enter CRN Number: <input required type="number" name="crnfield" placeholder="Course CRN"/></p>
-
+            <div class="container">
+            <h4>You need to provide a Course Registration Number(CRN) to fill out Evaluation</h4><br/>
+            <!--<p>Enter CRN Number: <input required type="number" name="crnfield" placeholder="Course CRN"/></p>-->
+            <div class="form-group">
+            <p>Enter CRN Number: <input required type="number" name="crnfield" class="form-control input-lg" placeholder="Course CRN" tabindex="3"/></p>
+            </div>
+            <!--<div class="form-group">-->
+                <!--<input type="text" th:field="*{crn}" name="crn" id="crn" class="form-control input-lg" placeholder="Course CRN" tabindex="3">-->
+            <!--</div>-->
             <p><input type="submit" value="Search By CRN" /><input type="reset" value="Reset" /></p>
-
+            </div>
         </form>
     </div>
 
