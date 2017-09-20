@@ -17,19 +17,21 @@
     <div class="container">
         <h1>Teacher Home Page</h1>
 
-        <p>My profile</p>
+        <br/>
+        <br/>
+
+        <h3>My profile</h3>
 
         <!--<p th:text="'Instructor Id: ' + ${instructor.id}"></p>-->
-        <p th:text="'Instructor MNumber: ' + ${instructor.mNumber}"></p>
-        <p th:text="'Instructor Name: ' + ${instructor.firstName} + ' ' +${instructor.lastName} "></p>
-        <p th:text="'Instructor email: ' + ${instructor.email}"></p>
+        <p th:text="'MNumber: ' + ${instructor.mNumber}"></p>
+        <p th:text="'Name: ' + ${instructor.firstName} + ' ' +${instructor.lastName} "></p>
+        <p th:text="'Username: ' + ${instructor.username}"></p>
+        <p th:text="'Email: ' + ${instructor.email}"></p>
 
         <!--<p>My Courses links</p>-->
-        <p><a href="/teacher/listallcourses">All my courses</a></p>
-        <p><a href="/teacher/listallcourses">All my courses</a></p>
+        <!--<p><a href="/teacher/listallcourses">All my courses</a></p>-->
 
     </div>
-
 
     <!-- Footer -->
     <div th:replace="base :: footer"></div>
