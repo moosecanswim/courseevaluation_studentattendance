@@ -226,6 +226,22 @@ public class TeacherController {
         return "teacherpages/tableattofonecourse";
     }
 
+    @GetMapping("/updateperson/{id}")
+    public String editPerson(@PathVariable("id") long id, Principal principal,Model model){
+        Person instructor=personRepo.findByUsername(principal.getName());
+        model.addAttribute("instructor", personRepo.findOne(instructor.getId()));
+
+        return "teacherpages/teacheredit";
+    }
+
+
+    @PostMapping("/updateperson")
+    public String savePerson(@Valid @ModelAttribute("instructor") Person instructor, BindingResult bindingResult)
+    {
+
+        personService.update(instructor);
+        return "redirect:/teacher/home/";
+    }
 
     //for delete or update M number for the student
     @GetMapping("/listallstudents/{courseId}")
@@ -250,8 +266,7 @@ public class TeacherController {
         model.addAttribute("student", currentStudent);
         model.addAttribute("course", currentCourse);
 
-        return "teacherpages/" +
-                "teMform";
+        return "teacherpages/updateMform";
     }
 
 
