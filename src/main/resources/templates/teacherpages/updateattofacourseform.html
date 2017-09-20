@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+
+    <title>Student Attendance</title>
+    <!-- Header -->
+    <th:block th:replace="base :: header"></th:block>
+    <!-- /.Header -->
+</head>
+<body>
+    <!--Navigation Teacher-->
+    <nav th:replace="base :: nav2Teacher"></nav>
+    <!--/.Navigation Teacher-->
+    <div class="container-loggeduser">
+        Logged user:  <span sec:authentication="name">The Teacher is not logged in yet</span>
+    </div>
+
+    <div class="container">
+
+        <h1>Update Student Attendance: </h1>
+        <!--should be a form allow input of students' attendance info-->
+
+        <div  th:if="${!studentsofACourse.isEmpty()}">
+
+            <form th:action="@{/teacher/markattendancepo/{courseId}(courseId=${course.id})}"
+                  method="post">
+                <legend>Attendance Form</legend>
+                <fieldset>
+
+                    <p>Choose a Date to update: </p>
+
+                    <!--<p><input required type="date" name="attdate" placeholder="MM/dd/yyyy" /></p>-->
+
+                    <p>
+                        <select name="attdate">
+                        <option th:value="${nowdate}" th:inline="text">Today([[${nowdate}]])</option>
+                            <th:block th:each="att:${onestu.attendances}">
+                                <option th:value="${att.date}" th:inline="text">[[${att.date}]]</option>
+                            </th:block>
+                        </select>
+                    </p>
+
+
+                    <table class="table table-striped" border="1">
+                        <tr>
+                            <th>Full Name: </th>
+                            <th>Email: </th>
+                            <th>Attendance: </th>
+                        </tr>
+                        <tr th:each="student:${studentsofACourse}">
+                            <td th:text="${student.firstName} + ' ' +${student.lastName} "></td>
+                            <td th:text="${student.email}"></td>
+                            <td>
+                                <select name="attendanceStatus">
+                                    <option value="NotMarked">  </option>
+                                    <option value="Present">Present</option>
+                                    <option value="Absent">Absent</option>
+                                    <option value="Late">Late</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <p>
+                        <input type="submit" class="btn btn-default navbar-btn" value="Mark Attendance" />
+                        <input type="reset" class="btn btn-default navbar-btn" value="Reset" />
+                    </p>
+                </fieldset>
+            </form>
+        </div>
+
+        <div  th:if="${studentsofACourse.isEmpty()}">
+            <p>No Student information available!</p>
+            <a th:href="@{/teacher/addstudentstocourse/{id}(id=${course.id})}">Register students for the course</a>
+        </div>
+
+        <a th:href="@{/teacher/detailsofacourse/{id} (id=${course.id})}">Back to Course Page</a>
+    </div>
+
+    <!-- Footer -->
+    <div th:replace="base :: footer"></div>
+    <!-- /.Footer -->
+</body>
+</html>
