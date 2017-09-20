@@ -53,4 +53,6 @@ public interface CommunicationRepository extends CrudRepository<Communication,Lo
     Iterable<Communication> findByNameLikeIgnoreCaseAndCallStatusFalse(String name);
     Long countByNameLikeIgnoreCaseAndCallStatusTrue(String name);
     Long countByNameLikeIgnoreCaseAndCallStatusFalse(String name);
+
+
 }

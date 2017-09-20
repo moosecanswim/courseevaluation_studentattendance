@@ -2,14 +2,18 @@ package com.finalproject.courseevaluation_studentattendance.Services;
 
 import com.finalproject.courseevaluation_studentattendance.Model.Communication;
 import com.finalproject.courseevaluation_studentattendance.Model.Course;
+import com.finalproject.courseevaluation_studentattendance.Model.Person;
 import com.finalproject.courseevaluation_studentattendance.Repositories.CommunicationRepository;
+import com.finalproject.courseevaluation_studentattendance.Repositories.PersonRepository;
 import com.google.common.collect.Iterables;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CommunicationService {
@@ -17,6 +21,14 @@ public class CommunicationService {
     CommunicationRepository communicationRepository;
     @Autowired
     CourseService courseService;
+
+    @Autowired
+    PersonRepository personRepository;
+
+    @Autowired
+    PersonService personService;
+
+
 
     public void create(Communication aComm){
         Communication existCom = communicationRepository.findOne(aComm.getId());
@@ -46,6 +58,22 @@ public class CommunicationService {
             System.out.println("Adding " + existCom.toString());
             communicationRepository.save(existCom);
         }
+    }
+
+
+    public void overrideExistingInformation(Communication aCom)
+    {
+
+        Communication existInfo = communicationRepository.findOne(aCom.getId());
+
+        String mymnumber= existInfo.getmNumber();
+        Person pr = personRepository.findFirstByMNumber(mymnumber);
+        existInfo.setName(pr.getFirstName());
+        existInfo.setEmail(pr.getEmail());
+        communicationRepository.save(existInfo);
+
+
+
     }
 
     public Iterable<Communication> showAllAvalible(){

@@ -25,6 +25,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import com.finalproject.courseevaluation_studentattendance.Model.Communication;
 
+import javax.jws.WebParam;
 import javax.mail.internet.InternetAddress;
 import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
@@ -397,7 +398,6 @@ public class AdminController {
         return "redirect:/admin/viewallpeople";
     }
 
-
     // ===   See the List of this Teacher Courses
     @GetMapping("/viewteachercourses/{id}") // teacher id
     public String seeAllTeachers(@PathVariable("id") long id, Model model)
@@ -478,6 +478,21 @@ public class AdminController {
         communicationService.toggleCommunicationStatus(communicationService.findOne(communicationId));
         return "redirect:/admin/communicationhome";
     }
+
+    @GetMapping("/overridecommunicatoin/{id}")
+    public String overrideCommunication(@PathVariable("id") long comid, Model model)
+    {
+
+        Communication cm =  communicationService.findOne(comid);
+
+       // model.addAttribute("aCommunication", communicationService.findOne(comid));
+        communicationService.overrideExistingInformation(cm);
+
+        return "resirect:/adminpages/admincommunicationhome";
+    }
+
+
+
 
     @GetMapping("/searchcommunication")
     public String searchCommunication(@RequestParam("searchBy") String searchBy,@RequestParam("searchThing") String searchThing,Model model){
