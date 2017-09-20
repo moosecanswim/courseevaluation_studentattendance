@@ -422,14 +422,16 @@ public class TeacherController {
 
 
    @PostMapping("/addstudent/{id}")
-    public String postCourse(@Valid @PathVariable("id") Long id, @ModelAttribute("newstudent") Person student, BindingResult bindingResult,Model model)
+    public String postCourse(@PathVariable("id") Long id, @Valid @ModelAttribute("newstudent") Person student, BindingResult bindingResult,Model model)
    {
+
         if(bindingResult.hasErrors())
         {
-            return "teacherpages/addstudent";
+            return "redirect:/teacher/addstudentstocourse/" +id;
         }
-        Course c =  courseRepository.findOne(id);
-        student.setCourseStudent(c);
+
+       Course c = courseRepository.findOne(id);
+       student.setCourseStudent(c);
         student.addRole(roleService.findByRoleName("DEFAULT"));
         personRepository.save(student);
         model.addAttribute("course", c);
