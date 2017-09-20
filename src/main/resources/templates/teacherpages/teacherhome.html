@@ -10,35 +10,28 @@
     <!-- /.Header -->
 
 </head>
-<body>
+<body id="teacher-page">
     <!--Navigation Teacher-->
     <nav th:replace="base :: nav2Teacher"></nav>
     <!--/.Navigation Teacher-->
     <!--style="right-justified"-->
     <div class="container-loggeduser">
-         Logged user:  <span sec:authentication="name">The Teacher is not logged in yet</span>
+        Logged user:  <span sec:authentication="name">The Teacher is not logged in yet</span>
     </div>
 
     <div class="container">
-        <h1>Teacher Home Page</h1>
+        <h1 th:inline="text">[[${instructor.firstName}]] [[${instructor.lastName}]]'s Home Page</h1>
 
-        <br/>
-        <br/>
 
-        <h2>My profile</h2>
         <br/>
         <!--<p th:text="'Instructor Id: ' + ${instructor.id}"></p>-->
-        <p th:text="'MNumber: ' + ${instructor.mNumber}"></p>
+        <p th:text="'M Number: ' + ${instructor.mNumber}"></p>
         <p th:text="'Name: ' + ${instructor.firstName} + ' ' +${instructor.lastName} "></p>
         <p th:text="'Username: ' + ${instructor.username}"></p>
         <p th:text="'Email: ' + ${instructor.email}"></p>
         <p><a th:href="@{/teacher/updateperson/{id}(id=${instructor.id})}">Update</a></p>
         <!--<p>My Courses links</p>-->
         <!--<p><a href="/teacher/listallcourses">All my courses</a></p>-->
-    </div>
-
-
-    <div class="container">
 
         <h2>List of Courses</h2>
         <br/>
