@@ -87,12 +87,17 @@ public class EvalController {
     }
 
     @PostMapping("/searchcourse")
-    public String searchCoursePost(@Valid @RequestParam("crnfield")long crn, Course course,BindingResult bindingResult,Model model )
+//    public String searchCoursePost(@Valid @RequestParam("crnfield")long crn, Course course,BindingResult bindingResult,Model model )
+    public String searchCoursePost(@RequestParam("crnfield")Long crn, Model model )
     {
-        if(bindingResult.hasErrors())
-        {
-            return "evalpages/evaluationentry";
+//        if(bindingResult.hasErrors())
+//        {
+//            return "evalpages/evaluationentry";
+//        }
+        if(crn==null){
+            return "evalpages/searchcourse";
         }
+
         model.addAttribute("searcheval", courseRepository.findAllByCrn(crn));
 
 
