@@ -555,7 +555,11 @@ public class AdminController {
     public EmailService emailService;
     public void sendEmailWithoutTemplating(Iterable<Evaluation>evaluations) throws UnsupportedEncodingException {
         System.out.println("test before email");
-        for (Evaluation eval:evaluations) {
+        Evaluation eval=new Evaluation();
+        for (Evaluation neval:evaluations) {
+            eval=neval;
+        }
+
             System.out.println(eval.getContent());
             final Email email = DefaultEmail.builder()
                     .from(new InternetAddress("mahifentaye@gmail.com", "Evaluation INFO"))
@@ -566,7 +570,7 @@ public class AdminController {
                     .encoding("UTF-8").build();
             System.out.println("test it");
             emailService.send(email);
-        }
+
     }
     private EmailAttachment getCsvEvaluationAttachment(String filename, Iterable<Evaluation>evaluations) {
 
