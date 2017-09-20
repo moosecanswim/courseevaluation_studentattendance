@@ -15,7 +15,15 @@
     <nav th:replace="base :: nav2Welcome"></nav>
     <!--/.Navigation Welcome-->
     <div class="container">
-        <h1>This is the welcome page!</h1>
+    <div class="jumbotron">
+        <h1 class="display-3">Hello, world!</h1>
+        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+        <hr class="my-4">
+        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+        </p>
+    </div>
 
     <!--<div  th:if="${!collectionOfAllMatchedJobs.isEmpty()}">-->
     <div   th:if="${message!=null}">
@@ -29,8 +37,8 @@
         <p><a href="/admin/home">Admin Home</a></p>
         <p><a href="/eval/home">Eval Home</a></p>
         <br />
-        <p><a href="/login">Login</a></p>
-        <p><a href="/viewcourses">View Courses</a></p>
+        <!--<p><a href="/login">Login</a></p>-->
+        <!--<p><a href="/viewcourses">View Courses</a></p>-->
     </div>
 
     <!-- Footer -->
