@@ -255,8 +255,6 @@ public class AdminController {
         return "redirect:/admin/admincoursedetails/"+id;
     }
 
-
-
     // ===   Remove Course from the list of courses
     @RequestMapping("/removecourse/{id}") //Course id
     public String removeCourse (@PathVariable("id")long id, Model model){
