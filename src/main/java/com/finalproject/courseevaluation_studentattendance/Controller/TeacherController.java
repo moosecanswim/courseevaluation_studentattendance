@@ -250,8 +250,7 @@ public class TeacherController {
         model.addAttribute("student", currentStudent);
         model.addAttribute("course", currentCourse);
 
-        return "teacherpages/" +
-                "teMform";
+        return "teacherpages/updateMform";
     }
 
 
