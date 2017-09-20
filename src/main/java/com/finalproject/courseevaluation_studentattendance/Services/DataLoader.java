@@ -67,7 +67,7 @@ public class DataLoader implements CommandLineRunner{
         personRepo.save(aPerson);
 
         //
-        aPerson= new Person("admin", "Mr.Admin","admin", "password","admin@email.com","M004" );
+        aPerson= new Person("admin", "Mr.Admin","admin", "password","mymahder@gmail.com","M004" );
         personRepo.save(aPerson);
         aPerson.addRole(teacherRole);
         aPerson.addRole(adminRole);
@@ -77,7 +77,7 @@ public class DataLoader implements CommandLineRunner{
         aPerson= new Person("student", "name","", "password","noname@email.com","M005" );
         personRepo.save(aPerson);
         aPerson.addRole(teacherRole);
-        aPerson.addRole(adminRole);
+//        aPerson.addRole(adminRole);
         personRepo.save(aPerson);
 
 
