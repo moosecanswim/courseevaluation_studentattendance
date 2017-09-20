@@ -393,7 +393,7 @@ public class AdminController {
            return"adminpages/admineditpeople";
        }
         personRepo.save(person);
-        return "redirect:/admin/home/";
+        return "redirect:/admin/viewallpeople";
     }
 
 
