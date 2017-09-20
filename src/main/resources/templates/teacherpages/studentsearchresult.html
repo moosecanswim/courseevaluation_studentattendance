@@ -63,7 +63,7 @@
                 <td th:text="${student.email}"></td>
 
                 <td>
-                    <a th:href="@{/teacher/delete/{courseId}/{studentId}(courseId=${course.id} ,studentId=${student.id})}">Delete</a>
+                    <a th:href="@{/teacher/delete/{courseId}/{studentId}(courseId=${course.id} ,studentId=${student.id})}">delete</a>
 
                 </td>
                 <td>
@@ -73,31 +73,54 @@
             </tr>
         </table>
 
-        <h4>Search result (Matching students)</h4>
+
+        <br/>
+        <br/>
+
+
+        <!--<h4>Choose an option: search student by:</h4>-->
+
+        <!--<form th:action="@{/teacher/searchstudent/{courseId}(courseId=${course.id})}" method="post">-->
+            <!--<select name="searchBy">-->
+                <!--<option value="all">First Name, Last Name and Email</option>-->
+                <!--<option value="first">First Name only</option>-->
+                <!--<option value="last">Last Name only</option>-->
+                <!--<option value="email">Email only</option>-->
+                <!--<option value="fandl">First Name and Last Name</option>-->
+            <!--</select>-->
+            <!--<p>-->
+                <!--<input name="fname" type="text" placeholder="FirstName"/>-->
+                <!--<input name="lname" type="text" placeholder="LastName"/>-->
+                <!--<input name="email" type="text" placeholder="Email"/>-->
+                <!--<input type="submit" value="Search"/>-->
+            <!--</p>-->
+
+        <!--</form>-->
+
+        <!--<br/>-->
+        <!--<br/>-->
+        <hr/>
+
+        <div>
+
+
+            <a th:href="@{/teacher/listallstudents/{courseId}/(courseId=${course.id})}">Search again</a>
+            -
+            <a th:href="@{/teacher/detailsofacourse/{courseId}/(courseId=${course.id})}">Back to course detail</a>
+        </div>
+        <hr/>
+        <br/>
+
+        <h3>Search result</h3>
 
 
         <p th:text="${message}"></p>
 
         <div  th:if="${searchstudent.isEmpty()}">
             <h4>No matching students found!</h4>
-
-            <hr/>
-            <div>
-                <a th:href="@{/teacher/listallstudents/{courseId}/(courseId=${course.id})}">Search again</a>
-                -
-                 <a th:href="@{/teacher/detailsofacourse/{courseId}/(courseId=${course.id})}">Back to course detail</a>
-            </div>
-            <hr/>
         </div>
 
         <div  th:if="${!searchstudent.isEmpty()}">
-            <hr/>
-            <div>
-                <a th:href="@{/teacher/listallstudents/{courseId}/(courseId=${course.id})}">Search again</a>
-                -
-                <a th:href="@{/teacher/detailsofacourse/{courseId}/(courseId=${course.id})}">Back to course detail</a>
-            </div>
-            <hr/>
 
             <table class="table">
 
