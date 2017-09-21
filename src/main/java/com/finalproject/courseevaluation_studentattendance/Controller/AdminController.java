@@ -570,7 +570,12 @@ public class AdminController {
         return"redirect:/admin/home";
     }
 
-
+    @RequestMapping("/setpersontostudent/{id}")
+    public String makePersonStudent(@PathVariable("id") long id){
+        Person tempP = personService.findById(id);
+      personService.saveStudent(tempP);
+        return "redirect:/admin/viewallpeople";
+    }
 
     @GetMapping("/sendevaluation/{id}")
     public String emailEvaluation(@PathVariable("id") long id, Model model) throws UnsupportedEncodingException {
