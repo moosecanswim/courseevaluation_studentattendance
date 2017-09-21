@@ -17,7 +17,8 @@
     </div>
 
     <div class="container">
-
+        <h2 th:inline="text">Course: [[${course.courseName}]] CRN [[${course.crn}]]</h2>
+        <hr />
         <h1>Update Student Attendance: </h1>
         <!--should be a form allow input of students' attendance info-->
 
@@ -34,7 +35,7 @@
 
                     <p>
                         <select name="attdate">
-                        <option required th:value="${nowdate}" th:inline="text">Today([[${nowdate}]])</option>
+                        <option required th:value="${nowdate}" th:inline="text">Today ([[${nowdate}]])</option>
                             <th:block th:each="att:${onestu.attendances}">
                                 <option th:value="${att.date}" th:inline="text">[[${att.date}]]</option>
                             </th:block>

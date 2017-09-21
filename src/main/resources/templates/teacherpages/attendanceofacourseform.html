@@ -17,6 +17,15 @@
     </div>
 
     <div class="container">
+        <h1 th:inline="text">Course: [[${course.courseName}]] CRN [[${course.crn}]]</h1>
+        <hr />
+        <p th:text="'Course ID: ' + ${course.id}"/>
+        <p th:text="'Course Name: '+ ${course.courseName}" />
+        <p th:text="'Course CRN:' + ${course.crn}"/>
+        <p th:text="'Course StartDate:' + ${{course.startDate}}"/>
+        <p th:text="'Course EndDate:' + ${{course.endDate}}"/>
+        <p th:text="'Course Status:' + ${course.status}"/>
+        <hr />
 
         <h1>Student Attendance: </h1>
         <p th:text="'Date today: ' + ${nowdate}"></p>

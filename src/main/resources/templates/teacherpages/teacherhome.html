@@ -29,10 +29,10 @@
         <p th:text="'Name: ' + ${instructor.firstName} + ' ' +${instructor.lastName} "></p>
         <p th:text="'Username: ' + ${instructor.username}"></p>
         <p th:text="'Email: ' + ${instructor.email}"></p>
-        <p><a th:href="@{/teacher/updateperson}">Update</a></p>
+        <p><a th:href="@{/teacher/updateperson}">Update Personal Info</a></p>
         <!--<p>My Courses links</p>-->
         <!--<p><a href="/teacher/listallcourses">All my courses</a></p>-->
-
+        <br>
         <h2>List of Courses</h2>
         <br/>
         <div  th:if="${!allcoursesofaInstructor.isEmpty()}">
