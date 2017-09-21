@@ -15,6 +15,12 @@ body {
     /*padding-bottom:20px*/
 }
 
+h1
+{
+    font-size:3.5em;
+}
+
+
 
 /* header */
 
@@ -100,6 +106,11 @@ section {
 
 .white_text{
     color:white;
+}
+
+
+.black_text{
+    color:black;
 }
 
 /*Old Footer:*/
