@@ -27,7 +27,7 @@
         <div class="center">
             <!--<a th:href="@{/teacher/addstudentstocourse/{id}(id=${course.id})}">Register students for the course</a>-->
             <!-- - -->
-            <th:block th:if="${!test4att.isEmpty()}">
+            <th:block th:if="${!test4att.isEmpty() && !test4stt.isEmpty()}">
             <a th:href="@{/teacher/courseend/{id}(id=${course.id})}">Course has Ended</a> -
             </th:block>
             <a th:href="@{/teacher/displayallevalsofonecourse/{id}(id=${course.id})}">See Course Evaluations</a> -

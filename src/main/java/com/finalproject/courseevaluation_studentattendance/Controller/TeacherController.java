@@ -111,6 +111,7 @@ public class TeacherController {
 
         Course currentCourse = courseRepository.findOne(courseId);
         model.addAttribute("test4att",currentCourse.getCourseAttendances());
+        model.addAttribute("test4stt",currentCourse.getStudent());
         Iterable<Person> studentsofACourse = currentCourse.getStudent();
         model.addAttribute("courseInstructor", currentCourse.getInstructor());
 
