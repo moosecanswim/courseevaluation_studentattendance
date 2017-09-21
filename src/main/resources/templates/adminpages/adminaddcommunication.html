@@ -1,14 +1,14 @@
-    <!DOCTYPE html>
-    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-    <head lang="en">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
 
-        <title>New Communication</title>
-        <!-- Header -->
-        <th:block th:replace="base :: header"></th:block>
-        <!-- /.Header -->
+    <title>New Communication</title>
+    <!-- Header -->
+    <th:block th:replace="base :: header"></th:block>
+    <!-- /.Header -->
 
-    </head>
-    <body id="admin-page">
+</head>
+<body id="admin-page">
 
     <!--Navigation Admin-->
     <nav th:replace="base :: nav2Admin"></nav>
@@ -18,43 +18,38 @@
         <h1>Communication Form</h1>
         <p th:text="'Date today: ' + ${#dates.format(now, 'MMM dd, yyyy')}"></p>
 
-        <form class="well form-horizontal"
-              th:action="@{/admin/processcommunication/add}"
+        <form action="#"
+                th:action="@{/admin/processcommunication/add}"
               th:object="${aCommunication}"
               method="POST">
             <fieldset>
-                <legend>Communication Form</legend>
+                <legend></legend>
                 <!--//hidden id-->
                 <input type="hidden" th:field="*{id}">
+
                 <div class="form-group">
-                    <label>M#</label>
-                    <input th:field="*{mNumber}" placeholder="M-Number">
+                    <label>M Number</label>
+                    <input th:field="*{mNumber}" class="form-control input-lg" placeholder="M-Number">
                 </div>
                 <div class="form-group">
-                    <label>Name: </label>
-                    <input th:field="*{name}" placeholder="Contact Name">
+                    <label>Name </label>
+                    <input th:field="*{name}" class="form-control input-lg" placeholder="Contact Name">
                 </div>
                 <div class="form-group">
-                    <label>Phone #: </label>
-                    <input th:field="*{phoneNumber}" placeholder="(xxxyyzzzz)">
+                    <label>Phone Number </label>
+                    <input th:field="*{phoneNumber}" class="form-control input-lg" placeholder="(xxxyyzzzz)">
                 </div>
                 <div class="form-group">
-                    <label>Email: </label>
-                    <input th:field="*{email}" placeholder="Email">
+                    <label>Email </label>
+                    <input th:field="*{email}" class="form-control input-lg" placeholder="Email">
                 </div>
                 <div class="form-group">
-                    <label>Course:</label>
-<!--"*{crn[__${courseInterestedCRN.index}__].courseName}">-->
-                    <select th:field="*{courseInterestedCRN}">
+                    <label>Course </label>
+                    <select th:field="*{courseInterestedCRN}" class="form-control input-lg" >
                         <option value="">--select a course--</option>
                         <option th:each="course: ${courseList}"
                                 th:value="${course.crn}"
                                 th:text="${course.courseName + '|' + course.crn}">
-
-
-
-
-
                         </option>
                     </select>
 
@@ -64,7 +59,10 @@
                     <textarea th:field="*{callDetails}" col="50" row="4"></textarea>
 
                 </div>
-                <input type="submit" value="Submit call/email"></select>
+                <div class="col-xs-6 col-md-6">
+                    <input class="btn btn-primary btn-block btn-lg" tabindex="7" type="submit" value="Submit call/email"></select>
+                </div>
+
 
                 <!--<table>-->
                 <!--&lt;!&ndash;//mNumber input&ndash;&gt;-->
@@ -102,5 +100,5 @@
     <div th:replace="base :: footer"></div>
     <!-- /.Footer -->
 
-    </body>
-    </html>
+</body>
+</html>
