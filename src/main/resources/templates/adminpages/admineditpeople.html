@@ -13,29 +13,47 @@
     <nav th:replace="base :: nav2Admin"></nav>
     <!--/.Navigation Admin-->
     <div class="container">
-
+        <h2>Update Person</h2>
+        <div>
+            <br/>
+        </div>
         <form action="#" th:action="@{/admin/updateperson}" th:object="${person}" method="post" >
-            <!--<input type="text" th:field="*{perosn.id}" />-->
             <input type="hidden" th:field="*{id}" />
-            <p> <h4>M Number</h4> <input type="text" th:field="*{mNumber}"/></p>
+            <div class="form-group">
+                <input type="text" th:field="*{mNumber}" name="mNumber" id="mNumber" class="form-control input-lg" placeholder="M Number" tabindex="3">
+            </div>
             <div th:if="${#fields.hasErrors('mNumber')}"  th:errors="*{mNumber}"
                  class="well alert alert-warning" role="alert"></div>
-            <p><h4>First Name</h4> <input type="text" th:field="*{firstName}"/></p>
+            <div class="form-group">
+                <input type="text" th:field="*{firstName}" name="firstName" id="firstName" class="form-control input-lg" placeholder="First Name" tabindex="3">
+            </div>
             <div th:if="${#fields.hasErrors('firstName')}"  th:errors="*{firstName}"
                  class="well alert alert-warning" role="alert"></div>
-            <p> <h4> Last Name  </h4> <input type="text" th:field="*{lastName}"/></p>
+            <div class="form-group">
+                <input type="text" th:field="*{lastName}" name="lastName" id="lastName" class="form-control input-lg" placeholder="Last Name" tabindex="3">
+            </div>
             <div th:if="${#fields.hasErrors('lastName')}"  th:errors="*{lastName}"
                  class="well alert alert-warning" role="alert"></div>
-            <p> <h4> Email  </h4> <input type="email" th:field="*{email}"/></p>
+
+            <div class="form-group">
+                <input type="text" th:field="*{email}" name="email" id="email" class="form-control input-lg" placeholder="Email" tabindex="3">
+            </div>
             <div th:if="${#fields.hasErrors('email')}"  th:errors="*{email}"
                  class="well alert alert-warning" role="alert"></div>
-            <p> <h4> Start Date  </h4> <input type="text" th:field="*{startDate}"/></p>
+
+            <div class="form-group">
+                <input type="text" th:field="*{startDate}" name="startDate" id="startDate" class="form-control input-lg" placeholder="Start Date (MM/dd/yyyy)" tabindex="3">
+            </div>
             <div th:if="${#fields.hasErrors('startDate')}"  th:errors="*{startDate}"
                  class="well alert alert-warning" role="alert"></div>
 
+
             <!--th:text="${#dates.format(link.date, 'MMM dd, yyyy')}"-->
             <!--<p th:text="'Sign up date: ' + ${#dates.format(newstudent.startDate, 'MMM dd, yyyy')}" />-->
-            <p><input type="submit"  value="Submit" class="btn btn-lg btn-default btn-block" /></p>
+            <div class="col-xs-6 col-md-6"><input type="submit" value="Enter" class="btn btn-primary btn-block btn-lg" tabindex="7"></div>
+
+            </fieldset>
+
         </form>
     </div>
 

@@ -1,6 +1,8 @@
 
 /* Global Styles */
-
+.div{
+    align-content: center;
+}
 html,
 body {
     width: 100%;
