@@ -37,15 +37,15 @@
                 </div>
                 <div class="form-group">
                     <label>Phone Number </label>
-                    <input th:field="*{phoneNumber}" class="form-control input-lg" placeholder="(xxxyyzzzz)">
+                    <input  th:field="*{phoneNumber}" class="form-control input-lg" placeholder="(xxxyyzzzz)">
                 </div>
                 <div class="form-group">
                     <label>Email </label>
-                    <input th:field="*{email}" class="form-control input-lg" placeholder="Email">
+                    <input  th:field="*{email}" class="form-control input-lg" placeholder="Email">
                 </div>
                 <div class="form-group">
                     <label>Course </label>
-                    <select th:field="*{courseInterestedCRN}" class="form-control input-lg" >
+                    <select required th:field="*{courseInterestedCRN}" class="form-control input-lg" >
                         <option value="">--select a course--</option>
                         <option th:each="course: ${courseList}"
                                 th:value="${course.crn}"
@@ -56,7 +56,7 @@
                 </div>
                 <div class="form-group">
                     <label>Call Details: </label>
-                    <textarea th:field="*{callDetails}" col="50" row="4"></textarea>
+                    <textarea required th:field="*{callDetails}" col="50" row="4"></textarea>
 
                 </div>
                 <div class="col-xs-6 col-md-6">

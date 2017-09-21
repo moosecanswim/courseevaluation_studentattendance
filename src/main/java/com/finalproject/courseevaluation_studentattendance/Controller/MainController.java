@@ -37,7 +37,7 @@ public class MainController {
     public String viewCoursesInsecure(Model model){
         Iterable<Course> courseList = courseService.findAll();
 
-        Iterable<Course> courselistshow = courseRepository.findAllByCourseNameIsNot("Math");
+        Iterable<Course> courselistshow = courseRepository.findAllByCourseNameIsNot("--no Select--");
         model.addAttribute("courseList",courselistshow);
 
         return "viewcourses";
