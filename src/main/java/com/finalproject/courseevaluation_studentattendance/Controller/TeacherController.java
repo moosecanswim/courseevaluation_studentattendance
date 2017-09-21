@@ -283,6 +283,7 @@ public class TeacherController {
     }
 
 
+    // update student M number from teacher side
     @GetMapping("/update/{courseId}/{studentId}")
     public String updateMnumber(@PathVariable("courseId") Long courseId, @PathVariable("studentId") Long studentId, Model model) {
 
@@ -339,12 +340,13 @@ public class TeacherController {
 
 
     @RequestMapping("/delete/{courseId}/{studentId}")
-    public String deletestudentwithnoMnumber(@PathVariable("courseId") Long courseId,@PathVariable("studentId") Long studentId, Model model) {
+    public String removestufromcourse(@PathVariable("courseId") Long courseId,@PathVariable("studentId") Long studentId, Model model) {
 
         Course currentCourse = courseRepository.findOne(courseId);
         Person currentStudent= personRepository.findOne(studentId);
-        currentCourse.removeStudent(currentStudent);
-        personRepository.delete(currentStudent);
+
+        //keep student in the database, just remove the relationship
+        courseService.removeStudentFromCourse(currentCourse,currentStudent);
 
         model.addAttribute("course", currentCourse);
 

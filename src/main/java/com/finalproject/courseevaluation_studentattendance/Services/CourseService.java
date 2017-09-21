@@ -106,8 +106,6 @@ public class CourseService {
     }
 
 
-
-
     //remove a student from a course
     //take a temp set of students from the course and checks to see if the student is in it
     //if the student is in that set it will remove the student from the temp sent courseStudents
@@ -123,6 +121,7 @@ public class CourseService {
                     " that are currently enrolled in the course: "
                     + s.getFirstName());
         }
+
         if(courseStudents.contains(aStudent)){
 
             System.out.println("CourseService/removeStudentFromCourse:remove students");
