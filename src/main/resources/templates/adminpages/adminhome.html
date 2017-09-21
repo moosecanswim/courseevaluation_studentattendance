@@ -9,63 +9,69 @@
 
 </head>
 <body id="admin-page">
-    <!--Navigation Admin-->
-    <nav th:replace="base :: nav2Admin"></nav>
-    <!--/.Navigation Admin-->
-    <div class="container">
-        <h1>Admin Home</h1>
-        <br />
-        <p>List of Courses</p>
+<!--Navigation Admin-->
+<nav th:replace="base :: nav2Admin"></nav>
+<!--/.Navigation Admin-->
+<div class="container">
 
-        <table class="table table-striped">
+    <h1>Admin Home</h1>
+    <br />
+    <p>List of Courses</p>
+
+    <table class="table table-striped">
+        <tr>
+            <td><b>ID</b></td>
+            <td><b>CRN</b></td>
+            <td><b>Course Name</b></td>
+            <td><b>Start Date</b></td>
+            <td><b>End Date</b></td>
+            <td><b>Class Available</b></td>
+            <td><b>View Evaluations</b></td>
+            <td><strong>Action</strong></td>
+        </tr>
+
+
+        <!--iterate through all the existed courses-->
+        <th:block th:each="course:${allcourses}">
             <tr>
-                <td><b>ID</b></td>
-                <td><b>CRN</b></td>
-                <td><b>Course Name</b></td>
-                <td><b>Start Date</b></td>
-                <td><b>End Date</b></td>
-                <td><b>Class Available</b></td>
-                <td><b>View Evaluations</b></td>
-                <td><strong>Action</strong></td>
+                <td th:text="${course.id}"></td>
+                <td th:text="${course.crn}"></td>
+                <td><a th:href="@{/admin/admincoursedetails/{id}(id=${course.id})}"  th:inline="text">[[${course.courseName}]]</a></td>
+                <td th:text="${{course.startDate}}"></td>
+                <td th:text="${{course.endDate}}"></td>
+                <td th:text="${course.status}"></td>
+                <td>
+                    <!--<a th:href="@{/admin/viewcourseevaluations/{id}(id=${course.id})}">View Evaluations</a>-->
+
+                    <a th:href="@{/admin/admineval/{id}(id=${course.id})}">View Evaluations</a>  or
+                    <a th:href="@{/admin/sendevaluation/{id}(id=${course.id})}">Email Evaluations</a>
+                </td>
+                <td>
+                    <a th:href="@{/admin/updatecourse/{id}(id=${course.id})}">Update</a>
+                    -
+                    <a th:href="@{/admin/removecourse/{id}(id=${course.id})}">Remove Course</a>
+                </td>
             </tr>
-
-
-            <!--iterate through all the existed courses-->
-            <th:block th:each="course:${allcourses}">
-                <tr>
-                    <td th:text="${course.id}"></td>
-                    <td th:text="${course.crn}"></td>
-                    <td><a th:href="@{/admin/admincoursedetails/{id}(id=${course.id})}"  th:inline="text">[[${course.courseName}]]</a></td>
-                    <td th:text="${{course.startDate}}"></td>
-                    <td th:text="${{course.endDate}}"></td>
-                    <td th:text="${course.status}"></td>
-                    <td>
-                        <!--<a th:href="@{/admin/viewcourseevaluations/{id}(id=${course.id})}">View Evaluations</a>-->
-
-                        <a th:href="@{/admin/admineval/{id}(id=${course.id})}">View Evaluations</a>  or
-                        <a th:href="@{/admin/sendevaluation/{id}(id=${course.id})}">Email Evaluations</a>
-                    </td>
-                    <td>
-                        <a th:href="@{/admin/updatecourse/{id}(id=${course.id})}">Update</a>
-                        -
-                        <a th:href="@{/admin/removecourse/{id}(id=${course.id})}">Remove Course</a>
-                    </td>
-                </tr>
-            </th:block>
-        </table>
+        </th:block>
+    </table>
 
 
 
-        <!--<p>any notifications ("email" from the submit attendance from the teacher)</p>-->
+    <!--<p>any notifications ("email" from the submit attendance from the teacher)</p>-->
 
 
-        <!--Create a new person-->
-        <div><a href="/admin/addperson">Add a Student</a></div>
+    <!--Create a new person-->
+    <div class="center">
+        <form action="/admin/addperson">
+            <input type="submit" value = Add Student>
+        </form>
     </div>
 
-    <!-- Footer -->
-    <div th:replace="base :: footer"></div>
-    <!-- /.Footer -->
+</div>
+
+<!-- Footer -->
+<div th:replace="base :: footer"></div>
+<!-- /.Footer -->
 
 </body>
 </html>

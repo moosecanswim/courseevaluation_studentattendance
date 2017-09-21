@@ -67,7 +67,10 @@ public class CommunicationService {
         Communication existInfo = communicationRepository.findOne(aCom.getId());
 
         String mymnumber= existInfo.getmNumber();
+        System.out.println("mNumber from entered communication (before personRepository search"+mymnumber);
         Person pr = personRepository.findFirstByMNumber(mymnumber);
+        System.out.println("mNumber from person retrived from repository" + pr.getmNumber());
+        System.out.println("this is our person" + pr.toString());
         existInfo.setName(pr.getFirstName());
         existInfo.setEmail(pr.getEmail());
         communicationRepository.save(existInfo);

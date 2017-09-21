@@ -61,20 +61,10 @@ public class PersonService {
     }
 
 
+
     //create a person that does not exist in the database.
     //assigns a default username if it is blank or null
     public Person create(Person aPerson) {
-//        Person existingUser = personRepo.findByUsername(aPerson.getUsername());
-//        if (existingUser != null) {
-//            throw new RuntimeException("Record already exists!");
-//        }
-//        if(aPerson.getUsername()==null || aPerson.getUsername()==""){
-//            Long count=personRepo.count()+1;
-//            String fistNameFirstLetter=existingUser.getFirstName().substring(0);
-//            String lastNameFirstLetter=existingUser.getLastName().substring(0);
-//            String defaultUserName = String.format("%s%s%s",fistNameFirstLetter,lastNameFirstLetter,Long.toString(count));
-//            aPerson.setUsername(defaultUserName);
-//        }
         System.out.println("UserService: adding new user " + aPerson.toString());
         aPerson.addRole(roleRepo.findByRoleName("DEFAULT"));
         return personRepo.save(aPerson);
@@ -87,6 +77,11 @@ public class PersonService {
     public void saveAdmin(Person aPerson){
         aPerson.addRole(roleRepo.findByRoleName("ADMIN"));
         aPerson.setActive(true);
+        personRepo.save(aPerson);
+    }
+    public void saveStudent(Person aPerson){
+        aPerson.getPersonRoles().clear();
+        aPerson.addRole(roleRepo.findByRoleName("DEFAULT"));
         personRepo.save(aPerson);
     }
 
