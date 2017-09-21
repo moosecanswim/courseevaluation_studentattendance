@@ -56,7 +56,7 @@
             <ul class="nav navbar-nav">
 
                 <li><a href="/">Welcome</a></li>
-                <li class="active"><a href="/admin/home">Admin Home</a></li>
+                <li><a href="/admin/home">Admin Home</a></li>
 
 
                 <!--Communication dropdown-->
@@ -122,7 +122,7 @@
 
             <ul class="nav navbar-nav">
                 <li><a href="/">Welcome</a></li>
-                <li class="active"><a href="/teacher/home">Teacher Home</a></li>
+                <li><a href="/teacher/home">Teacher Home</a></li>
                 <li><a href="/teacher/listallcourses">My Courses</a></li>
 
             </ul>
@@ -138,7 +138,7 @@
 
 <!-- Navigation Welcome Page -->
 <div th:fragment="nav2Welcome">
-    <nav class="navbar navbar-inverse navbar-fixed-top" style="background-color: purple">
+    <nav class="navbar navbar-inverse navbar-fixed-top welcome-navbar">
         <div class="container-fluid">
             <!--Link to our GitHub project page:-->
             <!--<div class="navbar-header">-->
@@ -179,7 +179,7 @@
             <!--</div>-->
 
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/">Welcome</a></li>
+                <li ><a href="/">Welcome</a></li>
             </ul>
 
             <!--<ul class="nav navbar-nav navbar-right">-->
@@ -195,15 +195,15 @@
 <div th:fragment="nav2Student">
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
-            <!--<div class="navbar-header">-->
+            <div class="navbar-header">
                 <!--<a href="https://github.com/moosecanswim/courseevaluation_studentattendance.git" class="" target="_self">-->
                     <!--<img src="/img/apple-touch-icon-180x180.jpg" height="50" width="50"/>-->
                 <!--</a>-->
-                <!--&lt;!&ndash;<a class="navbar-brand" href="https://github.com/moosecanswim/courseevaluation_studentattendance.git">Courses DB</a>&ndash;&gt;-->
-            <!--</div>-->
+                <!--<a class="navbar-brand" href="https://github.com/moosecanswim/courseevaluation_studentattendance.git">Courses DB</a>-->
+            </div>
 
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/">Welcome</a></li>
+                <li><a href="/">Welcome</a></li>
                 <li><a href="/viewcourses">View Courses</a></li>
                 <li><a href="/eval/searchcourse">Evaluate a Course</a></li>
             </ul>

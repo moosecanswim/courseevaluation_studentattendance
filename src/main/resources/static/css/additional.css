@@ -2,6 +2,12 @@
 /* Global Styles */
 .navbar
 {
+    background-color: black;
+    /*text-color:white;*/
+    /*body-color:white;*/
+}
+.welcome-navbar
+{
     background-color: rebeccapurple;
     /*text-color:white;*/
     /*body-color:white;*/
@@ -99,6 +105,7 @@ background-size: cover;
 /*navbar shape*/
 .navbar {
     border-radius: 0;
+    height: inherit;
 }
 
 /* new section */
@@ -152,7 +159,7 @@ footer {
 /*My Additionals*/
 .container {
     padding-bottom:60px;   /* Height of the footer */
-    background-color: whitesmoke;
+    background-color: white;
 }
 
 .container-loggeduser {
@@ -160,6 +167,7 @@ footer {
     margin-left:auto;
     margin-right:1%;
 }
+
 
 body#admin-page{
     background: url("https://images.designtrends.com/wp-content/uploads/2015/11/30162457/White-Abstract-Plain-Background2.jpg");
