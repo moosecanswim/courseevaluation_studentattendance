@@ -123,3 +123,9 @@ body#admin-page{
 body#teacher-page{
     background-color: #9acfea;
 }
+.center{
+    text-align: center;
+}
+.right{
+    text-align: right;
+}
