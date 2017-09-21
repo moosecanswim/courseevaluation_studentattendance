@@ -34,6 +34,20 @@
 
         <br/>
 
+
+        <hr/>
+        <div>
+
+            <a th:href="@{/teacher/updateattendance/{id}(id=${course.id})}">Update Attendance</a>
+            -
+            <a th:href="@{/teacher/markattendance/{courseId}(courseId=${course.id})}">Mark Attendance</a>
+            -
+            <a th:href="@{/teacher/detailsofacourse/{id}(id=${course.id})}">Back to Course detail</a>
+
+
+        </div>
+        <hr/>
+
         <h3>Student Attendance </h3>
 
         <table class="table table-striped" border="1">
