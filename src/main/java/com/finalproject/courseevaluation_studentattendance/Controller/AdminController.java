@@ -485,10 +485,16 @@ public class AdminController {
 
         Communication cm =  communicationService.findOne(comid);
 
-       // model.addAttribute("aCommunication", communicationService.findOne(comid));
-        communicationService.overrideExistingInformation(cm);
+        try {
+            // model.addAttribute("aCommunication", communicationService.findOne(comid));
+            communicationService.overrideExistingInformation(cm);
+        }
+        catch (Exception e)
+        {
+            return "redirect:/admin/communicationhome";
+        }
 
-        return "resirect:/adminpages/admincommunicationhome";
+        return "redirect:/admin/communicationhome";
     }
 
 
