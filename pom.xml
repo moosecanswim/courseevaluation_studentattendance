@@ -68,6 +68,7 @@
 		</dependency>
 
 
+
 		<!--Dependency for Security: thymeleaf-extras-springsecurity4-->
 		<dependency>
 			<groupId>org.thymeleaf.extras</groupId>
