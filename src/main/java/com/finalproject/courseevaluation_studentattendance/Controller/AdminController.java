@@ -27,6 +27,7 @@ import com.finalproject.courseevaluation_studentattendance.Model.Communication;
 
 import javax.jws.WebParam;
 import javax.mail.internet.InternetAddress;
+import javax.naming.Binding;
 import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
@@ -592,6 +593,20 @@ public class AdminController {
         sendEmailWithoutTemplating(thiscrseval, principal,course);
         return "redirect:/admin/home";
 
+    }
+    @GetMapping("/editprofile")
+    public String editProfile(Principal p, Model model){
+        Person tempP = personService.findByUsername(p.getName());
+        model.addAttribute("aPerson",tempP);
+        return "adminpages/admineditprofile";
+    }
+    @PostMapping("/processeditprofile")
+    public String processEditProfile(@Valid Person aPerson, BindingResult result){
+        if(result.hasErrors()){
+            return "adminpages/admineditprofile";
+        }
+        personService.update(aPerson);
+        return "redirect:/admin/home";
     }
 
     public void sendEmailWithoutTemplating(Iterable<Evaluation>evaluations,Principal principal,Course course) throws UnsupportedEncodingException {
