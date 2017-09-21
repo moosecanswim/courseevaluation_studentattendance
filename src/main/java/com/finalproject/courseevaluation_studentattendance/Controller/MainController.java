@@ -41,6 +41,8 @@ public class MainController {
     public String login(){
         return "login";
     }
+
+
     @RequestMapping("/processlogin")
     public String processLogin(Principal p){
         //could have an issue when passing the roles in a string or if someone is assigned both roles
