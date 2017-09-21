@@ -110,6 +110,8 @@ public class TeacherController {
     {
 
         Course currentCourse = courseRepository.findOne(courseId);
+        model.addAttribute("test4att",currentCourse.getCourseAttendances());
+        model.addAttribute("test4stt",currentCourse.getStudent());
         Iterable<Person> studentsofACourse = currentCourse.getStudent();
         model.addAttribute("courseInstructor", currentCourse.getInstructor());
 
@@ -470,15 +472,16 @@ public class TeacherController {
    }
 
     //the method to send email
-    //it sends email need to make the body
-
+  //to send an email of attendance to the admin when course ends
     @GetMapping("/courseend/{id}")
     public String emailAtCourseEnd(@PathVariable("id") long id, Model model) throws UnsupportedEncodingException {
+
         Course course=courseRepository.findOne(id);
         Date date= new Date();
         course.setEndDate(date);
         courseRepository.save(course);
         System.out.println("test after save End date");
+
         sendEmailWithoutTemplating(course);
         return "redirect:/teacher/listallcourses/";
 
@@ -489,7 +492,8 @@ public class TeacherController {
     public void sendEmailWithoutTemplating(Course course) throws UnsupportedEncodingException {
         System.out.println("test before email");
         System.out.println(course.getCourseName());
-        Person admin=personRepo.findOne(new Long(5));
+        Person admin=personRepository.findByUsername("admin");
+        System.out.println("admin emaillllllllllllllllllllll"+admin.getEmail());
         final Email email= DefaultEmail.builder()
                 .from(new InternetAddress("mahifentaye@gmail.com", "Attendance INFO"))
                 .to(Lists.newArrayList(new InternetAddress(admin.getEmail(),"admin")))
@@ -548,6 +552,7 @@ public class TeacherController {
         return attachment;
     }
 
+    //this is to send the email of evaluation to the logged in teacher
     @GetMapping("/sendevaluation/{id}")
     public String emailEvaluation(@PathVariable("id") long id,Principal principal, Model model) throws UnsupportedEncodingException {
         Course course=courseRepository.findOne(id);

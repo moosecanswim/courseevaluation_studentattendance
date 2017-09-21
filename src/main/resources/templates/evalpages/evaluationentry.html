@@ -20,6 +20,7 @@
     <div>
         <br/>
         <br/>
+        <hr/>
     </div>
     <!--<div class="container">-->
     <form>
@@ -28,11 +29,11 @@
             <br/>
         </div>
         <h4>
-            1.Course Registration Number CRN# : <input type="text" th:field="*{course.crn}" th:disabled="true"/><br/>
+            1.Course Registration Number CRN# :&nbsp;&nbsp; <input type="text" th:field="*{course.crn}" size="28" th:disabled="true"/><br/>
             <br/>
-            2.Course Name: <input type="text" th:field="*{course.courseName}" th:disabled="true"/><br/>
+            2.Course Name:&nbsp; <input type="text" th:field="*{course.courseName}" size="46" th:disabled="true"/><br/>
             <br/>
-            3.Course Start Date: <input type="text" th:field="*{{course.startDate}}" th:disabled="true"/><br/>
+            3.Course Start Date: <input type="text" th:field="*{{course.startDate}}" size="43" th:disabled="true"/><br/>
             <br/>
             4.Instructor's Name: <input type="text" th:field="*{{course.instructor.firstName}}" th:disabled="true"/> <input type="text" th:field="*{{course.instructor.lastName}}" th:disabled="true"/><br/>
             <br/>
@@ -125,11 +126,11 @@
             <br/>
         </div>
         <p>1. How did you find out about the class? <br />
-            <label><input type="radio" name="findings" id="select15" value="Internet">Internet / Website </label>
+            <label><input type="radio" name="findings" id="select15" value="Internet">Internet / Website </label>&nbsp;&nbsp;&nbsp;&nbsp;
             <label><input type="radio" name="findings" id="select15" value="Brochure">Brochure - ITI schedule of classes </label><br>
-            <label><input type="radio" name="findings" id="select15" value="Word of Mouth">Word of Mouth </label>
-            <label><input type="radio" name="findings" id="select15" value="other">Other</label>
-            <input type="text"  name="findings" id="comment15" size=50 maxlength="100"><br>
+            <label><input type="radio" name="findings" id="select15" value="Word of Mouth">Word of Mouth </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <label><input type="radio" name="findings" id="select15" value="other">Other </label>
+            &nbsp;<input type="text"  name="findings" id="comment15" size=70 maxlength="100"><br>
 
         <p>2. If you have further questions, please feel free to contact us at 240-567-5510</p><br>
         <br>
