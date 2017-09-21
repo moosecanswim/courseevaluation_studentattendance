@@ -84,20 +84,17 @@ public class Person {
         this.password=password;
         this.email=email;
     }
-//
-//    @Override
-//    public String toString() {
-//        return "Person{" +
-//                "id=" + id +
-//                ", firstName='" + firstName + '\'' +
-//                ", lastName='" + lastName + '\'' +
-//                ", username='" + username + '\'' +
-//                ", password='" + password + '\'' +
-//                ", email='" + email + '\'' +
-//                ", role=" + role +
-//                ", course=" + course +
-//                '}';
-//    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email+'}';
+    }
 
 //    public void addCourse(Course course)
 //    {
