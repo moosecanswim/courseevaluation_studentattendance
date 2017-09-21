@@ -115,6 +115,14 @@ public class TeacherController {
         Iterable<Person> studentsofACourse = currentCourse.getStudent();
         model.addAttribute("courseInstructor", currentCourse.getInstructor());
 
+        model.addAttribute("att", currentCourse.getCourseAttendances());
+
+        model.addAttribute("course", currentCourse);
+        model.addAttribute("studentsofACourse", studentsofACourse);
+
+
+
+
 
         //move it to new route so it can stamp the time of the time actually submitted
         //add a new attendance and set date (for a course)
@@ -132,9 +140,6 @@ public class TeacherController {
 //            student.addAttendance(oneAttendance);
 //        }
 
-
-        model.addAttribute("course", currentCourse);
-        model.addAttribute("studentsofACourse", studentsofACourse);
 
         return "teacherpages/detailsofacourse";
     }
