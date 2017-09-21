@@ -138,7 +138,9 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/login">Login</a></li>
+                <th:block sec:authorize="isAuthenticated()">
                 <li><a href="/logout">Logout</a></li>
+                </th:block>
                 <li><a href="/registrationteacher">Teacher Registration</a></li>
             </ul>
         </div>
