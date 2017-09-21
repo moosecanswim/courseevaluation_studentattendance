@@ -20,7 +20,18 @@
         <br/>
     </div>
     <h2> <label th:inline="text">Course Evaluation for : [[${course.courseName}]]</label></h2>
-<table class="table table-striped table-inverse" border="4">
+
+
+
+    <div  th:if="${evals.isEmpty()}">
+        <h3>No evaluation available for this course now. </h3>
+    </div>
+
+
+    <div  th:if="${!evals.isEmpty()}">
+
+        <table class="table table-striped table-inverse" border="4">
+
     <tr>
         <td>Eval ID</td>
         <td>Course Content</td>
@@ -54,6 +65,8 @@
         </tr>
     </th:block>
 </table>
+
+</div>
 
 
 <!--<div>-->
