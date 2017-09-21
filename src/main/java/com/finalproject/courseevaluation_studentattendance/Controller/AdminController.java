@@ -181,7 +181,7 @@ public class AdminController {
         model.addAttribute("evaluation",thiscourseevaluation);
         model.addAttribute("course",thiscourse);
         model.addAttribute("courseInstructor",courseInstructor);
-        return"/adminpages/admincourseevaluation";
+        return"adminpages/admincourseevaluation";
     }
 
     @GetMapping("admineval/{id}")  // course id
@@ -196,7 +196,7 @@ public class AdminController {
         model.addAttribute("course",thiscourse);
 //        model.addAttribute("course",thiscourse);
 //        model.addAttribute("courseInstructor",courseInstructor);
-        return"/adminpages/admineval";
+        return"adminpages/admineval";
     }
 
     //this will allow the the admin to add an existing student to a course
@@ -424,7 +424,7 @@ public class AdminController {
     public String communicationHome(Model model){
         model.addAttribute("communicationListAvalible",communicationService.showByStatus(true));
         model.addAttribute("communicationListUnavalible",communicationService.showByStatus(false));
-        return "/adminpages/admincommunicationhome";
+        return "adminpages/admincommunicationhome";
     }
 
     @GetMapping("/addcommunication")
@@ -436,13 +436,13 @@ public class AdminController {
         model.addAttribute("now", now);
         model.addAttribute("aCommunication",new Communication());
         model.addAttribute("courseList",courseService.findAll());
-        return "/adminpages/adminaddcommunication";
+        return "adminpages/adminaddcommunication";
     }
     @PostMapping("/processcommunication/{type}")
     public String processCommunication(@Valid Communication aCom,@PathVariable("type") String type, BindingResult result){
         if(result.hasErrors()){
             System.out.println("Communication invalid- did not add");
-            return "/adminpages/adminaddcommunication";
+            return "adminpages/adminaddcommunication";
         }else{
             Date now= new Date();
             DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
@@ -473,7 +473,7 @@ public class AdminController {
         model.addAttribute("now", now);
         model.addAttribute("aCommunication",communicationService.findOne(communicationId));
         model.addAttribute("courseList",courseService.findAll());
-        return "/adminpages/adminupdatecommunication";
+        return "adminpages/adminupdatecommunication";
     }
     @GetMapping("/togglecommunication/{id}")
     public String toggleCommunication(@PathVariable("id") long communicationId){
@@ -552,7 +552,7 @@ public class AdminController {
         }
 
         //returns to admin home if there is an error
-        return "/adminpages/admincommunicationhome";
+        return "adminpages/admincommunicationhome";
     }
 
 

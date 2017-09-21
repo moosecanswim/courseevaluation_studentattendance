@@ -41,7 +41,7 @@ public class EvalController {
 
     @RequestMapping("/home")
     public String evalHome(){
-        return "/evalpages/evalhome";
+        return "evalpages/evalhome";
     }
 
 //
