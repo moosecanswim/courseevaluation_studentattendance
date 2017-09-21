@@ -24,7 +24,6 @@
     <table  class="table table-striped" border="1">
         <tr>
             <th>Id</th>
-            <th>CRN</th>
             <th>Name</th>
             <th>Start Date</th>
             <th>End Date</th>
@@ -33,7 +32,6 @@
         </tr>
         <tr th:each="course:${courseList}">
             <td th:text="*{course.id}"></td>
-            <td th:text="*{course.crn}"></td>
             <td th:text="*{course.courseName}"></td>
             <td th:text="*{{course.startDate}}"></td>
             <td th:text="*{{course.endDate}}"></td>
