@@ -93,12 +93,11 @@ public class DataLoader implements CommandLineRunner{
 
 
         //add math
-        Course course = new Course(123,"Math",startDate,endDate);
+        Course course = new Course(111,"--no Select--",startDate,endDate);
+        course.setStatus(false);
         courseRepo.save(course);
 //        course.addStudent(personRepo.findByUsername("bobbob"));
 //        course.addStudent(personRepo.findByUsername("student"));
-        course.setInstructor(personRepo.findByUsername("teacher"));
-        courseRepo.save(course);
 
 
         //add physics
@@ -119,6 +118,12 @@ public class DataLoader implements CommandLineRunner{
 
 
         //add java
+
+        course = new Course(123,"Math",startDate,endDate);
+        courseRepo.save(course);
+        course.setInstructor(personRepo.findByUsername("teacher"));
+        courseRepo.save(course);
+
         course = new Course(101,"Java",startDate,endDate);
         courseRepo.save(course);
 
