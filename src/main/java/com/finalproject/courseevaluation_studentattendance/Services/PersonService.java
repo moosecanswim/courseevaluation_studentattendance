@@ -61,6 +61,7 @@ public class PersonService {
     }
 
 
+
     //create a person that does not exist in the database.
     //assigns a default username if it is blank or null
     public Person create(Person aPerson) {
@@ -76,6 +77,11 @@ public class PersonService {
     public void saveAdmin(Person aPerson){
         aPerson.addRole(roleRepo.findByRoleName("ADMIN"));
         aPerson.setActive(true);
+        personRepo.save(aPerson);
+    }
+    public void saveStudent(Person aPerson){
+        aPerson.getPersonRoles().clear();
+        aPerson.addRole(roleRepo.findByRoleName("DEFAULT"));
         personRepo.save(aPerson);
     }
 
