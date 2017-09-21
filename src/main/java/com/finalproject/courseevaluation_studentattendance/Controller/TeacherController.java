@@ -333,6 +333,8 @@ public class TeacherController {
 
         Iterable<Evaluation> allevalofonecourse= currentCourse.getEvaluations();
 
+        model.addAttribute("course", currentCourse);
+
         model.addAttribute("neweval", allevalofonecourse);
 
         return "teacherpages/displayallevalofacourse";
