@@ -8,7 +8,7 @@
     <th:block th:replace="base :: header"></th:block>
     <!-- /.Header -->
 </head>
-<body id="teacher-page">
+<body>
     <!--Navigation Teacher-->
     <nav th:replace="base :: nav2Teacher"></nav>
     <!--/.Navigation Teacher-->
@@ -18,9 +18,7 @@
 
     <div class="container">
 
-        <h1>Student Attendance: </h1>
-        <p th:text="'Date today: ' + ${nowdate}"></p>
-        <br />
+        <h1>Update Student Attendance: </h1>
         <!--should be a form allow input of students' attendance info-->
 
         <div  th:if="${!studentsofACourse.isEmpty()}">
@@ -30,46 +28,21 @@
                 <legend>Attendance Form</legend>
                 <fieldset>
 
-                    <p>Input Attendance Date</p>
+                    <p>Choose a Date to update: </p>
 
-                    <p><input th:value="${nowdate}" required type="date" name="attdate" placeholder="MM/dd/yyyy" /></p>
+                    <!--<p><input required type="date" name="attdate" placeholder="MM/dd/yyyy" /></p>-->
+
+                    <p>
+                        <select name="attdate">
+                        <option required th:value="${nowdate}" th:inline="text">Today([[${nowdate}]])</option>
+                            <th:block th:each="att:${onestu.attendances}">
+                                <option th:value="${att.date}" th:inline="text">[[${att.date}]]</option>
+                            </th:block>
+                        </select>
+                    </p>
 
 
-                    <!--<table>-->
-                    <!--<thead>-->
-                    <!--<tr>-->
-                    <!--Full Name:-->
-                    <!--</tr>-->
-                    <!--<tr>-->
-                    <!--Email:-->
-                    <!--</tr>-->
-                    <!--<tr>-->
-                    <!--Attendance:-->
-                    <!--</tr>-->
-                    <!--</thead>-->
 
-                    <!--<tbody>-->
-                    <!--<th:block th:each="student:${studentsofACourse}">-->
-                    <!--<tr>-->
-                    <!--<td th:text="${student.firstName} + ' ' +${student.lastName} "></td>-->
-                    <!--<td th:text="${student.email}"></td>-->
-
-                    <!--<td>-->
-                    <!--<select name="attendanceStatus">-->
-                    <!--&lt;!&ndash;<th:block th:each="director:${alldirector}">&ndash;&gt;-->
-                    <!--<option value="NotMarked">  </option>-->
-                    <!--<option value="Present">Present</option>-->
-                    <!--<option value="Absent">Absent</option>-->
-                    <!--<option value="Late">Late</option>-->
-                    <!--&lt;!&ndash;<option value="-1">Not a department head</option>&ndash;&gt;-->
-
-                    <!--&lt;!&ndash;</th:block>&ndash;&gt;-->
-                    <!--</select>-->
-                    <!--</td>-->
-                    <!--</tr>-->
-                    <!--</th:block>-->
-                    <!--</tbody>-->
-                    <!--</table>-->
                     <table class="table table-striped" border="1">
                         <tr>
                             <th>Full Name: </th>
@@ -85,7 +58,6 @@
                                     <option value="Present">Present</option>
                                     <option value="Absent">Absent</option>
                                     <option value="Late">Late</option>
-                                    <!--<option value="-1">Not a department head</option>-->
                                 </select>
                             </td>
                         </tr>
