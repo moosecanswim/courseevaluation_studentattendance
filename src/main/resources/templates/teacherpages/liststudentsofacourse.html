@@ -16,8 +16,13 @@
         Logged user:  <span sec:authentication="name">The Teacher is not logged in yet</span>
     </div>
 
+
+
+
     <div class="container">
-        <h2>Validate Students/Update M-number</h2>
+        <h2 th:inline="text">Course: [[${course.courseName}]] CRN [[${course.crn}]]</h2>
+        <hr />
+        <h2>Validate Students/Update M-Number</h2>
         <br />
         <table class="table">
 
@@ -90,7 +95,7 @@
                 <option value="email">Email only</option>
                 <option value="fandl">First Name and Last Name</option>
             </select>
-            <br>
+            <br> <br>
             <p>
                 <input name="fname" type="text" placeholder="FirstName"/>
                 <input name="lname" type="text" placeholder="LastName"/>
