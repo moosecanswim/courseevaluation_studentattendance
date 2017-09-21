@@ -89,18 +89,18 @@
                             <td th:text="${student.firstName} + ' ' +${student.lastName} "></td>
                             <td th:text="${student.email}"></td>
                             <td>
-                                <!--<select name="attendanceStatus">-->
-                                    <!--<option value="NotMarked">  </option>-->
-                                    <!--<option value="Present">Present</option>-->
-                                    <!--<option value="Absent">Absent</option>-->
-                                    <!--<option value="Late">Late</option>-->
-                                    <!--&lt;!&ndash;<option value="-1">Not a department head</option>&ndash;&gt;-->
-                                <!--</select>-->
+                                <select name="attendanceStatus">
+                                    <option value="NotMarked">  </option>
+                                    <option value="Present">Present</option>
+                                    <option value="Absent">Absent</option>
+                                    <option value="Late">Late</option>
+                                    <!--<option value="-1">Not a department head</option>-->
+                                </select>
 
-                                <label><input type="radio" name="attendanceStatus" value="P" checked>Present   </label>
-                                <label><input type="radio" name="attendanceStatus" value="L">Late   </label>
-                                <label><input type="radio" name="attendanceStatus" value="A">Absent   </label>
-                                <label><input type="radio" name="attendanceStatus" value="N">unMark   </label>
+                                <!--<label><input type="radio" name="attendanceStatus" value="P" checked>Present   </label>-->
+                                <!--<label><input type="radio" name="attendanceStatus" value="L">Late   </label>-->
+                                <!--<label><input type="radio" name="attendanceStatus" value="A">Absent   </label>-->
+                                <!--<label><input type="radio" name="attendanceStatus" value="N">unMark   </label>-->
                             </td>
                         </tr>
                     </table>
