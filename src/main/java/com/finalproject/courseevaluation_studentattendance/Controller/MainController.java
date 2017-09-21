@@ -2,6 +2,7 @@ package com.finalproject.courseevaluation_studentattendance.Controller;
 
 import com.finalproject.courseevaluation_studentattendance.Model.Course;
 import com.finalproject.courseevaluation_studentattendance.Model.Person;
+import com.finalproject.courseevaluation_studentattendance.Repositories.CourseRepository;
 import com.finalproject.courseevaluation_studentattendance.Services.CourseService;
 import com.finalproject.courseevaluation_studentattendance.Services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,9 @@ public class MainController {
     @Autowired
     PersonService personService;
 
+    @Autowired
+    CourseRepository courseRepository;
+
     @RequestMapping("/")
     public String welcomePage(){
 
@@ -32,7 +36,9 @@ public class MainController {
     @RequestMapping("/viewcourses")
     public String viewCoursesInsecure(Model model){
         Iterable<Course> courseList = courseService.findAll();
-        model.addAttribute("courseList",courseList);
+
+        Iterable<Course> courselistshow = courseRepository.findAllByCourseNameIsNot("Math");
+        model.addAttribute("courseList",courselistshow);
 
         return "viewcourses";
     }

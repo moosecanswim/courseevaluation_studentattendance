@@ -18,6 +18,7 @@ public class Communication {
     @ManyToOne
     @JoinColumn(name="course_id")
     private Course courseInterested;
+
     private String courseInterestedCRN;
     private String callDetails;
     private Boolean callStatus;
