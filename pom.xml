@@ -28,7 +28,7 @@
 		<dependency>
 			<groupId>it.ozimov</groupId>
 			<artifactId>spring-boot-thymeleaf-email</artifactId>
-
+			<version>0.6.2</version>
 		</dependency>
 		<dependency>
 			<groupId>it.ozimov</groupId>
