@@ -18,7 +18,10 @@
 
         <h3>Open Communications</h3>
 
-        <a href="/admin/addcommunication" class="btn btn-primary btn-lg active" bgcolor="Black" role="button" aria-pressed="true">Add communication</a>
+        <div class="btn btn-link" type = "button" color="grey">
+        <a href="/admin/addcommunication"   role="button" aria-pressed="true">Add communication</a>
+        </div>
+
 
         <table class="table table-striped">
             <tr>
@@ -45,10 +48,10 @@
                 <!--<td th:text="*{comm.callStatus}"></td>-->
                 <td>
                     <a th:href="@{/admin/updatecommunication/{id} (id=*{comm.id})}">Update</a>
-
-                    <a th:href="@{/admin/overridecommunicatoin/{id} (id=*{comm.id})}">Override</a>
                     -
                     <a th:href="@{/admin/togglecommunication/{id} (id=*{comm.id})}">Mark Closed</a>
+
+                    <a th:href="@{/admin/overridecommunicatoin/{id} (id=*{comm.id})}">Override Duplicate</a>
                 </td>
 
             </tr>

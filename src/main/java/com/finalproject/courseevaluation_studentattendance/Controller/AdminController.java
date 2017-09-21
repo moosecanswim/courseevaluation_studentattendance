@@ -485,10 +485,16 @@ public class AdminController {
 
         Communication cm =  communicationService.findOne(comid);
 
-       // model.addAttribute("aCommunication", communicationService.findOne(comid));
-        communicationService.overrideExistingInformation(cm);
+        try {
+            // model.addAttribute("aCommunication", communicationService.findOne(comid));
+            communicationService.overrideExistingInformation(cm);
+        }
+        catch (Exception e)
+        {
+            return "redirect:/admin/communicationhome";
+        }
 
-        return "resirect:/adminpages/admincommunicationhome";
+        return "redirect:/admin/communicationhome";
     }
 
 
@@ -570,7 +576,12 @@ public class AdminController {
         return"redirect:/admin/home";
     }
 
-
+    @RequestMapping("/setpersontostudent/{id}")
+    public String makePersonStudent(@PathVariable("id") long id){
+        Person tempP = personService.findById(id);
+      personService.saveStudent(tempP);
+        return "redirect:/admin/viewallpeople";
+    }
 
     @GetMapping("/sendevaluation/{id}")
     public String emailEvaluation(@PathVariable("id") long id, Model model) throws UnsupportedEncodingException {

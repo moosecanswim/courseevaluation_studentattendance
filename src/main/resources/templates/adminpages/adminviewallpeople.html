@@ -45,8 +45,9 @@
                 <td th:text="${{all.startDate}}"></td>
                 <td th:text="${all.active}"></td>
                 <td>
-                    <a th:href="@{/admin/updateperson/{id}(id=${all.id})}">Update</a>
-
+                    <a th:href="@{/admin/updateperson/{id} (id=${all.id})}">Update</a>
+                    -
+                    <a th:href="@{/admin/setpersontostudent/{id} (id=${all.id})}">Make Person a Student</a>
                 </td>
             </tr>
         </table>

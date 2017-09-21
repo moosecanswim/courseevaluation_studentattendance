@@ -8,7 +8,7 @@
     <th:block th:replace="base :: header"></th:block>
     <!-- /.Header -->
 </head>
-<body>
+<body id="teacher-page">
     <!--Navigation Teacher-->
     <nav th:replace="base :: nav2Teacher"></nav>
     <!--/.Navigation Teacher-->
@@ -33,6 +33,20 @@
         </table>
 
         <br/>
+
+
+        <hr/>
+        <div>
+
+            <a th:href="@{/teacher/updateattendance/{id}(id=${course.id})}">Update Attendance</a>
+            -
+            <a th:href="@{/teacher/markattendance/{courseId}(courseId=${course.id})}">Mark Attendance</a>
+            -
+            <a th:href="@{/teacher/detailsofacourse/{id}(id=${course.id})}">Back to Course detail</a>
+
+
+        </div>
+        <hr/>
 
         <h3>Student Attendance </h3>
 
