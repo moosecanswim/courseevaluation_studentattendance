@@ -13,6 +13,7 @@ public interface CourseRepository extends CrudRepository<Course,Long> {
    Iterable<Course> findByStatusAndCourseNameContains(Boolean status, String courseName);
    Iterable<Course> findAllByCourseNameAndStatusTrue(String courseName);
    Iterable<Course> findAllByCourseNameAndStatusFalse(String courseName);
+   Iterable<Course> findAllByCourseNameIsNot(String courseName);
 
 
    //this may be an issue because several courses can have the same name

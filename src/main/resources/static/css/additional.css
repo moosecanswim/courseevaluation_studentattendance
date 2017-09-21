@@ -143,10 +143,19 @@ td, th {
     border-top: 1px solid #ddd;
     padding: 4px 8px;
 }
+
+nav select {
+    display: none;
+}
+
+
+
 @media screen and (max-width: 640px) {
     table {
         overflow-x: auto;
         display: block;
     }
+    nav ul     { display: none; }
+    nav select { display: inline-block; }
 }
 
