@@ -1,5 +1,11 @@
 
 /* Global Styles */
+.navbar
+{
+    background-color: rebeccapurple;
+    /*text-color:white;*/
+    /*body-color:white;*/
+}
 .div{
     align-content: center;
 }
@@ -146,7 +152,7 @@ footer {
 /*My Additionals*/
 .container {
     padding-bottom:60px;   /* Height of the footer */
-    background-color: white;
+    background-color: whitesmoke;
 }
 
 .container-loggeduser {
@@ -156,7 +162,8 @@ footer {
 }
 
 body#admin-page{
-    background-color: darkorange;
+    background: url("https://images.designtrends.com/wp-content/uploads/2015/11/30162457/White-Abstract-Plain-Background2.jpg");
+    background-position:bottom;
 }
 body#teacher-page{
     background-color: #9acfea;
