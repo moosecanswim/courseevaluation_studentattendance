@@ -16,6 +16,7 @@
         <br/>
     </div>
     <div class="container">
+        <div class="col-lg-8">
         <form action="#"
               th:action="@{/admin/registerstudent}"
               th:object="${newstudent}"
@@ -25,10 +26,14 @@
             </div>
             <fieldset>
 
-                <legend>Add Student To Class</legend>
-
+                <!--<legend>Add Student To Class</legend>-->
+                <h2>Register A Student</h2>
+                <div>
+                    <br/>
+                </div>
                 <!--hide the new person(student) id and the course id they are registering to-->
                 <input type="hidden" th:field="*{id}" />
+
                 <input type="hidden" th:field="*{courseStudent.id}" />
                 <div class="form-group">
                     <input type="text" th:field="*{mNumber}" name="mNumber" id="mNumber" class="form-control input-lg" placeholder="M Number" tabindex="3">
@@ -72,11 +77,12 @@
 
                 <!--th:text="${#dates.format(link.date, 'MMM dd, yyyy')}"-->
                 <!--<p th:text="'Sign up date: ' + ${#dates.format(newstudent.startDate, 'MMM dd, yyyy')}" />-->
-                <p><input type="submit"  value="Submit" class="btn btn-lg btn-default btn-block" /></p>
+                <div class="col-xs-6 col-md-6"><input type="submit" value="Enter" class="btn btn-primary btn-block btn-lg" tabindex="7"></div>
 
             </fieldset>
 
         </form>
+    </div>
     </div>
 
 

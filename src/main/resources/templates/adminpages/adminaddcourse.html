@@ -12,14 +12,19 @@
     <!--Navigation Admin-->
     <nav th:replace="base :: nav2Admin"></nav>
     <!--/.Navigation Admin-->
-
     <div class="container">
+  <div class="col-lg-8">
+
         <form action="#"
               th:action="@{/admin/addcourse}"
               th:object="${newcourse}"
               method="post">
-            <legend>Add Course</legend>
+            <div>
+                <br/>
+            </div>
+            <!--<legend>Add Course</legend>-->
             <fieldset>
+
                 <input type="hidden" th:field="*{id}">
                 <h2>Enter Course</h2>
                 <hr class="colorgraph">
@@ -51,6 +56,7 @@
                 <div class="row">
                     <div class="col-xs-6 col-md-6"><input type="submit" value="Enter" class="btn btn-primary btn-block btn-lg" tabindex="7"></div>
                     <!--<div class="col-xs-6 col-md-6"><a href="#" class="btn btn-success btn-block btn-lg">Sign In</a></div>-->
+                </div>
                 </div>
             </fieldset>
         </form>
