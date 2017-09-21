@@ -50,7 +50,7 @@
 
 
             <div class="form-group">
-                <input type="text" th:field="*{email}" name="email" id="email" class="form-control input-lg" placeholder="Email" tabindex="3">
+                <input type="email" th:field="*{email}" name="email" id="email" class="form-control input-lg" placeholder="Email" tabindex="3">
             </div>
             <div th:if="${#fields.hasErrors('email')}"  th:errors="*{email}"
                  class="well alert alert-warning" role="alert"></div>
