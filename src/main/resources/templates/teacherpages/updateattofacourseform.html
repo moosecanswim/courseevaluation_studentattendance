@@ -34,7 +34,7 @@
 
                     <p>
                         <select name="attdate">
-                        <option th:value="${nowdate}" th:inline="text">Today([[${nowdate}]])</option>
+                        <option required th:value="${nowdate}" th:inline="text">Today([[${nowdate}]])</option>
                             <th:block th:each="att:${onestu.attendances}">
                                 <option th:value="${att.date}" th:inline="text">[[${att.date}]]</option>
                             </th:block>
