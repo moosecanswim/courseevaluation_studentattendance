@@ -45,7 +45,7 @@
                 <td th:text="${{course.endDate}}"></td>
                 <td th:text="${course.status}"></td>
                 <td>
-                    <a th:href="@{/removestudentfromcourse/{courseid}/{studentid} (courseid=${course.id} , studentid=${aStudent.id})}">Un-Enroll student from class</a>
+                    <a th:href="@{/admin/removestudentfromcourse/{courseid}/{studentid} (courseid=${course.id} , studentid=${aStudent.id})}">Un-Enroll student from class</a>
                 </td>
             </tr>
 
