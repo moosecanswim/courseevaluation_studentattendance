@@ -396,7 +396,7 @@ public class AdminController {
        {
            return"adminpages/admineditpeople";
        }
-        personRepo.save(person);
+        personService.update(person);
         return "redirect:/admin/viewallpeople";
     }
 
@@ -586,11 +586,11 @@ public class AdminController {
     }
 
     @GetMapping("/sendevaluation/{id}")
-    public String emailEvaluation(@PathVariable("id") long id, Model model) throws UnsupportedEncodingException {
+    public String emailEvaluation(@PathVariable("id") long id, Principal principal,Model model) throws UnsupportedEncodingException {
         Course course=courseRepo.findOne(id);
         Iterable<Evaluation>thiscrseval=course.getEvaluations();
         System.out.println("test after save End date");
-        sendEmailWithoutTemplating(thiscrseval);
+        sendEmailWithoutTemplating(thiscrseval, principal,course);
         return "redirect:/admin/home";
 
     }
@@ -609,25 +609,24 @@ public class AdminController {
         return "redirect:/admin/home";
     }
 
-    public void sendEmailWithoutTemplating(Iterable<Evaluation>evaluations) throws UnsupportedEncodingException {
+    public void sendEmailWithoutTemplating(Iterable<Evaluation>evaluations,Principal principal,Course course) throws UnsupportedEncodingException {
         System.out.println("test before email");
         Evaluation eval=new Evaluation();
-//        Person admin=new Person();
-        System.out.println();
+        System.out.println("--------------------"+principal.getName());
         for (Evaluation neval:evaluations) {
             eval=neval;
             System.out.println("Courssssssssssssss"+eval.getCourseEvaluation().toString());
         }
-        Person admin=personRepo.findOne(new Long(5));
+        Person admin=personRepo.findByUsername(principal.getName());
 
-        String adminemail=admin.getEmail().toString();
-        System.out.println("emailllllllllllll"+adminemail);
+//        String adminemail=admin.getEmail();
+        System.out.println("emailllllllllllll"+admin.getEmail());
             System.out.println(eval.getContent());
             final Email email = DefaultEmail.builder()
                     .from(new InternetAddress("mahifentaye@gmail.com", "Evaluation INFO"))
                     .to(Lists.newArrayList(new InternetAddress(admin.getEmail(), "admin")))
-                    .subject("Evaluation for" + eval.getCourseEvaluation())
-                    .body("Evaluation for "+eval.getCourseEvaluation()+ " has been attached.")
+                    .subject("Evaluation for " + course.getCourseName()+", CRN:"+ course.getCrn())
+                    .body("Evaluation for "+course.getCourseName()+ " has been attached.")
                     .attachment(getCsvEvaluationAttachment("Evaluation", evaluations))
                     .encoding("UTF-8").build();
             System.out.println("test it");

@@ -49,18 +49,18 @@
     <!--iterate through all the evaluations for this course-->
     <th:block th:each="eval:${evals}">
         <tr>
-            <td><a th:text="${eval.id}"></a></td>
-            <td><a th:text="${eval.content}"></a></td>
-            <td><a th:text="${eval.quality}"></a></td>
-            <td><a th:text="${eval.experience}"></a></td>
-            <td><a th:text="${eval.materials}"></a></td>
-            <td><a th:text="${eval.environment}"></a></td>
-            <td><a th:text="${eval.equipment}"></a></td>
-            <td><a th:text="${eval.likes}"></a></td>
-            <td><a th:text="${eval.dislikes}"></a></td>
-            <td><a th:text="${eval.suggestions}"></a></td>
-            <td><a th:text="${eval.otherClass}"></a></td>
-            <td><a th:text="${eval.findings}"></a></td>
+            <td th:text="${eval.id}"></td>
+            <td th:text="${eval.content}"></td>
+            <td th:text="${eval.quality}"></td>
+            <td th:text="${eval.experience}"></td>
+            <td th:text="${eval.materials}"></td>
+            <td th:text="${eval.environment}"></td>
+            <td th:text="${eval.equipment}"></td>
+            <td th:text="${eval.likes}"></td>
+            <td th:text="${eval.dislikes}"></td>
+            <td th:text="${eval.suggestions}"></td>
+            <td th:text="${eval.otherClass}"></td>
+            <td th:text="${eval.findings}"></td>
         </tr>
     </th:block>
 </table>
