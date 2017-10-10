@@ -11,9 +11,8 @@
 <body>
     <!--Navigation Default-->
     <nav th:replace="base :: nav2Default"></nav>
-    <!--/.Navigation Default-->
 
-    <div class="container" id="login">
+    <div id="login">
 
         <div th:if="${param.error}">
             Invalid username and password.
@@ -26,7 +25,7 @@
             <div><label> Password: <input type="password" name="password"/> </label></div>
             <div><input type="submit" value="Sign In"/></div>
         </form>
-    </div><!-- /.container -->
+    </div>
 
     <!-- Footer -->
     <div th:replace="base :: footer"></div>

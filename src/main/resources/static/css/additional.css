@@ -9,7 +9,7 @@
 .welcome-navbar
 {
     background-color: rebeccapurple;
-    /*text-color:white;*/
+    text-color:white;
     /*body-color:white;*/
 }
 .div{
@@ -19,7 +19,7 @@ html,
 body {
     width: 100%;
     height: 100%;
-    padding-top: 50px;
+    padding-top: 25px;
 }
 
 body {
@@ -170,7 +170,8 @@ footer {
 
 
 body#admin-page{
-    background: url("https://images.designtrends.com/wp-content/uploads/2015/11/30162457/White-Abstract-Plain-Background2.jpg");
+    /*background: url("https://images.designtrends.com/wp-content/uploads/2015/11/30162457/White-Abstract-Plain-Background2.jpg");*/
+    background:darksalmon;
     background-position:bottom;
 }
 body#teacher-page{

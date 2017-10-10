@@ -67,7 +67,7 @@ public class DataLoader implements CommandLineRunner{
         personRepo.save(aPerson);
 
         //
-        aPerson= new Person("admin", "Mr.Admin","admin", "password","mymahder@gmail.com","M004" );
+        aPerson= new Person("admin", "Mr.Admin","admin", "password","throwawaymcbootcamp@gmail.com","M004" );
         personRepo.save(aPerson);
         aPerson.addRole(teacherRole);
         aPerson.addRole(adminRole);
